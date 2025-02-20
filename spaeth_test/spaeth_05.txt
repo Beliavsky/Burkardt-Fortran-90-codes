@@ -1,0 +1,74 @@
+# spaeth_05.txt
+#
+#  Discussion:
+#
+#    Data matrix with 55 rows and 2 columns.
+#
+#    This data naturally groups into two long thin ellipsoids.
+#
+#  Modified:
+#
+#    03 April 2002
+#
+#  Reference:
+#
+#    Helmut Spaeth,
+#    Cluster Dissection and Analysis,
+#    Theory, FORTRAN Programs, Examples,
+#    Ellis Horwood, 1985, page 161.
+#
+45 50
+22 49
+20 48
+18 46
+21 47
+46 47
+19 44
+41 44
+15 42
+17 42
+19 42
+24 41
+14 39
+17 39
+23 39
+42 39
+21 38
+38 38
+14 37
+12 36
+21 36
+19 35
+34 35
+13 34
+11 33
+19 33
+39 33
+17 32
+35 32
+ 9 31
+15 30
+17 30
+ 9 29
+32 29
+15 28
+29 28
+13 27
+35 27
+11 25
+13 25
+32 25
+24 24
+11 23
+27 22
+ 9 21
+ 7 18
+20 17
+28 17
+ 6 16
+23 16
+18 12
+22 11
+17  7
+12  6
+ 9  1

@@ -1,0 +1,104 @@
+24 June 2024  11:11:54.870 AM
+
+candy_count_test():
+  Fortran90 version
+  Test candy_count().
+
+candy_count_vector_test():
+  candy_count_vector() counts candy types in a vector.
+  There are N entries in the vector A().
+  There are C candy types.
+  Candy types are assigned cyclically to vector entries:
+  A(I) = mod ( i - 1, c ) + 1
+  Count the number of candies of each type.
+
+  Count using candy_count_vector()
+  Fix value of C =    4
+  Consider a range of values of N:
+
+   N    #1  #2  #3  #4
+
+   3     1   1   1   0
+   4     1   1   1   1
+   5     2   1   1   1
+   6     2   2   1   1
+   7     2   2   2   1
+   8     2   2   2   2
+   9     3   2   2   2
+  10     3   3   2   2
+
+  Repeat calculation, using candy_count_vector_sum()
+  Fix value of C =    4
+  Consider a range of values of N:
+
+   N    #1  #2  #3  #4
+
+   3     1   1   1   0
+   4     1   1   1   1
+   5     2   1   1   1
+   6     2   2   1   1
+   7     2   2   2   1
+   8     2   2   2   2
+   9     3   2   2   2
+  10     3   3   2   2
+
+candy_count_matrix_test():
+  candy_count_matrix() counts candy types in a matrix.
+  There are MxN entries in the matrix A().
+  There are C candy types.
+  Candy types are assigned cyclically to matrix entries:
+  A(I,J) = mod ( i + j - 2, c ) + 1
+  Count the number of candies of each type.
+
+  Count using candy_count_matrix()
+
+   C   M   N     1   2   3   4
+   4  10  13    33  33  32  32
+
+  Repeat calculation using candy_count_matrix_sum()
+
+   C   M   N     1   2   3   4
+   4  10  13    33  33  32  32
+
+  Count using candy_count_matrix()
+
+   C   M   N     1   2   3   4   5
+   5  13  19    49  49  50  50  49
+
+  Repeat calculation using candy_count_matrix_sum()
+
+   C   M   N     1   2   3   4   5
+   5  13  19    49  49  50  50  49
+
+candy_count_box_test():
+  candy_count_box() counts candy types in a 3D box.
+  There are LxMxN entries in the box A().
+  There are C candy types.
+  Candy types are assigned cyclically to matrix entries:
+  A(I,J,K) = mod ( i + j + k - 3, c ) + 1
+  Count the number of candies of each type.
+
+  Count using candy_count_box()
+
+   C   L   M   N     1   2   3   4
+   4   7  10  13   227 228 228 227
+
+  Repeat calculation using candy_count_box_sum()
+
+   C   L   M   N     1   2   3   4
+   4   7  10  13   227 228 228 227
+
+  Count using candy_count_box()
+
+   C   L   M   N     1   2   3   4   5
+   5  12  13  19   592 592 593 594 593
+
+  Repeat calculation using candy_count_box_sum()
+
+   C   L   M   N     1   2   3   4   5
+   5  12  13  19   592 592 593 594 593
+
+candy_count_test():
+  Normal end of execution.
+
+24 June 2024  11:11:54.870 AM

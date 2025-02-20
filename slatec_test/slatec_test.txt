@@ -1,0 +1,72 @@
+November 16 2023   2:17:19.567 PM
+ 
+slatec_test():
+  FORTRAN90 version
+  Test slatec().
+TEST01 passed all tests.
+TEST02 passed all tests.
+TEST03 passed all tests.
+TEST04 passed all tests.
+TEST05 passed all tests.
+TEST06 passed all tests.
+TEST07 passed all tests.
+TEST08 passed all tests.
+TEST09 passed all tests.
+TEST10 passed all tests.
+TEST11 passed all tests.
+TEST12 passed all tests.
+TEST13 passed all tests.
+TEST14 passed all tests.
+TEST15 passed all tests.
+TEST16 passed all tests.
+TEST17 passed all tests.
+TEST18 passed all tests.
+TEST19 passed all tests.
+TEST20 passed all tests.
+TEST21 passed all tests.
+TEST22 passed all tests.
+TEST23 passed all tests.
+TEST24 passed all tests.
+TEST25 passed all tests.
+TEST26 passed all tests.
+TEST27 passed all tests.
+TEST28 passed all tests.
+TEST29 passed all tests.
+TEST30 passed all tests.
+TEST31 passed all tests.
+TEST32 passed all tests.
+TEST33 passed all tests.
+TEST34 passed all tests.
+TEST35 passed all tests.
+TEST36 passed all tests.
+TEST37 passed all tests.
+TEST38 passed all tests.
+TEST39 passed all tests.
+TEST40 passed all tests.
+TEST41 passed all tests.
+TEST42 passed all tests.
+ 
+ test43():
+   Call to qxbvsp cancelled!
+   External functions fmat, gvec, uivp, uvec not supplied.
+TEST43 passed all tests.
+ 
+ test44():
+   Call to qxdbvs cancelled!
+   External functions dfmat, dgvec, duivp, duvec not supplied.
+TEST44 passed all tests.
+TEST45 passed all tests.
+TEST46 passed all tests.
+TEST47 passed all tests.
+TEST48 passed all tests.
+TEST49 passed all tests.
+TEST50 passed all tests.
+TEST51 passed all tests.
+TEST52 passed all tests.
+TEST53 passed all tests.
+TEST54 passed all tests.
+ 
+slatec_test():
+  Normal end of execution.
+ 
+November 16 2023   2:17:19.878 PM

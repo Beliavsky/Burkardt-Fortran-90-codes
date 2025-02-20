@@ -1,0 +1,237 @@
+<html>
+
+  <head>
+    <title>
+      divdif
+    </title>
+  </head>
+
+  <body bgcolor="#eeeeee" link="#cc0000" alink="#ff3300" vlink="#000055">
+
+    <h1 align = "center">
+      divdif
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>divdif</b>,
+      a Fortran90 code which
+      creates, prints and manipulates divided difference polynomials from
+      a table of values (x,f(x)).  The code can compute the coefficients of
+      the Newton and power sum forms of the interpolating polynomial.  It
+      can compute the derivative or antiderivate polynomial.  It can compute
+      the form of the Lagrange basis polynomials.  It can compute the 
+      points and weights for Newton Cotes quadrature rules.  It can compute
+      the weights for a Lagrange interpolation scheme.
+    </p>
+
+    <p>
+      Divided difference polynomials are a
+      systematic method of computing polynomial approximations to scattered
+      data.  The representations are compact, and may easily be updated with
+      new data, rebased at zero, or analyzed to produce the standard form
+      polynomial, integral or derivative polynomials.
+    </p>
+
+    <p>
+      Other routines are available to convert the divided difference
+      representation to standard polynomial format.  This is a natural
+      way to determine the coefficients of the polynomial that interpolates
+      a given set of data, for instance.
+    </p>
+
+    <p>
+      One surprisingly simple but useful routine is available to take
+      a set of roots and compute the divided difference or standard form
+      polynomial that passes through those roots.
+    </p>
+
+    <p>
+      Finally, the Newton-Cotes quadrature formulas can be derived using
+      divided difference methods, so a few routines are given which can
+      compute the weights and abscissas of open or closed rules for an
+      arbitrary number of nodes.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>divdif</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/divdif/divdif.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/divdif/divdif.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/divdif/divdif.html">a Fortran77 version</a> and
+      <a href = "divdif.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/divdif/divdif.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/divdif/divdif.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/divdif/divdif.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../divdif_test/divdif_test.html">
+      divdif_test</a>
+    </p>
+
+    <p>
+      <a href = "../bernstein_polynomial/bernstein_polynomial.html">
+      bernstein_polynomial</a>,
+      a Fortran90 code which
+      evaluates the Bernstein polynomials, 
+      useful for uniform approximation of functions;
+    </p>
+
+    <p>
+      <a href = "../chebyshev/chebyshev.html">
+      chebyshev</a>,
+      a Fortran90 code which
+      computes the Chebyshev interpolant/approximant to a given function
+      over an interval.
+    </p>
+
+    <p>
+      <a href = "../differ/differ.html">
+      differ</a>,
+      a Fortran90 code which
+      determines the finite difference coefficients necessary in order to
+      combine function values at known locations to compute an approximation
+      of given accuracy to a derivative of a given order.
+    </p>
+
+    <p>
+      <a href = "../hermite_interpolant/hermite_interpolant.html">
+      hermite_interpolant</a>,
+      a Fortran90 code which
+      computes the Hermite interpolant, a polynomial that matches function values
+      and derivatives.
+    </p>
+
+    <p>
+      <a href = "../lagrange_interp_1d/lagrange_interp_1d.html">
+      lagrange_interp_1d</a>,
+      a Fortran90 code which
+      defines and evaluates the Lagrange polynomial p(x) 
+      which interpolates a set of data, so that p(x(i)) = y(i).
+    </p>
+
+    <p>
+      <a href = "../pppack/pppack.html">
+      pppack</a>,
+      a Fortran90 code which
+      computes piecewise polynomial functions, including cubic splines.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/rbf_interp/rbf_interp.html">
+      rbf_interp</a>,
+      a Fortran90 code which
+      defines and evaluates radial basis interpolants to multidimensional data.
+    </p>
+
+    <p>
+      <a href = "../spline/spline.html">
+      spline</a>,
+      a Fortran90 code which
+      can construct and evaluate spline interpolants and approximants.
+    </p>
+
+    <p>
+      <a href = "../test_approx/test_approx.html">
+      test_approx</a>,
+      a Fortran90 code which
+      defines test functions for approximation and interpolation.
+    </p>
+
+    <p>
+      <a href = "../toms446/toms446.html">
+      toms446</a>,
+      a Fortran90 code which
+      manipulates Chebyshev series for interpolation and approximation;<br>
+      this is a version of ACM TOMS algorithm 446,
+      by Roger Broucke.
+    </p>
+
+    <p>
+      <a href = "../vandermonde_interp_1d/vandermonde_interp_1d.html">
+      vandermonde_interp_1d</a>,
+      a Fortran90 code which
+      finds a polynomial interpolant to data y(x) of a 1D argument,
+      by setting up and solving a linear system for the polynomial coefficients,
+      involving the Vandermonde matrix.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Philip Davis,<br>
+          Interpolation and Approximation,<br>
+          Dover, 1975,<br>
+          ISBN: 0-486-62495-1,<br>
+          LC: QA221.D33
+        </li>
+        <li>
+          Carl deBoor,<br>
+          A Practical Guide to Splines,<br>
+          Springer, 2001,<br>
+          ISBN: 0387953663,<br>
+          LC: QA1.A647.v27.
+        </li>
+        <li>
+          Jean-Paul Berrut, Lloyd Trefethen,<br>
+          Barycentric Lagrange Interpolation,<br>
+          SIAM Review,<br>
+          Volume 46, Number 3, September 2004, pages 501-517.
+        </li>
+        <li>
+          FM Larkin,<br>
+          Root Finding by Divided Differences,<br>
+          Numerische Mathematik,<br>
+          Volume 37, pages 93-104, 1981.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "divdif.f90">divdif.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "divdif.sh">divdif.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 12 October 2019.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+

@@ -1,0 +1,571 @@
+03 April 2023  10:35:34.704 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        1
+ 
+  The number of maps to use is      5
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.2000  0.2000
+  0.2000  0.4000  0.2000
+  0.4000  0.6000  0.2000
+  0.6000  0.8000  0.2000
+  0.8000  1.0000  0.2000
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.3330  0.0000  0.3330
+  0.0000  0.3330  0.0000
+ 
+ Map #      2
+ 
+  0.3330  0.0000  0.0000
+  0.0000  0.3330  0.3330
+ 
+ Map #      3
+ 
+  0.3330  0.0000  0.3330
+  0.0000  0.3330  0.3330
+ 
+ Map #      4
+ 
+  0.3330  0.0000  0.6660
+  0.0000  0.3330  0.3330
+ 
+ Map #      5
+ 
+  0.3330  0.0000  0.3330
+  0.0000  0.3330  0.6660
+ 
+  Points 0 through 10:
+ 
+       0    0.9632    0.1385
+       1    0.6537    0.0461
+       2    0.5507    0.3484
+       3    0.5164    0.7820
+       4    0.5050    0.5934
+       5    0.8341    0.5306
+       6    0.2778    0.5097
+       7    0.0925    0.5027
+       8    0.3638    0.5004
+       9    0.7871    0.4996
+      10    0.5951    0.1664
+ 
+  X coordinate range:
+     0.00000       1.00000    
+ 
+  Y coordinate range:
+     0.00000       1.00000    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:34.717 PM
+03 April 2023  10:35:34.853 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        2
+ 
+  The number of maps to use is      2
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.5000  0.5000
+  0.5000  1.0000  0.5000
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.5000  0.5000  0.1250
+ -0.5000  0.5000  0.6750
+ 
+ Map #      2
+ 
+  0.5000  0.5000 -0.1250
+ -0.5000  0.5000  0.3250
+ 
+  Points 0 through 10:
+ 
+       0    0.3876    0.6906
+       1    0.6641    0.8265
+       2    0.8703    0.7562
+       3    0.9383    0.6179
+       4    0.6531    0.1648
+       5    0.2840    0.0809
+       6    0.0574    0.2234
+       7    0.0154    0.4080
+       8    0.3367    0.8713
+       9    0.7290    0.9423
+      10    0.9606    0.7816
+ 
+  X coordinate range:
+     0.00000       1.00000    
+ 
+  Y coordinate range:
+     0.00000       1.00000    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:34.864 PM
+03 April 2023  10:35:34.959 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        3
+ 
+  The number of maps to use is      4
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.7500  0.7500
+  0.7500  0.8500  0.1000
+  0.8500  0.9500  0.1000
+  0.9500  1.0000  0.0500
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.8560  0.0414  0.0700
+ -0.0205  0.8580  0.1470
+ 
+ Map #      2
+ 
+  0.2440 -0.3850  0.3930
+  0.1760  0.2240  0.1020
+ 
+ Map #      3
+ 
+ -0.1440  0.3900  0.5270
+  0.1810  0.2590 -0.0140
+ 
+ Map #      4
+ 
+  0.0000  0.0000  0.4860
+  0.0310  0.2160  0.0500
+ 
+  Points 0 through 10:
+ 
+       0    0.7526    0.6338
+       1    0.7404    0.6753
+       2    0.7318    0.7113
+       3    0.7259    0.7423
+       4    0.7221    0.7690
+       5    0.7199    0.7920
+       6    0.7190    0.8118
+       7    0.7191    0.8287
+       8    0.2494    0.4142
+       9    0.6526    0.1384
+      10    0.6344    0.2524
+ 
+  X coordinate range:
+     0.00000       1.00000    
+ 
+  Y coordinate range:
+     0.00000       1.00000    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:34.970 PM
+03 April 2023  10:35:35.065 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        4
+ 
+  The number of maps to use is      4
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.2500  0.2500
+  0.2500  0.5000  0.2500
+  0.5000  0.7500  0.2500
+  0.7500  1.0000  0.2500
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.8000  0.0000  0.1000
+  0.0000  0.8000  0.0400
+ 
+ Map #      2
+ 
+  0.5000  0.0000  0.2500
+  0.0000  0.5000  0.4000
+ 
+ Map #      3
+ 
+  0.3550 -0.3550  0.2660
+  0.3550  0.3550  0.0780
+ 
+ Map #      4
+ 
+  0.3550  0.3550  0.3780
+ -0.3550  0.3550  0.4340
+ 
+  Points 0 through 10:
+ 
+       0    0.3968    0.4906
+       1    0.4484    0.6453
+       2    0.7663    0.5039
+       3    0.3591    0.5289
+       4    0.3873    0.4631
+       5    0.4437    0.6316
+       6    0.4718    0.7158
+       7    0.1794    0.4996
+       8    0.2435    0.4397
+       9    0.1964    0.3205
+      10    0.2571    0.2964
+ 
+  X coordinate range:
+     0.00000       1.00000    
+ 
+  Y coordinate range:
+     0.00000       1.00000    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:35.075 PM
+03 April 2023  10:35:35.177 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        5
+ 
+  The number of maps to use is      2
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.5000  0.5000
+  0.5000  1.0000  0.5000
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.5000  0.5000  0.5000
+ -0.5000  0.5000  0.5000
+ 
+ Map #      2
+ 
+  0.5000 -0.5000 -0.5000
+  0.5000  0.5000  0.5000
+ 
+  Points 0 through 10:
+ 
+       0    0.1007    0.0286
+       1    0.5646    0.4640
+       2    1.0143    0.4497
+       3    1.2320    0.2177
+       4    1.2248   -0.0071
+       5    0.1160    1.1088
+       6   -0.9964    1.1124
+       7    0.5580    1.5544
+       8   -0.9982    1.5562
+       9   -1.7772    0.7790
+      10   -1.7781    0.0009
+ 
+  X coordinate range:
+    -1.99801       1.99944    
+ 
+  Y coordinate range:
+   -0.499718       1.99887    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:35.188 PM
+03 April 2023  10:35:35.290 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        6
+ 
+  The number of maps to use is      4
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.0500  0.0500
+  0.0500  0.2000  0.1500
+  0.2000  0.6000  0.4000
+  0.6000  1.0000  0.4000
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.0000  0.0000  0.5000
+  0.0000  0.5000  0.0000
+ 
+ Map #      2
+ 
+  0.1000  0.0000  0.4500
+  0.0000  0.1000  0.1500
+ 
+ Map #      3
+ 
+  0.4200 -0.4200  0.2900
+  0.4200  0.4200 -0.0100
+ 
+ Map #      4
+ 
+  0.4200  0.4200  0.2900
+ -0.4200  0.4200  0.4100
+ 
+  Points 0 through 10:
+ 
+       0    0.1137    0.1386
+       1    0.4614    0.1639
+       2    0.4150    0.2526
+       3    0.3582    0.2704
+       4    0.3269    0.2540
+       5    0.5340    0.3794
+       6    0.3549    0.3736
+       7    0.2822    0.2960
+       8    0.5000    0.1480
+       9    0.5622    0.2622
+      10    0.6362    0.2840
+ 
+  X coordinate range:
+     0.00000       1.00000    
+ 
+  Y coordinate range:
+     0.00000       1.00000    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:35.300 PM
+03 April 2023  10:35:35.398 PM
+ 
+ranmap():
+  FORTRAN90 version
+  Demonstrate the use of weighted affine
+  mappings to draw fractals.
+ 
+Choose the number of points to plot
+ 
+  The number of points to plot is     2000
+ 
+Choose a map:
+  1 = the cross
+  2 = the dragon
+  3 = the fern
+  4 = the leaf
+  5 = the Levy dragon
+  6 = the tree
+  7 = the triangle
+  8 = a random map (not debugged)
+  9 = specify your own.
+ 
+  The map choice is        7
+ 
+  The number of maps to use is      3
+ 
+  The map bin values:
+ 
+  Left    Right  Length
+ 
+  0.0000  0.3300  0.3300
+  0.3300  0.6600  0.3300
+  0.6600  1.0000  0.3400
+ 
+  Setting the map coefficients.
+ 
+ 
+ Map #      1
+ 
+  0.5000  0.0000  0.0000
+  0.0000  0.5000  0.0000
+ 
+ Map #      2
+ 
+  0.5000  0.0000  0.5000
+  0.0000  0.5000  0.0000
+ 
+ Map #      3
+ 
+  0.5000  0.0000  0.2500
+  0.0000  0.5000  0.3300
+ 
+  Points 0 through 10:
+ 
+       0    0.2300    0.6299
+       1    0.6150    0.3150
+       2    0.3075    0.1575
+       3    0.4038    0.4087
+       4    0.4519    0.5344
+       5    0.7259    0.2672
+       6    0.6130    0.4636
+       7    0.5565    0.5618
+       8    0.5282    0.6109
+       9    0.7641    0.3054
+      10    0.3821    0.1527
+ 
+  X coordinate range:
+     0.00000       1.00000    
+ 
+  Y coordinate range:
+     0.00000       1.00000    
+ 
+  The point data has been saved in the file "ranmap.txt".
+  A point plot has been saved in the file "ranmap.eps".
+ 
+RANMAP:
+  Normal end of execution.
+ 
+03 April 2023  10:35:35.407 PM

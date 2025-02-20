@@ -1,0 +1,14 @@
+# lotka_timestep_commands.txt
+#
+# Usage:
+#  gnuplot < lotka_timestep_commands.txt
+#
+set term png
+set output "lotka_timestep.png"
+set xlabel "Index"
+set ylabel "DT"
+set title "MAD timesteps"
+set grid
+set style data lines
+plot "lotka_timestep_data.txt" using 1:2 lw 3 linecolor rgb "blue"
+quit

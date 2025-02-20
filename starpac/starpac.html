@@ -1,0 +1,426 @@
+<html>
+
+  <head>
+    <title>
+      starpac
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      starpac
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>starpac</b>,
+      a Fortran90 code which
+      performs statistical data analysis.  It includes functions for nonlinear 
+      least squares regression, time series analysis in both time and 
+      frequency domains), line printer graphics, basic statistical analysis, 
+      and linear least squares regression, by Janet Donaldson.
+    </p>
+
+    <p>
+      starpac() uses a COMMON block and EQUIVALENCE statements
+      in order to make workspace storage available to its routines.
+      This scheme assumes that an integer is stored in one word.
+      When compiling this program with the gnu g95() compiler, it may be 
+      necessary to include the <b>-i4</b> switch, to guarantee that integers
+      are stored in 4 bytes = one word.  Otherwise, routines that
+      rely on the workspace storage system will fail.
+    </p>
+
+    <p>
+      Some updates to the original Fortran77 code include:
+      <ul>
+        <p>
+          Basic conversion to Fortran90 format, although many archaic
+          structures remain, include common blocks and equivalence statements.
+        </p>
+        <p>
+          Source code for erf(), erfc() and gamma() removed;
+          intrinsic functions are called instead.
+        </p>
+        <p>
+          The subroutine stat() was renamed stat_external() to avoid
+          conflict with an intrinsic stat() function.  Various
+          calls and declarations had to be correspondingly updated.
+        </p>
+        <p>
+          The dstak() array was uniformly redimensioned to size 3000;
+          Previously, it was generally dimensioned as size 12, but
+          some functions expected it to have signficantly more storage.
+        </p>
+        <p>
+          Several obsolete arithmetic goto statements were replaced
+          by corresponding if/elseif/else statements.
+        </p>
+        <p>
+          Numerous statements were corrected, in which an array argument, 
+          say "xmiss", was supposed to be followed by a scalar value.
+          Instead, these statements had the form ",xmiss,xmiss,".  Presumably,
+          the second value was actually not used, and so the value "xmiss"
+          was repeated as a filler.  However, the receiving subroutine 
+          expected a scalar value for that argument, and this triggered an
+          error.  Most of these errors were suppressed simply by replacing
+          ",xmiss,xmiss," by ",xmiss,xmiss(1),", turning the second argument
+          into a scalar, and relying on the likelihood that the subroutine
+          actually had no need for this information anyway.  Before this
+          change, the gfortran compiler would allow the original statements
+          as long as it was invoked with the flag "-fallow-argument-mismatch".
+          This problem and the gfortran workaround were reported by Vivek
+          Rao.
+        </p>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>starpac</b> is available in
+      <a href = "starpac.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../starpac_test/starpac_test.html">
+      starpac_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/blas1/blas1.html">
+      blas1</a>,
+      a Fortran90 code which
+      implements the
+      Basic Linear Algebra Subprograms, Level 1, and which are
+      called by starpac().
+    </p>
+
+    <p>
+      <a href = "../machine/machine.html">
+      machine</a>,
+      a Fortran90 code which 
+      tabulates the values
+      of certain machine-specific arithmetic quantities, and which are
+      called by starpac().
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/nl2sol/nl2sol.html">
+      nl2sol</a>, 
+      a Fortran90 code which
+      minimizes the
+      sum of squares of a set of nonlinear functions, and which is
+      called by starpac().
+    </p>
+
+    <p>
+      <a href = "../prob/prob.html">
+      prob</a>, 
+      a Fortran90 code which
+      computes the PDF, CDF, inverse CDF, and sampling various statistical
+      distributions.
+    </p>
+
+    <p>
+      <a href = "../xerror/xerror.html">
+      xerror</a>,
+      a Fortran90 code which
+      carries out error handling.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Original Fortran77 version by Janet Donaldson.
+      This version by John Burkardt.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Milton Abramowitz, Irene Stegun,<br>
+          Handbook of Mathematical Functions,<br>
+          National Bureau of Standards, 1964,<br>
+          LC: QA47.A34,<br>
+          ISBN: 0-486-61272-4.
+        </li>
+        <li>
+          Peter Bloomfield,<br>
+          Fourier Analysis of Time Series - An Introduction,<br>
+          Wiley, 2000,<br>
+          ISBN: 0471889482,<br>
+          LC: QA280.B59.
+        </li>
+        <li>
+          Nancy Bosten, Thomas Aird,<br>
+          Remark on Algorithm 179, <br>
+          Communications of the ACM,<br>
+          Volume 17, page 153, 1974.
+        </li>
+        <li>
+          George Box, Gwilym Jenkins,<br>
+          Time Series Analysis: Forecasting and Control,<br>
+          Prentice Hall, 1991,<br>
+          ISBN: 0139051007,<br>
+          LC: QA280.B67.
+        </li>
+        <li>
+          Kenneth Brown,<br>
+          A Quadratically Convergent Newton-like Method Based upon 
+          Gaussian Elimination,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 6, pages 560-569, 1969.
+        </li>
+        <li>
+          Peter Businger, Gene Golub,<br>
+          Linear Least Squares Solutions by Householder Transformations,<br>
+          Numerische Mathematik,<br>
+          Volume 7, pages 269-276, 1965.
+        </li>
+        <li>
+          Alan Cline, Cleve Moler, Pete Stewart, James Wilkinson,<br>
+          An Estimate of the Condition Number of a Matrix,<br>
+          Technical Report TM-310,<br>
+          Applied Math Division,<br>
+          Argonne National Laboratory, 1977.
+        </li>
+        <li>
+          John Dennis, David Gay, Roy Welsch,<br>
+          Algorithm 573:
+          An Adaptive Nonlinear Least-Squares Algorithm,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 7, Number 3, 1981, pages 367-383.
+        </li>
+        <li>
+          Janet Donaldson, Peter Tryon,<br>
+          User's Guide to STARPAC,<br>
+          The Standards Time Series and Regression Package,<br> 
+          NIST, Boulder, Colorado, 1987.
+        </li>
+        <li>
+          Jack Dongarra, Jim Bunch, Cleve Moler, Pete Stewart,<br>
+          LINPACK User's Guide,<br>
+          SIAM, 1979,<br>
+          ISBN13: 978-0-898711-72-1,<br>
+          LC: QA214.L56.
+        </li>
+        <li>
+          Norman Draper, Harry Smith,<br>
+          Applied Regression Analysis,<br>
+          Wiley, 1998,<br>
+          ISBN: 978-0471170822,<br>
+          LC: QA278.2.D7.
+        </li>
+        <li>
+          Merran Evans, Nicholas Hastings, Brian Peacock,<br>
+          Statistical Distributions,<br>
+          Wiley, 2000,<br>
+          ISBN: 0471371246,<br>
+          LC: QA273.6E92.
+        </li>
+        <li>
+          Enrico Federghi,<br>
+          Extended Tables of the Percentage Points of Student's
+          T-Distribution,<br>
+          Journal of the American Statistical Association,<br>
+          Volume 54, Number 287, 1959, pages 683-688.
+        </li>
+        <li>
+          Phyllis Fox, Andrew Hall, Norman Schryer,<br>
+          Algorithm 528,
+          A Framework for a Portable code,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 4, Number 2, June 1978, pages 177-188.
+        </li>
+        <li>
+          Walter Gautschi,<br>
+          Algorithm 542:
+          Incomplete Gamma Functions,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 5, Number 4, December 1979, pages 382-489.
+        </li>
+        <li>
+          David Gay,<br>
+          Computing Optimal Locally Constrained Steps,<br>
+          SIAM Journal on Scientific and Statistical Computing,<br>
+          Volume 2, Number 2, pages 186-197, 1981.
+        </li>
+        <li>
+          Philip Gill, Walter Murray,<br>
+          Algorithms for the Solution of the 
+          Non-linear Least-squares Problem, <br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 15, Number 5, pages 977-991, 1978.
+        </li>
+        <li>
+          Steven Goldfeld, Richard Quandt, Hale Trotter,<br>
+          Maximization by Quadratic Hill-climbing,<br>
+          Econometrica,<br>
+          Volume 34, pages 541-551, 1966.
+        </li>
+        <li>
+          MD Hebden,<br>
+          An Algorithm for Minimization using Exact Second Derivatives,<br>
+          Report TP515,<br>
+          Theoretical Physics Division,<br>
+          AERE, Harwell, Oxon., England, 1973.
+        </li>
+        <li>
+          DC Hoaglin,<br>
+          Theoretical Properties of Congruential Random-Number Generators,
+          An Empirical View,<br>
+          Memorandum NS-340,<br>
+          Department of Statistics,<br>
+          Harvard University, 1976.
+        </li>
+        <li>
+          Gwilym Jenkins, Donald Watts,<br>
+          Spectral Analysis and its Applications,<br>
+          Holden-Day, 1968,<br>
+          ISBN: 1892803038,<br>
+          LC: QA280.J45.
+        </li>
+        <li>
+          Norman Johnson, Samuel Kotz, Narayanaswamy Balakrishnan,<br>
+          Continuous Univariate Distributions,<br>
+          Second edition,<br>
+          Wiley, 1994,<br>
+          ISBN: 0471584940,<br>
+          LC: QA273.6.J6
+        </li>
+        <li>
+          Donald Knuth,<br>
+          The Art of Computer Programming,<br>
+          Volume 2, Seminumerical Algorithms,<br> 
+          Third Edition,<br>
+          Addison Wesley, 1997,<br>
+          ISBN: 0201896842,<br>
+          LC: QA76.6.K64.
+        </li>
+        <li>
+          Charles Lawson, Richard Hanson,<br>
+          Solving Least Squares Problems,<br>
+          SIAM, 1995,<br>
+          ISBN: 0898713560,<br>
+          LC: QA275.L38.
+        </li>
+        <li>
+          Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,<br>
+          Algorithm 539:
+          Basic Linear Algebra Subprograms for Fortran Usage,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 5, Number 3, September 1979, pages 308-323.
+        </li>
+        <li>
+          George Marsaglia, Wai Wan Tsang,<br>
+          A fast, easily implemented method for sampling from decreasing or
+          symmetric unimodal density functions,<br>
+          SIAM Journal of Scientific and Statistical Computing,<br>
+          Volume 5, 1983, pages 349-359.
+        </li>
+        <li>
+          Jorge More,<br>
+          The Levenberg-Marquardt Algorithm, Implementation and Theory,<br>
+          in Springer Lecture Notes in Mathematics, Number 630,<br>
+          edited by G A Watson,<br>
+          Springer, 1978.
+        </li>
+        <li>
+          Donald Owen, <br>
+          Handbook of Statistical Tables,<br>
+          Addison-Wesley, 1962.
+        </li>
+        <li>
+          Egon Pearson, Herman Hartley, <br>
+          Biometrika Tables for Statisticians, <br>
+          Cambridge, 1970,<br>
+          ISBN: 978-0852647004.
+        </li>
+        <li>
+          Michael Powell,<br>
+          A Fortran Subroutine for Solving Systems of Nonlinear 
+          Algebraic Equations,<br>
+          in Numerical Methods for Nonlinear Algebraic Equations,<br>
+          edited by Philip Rabinowitz,<br>
+          Gordon and Breach, 1970,<br>
+          ISBN13: 978-0677142302,<br>
+          LC: QA218.N85.
+        </li>
+        <li>
+          CS Smith,<br>
+          Multiplicative Pseudo-Random Number Generators with Prime Modulus,<br>
+          Journal of the Association for Computing Machinery,<br>
+          Volume 19, pages 586-593, 1971.
+        </li>
+        <li>
+          Richard Varga,<br>
+          Minimal Gerschgorin Sets,<br>
+          Pacific Journal of Mathematics,<br>
+          Volume 15, pages 719-729, 1965.
+        </li>
+        <li>
+          Max Waldmeier,<br>
+          The Sunspot-Activity in the Years 1610-1960,<br>
+          Shulthess, 1961,<br>
+          LC: QB525.W34.
+        </li>
+        <li>
+          Martin Wilk, Ram Gnanadesikan, Marilyn Huyett,<br>
+          Probability Plots for the Gamma Distribution,<br>
+          Technometrics,<br>
+          Volume 4, Number 1, 1962, pages 1-15,
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "starpac.f90">starpac.f90</a>, 
+          the source code.
+        </li>
+        <li>
+          <a href = "starpac.sh">starpac.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 22 October 2024.
+    </i>
+
+    <!-- John Burkardt -->
+ 
+  </body>
+
+</html>

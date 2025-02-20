@@ -1,0 +1,92 @@
+19 March 2024   9:42:10.041 PM
+
+zero_chandrupatla_test():
+  Fortran90 version
+  zero_chandrupatla() seeks a root of a function f(x)
+  in an interval [a,b].
+
+  f_01(x) = x**3 - 2 x - 5
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+        2.094556        2.094551        2.094551
+    0.523216E-04   -0.349042E-05   -0.349042E-05
+  Number of calls to F =    7
+
+  f_02(x) = 1 - 1/x**2
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+        1.000005        1.000000        1.000000
+    0.900249E-05   -0.997852E-06   -0.997852E-06
+  Number of calls to F =    8
+
+  f_03(x) = ( x - 3 )**3
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+        3.000002        3.000002        2.999992
+    0.693889E-17    0.693889E-17   -0.444089E-15
+  Number of calls to F =   21
+
+  f_04(x) = 6 * ( x - 2 )**5
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+        1.999998        1.999998        2.000008
+   -0.151461E-27   -0.151461E-27    0.155096E-24
+  Number of calls to F =   21
+
+  f_05(x) = x**9
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+       -0.000006        0.000004        0.000004
+   -0.657600E-47    0.171057E-48    0.171057E-48
+  Number of calls to F =   21
+
+  f_06(x) = x**19
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+       -0.000006        0.000004        0.000004
+   -0.247443E-99    0.111620-102    0.111620-102
+  Number of calls to F =   21
+
+  f_07(x) = x e**(-1/x2)
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+       -0.008278       -0.008278        0.207190
+    -0.00000        -0.00000        0.158302E-10
+  Number of calls to F =    8
+
+  f_08(x) = -(3062(1-xi)e**(-x)/(xi+(1-xi)e**(-x)) - 1013 + 1628/x
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+        1.037541        1.037536        1.037536
+   -0.495108E-02    0.335259E-03    0.335259E-03
+  Number of calls to F =    9
+
+  f_09(x) = e**x - 2 - 0.01/x**2 + 0.000002/x**3
+
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+
+        0.703210        0.703205        0.703205
+    0.103432E-04   -0.456893E-07   -0.456893E-07
+  Number of calls to F =    7
+
+zero_chandrupatla_test():
+  Normal end of execution.
+
+19 March 2024   9:42:10.041 PM

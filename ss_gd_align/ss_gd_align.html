@@ -1,0 +1,181 @@
+<html>
+
+  <head>
+    <title>
+      ss_gd_align
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      ss_gd_align
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>ss_gd_align</b>,
+      a FORTRAN90 code which
+      implements some of the linear space alignment
+      algorithms described in the reference by Chao.
+    </p>
+
+    <p>
+      A global
+      alignment is attempted between the strings, and similarity is measured by
+      a sort of distance.  These algorithms carry out the computation in
+      <I>linear space</I>, and compute not just the optimal alignment
+      score, but the corresponding optimal alignment.
+    </p>
+
+    <p>
+      It's important to be able to compute alignments using "linear space",
+      that is, just a few vectors whose length <b>N</b> is equal to that
+      of a typical string.  A quadratic algorithm would require a two
+      dimensional array of total dimension <b>N*N</b>.  Realistic alignment
+      problems can involve strings of <b>N</b>=100,000 elements or more,
+      so a quadratic algorithm would be expensive or impossible to use.
+    </p>
+
+    <p>
+      The score for the actual best matching is determined without
+      constructing the best matching, and in fact it is a matter of some
+      difficulty to recover the matching, particularly if the algorithm is a
+      linear space one, which discards a great deal of intermediate information.
+      However, a linear space algorithm included here can also compute the
+      optimal matching, based on the idea of a recursive subdivision of the
+      problem.
+    </p>
+
+    <p>
+      Routines that use quadratic space are included as well, so the algorithms
+      can be compared for storage, speed, and correctness.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this web page
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>ss_gd_align</b> is available in
+      <a href = "ss_gd_align.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../ss_gd_align_test/ss_gd_align_test.html">
+      ss_gd_align_test</a>
+    </p>
+
+    <p>
+      <a href = "../ps_gg_align/ps_gg_align.html">
+      PS_GG_ALIGN</a>,
+      a FORTRAN90 library which
+      implements a profile/sequence global alignment using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ps_lg_align/ps_lg_align.html">
+      PS_LG_ALIGN</a>,
+      a FORTRAN90 library which
+      implements a profile/sequence local alignment using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ps_qg_align/ps_qg_align.html">
+      PS_QG_ALIGN</a>,
+      a FORTRAN90 library which
+      implements a profile/sequence quasiglobal alignment using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ss_gg_align/ss_gg_align.html">
+      SS_GG_ALIGN</a>,
+      a FORTRAN90 library which
+      globally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ss_lg_align/ss_lg_align.html">
+      SS_LG_ALIGN</a>,
+      a FORTRAN90 library which
+      locally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ss_qg_align/ss_qg_align.html">
+      SS_QG_ALIGN</a>,
+      a FORTRAN90 library which
+      quasi-globally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Kun-Mao Chao, Ross Hardison, Webb Miller,<br>
+          Recent Developments in Linear-Space Alignment Methods: A Survey,<br>
+          Journal of Computational Biology, <br>
+          Volume 1, Number 4, 1994, pages 271-291.
+        </li>
+        <li>
+          Eugene Myers, Webb Miller,<br>
+          Optimal Alignments in Linear Space,<br>
+          CABIOS,<br>
+          Volume 4, number 1, 1988, pages 11-17.
+        </li>
+        <li>
+          Michael Waterman,<br>
+          Introduction to Computational Biology,<br>
+          Chapman and Hall, 1995,<br>
+          ISBN: 0412993910,<br>
+          LC: QH438.4.M33.W38.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "ss_gd_align.f90">ss_gd_align.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "ss_gd_align.sh">ss_gd_align.sh</a>,
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 28 March 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+

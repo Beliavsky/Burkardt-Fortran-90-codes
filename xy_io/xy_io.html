@@ -1,0 +1,252 @@
+<html>
+
+  <head>
+    <title>
+      xy_io
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      xy_io
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>xy_io</b>,
+      a Fortran90 code which
+      reads and writes simple graphics files in the XY, XYL and XYF formats.
+    </p>
+
+    <p>
+      XY files are a simple way of storing information about sets of points in 2D.
+    </p>
+
+    <p>
+      An XY file has a simple structure.  There are three kinds of records:
+      <ul>
+        <li>
+          COMMENT LINES begin with the character '#' and are ignored;
+        </li>
+        <li>
+          BLANK LINES are ignored;
+        </li>
+        <li>
+          COORDINATE LINES each contain one pair of X, Y coordinates;
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Here is an example of an XY file containing 13 points:
+      <pre>
+#  house.xy
+#
+        0.000000        0.000000
+        6.000000        0.000000
+        6.000000        7.000000
+        3.000000       10.000000
+        0.000000        7.000000
+        4.000000        1.000000
+        5.000000        1.000000
+        5.000000        4.000000
+        4.000000        4.000000
+        5.000000        8.000000
+        5.000000       11.000000
+        4.000000       11.000000
+        4.000000        9.000000
+      </pre>
+    </p>
+
+    <p>
+      Of course, in many cases, we would like to describe LINES between the points.
+      We can add this information by including a second file, called an XYL file,
+      which consists of a string of point indices.  A line is drawn from one point
+      to the next and so on.  Each list of points is on a separate record.  Thus, an XYL file
+      associated with the above XY file might be:
+      <pre>
+#  house.xyl
+#
+ 1 2 3 4 5 1
+ 6 7 8 9 6
+ 10 11 12 13
+      </pre>
+    </p>
+
+    <p>
+      We might also like to describe FACES defined by the points.
+      We can add this information by including a file, called an XYF file,
+      which consists of a string of point indices.  A face is defined by
+      listing in counterclockwise order the vertices that lie on it.
+      No terminating "-1" is needed, and the first vertex is not repeated
+      as the final vertex. Thus, an XYF file
+      associated with the above XY file might be:
+      <pre>
+#  house.xyf
+#
+ 1 2 3 4 5
+ 6 7 8 9
+ 10 11 12 13
+      </pre>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>xy_io</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xy_io/xy_io.html">a C++ version</a> and
+      <a href = "xy_io.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xy_io/xy_io.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../xy_io_test/xy_io_test.html">
+      xy_io_test</a>
+    </p>
+
+    <p>
+      <a href = "../circle_arc_grid/circle_arc_grid.html">
+      circle_arc_grid</a>,
+      a Fortran90 code which
+      computes points equally spaced on a circular arc, and writes them to an XY file;
+    </p>
+
+    <p>
+      <a href = "../grf_to_xyl/grf_to_xyl.html">
+      grf_to_xyl</a>,
+      a Fortran90 code which
+      converts information describing the adjacency and embedding of an
+      abstract graph from GRF to XYL format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/table/table.html">
+      table</a>,
+      a data directory which
+      contains examples of TABLE files,
+      a simple format for N points in M dimensions;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xy/xy.html">
+      xy</a>,
+      a data directory which
+      contains examples of XY files,
+      a simple 2D graphics point format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xy_display/xy_display.html">
+      xy_display</a>,
+      a MATLAB code which
+      reads an XY file containing
+      the coordinates of points in 2D, and displays a plot of the
+      points in a MATLAB graphics window;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xy_display_opengl/xy_display_opengl.html">
+      xy_display_opengl</a>,
+      a C++ code which
+      reads an XY file of 2D point coordinates, and displays
+      an image of those points using OpenGL.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xyf/xyf.html">
+      xyf</a>,
+      a data directory which
+      contains examples of XYF files,
+      a simple 2D graphics point and face format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyf_display/xyf_display.html">
+      xyf_display</a>,
+      a MATLAB code which
+      reads XYF information defining points and faces in 2D, and displays
+      an image.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyf_display_opengl/xyf_display_opengl.html">
+      xyf_display_opengl</a>,
+      a C++ code which
+      reads XYF information defining points and faces in 2D, and displays
+      an image using OpenGL.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xyl/xyl.html">
+      xyl</a>,
+      a data directory which
+      contains examples of XYL files,
+      a simple 2D graphics point and line format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyl_display/xyl_display.html">
+      xyl_display</a>,
+      a MATLAB code which
+      reads XYL information defining points and lines in 2D, and displays
+      an image.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyl_display_opengl/xyl_display_opengl.html">
+      xyl_display_opengl</a>,
+      a C++ code which
+      reads XYL information defining points and lines in 2D, and displays
+      an image using OpenGL.
+    </p>
+
+    <p>
+      <a href = "../xyz_io/xyz_io.html">
+      xyz_io</a>,
+      a Fortran90 code which
+      reads and writes XYZ files, a simple 3D graphics point format.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "xy_io.f90">xy_io.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "xy_io.sh">xy_io.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+ 
+    <hr>
+
+    <i>
+      Last revised on 29 October 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+

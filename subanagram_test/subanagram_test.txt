@@ -1,0 +1,27 @@
+ 1 January 2025   4:34:19.381 PM
+ 
+subanagram():
+  Fortran90 version
+  Find subanagrams of a given word.
+ 
+  Given an master word (or phrase), this
+  program examines a file full of words, and looks 
+  for "subanagrams", that is, words formed by using 
+  some (possibly all) of the letters of the master word.
+ 
+  Master word: "amsterdam".
+  Sorted:      "aademmrst".
+ 
+  Minimum subanagrams length:        4
+  Maximum subanagrams length:        9
+ 
+    300394  words checked;
+    155829  words checked that were the right length;
+       270  words checked that were the right length AND subanagrams.
+ 
+  The subanagrams were written to the file "amsterdam.txt".
+ 
+SUBANAGRAM:
+  Normal end of execution.
+ 
+ 1 January 2025   4:34:19.515 PM

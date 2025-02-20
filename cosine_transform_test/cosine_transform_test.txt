@@ -1,0 +1,33 @@
+08 September 2021   2:37:46.893 PM
+
+COSINE_TRANSFORM_TEST
+  Fortran90 version.
+  Test COSINE_TRANSFORM().
+
+COSINE_TRANSFORM_TEST01:
+  COSINE_TRANSFORM_DATA does a cosine transform of data
+  defined by a vector.
+
+  Apply the transform, then its inverse.
+  Let R be a random N vector.
+  Let S be the transform of D.
+  Let T be the transform of E.
+  Then R and T will be equal.
+
+     I      R(I)        S(I)        T(I)
+
+     1    0.638017    1.932653    0.638017
+     2    0.046769    0.013242    0.046769
+     3    0.311104   -0.163361    0.311104
+     4    0.922936    0.022135    0.922936
+     5    0.067071    0.060263    0.067071
+     6    0.851432    0.331517    0.851432
+     7    0.268646    0.148448    0.268646
+     8    0.336429    0.745225    0.336429
+     9    0.720491   -0.182100    0.720491
+    10    0.158647   -0.444859    0.158647
+
+COSINE_TRANSFORM_TEST
+  Normal end of execution.
+
+08 September 2021   2:37:46.893 PM

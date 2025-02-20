@@ -1,0 +1,18730 @@
+subroutine comp_next ( n, k, a, more, h, t )
+
+!*****************************************************************************80
+!
+!! comp_next() computes the compositions of the integer N into K parts.
+!
+!  Discussion:
+!
+!    A composition of the integer N into K parts is an ordered sequence
+!    of K nonnegative integers which sum to N.  The compositions (1,2,1)
+!    and (1,1,2) are considered to be distinct.
+!
+!    The routine computes one composition on each call until there are no more.
+!    For instance, one composition of 6 into 3 parts is
+!    3+2+1, another would be 6+0+0.
+!
+!    On the first call to this routine, set MORE = FALSE.  The routine
+!    will compute the first element in the sequence of compositions, and
+!    return it, as well as setting MORE = TRUE.  If more compositions
+!    are desired, call again, and again.  Each time, the routine will
+!    return with a new composition.
+!
+!    However, when the LAST composition in the sequence is computed
+!    and returned, the routine will reset MORE to FALSE, signaling that
+!    the end of the sequence has been reached.
+!
+!    There are 28 compositions of 6 into three parts.  This routine will
+!    produce those compositions in the following order:
+!
+!     I         A
+!     -     ---------
+!     1     6   0   0
+!     2     5   1   0
+!     3     4   2   0
+!     4     3   3   0
+!     5     2   4   0
+!     6     1   5   0
+!     7     0   6   0
+!     8     5   0   1
+!     9     4   1   1
+!    10     3   2   1
+!    11     2   3   1
+!    12     1   4   1
+!    13     0   5   1
+!    14     4   0   2
+!    15     3   1   2
+!    16     2   2   2
+!    17     1   3   2
+!    18     0   4   2
+!    19     3   0   3
+!    20     2   1   3
+!    21     1   2   3
+!    22     0   3   3
+!    23     2   0   4
+!    24     1   1   4
+!    25     0   2   4
+!    26     1   0   5
+!    27     0   1   5
+!    28     0   0   6
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    02 July 2008
+!
+!  Author:
+!
+!    Original FORTRAN77 version by Albert Nijenhuis, Herbert Wilf.
+!    FORTRAN90 version by John Burkardt.
+!
+!  Reference:
+!
+!    Albert Nijenhuis, Herbert Wilf,
+!    Combinatorial Algorithms for Computers and Calculators,
+!    Second Edition,
+!    Academic Press, 1978,
+!    ISBN: 0-12-519260-6,
+!    LC: QA164.N54.
+!
+!  Parameters:
+!
+!    Input, integer N, the integer whose compositions are desired.
+!
+!    Input, integer K, the number of parts in the composition.
+!
+!    Input/output, integer A(K), the parts of the composition.
+!
+!    Input/output, logical MORE, set by the user to start the computation,
+!    and by the routine to terminate it.
+!
+!    Input/output, integer H, T, two internal parameters needed
+!    for the computation.  The user should allocate space for these in the
+!    calling program, include them in the calling sequence, but never alter
+!    them!
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer k
+
+  integer a(k)
+  integer h
+  logical more
+  integer n
+  integer t
+!
+!  The first computation.
+!
+  if ( .not. more ) then
+
+    t = n
+    h = 0
+    a(1) = n
+    a(2:k) = 0
+!
+!  The next computation.
+!
+  else
+!
+!  If the first entry A(1) is positive, then set H to zero,
+!  so that when we increment H, it points to A(1); we will decrement A(1) by 1
+!  and increment A(2).
+!
+    if ( 1 < t ) then
+      h = 0
+    end if
+!
+!  Otherwise, A(1) is 0.  Then by H + 1 is the entry we incremented last time.
+!  Set H = H + 1, zero A(H), adding all but one of its value to A(1),
+!  and incrementing A(H+1) by 1.
+!
+    h = h + 1
+    t = a(h)
+    a(h) = 0
+    a(1) = t - 1
+    a(h+1) = a(h+1) + 1
+
+  end if
+!
+!  This is the last element of the sequence if all the
+!  items are in the last slot.
+!
+  more = ( a(k) /= n )
+
+  return
+end
+subroutine monomial_value ( d, n, e, x, v )
+
+!*****************************************************************************80
+!
+!! monomial_value() evaluates a monomial.
+!
+!  Discussion:
+!
+!    This routine evaluates a monomial of the form
+!
+!      product ( 1 <= i <= d ) x(i)^e(i)
+!
+!    The combination 0.0^0, if encountered, is treated as 1.0.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license. 
+!
+!  Modified:
+!
+!    16 May 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Input:
+!
+!    integer D, the spatial dimension.
+!
+!    integer N, the number of evaluation points.
+!
+!    integer E(D), the exponents.
+!
+!    real ( kind = rk ) X(N,D), the point coordinates.
+!
+!  Output:
+!
+!    real ( kind = rk ) V(N), the monomial values.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer d
+  integer n
+
+  integer e(d)
+  integer j
+  real ( kind = rk ) v(n)
+  real ( kind = rk ) x(n,d)
+
+  v(1:n) = 1.0D+00
+
+  do j = 1, d
+    if ( 0 /= e(j) ) then
+      v(1:n) = v(1:n) * x(1:n,j) ** e(j)
+    end if
+  end do
+
+  return
+end
+function r8mat_det_4d ( a )
+
+!*****************************************************************************80
+!
+!! r8mat_det_4d() computes the determinant of a 4 by 4 matrix.
+!
+!  Discussion:
+!
+!    An R8MAT is an MxN array of R8's, stored by (I,J) -> [I+J*M].
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    01 March 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Input:
+!
+!    real ( kind = rk ) A(4,4): the matrix whose determinant is desired.
+!
+!  Output:
+!
+!    real ( kind = rk ) R8MAT_DET_4D: the determinant of the matrix.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  real ( kind = rk ) a(4,4)
+  real ( kind = rk ) r8mat_det_4d
+
+  r8mat_det_4d = &
+         a(1,1) * ( &
+             a(2,2) * ( a(3,3) * a(4,4) - a(3,4) * a(4,3) ) &
+           - a(2,3) * ( a(3,2) * a(4,4) - a(3,4) * a(4,2) ) &
+           + a(2,4) * ( a(3,2) * a(4,3) - a(3,3) * a(4,2) ) ) &
+       - a(1,2) * ( &
+             a(2,1) * ( a(3,3) * a(4,4) - a(3,4) * a(4,3) ) &
+           - a(2,3) * ( a(3,1) * a(4,4) - a(3,4) * a(4,1) ) &
+           + a(2,4) * ( a(3,1) * a(4,3) - a(3,3) * a(4,1) ) ) &
+       + a(1,3) * ( &
+             a(2,1) * ( a(3,2) * a(4,4) - a(3,4) * a(4,2) ) &
+           - a(2,2) * ( a(3,1) * a(4,4) - a(3,4) * a(4,1) ) &
+           + a(2,4) * ( a(3,1) * a(4,2) - a(3,2) * a(4,1) ) ) &
+       - a(1,4) * ( &
+             a(2,1) * ( a(3,2) * a(4,3) - a(3,3) * a(4,2) ) &
+           - a(2,2) * ( a(3,1) * a(4,3) - a(3,3) * a(4,1) ) &
+           + a(2,3) * ( a(3,1) * a(4,2) - a(3,2) * a(4,1) ) )
+
+  return
+end
+subroutine rule_order ( p, order )
+
+!****************************************************************************80
+!
+!! rule_order() returns the order of a quadrature rule of given precision.
+!
+!  Discussion:
+!
+!    The "order" of a quadrature rule is the number of points involved.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer p: the precision, 0 <= p <= 20.
+!
+!  Output:
+!
+!    integer order: the order of the rule.
+!
+  implicit none
+
+  integer order
+  integer, save, dimension(0:20) :: order_save = (/ &
+      1, &
+      1,   4,   8,  14,  14, &
+     24,  35,  46,  59,  81, &
+    110, 168, 172, 204, 264, &
+    304, 364, 436, 487, 552 /)
+  integer p
+
+  if ( p < 0 ) then
+    write ( *, '(a)' ) ''
+    write ( *, '(a)' ) 'rule_order(): Fatal error!'
+    write ( *, '(a)' ) '  Input p < 0.'
+    stop ( 1 )
+  end if
+
+  if ( 20 < p ) then
+    write ( *, '(a)' ) ''
+    write ( *, '(a)' ) 'rule_order(): Fatal error!'
+    write ( *, '(a)' ) '  Input 20 < p.'
+    stop ( 1 )
+  end if
+
+  order = order_save(p)
+
+  return
+end
+subroutine rule00 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule00() returns the rule of precision 0.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 1
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      1.00000000000000000000D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule01 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule01() returns the rule of precision 1.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 1
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.25000000000000000000D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      1.00000000000000000000D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule02 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule02() returns the rule of precision 2.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 4
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.13819660112501050420D+00, &
+      0.58541019662496840414D+00, &
+      0.13819660112501050420D+00, &
+      0.13819660112501050420D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.13819660112501050420D+00, &
+      0.13819660112501050420D+00, &
+      0.58541019662496840414D+00, &
+      0.13819660112501050420D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.13819660112501050420D+00, &
+      0.13819660112501050420D+00, &
+      0.13819660112501050420D+00, &
+      0.58541019662496840414D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.58541019662496840414D+00, &
+      0.13819660112501050420D+00, &
+      0.13819660112501050420D+00, &
+      0.13819660112501050420D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.25000000000000000000D+00, &
+      0.25000000000000000000D+00, &
+      0.25000000000000000000D+00, &
+      0.25000000000000000000D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule03 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule03() returns the rule of precision 3.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 8
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/ &
+      0.32868114666534897772D+00, &
+      0.01395656000395302174D+00, &
+      0.32868114666534897772D+00, &
+      0.32868114666534897772D+00, &
+      0.11192072750929155101D+00, &
+      0.66423781747212540250D+00, &
+      0.11192072750929155101D+00, &
+      0.11192072750929155101D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.32868114666534897772D+00, &
+      0.32868114666534897772D+00, &
+      0.01395656000395302174D+00, &
+      0.32868114666534897772D+00, &
+      0.11192072750929155101D+00, &
+      0.11192072750929155101D+00, &
+      0.66423781747212540250D+00, &
+      0.11192072750929155101D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.32868114666534897772D+00, &
+      0.32868114666534897772D+00, &
+      0.32868114666534897772D+00, &
+      0.01395656000395302174D+00, &
+      0.11192072750929155101D+00, &
+      0.11192072750929155101D+00, &
+      0.11192072750929155101D+00, &
+      0.66423781747212540250D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.01395656000395302174D+00, &
+      0.32868114666534897772D+00, &
+      0.32868114666534897772D+00, &
+      0.32868114666534897772D+00, &
+      0.66423781747212540250D+00, &
+      0.11192072750929155101D+00, &
+      0.11192072750929155101D+00, &
+      0.11192072750929155101D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.12749131155750642597D+00, &
+      0.12749131155750642597D+00, &
+      0.12749131155750642597D+00, &
+      0.12749131155750642597D+00, &
+      0.12250868844249357403D+00, &
+      0.12250868844249357403D+00, &
+      0.12250868844249357403D+00, &
+      0.12250868844249357403D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule04 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule04() returns the rule of precision 4.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 14
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.30958216531795190729D+00, &
+      0.07125350404614427813D+00, &
+      0.30958216531795190729D+00, &
+      0.30958216531795190729D+00, &
+      0.08344277230397757761D+00, &
+      0.74967168308806730881D+00, &
+      0.08344277230397757761D+00, &
+      0.08344277230397757761D+00, &
+      0.07722095407005866163D+00, &
+      0.42277904592994131061D+00, &
+      0.07722095407005866163D+00, &
+      0.42277904592994131061D+00, &
+      0.07722095407005866163D+00, &
+      0.42277904592994131061D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.30958216531795190729D+00, &
+      0.30958216531795190729D+00, &
+      0.07125350404614427813D+00, &
+      0.30958216531795190729D+00, &
+      0.08344277230397757761D+00, &
+      0.08344277230397757761D+00, &
+      0.74967168308806730881D+00, &
+      0.08344277230397757761D+00, &
+      0.42277904592994131061D+00, &
+      0.07722095407005866163D+00, &
+      0.07722095407005866163D+00, &
+      0.42277904592994131061D+00, &
+      0.42277904592994131061D+00, &
+      0.07722095407005866163D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.30958216531795190729D+00, &
+      0.30958216531795190729D+00, &
+      0.30958216531795190729D+00, &
+      0.07125350404614427813D+00, &
+      0.08344277230397757761D+00, &
+      0.08344277230397757761D+00, &
+      0.08344277230397757761D+00, &
+      0.74967168308806730881D+00, &
+      0.42277904592994131061D+00, &
+      0.42277904592994131061D+00, &
+      0.42277904592994131061D+00, &
+      0.07722095407005866163D+00, &
+      0.07722095407005866163D+00, &
+      0.07722095407005866163D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.07125350404614427813D+00, &
+      0.30958216531795190729D+00, &
+      0.30958216531795190729D+00, &
+      0.30958216531795190729D+00, &
+      0.74967168308806730881D+00, &
+      0.08344277230397757761D+00, &
+      0.08344277230397757761D+00, &
+      0.08344277230397757761D+00, &
+      0.07722095407005866163D+00, &
+      0.07722095407005866163D+00, &
+      0.42277904592994131061D+00, &
+      0.07722095407005866163D+00, &
+      0.42277904592994131061D+00, &
+      0.42277904592994131061D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.06540916363445217763D+00, &
+      0.06540916363445217763D+00, &
+      0.06540916363445217763D+00, &
+      0.06540916363445217763D+00, &
+      0.05935526423100475485D+00, &
+      0.05935526423100475485D+00, &
+      0.05935526423100475485D+00, &
+      0.05935526423100475485D+00, &
+      0.08349038142302871168D+00, &
+      0.08349038142302871168D+00, &
+      0.08349038142302871168D+00, &
+      0.08349038142302871168D+00, &
+      0.08349038142302871168D+00, &
+      0.08349038142302871168D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule05 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule05() returns the rule of precision 5.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 14
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.31088591926330061410D+00, &
+      0.06734224221009817157D+00, &
+      0.31088591926330061410D+00, &
+      0.31088591926330061410D+00, &
+      0.09273525031089122073D+00, &
+      0.72179424906732636558D+00, &
+      0.09273525031089122073D+00, &
+      0.09273525031089122073D+00, &
+      0.04550370412564964939D+00, &
+      0.45449629587435036449D+00, &
+      0.04550370412564964939D+00, &
+      0.45449629587435036449D+00, &
+      0.04550370412564964939D+00, &
+      0.45449629587435036449D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.31088591926330061410D+00, &
+      0.31088591926330061410D+00, &
+      0.06734224221009817157D+00, &
+      0.31088591926330061410D+00, &
+      0.09273525031089122073D+00, &
+      0.09273525031089122073D+00, &
+      0.72179424906732636558D+00, &
+      0.09273525031089122073D+00, &
+      0.45449629587435036449D+00, &
+      0.04550370412564964939D+00, &
+      0.04550370412564964939D+00, &
+      0.45449629587435036449D+00, &
+      0.45449629587435036449D+00, &
+      0.04550370412564964939D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.31088591926330061410D+00, &
+      0.31088591926330061410D+00, &
+      0.31088591926330061410D+00, &
+      0.06734224221009817157D+00, &
+      0.09273525031089122073D+00, &
+      0.09273525031089122073D+00, &
+      0.09273525031089122073D+00, &
+      0.72179424906732636558D+00, &
+      0.45449629587435036449D+00, &
+      0.45449629587435036449D+00, &
+      0.45449629587435036449D+00, &
+      0.04550370412564964939D+00, &
+      0.04550370412564964939D+00, &
+      0.04550370412564964939D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.06734224221009817157D+00, &
+      0.31088591926330061410D+00, &
+      0.31088591926330061410D+00, &
+      0.31088591926330061410D+00, &
+      0.72179424906732636558D+00, &
+      0.09273525031089122073D+00, &
+      0.09273525031089122073D+00, &
+      0.09273525031089122073D+00, &
+      0.04550370412564964939D+00, &
+      0.04550370412564964939D+00, &
+      0.45449629587435036449D+00, &
+      0.04550370412564964939D+00, &
+      0.45449629587435036449D+00, &
+      0.45449629587435036449D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.11268792571801584945D+00, &
+      0.11268792571801584945D+00, &
+      0.11268792571801584945D+00, &
+      0.11268792571801584945D+00, &
+      0.07349304311636195575D+00, &
+      0.07349304311636195575D+00, &
+      0.07349304311636195575D+00, &
+      0.07349304311636195575D+00, &
+      0.04254602077708146551D+00, &
+      0.04254602077708146551D+00, &
+      0.04254602077708146551D+00, &
+      0.04254602077708146551D+00, &
+      0.04254602077708146551D+00, &
+      0.04254602077708146551D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule06 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule06() returns the rule of precision 6.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 24
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.04067395853461135136D+00, &
+      0.87797812439616595981D+00, &
+      0.04067395853461135136D+00, &
+      0.04067395853461135136D+00, &
+      0.32233789014227548497D+00, &
+      0.03298632957317346875D+00, &
+      0.32233789014227548497D+00, &
+      0.32233789014227548497D+00, &
+      0.21460287125915203377D+00, &
+      0.35619138622254392645D+00, &
+      0.21460287125915203377D+00, &
+      0.21460287125915203377D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.04067395853461135136D+00, &
+      0.04067395853461135136D+00, &
+      0.87797812439616595981D+00, &
+      0.04067395853461135136D+00, &
+      0.32233789014227548497D+00, &
+      0.32233789014227548497D+00, &
+      0.03298632957317346875D+00, &
+      0.32233789014227548497D+00, &
+      0.21460287125915203377D+00, &
+      0.21460287125915203377D+00, &
+      0.35619138622254392645D+00, &
+      0.21460287125915203377D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.04067395853461135136D+00, &
+      0.04067395853461135136D+00, &
+      0.04067395853461135136D+00, &
+      0.87797812439616595981D+00, &
+      0.32233789014227548497D+00, &
+      0.32233789014227548497D+00, &
+      0.32233789014227548497D+00, &
+      0.03298632957317346875D+00, &
+      0.21460287125915203377D+00, &
+      0.21460287125915203377D+00, &
+      0.21460287125915203377D+00, &
+      0.35619138622254392645D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.87797812439616595981D+00, &
+      0.04067395853461135136D+00, &
+      0.04067395853461135136D+00, &
+      0.04067395853461135136D+00, &
+      0.03298632957317346875D+00, &
+      0.32233789014227548497D+00, &
+      0.32233789014227548497D+00, &
+      0.32233789014227548497D+00, &
+      0.35619138622254392645D+00, &
+      0.21460287125915203377D+00, &
+      0.21460287125915203377D+00, &
+      0.21460287125915203377D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.26967233145831581709D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00, &
+      0.60300566479164918743D+00, &
+      0.06366100187501752550D+00, &
+      0.06366100187501752550D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.01007721105532064301D+00, &
+      0.01007721105532064301D+00, &
+      0.01007721105532064301D+00, &
+      0.01007721105532064301D+00, &
+      0.05535718154365472377D+00, &
+      0.05535718154365472377D+00, &
+      0.05535718154365472377D+00, &
+      0.05535718154365472377D+00, &
+      0.03992275025816749423D+00, &
+      0.03992275025816749423D+00, &
+      0.03992275025816749423D+00, &
+      0.03992275025816749423D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00, &
+      0.04821428571428571647D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule07 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule07() returns the rule of precision 7.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 35
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.25000000000000000000D+00, &
+      0.31570114977820279423D+00, &
+      0.05289655066539160344D+00, &
+      0.31570114977820279423D+00, &
+      0.31570114977820279423D+00, &
+      0.05048982259839637082D+00, &
+      0.44951017740160364999D+00, &
+      0.05048982259839637082D+00, &
+      0.44951017740160364999D+00, &
+      0.05048982259839637082D+00, &
+      0.44951017740160364999D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.25000000000000000000D+00, &
+      0.31570114977820279423D+00, &
+      0.31570114977820279423D+00, &
+      0.05289655066539160344D+00, &
+      0.31570114977820279423D+00, &
+      0.44951017740160364999D+00, &
+      0.05048982259839637082D+00, &
+      0.05048982259839637082D+00, &
+      0.44951017740160364999D+00, &
+      0.44951017740160364999D+00, &
+      0.05048982259839637082D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.25000000000000000000D+00, &
+      0.31570114977820279423D+00, &
+      0.31570114977820279423D+00, &
+      0.31570114977820279423D+00, &
+      0.05289655066539160344D+00, &
+      0.44951017740160364999D+00, &
+      0.44951017740160364999D+00, &
+      0.44951017740160364999D+00, &
+      0.05048982259839637082D+00, &
+      0.05048982259839637082D+00, &
+      0.05048982259839637082D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.25000000000000000000D+00, &
+      0.05289655066539160344D+00, &
+      0.31570114977820279423D+00, &
+      0.31570114977820279423D+00, &
+      0.31570114977820279423D+00, &
+      0.05048982259839637082D+00, &
+      0.05048982259839637082D+00, &
+      0.44951017740160364999D+00, &
+      0.05048982259839637082D+00, &
+      0.44951017740160364999D+00, &
+      0.44951017740160364999D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.14663881381848495322D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.81083024109854850980D+00, &
+      0.02126547254148324767D+00, &
+      0.02126547254148324767D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.04716070036099788421D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00, &
+      0.57517163758700007303D+00, &
+      0.18883383102600104220D+00, &
+      0.18883383102600104220D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.09548528946413084584D+00, &
+      0.04232958120996702794D+00, &
+      0.04232958120996702794D+00, &
+      0.04232958120996702794D+00, &
+      0.04232958120996702794D+00, &
+      0.03189692783285758004D+00, &
+      0.03189692783285758004D+00, &
+      0.03189692783285758004D+00, &
+      0.03189692783285758004D+00, &
+      0.03189692783285758004D+00, &
+      0.03189692783285758004D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.00811077082990334201D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00, &
+      0.03720713072833461976D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule08 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule08() returns the rule of precision 8.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 46
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.18681275827072096885D+00, &
+      0.43956172518783709346D+00, &
+      0.18681275827072096885D+00, &
+      0.18681275827072096885D+00, &
+      0.11446240676123049795D+00, &
+      0.65661277971630849226D+00, &
+      0.11446240676123049795D+00, &
+      0.11446240676123049795D+00, &
+      0.31380659227240159659D+00, &
+      0.05858022318279514085D+00, &
+      0.31380659227240159659D+00, &
+      0.31380659227240159659D+00, &
+      0.04457737944884624520D+00, &
+      0.86626786165346125745D+00, &
+      0.04457737944884624520D+00, &
+      0.04457737944884624520D+00, &
+      0.43451650945615760691D+00, &
+      0.06548349054384239309D+00, &
+      0.43451650945615760691D+00, &
+      0.06548349054384239309D+00, &
+      0.43451650945615760691D+00, &
+      0.06548349054384239309D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.18681275827072096885D+00, &
+      0.18681275827072096885D+00, &
+      0.43956172518783709346D+00, &
+      0.18681275827072096885D+00, &
+      0.11446240676123049795D+00, &
+      0.11446240676123049795D+00, &
+      0.65661277971630849226D+00, &
+      0.11446240676123049795D+00, &
+      0.31380659227240159659D+00, &
+      0.31380659227240159659D+00, &
+      0.05858022318279514085D+00, &
+      0.31380659227240159659D+00, &
+      0.04457737944884624520D+00, &
+      0.04457737944884624520D+00, &
+      0.86626786165346125745D+00, &
+      0.04457737944884624520D+00, &
+      0.06548349054384239309D+00, &
+      0.43451650945615760691D+00, &
+      0.43451650945615760691D+00, &
+      0.06548349054384239309D+00, &
+      0.06548349054384239309D+00, &
+      0.43451650945615760691D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.18681275827072096885D+00, &
+      0.18681275827072096885D+00, &
+      0.18681275827072096885D+00, &
+      0.43956172518783709346D+00, &
+      0.11446240676123049795D+00, &
+      0.11446240676123049795D+00, &
+      0.11446240676123049795D+00, &
+      0.65661277971630849226D+00, &
+      0.31380659227240159659D+00, &
+      0.31380659227240159659D+00, &
+      0.31380659227240159659D+00, &
+      0.05858022318279514085D+00, &
+      0.04457737944884624520D+00, &
+      0.04457737944884624520D+00, &
+      0.04457737944884624520D+00, &
+      0.86626786165346125745D+00, &
+      0.06548349054384239309D+00, &
+      0.06548349054384239309D+00, &
+      0.06548349054384239309D+00, &
+      0.43451650945615760691D+00, &
+      0.43451650945615760691D+00, &
+      0.43451650945615760691D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.43956172518783709346D+00, &
+      0.18681275827072096885D+00, &
+      0.18681275827072096885D+00, &
+      0.18681275827072096885D+00, &
+      0.65661277971630849226D+00, &
+      0.11446240676123049795D+00, &
+      0.11446240676123049795D+00, &
+      0.11446240676123049795D+00, &
+      0.05858022318279514085D+00, &
+      0.31380659227240159659D+00, &
+      0.31380659227240159659D+00, &
+      0.31380659227240159659D+00, &
+      0.86626786165346125745D+00, &
+      0.04457737944884624520D+00, &
+      0.04457737944884624520D+00, &
+      0.04457737944884624520D+00, &
+      0.43451650945615760691D+00, &
+      0.43451650945615760691D+00, &
+      0.06548349054384239309D+00, &
+      0.43451650945615760691D+00, &
+      0.06548349054384239309D+00, &
+      0.06548349054384239309D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.58714032992535780675D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.00507332075042159041D+00, &
+      0.20389317466211026586D+00, &
+      0.20389317466211026586D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.24282751426755175284D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00, &
+      0.71467692639330493432D+00, &
+      0.02124777966957167377D+00, &
+      0.02124777966957167377D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.04781298803430665545D+00, &
+      0.04781298803430665545D+00, &
+      0.04781298803430665545D+00, &
+      0.04781298803430665545D+00, &
+      0.02972785408679422259D+00, &
+      0.02972785408679422259D+00, &
+      0.02972785408679422259D+00, &
+      0.02972785408679422259D+00, &
+      0.04352732421897526766D+00, &
+      0.04352732421897526766D+00, &
+      0.04352732421897526766D+00, &
+      0.04352732421897526766D+00, &
+      0.00863273602081497497D+00, &
+      0.00863273602081497497D+00, &
+      0.00863273602081497497D+00, &
+      0.00863273602081497497D+00, &
+      0.03689054126986636428D+00, &
+      0.03689054126986636428D+00, &
+      0.03689054126986636428D+00, &
+      0.03689054126986636428D+00, &
+      0.03689054126986636428D+00, &
+      0.03689054126986636428D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.01449702671085950460D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00, &
+      0.00715740186724360752D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule09 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule09() returns the rule of precision 9.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 59
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.25000000000000000000D+00, &
+      0.16790660523674277860D+00, &
+      0.49628018428977160870D+00, &
+      0.16790660523674277860D+00, &
+      0.16790660523674277860D+00, &
+      0.09143627051407625383D+00, &
+      0.72569118845777125237D+00, &
+      0.09143627051407625383D+00, &
+      0.09143627051407625383D+00, &
+      0.32185566481765326419D+00, &
+      0.03443300554704020050D+00, &
+      0.32185566481765326419D+00, &
+      0.32185566481765326419D+00, &
+      0.04183769590036560265D+00, &
+      0.87448691229890318510D+00, &
+      0.04183769590036560265D+00, &
+      0.04183769590036560265D+00, &
+      0.39327056142515365300D+00, &
+      0.10672943857484636088D+00, &
+      0.39327056142515365300D+00, &
+      0.10672943857484636088D+00, &
+      0.39327056142515365300D+00, &
+      0.10672943857484636088D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.25000000000000000000D+00, &
+      0.16790660523674277860D+00, &
+      0.16790660523674277860D+00, &
+      0.49628018428977160870D+00, &
+      0.16790660523674277860D+00, &
+      0.09143627051407625383D+00, &
+      0.09143627051407625383D+00, &
+      0.72569118845777125237D+00, &
+      0.09143627051407625383D+00, &
+      0.32185566481765326419D+00, &
+      0.32185566481765326419D+00, &
+      0.03443300554704020050D+00, &
+      0.32185566481765326419D+00, &
+      0.04183769590036560265D+00, &
+      0.04183769590036560265D+00, &
+      0.87448691229890318510D+00, &
+      0.04183769590036560265D+00, &
+      0.10672943857484636088D+00, &
+      0.39327056142515365300D+00, &
+      0.39327056142515365300D+00, &
+      0.10672943857484636088D+00, &
+      0.10672943857484636088D+00, &
+      0.39327056142515365300D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.25000000000000000000D+00, &
+      0.16790660523674277860D+00, &
+      0.16790660523674277860D+00, &
+      0.16790660523674277860D+00, &
+      0.49628018428977160870D+00, &
+      0.09143627051407625383D+00, &
+      0.09143627051407625383D+00, &
+      0.09143627051407625383D+00, &
+      0.72569118845777125237D+00, &
+      0.32185566481765326419D+00, &
+      0.32185566481765326419D+00, &
+      0.32185566481765326419D+00, &
+      0.03443300554704020050D+00, &
+      0.04183769590036560265D+00, &
+      0.04183769590036560265D+00, &
+      0.04183769590036560265D+00, &
+      0.87448691229890318510D+00, &
+      0.10672943857484636088D+00, &
+      0.10672943857484636088D+00, &
+      0.10672943857484636088D+00, &
+      0.39327056142515365300D+00, &
+      0.39327056142515365300D+00, &
+      0.39327056142515365300D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.25000000000000000000D+00, &
+      0.49628018428977160870D+00, &
+      0.16790660523674277860D+00, &
+      0.16790660523674277860D+00, &
+      0.16790660523674277860D+00, &
+      0.72569118845777125237D+00, &
+      0.09143627051407625383D+00, &
+      0.09143627051407625383D+00, &
+      0.09143627051407625383D+00, &
+      0.03443300554704020050D+00, &
+      0.32185566481765326419D+00, &
+      0.32185566481765326419D+00, &
+      0.32185566481765326419D+00, &
+      0.87448691229890318510D+00, &
+      0.04183769590036560265D+00, &
+      0.04183769590036560265D+00, &
+      0.04183769590036560265D+00, &
+      0.39327056142515365300D+00, &
+      0.39327056142515365300D+00, &
+      0.10672943857484636088D+00, &
+      0.39327056142515365300D+00, &
+      0.10672943857484636088D+00, &
+      0.10672943857484636088D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.21369256965239782908D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.71839309398142436880D+00, &
+      0.03395716818308888718D+00, &
+      0.03395716818308888718D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.00000000341375680369D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.07868363447668792754D+00, &
+      0.46065818105477762678D+00, &
+      0.46065818105477762678D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.03401339023811966039D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00, &
+      0.59721072276184994365D+00, &
+      0.18438794350001519451D+00, &
+      0.18438794350001519451D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.05686662425355172579D+00, &
+      0.02569427668952317667D+00, &
+      0.02569427668952317667D+00, &
+      0.02569427668952317667D+00, &
+      0.02569427668952317667D+00, &
+      0.00229892335302837002D+00, &
+      0.00229892335302837002D+00, &
+      0.00229892335302837002D+00, &
+      0.00229892335302837002D+00, &
+      0.03045603866759100803D+00, &
+      0.03045603866759100803D+00, &
+      0.03045603866759100803D+00, &
+      0.03045603866759100803D+00, &
+      0.00712372234023888121D+00, &
+      0.00712372234023888121D+00, &
+      0.00712372234023888121D+00, &
+      0.00712372234023888121D+00, &
+      0.03684365548094388487D+00, &
+      0.03684365548094388487D+00, &
+      0.03684365548094388487D+00, &
+      0.03684365548094388487D+00, &
+      0.03684365548094388487D+00, &
+      0.03684365548094388487D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.01032205678220984683D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.00763488715398085490D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00, &
+      0.02035802261874757046D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule10 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule10() returns the rule of precision 10.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 81
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.25000000000000000000D+00, &
+      0.07255175741743780105D+00, &
+      0.78234472774768659686D+00, &
+      0.07255175741743780105D+00, &
+      0.07255175741743780105D+00, &
+      0.30789594786692286998D+00, &
+      0.07631215639923132066D+00, &
+      0.30789594786692286998D+00, &
+      0.30789594786692286998D+00, &
+      0.47628086039277905961D+00, &
+      0.02371913960722092998D+00, &
+      0.47628086039277905961D+00, &
+      0.02371913960722092998D+00, &
+      0.47628086039277905961D+00, &
+      0.02371913960722092998D+00, &
+      0.09657977306910725535D+00, &
+      0.40342022693089274465D+00, &
+      0.09657977306910725535D+00, &
+      0.40342022693089274465D+00, &
+      0.09657977306910725535D+00, &
+      0.40342022693089274465D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.25000000000000000000D+00, &
+      0.07255175741743780105D+00, &
+      0.07255175741743780105D+00, &
+      0.78234472774768659686D+00, &
+      0.07255175741743780105D+00, &
+      0.30789594786692286998D+00, &
+      0.30789594786692286998D+00, &
+      0.07631215639923132066D+00, &
+      0.30789594786692286998D+00, &
+      0.02371913960722092998D+00, &
+      0.47628086039277905961D+00, &
+      0.47628086039277905961D+00, &
+      0.02371913960722092998D+00, &
+      0.02371913960722092998D+00, &
+      0.47628086039277905961D+00, &
+      0.40342022693089274465D+00, &
+      0.09657977306910725535D+00, &
+      0.09657977306910725535D+00, &
+      0.40342022693089274465D+00, &
+      0.40342022693089274465D+00, &
+      0.09657977306910725535D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.25000000000000000000D+00, &
+      0.07255175741743780105D+00, &
+      0.07255175741743780105D+00, &
+      0.07255175741743780105D+00, &
+      0.78234472774768659686D+00, &
+      0.30789594786692286998D+00, &
+      0.30789594786692286998D+00, &
+      0.30789594786692286998D+00, &
+      0.07631215639923132066D+00, &
+      0.02371913960722092998D+00, &
+      0.02371913960722092998D+00, &
+      0.02371913960722092998D+00, &
+      0.47628086039277905961D+00, &
+      0.47628086039277905961D+00, &
+      0.47628086039277905961D+00, &
+      0.40342022693089274465D+00, &
+      0.40342022693089274465D+00, &
+      0.40342022693089274465D+00, &
+      0.09657977306910725535D+00, &
+      0.09657977306910725535D+00, &
+      0.09657977306910725535D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.25000000000000000000D+00, &
+      0.78234472774768659686D+00, &
+      0.07255175741743780105D+00, &
+      0.07255175741743780105D+00, &
+      0.07255175741743780105D+00, &
+      0.07631215639923132066D+00, &
+      0.30789594786692286998D+00, &
+      0.30789594786692286998D+00, &
+      0.30789594786692286998D+00, &
+      0.47628086039277905961D+00, &
+      0.47628086039277905961D+00, &
+      0.02371913960722092998D+00, &
+      0.47628086039277905961D+00, &
+      0.02371913960722092998D+00, &
+      0.02371913960722092998D+00, &
+      0.09657977306910725535D+00, &
+      0.09657977306910725535D+00, &
+      0.40342022693089274465D+00, &
+      0.09657977306910725535D+00, &
+      0.40342022693089274465D+00, &
+      0.40342022693089274465D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.52266860528615399772D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.07385418101848620354D+00, &
+      0.20173860684767988549D+00, &
+      0.20173860684767988549D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.00281574262923683970D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.68750485588303955620D+00, &
+      0.15483970074386180227D+00, &
+      0.15483970074386180227D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.00065798250734006806D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.17414371649393212138D+00, &
+      0.41259915049936390918D+00, &
+      0.41259915049936390918D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.65646103832166713410D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.26575750656271990291D+00, &
+      0.03889072755780650925D+00, &
+      0.03889072755780650925D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.89554895506269893701D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00, &
+      0.09324134903525840845D+00, &
+      0.00560484795102133768D+00, &
+      0.00560484795102133768D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.05165089225609746648D+00, &
+      0.01346797267166026206D+00, &
+      0.01346797267166026206D+00, &
+      0.01346797267166026206D+00, &
+      0.01346797267166026206D+00, &
+      0.02646691924968953488D+00, &
+      0.02646691924968953488D+00, &
+      0.02646691924968953488D+00, &
+      0.02646691924968953488D+00, &
+      0.00510704782814352509D+00, &
+      0.00510704782814352509D+00, &
+      0.00510704782814352509D+00, &
+      0.00510704782814352509D+00, &
+      0.00510704782814352509D+00, &
+      0.00510704782814352509D+00, &
+      0.02364999615824559670D+00, &
+      0.02364999615824559670D+00, &
+      0.02364999615824559670D+00, &
+      0.02364999615824559670D+00, &
+      0.02364999615824559670D+00, &
+      0.02364999615824559670D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.02531736665096821770D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00541626340744792625D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.00815365901205422627D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.01112597175961277732D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00, &
+      0.00132567884826423560D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule11 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule11() returns the rule of precision 11.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 110
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.29931309239934250632D+00, &
+      0.10206072280197252267D+00, &
+      0.29931309239934250632D+00, &
+      0.29931309239934250632D+00, &
+      0.03263284396518179725D+00, &
+      0.90210146810445457355D+00, &
+      0.03263284396518179725D+00, &
+      0.03263284396518179725D+00, &
+      0.32579558451531082097D+00, &
+      0.17420441548468917903D+00, &
+      0.32579558451531082097D+00, &
+      0.17420441548468917903D+00, &
+      0.32579558451531082097D+00, &
+      0.17420441548468917903D+00, &
+      0.09878462414162506033D+00, &
+      0.40121537585837491191D+00, &
+      0.09878462414162506033D+00, &
+      0.40121537585837491191D+00, &
+      0.09878462414162506033D+00, &
+      0.40121537585837491191D+00, &
+      0.00570190512270035092D+00, &
+      0.49429809487729964301D+00, &
+      0.00570190512270035092D+00, &
+      0.49429809487729964301D+00, &
+      0.00570190512270035092D+00, &
+      0.49429809487729964301D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.29931309239934250632D+00, &
+      0.29931309239934250632D+00, &
+      0.10206072280197252267D+00, &
+      0.29931309239934250632D+00, &
+      0.03263284396518179725D+00, &
+      0.03263284396518179725D+00, &
+      0.90210146810445457355D+00, &
+      0.03263284396518179725D+00, &
+      0.17420441548468917903D+00, &
+      0.32579558451531082097D+00, &
+      0.32579558451531082097D+00, &
+      0.17420441548468917903D+00, &
+      0.17420441548468917903D+00, &
+      0.32579558451531082097D+00, &
+      0.40121537585837491191D+00, &
+      0.09878462414162506033D+00, &
+      0.09878462414162506033D+00, &
+      0.40121537585837491191D+00, &
+      0.40121537585837491191D+00, &
+      0.09878462414162506033D+00, &
+      0.49429809487729964301D+00, &
+      0.00570190512270035092D+00, &
+      0.00570190512270035092D+00, &
+      0.49429809487729964301D+00, &
+      0.49429809487729964301D+00, &
+      0.00570190512270035092D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.29931309239934250632D+00, &
+      0.29931309239934250632D+00, &
+      0.29931309239934250632D+00, &
+      0.10206072280197252267D+00, &
+      0.03263284396518179725D+00, &
+      0.03263284396518179725D+00, &
+      0.03263284396518179725D+00, &
+      0.90210146810445457355D+00, &
+      0.17420441548468917903D+00, &
+      0.17420441548468917903D+00, &
+      0.17420441548468917903D+00, &
+      0.32579558451531082097D+00, &
+      0.32579558451531082097D+00, &
+      0.32579558451531082097D+00, &
+      0.40121537585837491191D+00, &
+      0.40121537585837491191D+00, &
+      0.40121537585837491191D+00, &
+      0.09878462414162506033D+00, &
+      0.09878462414162506033D+00, &
+      0.09878462414162506033D+00, &
+      0.49429809487729964301D+00, &
+      0.49429809487729964301D+00, &
+      0.49429809487729964301D+00, &
+      0.00570190512270035092D+00, &
+      0.00570190512270035092D+00, &
+      0.00570190512270035092D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.10206072280197252267D+00, &
+      0.29931309239934250632D+00, &
+      0.29931309239934250632D+00, &
+      0.29931309239934250632D+00, &
+      0.90210146810445457355D+00, &
+      0.03263284396518179725D+00, &
+      0.03263284396518179725D+00, &
+      0.03263284396518179725D+00, &
+      0.32579558451531082097D+00, &
+      0.32579558451531082097D+00, &
+      0.17420441548468917903D+00, &
+      0.32579558451531082097D+00, &
+      0.17420441548468917903D+00, &
+      0.17420441548468917903D+00, &
+      0.09878462414162506033D+00, &
+      0.09878462414162506033D+00, &
+      0.40121537585837491191D+00, &
+      0.09878462414162506033D+00, &
+      0.40121537585837491191D+00, &
+      0.40121537585837491191D+00, &
+      0.00570190512270035092D+00, &
+      0.00570190512270035092D+00, &
+      0.49429809487729964301D+00, &
+      0.00570190512270035092D+00, &
+      0.49429809487729964301D+00, &
+      0.49429809487729964301D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.02642834370417183887D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.72733034634638349392D+00, &
+      0.12312065497472235442D+00, &
+      0.12312065497472235442D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.80376418553955530921D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.17022807348926419224D+00, &
+      0.01300387048559023713D+00, &
+      0.01300387048559023713D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.29586938786703270710D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.61825980978911576624D+00, &
+      0.04293540117192574251D+00, &
+      0.04293540117192574251D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.09125181905014285999D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.53990011685570160616D+00, &
+      0.18442403204707777387D+00, &
+      0.18442403204707777387D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.02622586544947517681D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.45543531962195954454D+00, &
+      0.25916940746428263065D+00, &
+      0.25916940746428263065D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.34145186619581896492D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.01097757236596030687D+00, &
+      0.01097757236596030687D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00, &
+      0.53514200093145947168D+00, &
+      0.11242856050676119928D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.01468934358613074864D+00, &
+      0.01468934358613074864D+00, &
+      0.01468934358613074864D+00, &
+      0.01468934358613074864D+00, &
+      0.00338086953062168103D+00, &
+      0.00338086953062168103D+00, &
+      0.00338086953062168103D+00, &
+      0.00338086953062168103D+00, &
+      0.01676676867722562761D+00, &
+      0.01676676867722562761D+00, &
+      0.01676676867722562761D+00, &
+      0.01676676867722562761D+00, &
+      0.01676676867722562761D+00, &
+      0.01676676867722562761D+00, &
+      0.01932364034775850906D+00, &
+      0.01932364034775850906D+00, &
+      0.01932364034775850906D+00, &
+      0.01932364034775850906D+00, &
+      0.01932364034775850906D+00, &
+      0.01932364034775850906D+00, &
+      0.00165325361037579671D+00, &
+      0.00165325361037579671D+00, &
+      0.00165325361037579671D+00, &
+      0.00165325361037579671D+00, &
+      0.00165325361037579671D+00, &
+      0.00165325361037579671D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00979997124703287439D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00203627849130482569D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.00820761375291671758D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01510498736666349325D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.01274239266610638702D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00, &
+      0.00527342705968912931D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule12 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule12() returns the rule of precision 12.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 168
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.21356799445330179599D+00, &
+      0.35929601664009458428D+00, &
+      0.21356799445330179599D+00, &
+      0.21356799445330179599D+00, &
+      0.08080469951147342678D+00, &
+      0.75758590146557969192D+00, &
+      0.08080469951147342678D+00, &
+      0.08080469951147342678D+00, &
+      0.14608946852754853274D+00, &
+      0.56173159441735442954D+00, &
+      0.14608946852754853274D+00, &
+      0.14608946852754853274D+00, &
+      0.06406537703779889570D+00, &
+      0.43593462296220109042D+00, &
+      0.06406537703779889570D+00, &
+      0.43593462296220109042D+00, &
+      0.06406537703779889570D+00, &
+      0.43593462296220109042D+00, &
+      0.12761830492460168873D+00, &
+      0.37238169507539831127D+00, &
+      0.12761830492460168873D+00, &
+      0.37238169507539831127D+00, &
+      0.12761830492460168873D+00, &
+      0.37238169507539831127D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.21356799445330179599D+00, &
+      0.21356799445330179599D+00, &
+      0.35929601664009458428D+00, &
+      0.21356799445330179599D+00, &
+      0.08080469951147342678D+00, &
+      0.08080469951147342678D+00, &
+      0.75758590146557969192D+00, &
+      0.08080469951147342678D+00, &
+      0.14608946852754853274D+00, &
+      0.14608946852754853274D+00, &
+      0.56173159441735442954D+00, &
+      0.14608946852754853274D+00, &
+      0.43593462296220109042D+00, &
+      0.06406537703779889570D+00, &
+      0.06406537703779889570D+00, &
+      0.43593462296220109042D+00, &
+      0.43593462296220109042D+00, &
+      0.06406537703779889570D+00, &
+      0.37238169507539831127D+00, &
+      0.12761830492460168873D+00, &
+      0.12761830492460168873D+00, &
+      0.37238169507539831127D+00, &
+      0.37238169507539831127D+00, &
+      0.12761830492460168873D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.21356799445330179599D+00, &
+      0.21356799445330179599D+00, &
+      0.21356799445330179599D+00, &
+      0.35929601664009458428D+00, &
+      0.08080469951147342678D+00, &
+      0.08080469951147342678D+00, &
+      0.08080469951147342678D+00, &
+      0.75758590146557969192D+00, &
+      0.14608946852754853274D+00, &
+      0.14608946852754853274D+00, &
+      0.14608946852754853274D+00, &
+      0.56173159441735442954D+00, &
+      0.43593462296220109042D+00, &
+      0.43593462296220109042D+00, &
+      0.43593462296220109042D+00, &
+      0.06406537703779889570D+00, &
+      0.06406537703779889570D+00, &
+      0.06406537703779889570D+00, &
+      0.37238169507539831127D+00, &
+      0.37238169507539831127D+00, &
+      0.37238169507539831127D+00, &
+      0.12761830492460168873D+00, &
+      0.12761830492460168873D+00, &
+      0.12761830492460168873D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.35929601664009458428D+00, &
+      0.21356799445330179599D+00, &
+      0.21356799445330179599D+00, &
+      0.21356799445330179599D+00, &
+      0.75758590146557969192D+00, &
+      0.08080469951147342678D+00, &
+      0.08080469951147342678D+00, &
+      0.08080469951147342678D+00, &
+      0.56173159441735442954D+00, &
+      0.14608946852754853274D+00, &
+      0.14608946852754853274D+00, &
+      0.14608946852754853274D+00, &
+      0.06406537703779889570D+00, &
+      0.06406537703779889570D+00, &
+      0.43593462296220109042D+00, &
+      0.06406537703779889570D+00, &
+      0.43593462296220109042D+00, &
+      0.43593462296220109042D+00, &
+      0.12761830492460168873D+00, &
+      0.12761830492460168873D+00, &
+      0.37238169507539831127D+00, &
+      0.12761830492460168873D+00, &
+      0.37238169507539831127D+00, &
+      0.37238169507539831127D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.27633537059295731897D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.69403517727214536492D+00, &
+      0.01481472606744864938D+00, &
+      0.01481472606744864938D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.91128536626116796171D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.00057879438757249416D+00, &
+      0.04406791967562979917D+00, &
+      0.04406791967562979917D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.14920653441671805073D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.79278383647296557513D+00, &
+      0.02900481455515819401D+00, &
+      0.02900481455515819401D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.00144300697841704437D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.72173183541857577339D+00, &
+      0.13841257880150359405D+00, &
+      0.13841257880150359405D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.44595560156909819227D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.20026851566617670519D+00, &
+      0.20026851566617670519D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.01155183527100142084D+00, &
+      0.34222404749372364874D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.42293328666445362263D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.25459204502515403457D+00, &
+      0.25459204502515403457D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.07295863195082626096D+00, &
+      0.24951603635956606797D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.55384977168586801977D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.39373386599840531908D+00, &
+      0.39373386599840531908D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.05001810761518710180D+00, &
+      0.00239825470053956630D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.59854862905440209264D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.03608735666657864050D+00, &
+      0.03608735666657864050D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00, &
+      0.25183678242711160511D+00, &
+      0.11352723185190768951D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.01761491553503256521D+00, &
+      0.01761491553503256521D+00, &
+      0.01761491553503256521D+00, &
+      0.01761491553503256521D+00, &
+      0.00835123593343274628D+00, &
+      0.00835123593343274628D+00, &
+      0.00835123593343274628D+00, &
+      0.00835123593343274628D+00, &
+      0.01777571920669439309D+00, &
+      0.01777571920669439309D+00, &
+      0.01777571920669439309D+00, &
+      0.01777571920669439309D+00, &
+      0.01016802439757214481D+00, &
+      0.01016802439757214481D+00, &
+      0.01016802439757214481D+00, &
+      0.01016802439757214481D+00, &
+      0.01016802439757214481D+00, &
+      0.01016802439757214481D+00, &
+      0.01574040002395383359D+00, &
+      0.01574040002395383359D+00, &
+      0.01574040002395383359D+00, &
+      0.01574040002395383359D+00, &
+      0.01574040002395383359D+00, &
+      0.01574040002395383359D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00151128114586428740D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00087265698874856076D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00371288266145752832D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00235831425572737572D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00449084703627170012D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00754961604889951930D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00185051458906769213D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00, &
+      0.00978070358195409946D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule13 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule13() returns the rule of precision 13.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 172
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.02023816786180974298D+00, &
+      0.93928549641457081965D+00, &
+      0.02023816786180974298D+00, &
+      0.02023816786180974298D+00, &
+      0.28901473524352633282D+00, &
+      0.13295579426942091827D+00, &
+      0.28901473524352633282D+00, &
+      0.28901473524352633282D+00, &
+      0.09402870008212707575D+00, &
+      0.71791389975361874498D+00, &
+      0.09402870008212707575D+00, &
+      0.09402870008212707575D+00, &
+      0.19764985444372551449D+00, &
+      0.40705043666882340103D+00, &
+      0.19764985444372551449D+00, &
+      0.19764985444372551449D+00, &
+      0.45953810323981636454D+00, &
+      0.04046189676018363546D+00, &
+      0.45953810323981636454D+00, &
+      0.04046189676018363546D+00, &
+      0.45953810323981636454D+00, &
+      0.04046189676018363546D+00, &
+      0.00000019514803064427D+00, &
+      0.49999980485196937607D+00, &
+      0.00000019514803064427D+00, &
+      0.49999980485196937607D+00, &
+      0.00000019514803064427D+00, &
+      0.49999980485196937607D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.02023816786180974298D+00, &
+      0.02023816786180974298D+00, &
+      0.93928549641457081965D+00, &
+      0.02023816786180974298D+00, &
+      0.28901473524352633282D+00, &
+      0.28901473524352633282D+00, &
+      0.13295579426942091827D+00, &
+      0.28901473524352633282D+00, &
+      0.09402870008212707575D+00, &
+      0.09402870008212707575D+00, &
+      0.71791389975361874498D+00, &
+      0.09402870008212707575D+00, &
+      0.19764985444372551449D+00, &
+      0.19764985444372551449D+00, &
+      0.40705043666882340103D+00, &
+      0.19764985444372551449D+00, &
+      0.04046189676018363546D+00, &
+      0.45953810323981636454D+00, &
+      0.45953810323981636454D+00, &
+      0.04046189676018363546D+00, &
+      0.04046189676018363546D+00, &
+      0.45953810323981636454D+00, &
+      0.49999980485196937607D+00, &
+      0.00000019514803064427D+00, &
+      0.00000019514803064427D+00, &
+      0.49999980485196937607D+00, &
+      0.49999980485196937607D+00, &
+      0.00000019514803064427D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.02023816786180974298D+00, &
+      0.02023816786180974298D+00, &
+      0.02023816786180974298D+00, &
+      0.93928549641457081965D+00, &
+      0.28901473524352633282D+00, &
+      0.28901473524352633282D+00, &
+      0.28901473524352633282D+00, &
+      0.13295579426942091827D+00, &
+      0.09402870008212707575D+00, &
+      0.09402870008212707575D+00, &
+      0.09402870008212707575D+00, &
+      0.71791389975361874498D+00, &
+      0.19764985444372551449D+00, &
+      0.19764985444372551449D+00, &
+      0.19764985444372551449D+00, &
+      0.40705043666882340103D+00, &
+      0.04046189676018363546D+00, &
+      0.04046189676018363546D+00, &
+      0.04046189676018363546D+00, &
+      0.45953810323981636454D+00, &
+      0.45953810323981636454D+00, &
+      0.45953810323981636454D+00, &
+      0.49999980485196937607D+00, &
+      0.49999980485196937607D+00, &
+      0.49999980485196937607D+00, &
+      0.00000019514803064427D+00, &
+      0.00000019514803064427D+00, &
+      0.00000019514803064427D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.93928549641457081965D+00, &
+      0.02023816786180974298D+00, &
+      0.02023816786180974298D+00, &
+      0.02023816786180974298D+00, &
+      0.13295579426942091827D+00, &
+      0.28901473524352633282D+00, &
+      0.28901473524352633282D+00, &
+      0.28901473524352633282D+00, &
+      0.71791389975361874498D+00, &
+      0.09402870008212707575D+00, &
+      0.09402870008212707575D+00, &
+      0.09402870008212707575D+00, &
+      0.40705043666882340103D+00, &
+      0.19764985444372551449D+00, &
+      0.19764985444372551449D+00, &
+      0.19764985444372551449D+00, &
+      0.45953810323981636454D+00, &
+      0.45953810323981636454D+00, &
+      0.04046189676018363546D+00, &
+      0.45953810323981636454D+00, &
+      0.04046189676018363546D+00, &
+      0.04046189676018363546D+00, &
+      0.00000019514803064427D+00, &
+      0.00000019514803064427D+00, &
+      0.49999980485196937607D+00, &
+      0.00000019514803064427D+00, &
+      0.49999980485196937607D+00, &
+      0.49999980485196937607D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.25304433989010172157D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.61189713020429348234D+00, &
+      0.06752926495280242580D+00, &
+      0.06752926495280242580D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.24114813709377821982D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.48683083387981590517D+00, &
+      0.13601051451320292363D+00, &
+      0.13601051451320292363D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.01646470005235971951D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.42737860803490002048D+00, &
+      0.27807834595637015429D+00, &
+      0.27807834595637015429D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.03973709246462935052D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.56675286809679847888D+00, &
+      0.19675501971928607836D+00, &
+      0.19675501971928607836D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.16548056691732521140D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.06201970724197542612D+00, &
+      0.38624986292034968471D+00, &
+      0.38624986292034968471D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.84426817980737456359D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.10866078208331987620D+00, &
+      0.02353551905465277316D+00, &
+      0.02353551905465277316D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.11559254935343205029D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.54469649770191619353D+00, &
+      0.54469649770191619353D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.33621089307477192154D+00, &
+      0.00350005986987981903D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.27458333024900039021D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.02886160494075550378D+00, &
+      0.02886160494075550378D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.68598163012351520695D+00, &
+      0.01057343468672890079D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.01103371356908743224D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.15458664682738043616D+00, &
+      0.15458664682738043616D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00, &
+      0.73567724678185975051D+00, &
+      0.09870239282167234118D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00086064177891414715D+00, &
+      0.00086064177891414715D+00, &
+      0.00086064177891414715D+00, &
+      0.00086064177891414715D+00, &
+      0.02260732681773922059D+00, &
+      0.02260732681773922059D+00, &
+      0.02260732681773922059D+00, &
+      0.02260732681773922059D+00, &
+      0.00968003732683891775D+00, &
+      0.00968003732683891775D+00, &
+      0.00968003732683891775D+00, &
+      0.00968003732683891775D+00, &
+      0.00717094032557274996D+00, &
+      0.00717094032557274996D+00, &
+      0.00717094032557274996D+00, &
+      0.00717094032557274996D+00, &
+      0.00778487097928040085D+00, &
+      0.00778487097928040085D+00, &
+      0.00778487097928040085D+00, &
+      0.00778487097928040085D+00, &
+      0.00778487097928040085D+00, &
+      0.00778487097928040085D+00, &
+      0.00051202714817161232D+00, &
+      0.00051202714817161232D+00, &
+      0.00051202714817161232D+00, &
+      0.00051202714817161232D+00, &
+      0.00051202714817161232D+00, &
+      0.00051202714817161232D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.00888027217142297112D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.01062144779049374252D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00587308933199585676D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.00923553539755601546D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.01456732207916522359D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00265873986217338978D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00322185277500176316D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00146420674110399047D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00, &
+      0.00226835492745013816D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule14 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule14() returns the rule of precision 14.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 204
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.32981515178461928706D+00, &
+      0.01055454464614207291D+00, &
+      0.32981515178461928706D+00, &
+      0.32981515178461928706D+00, &
+      0.05753828268975920424D+00, &
+      0.82738515193072237341D+00, &
+      0.05753828268975920424D+00, &
+      0.05753828268975920424D+00, &
+      0.00585616861378350419D+00, &
+      0.98243149415864949869D+00, &
+      0.00585616861378350419D+00, &
+      0.00585616861378350419D+00, &
+      0.16055547584795665239D+00, &
+      0.51833357245613009834D+00, &
+      0.16055547584795665239D+00, &
+      0.16055547584795665239D+00, &
+      0.09873964607404908667D+00, &
+      0.70378106177785271225D+00, &
+      0.09873964607404908667D+00, &
+      0.09873964607404908667D+00, &
+      0.20805319615972650560D+00, &
+      0.37584041152082048320D+00, &
+      0.20805319615972650560D+00, &
+      0.20805319615972650560D+00, &
+      0.00975202881222352394D+00, &
+      0.49024797118777646565D+00, &
+      0.00975202881222352394D+00, &
+      0.49024797118777646565D+00, &
+      0.00975202881222352394D+00, &
+      0.49024797118777646565D+00, &
+      0.39706059988446740228D+00, &
+      0.10293940011553258385D+00, &
+      0.39706059988446740228D+00, &
+      0.10293940011553258385D+00, &
+      0.39706059988446740228D+00, &
+      0.10293940011553258385D+00, &
+      0.46208653653878484224D+00, &
+      0.03791346346121513694D+00, &
+      0.46208653653878484224D+00, &
+      0.03791346346121513694D+00, &
+      0.46208653653878484224D+00, &
+      0.03791346346121513694D+00, &
+      0.18142642381613963143D+00, &
+      0.31857357618386039633D+00, &
+      0.18142642381613963143D+00, &
+      0.31857357618386039633D+00, &
+      0.18142642381613963143D+00, &
+      0.31857357618386039633D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.32981515178461928706D+00, &
+      0.32981515178461928706D+00, &
+      0.01055454464614207291D+00, &
+      0.32981515178461928706D+00, &
+      0.05753828268975920424D+00, &
+      0.05753828268975920424D+00, &
+      0.82738515193072237341D+00, &
+      0.05753828268975920424D+00, &
+      0.00585616861378350419D+00, &
+      0.00585616861378350419D+00, &
+      0.98243149415864949869D+00, &
+      0.00585616861378350419D+00, &
+      0.16055547584795665239D+00, &
+      0.16055547584795665239D+00, &
+      0.51833357245613009834D+00, &
+      0.16055547584795665239D+00, &
+      0.09873964607404908667D+00, &
+      0.09873964607404908667D+00, &
+      0.70378106177785271225D+00, &
+      0.09873964607404908667D+00, &
+      0.20805319615972650560D+00, &
+      0.20805319615972650560D+00, &
+      0.37584041152082048320D+00, &
+      0.20805319615972650560D+00, &
+      0.49024797118777646565D+00, &
+      0.00975202881222352394D+00, &
+      0.00975202881222352394D+00, &
+      0.49024797118777646565D+00, &
+      0.49024797118777646565D+00, &
+      0.00975202881222352394D+00, &
+      0.10293940011553258385D+00, &
+      0.39706059988446740228D+00, &
+      0.39706059988446740228D+00, &
+      0.10293940011553258385D+00, &
+      0.10293940011553258385D+00, &
+      0.39706059988446740228D+00, &
+      0.03791346346121513694D+00, &
+      0.46208653653878484224D+00, &
+      0.46208653653878484224D+00, &
+      0.03791346346121513694D+00, &
+      0.03791346346121513694D+00, &
+      0.46208653653878484224D+00, &
+      0.31857357618386039633D+00, &
+      0.18142642381613963143D+00, &
+      0.18142642381613963143D+00, &
+      0.31857357618386039633D+00, &
+      0.31857357618386039633D+00, &
+      0.18142642381613963143D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.32981515178461928706D+00, &
+      0.32981515178461928706D+00, &
+      0.32981515178461928706D+00, &
+      0.01055454464614207291D+00, &
+      0.05753828268975920424D+00, &
+      0.05753828268975920424D+00, &
+      0.05753828268975920424D+00, &
+      0.82738515193072237341D+00, &
+      0.00585616861378350419D+00, &
+      0.00585616861378350419D+00, &
+      0.00585616861378350419D+00, &
+      0.98243149415864949869D+00, &
+      0.16055547584795665239D+00, &
+      0.16055547584795665239D+00, &
+      0.16055547584795665239D+00, &
+      0.51833357245613009834D+00, &
+      0.09873964607404908667D+00, &
+      0.09873964607404908667D+00, &
+      0.09873964607404908667D+00, &
+      0.70378106177785271225D+00, &
+      0.20805319615972650560D+00, &
+      0.20805319615972650560D+00, &
+      0.20805319615972650560D+00, &
+      0.37584041152082048320D+00, &
+      0.49024797118777646565D+00, &
+      0.49024797118777646565D+00, &
+      0.49024797118777646565D+00, &
+      0.00975202881222352394D+00, &
+      0.00975202881222352394D+00, &
+      0.00975202881222352394D+00, &
+      0.10293940011553258385D+00, &
+      0.10293940011553258385D+00, &
+      0.10293940011553258385D+00, &
+      0.39706059988446740228D+00, &
+      0.39706059988446740228D+00, &
+      0.39706059988446740228D+00, &
+      0.03791346346121513694D+00, &
+      0.03791346346121513694D+00, &
+      0.03791346346121513694D+00, &
+      0.46208653653878484224D+00, &
+      0.46208653653878484224D+00, &
+      0.46208653653878484224D+00, &
+      0.31857357618386039633D+00, &
+      0.31857357618386039633D+00, &
+      0.31857357618386039633D+00, &
+      0.18142642381613963143D+00, &
+      0.18142642381613963143D+00, &
+      0.18142642381613963143D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.01055454464614207291D+00, &
+      0.32981515178461928706D+00, &
+      0.32981515178461928706D+00, &
+      0.32981515178461928706D+00, &
+      0.82738515193072237341D+00, &
+      0.05753828268975920424D+00, &
+      0.05753828268975920424D+00, &
+      0.05753828268975920424D+00, &
+      0.98243149415864949869D+00, &
+      0.00585616861378350419D+00, &
+      0.00585616861378350419D+00, &
+      0.00585616861378350419D+00, &
+      0.51833357245613009834D+00, &
+      0.16055547584795665239D+00, &
+      0.16055547584795665239D+00, &
+      0.16055547584795665239D+00, &
+      0.70378106177785271225D+00, &
+      0.09873964607404908667D+00, &
+      0.09873964607404908667D+00, &
+      0.09873964607404908667D+00, &
+      0.37584041152082048320D+00, &
+      0.20805319615972650560D+00, &
+      0.20805319615972650560D+00, &
+      0.20805319615972650560D+00, &
+      0.00975202881222352394D+00, &
+      0.00975202881222352394D+00, &
+      0.49024797118777646565D+00, &
+      0.00975202881222352394D+00, &
+      0.49024797118777646565D+00, &
+      0.49024797118777646565D+00, &
+      0.39706059988446740228D+00, &
+      0.39706059988446740228D+00, &
+      0.10293940011553258385D+00, &
+      0.39706059988446740228D+00, &
+      0.10293940011553258385D+00, &
+      0.10293940011553258385D+00, &
+      0.46208653653878484224D+00, &
+      0.46208653653878484224D+00, &
+      0.03791346346121513694D+00, &
+      0.46208653653878484224D+00, &
+      0.03791346346121513694D+00, &
+      0.03791346346121513694D+00, &
+      0.18142642381613963143D+00, &
+      0.18142642381613963143D+00, &
+      0.31857357618386039633D+00, &
+      0.18142642381613963143D+00, &
+      0.31857357618386039633D+00, &
+      0.31857357618386039633D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.08124278343533337943D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.41893877883766694747D+00, &
+      0.24990921886349984349D+00, &
+      0.24990921886349984349D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.01059656362646482081D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.56287668024978376735D+00, &
+      0.21326337806187573021D+00, &
+      0.21326337806187573021D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.00616845740566568986D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.89546897271401615370D+00, &
+      0.04918128494015905350D+00, &
+      0.04918128494015905350D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.19361118513020625365D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.02066357892967346510D+00, &
+      0.39286261797006011287D+00, &
+      0.39286261797006011287D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.84786258652736279373D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.12690220240749577885D+00, &
+      0.01261760553257071024D+00, &
+      0.01261760553257071024D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.23950059507858473262D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.06214000311762152978D+00, &
+      0.06214000311762152978D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.12161878434869899390D+00, &
+      0.57674061745509475063D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.08378145261134291311D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.55179413211842465170D+00, &
+      0.55179413211842465170D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.34890229604702455157D+00, &
+      0.01552211922320787148D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.28444074187088363992D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.01784164064765456428D+00, &
+      0.01784164064765456428D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.68223832016828933611D+00, &
+      0.01547929731317247183D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.07868554787111389781D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.16953955070016224482D+00, &
+      0.16953955070016224482D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00, &
+      0.73399829865858101652D+00, &
+      0.01777660277014278187D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00344543305032338817D+00, &
+      0.00344543305032338817D+00, &
+      0.00344543305032338817D+00, &
+      0.00344543305032338817D+00, &
+      0.00262125527187049689D+00, &
+      0.00262125527187049689D+00, &
+      0.00262125527187049689D+00, &
+      0.00262125527187049689D+00, &
+      0.00011073832418935026D+00, &
+      0.00011073832418935026D+00, &
+      0.00011073832418935026D+00, &
+      0.00011073832418935026D+00, &
+      0.01002858537247380485D+00, &
+      0.01002858537247380485D+00, &
+      0.01002858537247380485D+00, &
+      0.01002858537247380485D+00, &
+      0.00679040845780941229D+00, &
+      0.00679040845780941229D+00, &
+      0.00679040845780941229D+00, &
+      0.00679040845780941229D+00, &
+      0.00711814834189928528D+00, &
+      0.00711814834189928528D+00, &
+      0.00711814834189928528D+00, &
+      0.00711814834189928528D+00, &
+      0.00106005229456405102D+00, &
+      0.00106005229456405102D+00, &
+      0.00106005229456405102D+00, &
+      0.00106005229456405102D+00, &
+      0.00106005229456405102D+00, &
+      0.00106005229456405102D+00, &
+      0.01366983099498089022D+00, &
+      0.01366983099498089022D+00, &
+      0.01366983099498089022D+00, &
+      0.01366983099498089022D+00, &
+      0.01366983099498089022D+00, &
+      0.01366983099498089022D+00, &
+      0.00269074109467615534D+00, &
+      0.00269074109467615534D+00, &
+      0.00269074109467615534D+00, &
+      0.00269074109467615534D+00, &
+      0.00269074109467615534D+00, &
+      0.00269074109467615534D+00, &
+      0.01016460122584274262D+00, &
+      0.01016460122584274262D+00, &
+      0.01016460122584274262D+00, &
+      0.01016460122584274262D+00, &
+      0.01016460122584274262D+00, &
+      0.01016460122584274262D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.01354439963772739730D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00462334004766979095D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00083314984524733007D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00724029676085724896D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00087518078099780780D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00717253651809843761D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00428685634279078135D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00097575276415068943D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00, &
+      0.00375793629976672178D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule15 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule15() returns the rule of precision 15.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 264
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.01692642158547220249D+00, &
+      0.94922073524358341334D+00, &
+      0.01692642158547220249D+00, &
+      0.01692642158547220249D+00, &
+      0.28367792545957221106D+00, &
+      0.14896622362128333905D+00, &
+      0.28367792545957221106D+00, &
+      0.28367792545957221106D+00, &
+      0.18219841399758585077D+00, &
+      0.45340475800724244770D+00, &
+      0.18219841399758585077D+00, &
+      0.18219841399758585077D+00, &
+      0.48549199484781541125D+00, &
+      0.01450800515218459395D+00, &
+      0.48549199484781541125D+00, &
+      0.01450800515218459395D+00, &
+      0.48549199484781541125D+00, &
+      0.01450800515218459395D+00, &
+      0.35725585623414363168D+00, &
+      0.14274414376585639608D+00, &
+      0.35725585623414363168D+00, &
+      0.14274414376585639608D+00, &
+      0.35725585623414363168D+00, &
+      0.14274414376585639608D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.01692642158547220249D+00, &
+      0.01692642158547220249D+00, &
+      0.94922073524358341334D+00, &
+      0.01692642158547220249D+00, &
+      0.28367792545957221106D+00, &
+      0.28367792545957221106D+00, &
+      0.14896622362128333905D+00, &
+      0.28367792545957221106D+00, &
+      0.18219841399758585077D+00, &
+      0.18219841399758585077D+00, &
+      0.45340475800724244770D+00, &
+      0.18219841399758585077D+00, &
+      0.01450800515218459395D+00, &
+      0.48549199484781541125D+00, &
+      0.48549199484781541125D+00, &
+      0.01450800515218459395D+00, &
+      0.01450800515218459395D+00, &
+      0.48549199484781541125D+00, &
+      0.14274414376585639608D+00, &
+      0.35725585623414363168D+00, &
+      0.35725585623414363168D+00, &
+      0.14274414376585639608D+00, &
+      0.14274414376585639608D+00, &
+      0.35725585623414363168D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.01692642158547220249D+00, &
+      0.01692642158547220249D+00, &
+      0.01692642158547220249D+00, &
+      0.94922073524358341334D+00, &
+      0.28367792545957221106D+00, &
+      0.28367792545957221106D+00, &
+      0.28367792545957221106D+00, &
+      0.14896622362128333905D+00, &
+      0.18219841399758585077D+00, &
+      0.18219841399758585077D+00, &
+      0.18219841399758585077D+00, &
+      0.45340475800724244770D+00, &
+      0.01450800515218459395D+00, &
+      0.01450800515218459395D+00, &
+      0.01450800515218459395D+00, &
+      0.48549199484781541125D+00, &
+      0.48549199484781541125D+00, &
+      0.48549199484781541125D+00, &
+      0.14274414376585639608D+00, &
+      0.14274414376585639608D+00, &
+      0.14274414376585639608D+00, &
+      0.35725585623414363168D+00, &
+      0.35725585623414363168D+00, &
+      0.35725585623414363168D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.94922073524358341334D+00, &
+      0.01692642158547220249D+00, &
+      0.01692642158547220249D+00, &
+      0.01692642158547220249D+00, &
+      0.14896622362128333905D+00, &
+      0.28367792545957221106D+00, &
+      0.28367792545957221106D+00, &
+      0.28367792545957221106D+00, &
+      0.45340475800724244770D+00, &
+      0.18219841399758585077D+00, &
+      0.18219841399758585077D+00, &
+      0.18219841399758585077D+00, &
+      0.48549199484781541125D+00, &
+      0.48549199484781541125D+00, &
+      0.01450800515218459395D+00, &
+      0.48549199484781541125D+00, &
+      0.01450800515218459395D+00, &
+      0.01450800515218459395D+00, &
+      0.35725585623414363168D+00, &
+      0.35725585623414363168D+00, &
+      0.14274414376585639608D+00, &
+      0.35725585623414363168D+00, &
+      0.14274414376585639608D+00, &
+      0.14274414376585639608D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.07692970550279260022D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.77663574937330037695D+00, &
+      0.07321727256195353917D+00, &
+      0.07321727256195353917D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.75630817629777158384D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.22256065549243442270D+00, &
+      0.01056558410489698979D+00, &
+      0.01056558410489698979D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.41665525225671096177D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.05575022240565973008D+00, &
+      0.26379726266881464714D+00, &
+      0.26379726266881464714D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.01772853269570365958D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.11129092670553288047D+00, &
+      0.43549027029938169875D+00, &
+      0.43549027029938169875D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.34816828041873582045D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.54488653229756034424D+00, &
+      0.05347259364185193153D+00, &
+      0.05347259364185193153D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.00946783414343936938D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.76947037794054062854D+00, &
+      0.11053089395801002359D+00, &
+      0.11053089395801002359D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.00232892441548140190D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.60309364407709864508D+00, &
+      0.60309364407709864508D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.04104670514991076019D+00, &
+      0.35353072635750920627D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.86726460512418146465D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02939319332917082403D+00, &
+      0.02939319332917082403D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.09201667327695257914D+00, &
+      0.01132552826969512351D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.02200643755861661846D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.70778148731559709095D+00, &
+      0.70778148731559709095D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06822627868000051554D+00, &
+      0.20198579644578576464D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.06807532978800637236D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.12958095976745337419D+00, &
+      0.12958095976745337419D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.18900155563861761876D+00, &
+      0.61334215480592257919D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.07251484323369149221D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.46953330036626755861D+00, &
+      0.46953330036626755861D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.30547996639060115420D+00, &
+      0.15247189000943978110D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.01112774031280626234D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.57783462614827529880D+00, &
+      0.57783462614827529880D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.15091455008251053460D+00, &
+      0.26012308345640794416D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.41760695286430338236D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.01082194753682293349D+00, &
+      0.01082194753682293349D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00, &
+      0.33684506585476453600D+00, &
+      0.23472603374410913601D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00051120297714549352D+00, &
+      0.00051120297714549352D+00, &
+      0.00051120297714549352D+00, &
+      0.00051120297714549352D+00, &
+      0.01620740592022657661D+00, &
+      0.01620740592022657661D+00, &
+      0.01620740592022657661D+00, &
+      0.01620740592022657661D+00, &
+      0.01552578602041313621D+00, &
+      0.01552578602041313621D+00, &
+      0.01552578602041313621D+00, &
+      0.01552578602041313621D+00, &
+      0.00121901025997542137D+00, &
+      0.00121901025997542137D+00, &
+      0.00121901025997542137D+00, &
+      0.00121901025997542137D+00, &
+      0.00121901025997542137D+00, &
+      0.00121901025997542137D+00, &
+      0.00847286285312591654D+00, &
+      0.00847286285312591654D+00, &
+      0.00847286285312591654D+00, &
+      0.00847286285312591654D+00, &
+      0.00847286285312591654D+00, &
+      0.00847286285312591654D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00179753430540573298D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00081980152207600612D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00768177527247301210D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00447985038577478067D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00561529860838435452D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00176970368579728991D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00113113832918702211D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00084049934075774871D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00301196860740268442D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00508442932752266839D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00713938372800399564D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00337855056822929448D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00, &
+      0.00220168077770146239D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule16 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule16() returns the rule of precision 16.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 304
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.32967147384406064736D+00, &
+      0.01098557846781809087D+00, &
+      0.32967147384406064736D+00, &
+      0.32967147384406064736D+00, &
+      0.11204210441737877391D+00, &
+      0.66387368674786362277D+00, &
+      0.11204210441737877391D+00, &
+      0.11204210441737877391D+00, &
+      0.28044602591109291101D+00, &
+      0.15866192226672123922D+00, &
+      0.28044602591109291101D+00, &
+      0.28044602591109291101D+00, &
+      0.03942164444076165508D+00, &
+      0.88173506667771506251D+00, &
+      0.03942164444076165508D+00, &
+      0.03942164444076165508D+00, &
+      0.42508258143523242056D+00, &
+      0.07491741856476755168D+00, &
+      0.42508258143523242056D+00, &
+      0.07491741856476755168D+00, &
+      0.42508258143523242056D+00, &
+      0.07491741856476755168D+00, &
+      0.16430689704436540755D+00, &
+      0.33569310295563459245D+00, &
+      0.16430689704436540755D+00, &
+      0.33569310295563459245D+00, &
+      0.16430689704436540755D+00, &
+      0.33569310295563459245D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.32967147384406064736D+00, &
+      0.32967147384406064736D+00, &
+      0.01098557846781809087D+00, &
+      0.32967147384406064736D+00, &
+      0.11204210441737877391D+00, &
+      0.11204210441737877391D+00, &
+      0.66387368674786362277D+00, &
+      0.11204210441737877391D+00, &
+      0.28044602591109291101D+00, &
+      0.28044602591109291101D+00, &
+      0.15866192226672123922D+00, &
+      0.28044602591109291101D+00, &
+      0.03942164444076165508D+00, &
+      0.03942164444076165508D+00, &
+      0.88173506667771506251D+00, &
+      0.03942164444076165508D+00, &
+      0.07491741856476755168D+00, &
+      0.42508258143523242056D+00, &
+      0.42508258143523242056D+00, &
+      0.07491741856476755168D+00, &
+      0.07491741856476755168D+00, &
+      0.42508258143523242056D+00, &
+      0.33569310295563459245D+00, &
+      0.16430689704436540755D+00, &
+      0.16430689704436540755D+00, &
+      0.33569310295563459245D+00, &
+      0.33569310295563459245D+00, &
+      0.16430689704436540755D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.32967147384406064736D+00, &
+      0.32967147384406064736D+00, &
+      0.32967147384406064736D+00, &
+      0.01098557846781809087D+00, &
+      0.11204210441737877391D+00, &
+      0.11204210441737877391D+00, &
+      0.11204210441737877391D+00, &
+      0.66387368674786362277D+00, &
+      0.28044602591109291101D+00, &
+      0.28044602591109291101D+00, &
+      0.28044602591109291101D+00, &
+      0.15866192226672123922D+00, &
+      0.03942164444076165508D+00, &
+      0.03942164444076165508D+00, &
+      0.03942164444076165508D+00, &
+      0.88173506667771506251D+00, &
+      0.07491741856476755168D+00, &
+      0.07491741856476755168D+00, &
+      0.07491741856476755168D+00, &
+      0.42508258143523242056D+00, &
+      0.42508258143523242056D+00, &
+      0.42508258143523242056D+00, &
+      0.33569310295563459245D+00, &
+      0.33569310295563459245D+00, &
+      0.33569310295563459245D+00, &
+      0.16430689704436540755D+00, &
+      0.16430689704436540755D+00, &
+      0.16430689704436540755D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.01098557846781809087D+00, &
+      0.32967147384406064736D+00, &
+      0.32967147384406064736D+00, &
+      0.32967147384406064736D+00, &
+      0.66387368674786362277D+00, &
+      0.11204210441737877391D+00, &
+      0.11204210441737877391D+00, &
+      0.11204210441737877391D+00, &
+      0.15866192226672123922D+00, &
+      0.28044602591109291101D+00, &
+      0.28044602591109291101D+00, &
+      0.28044602591109291101D+00, &
+      0.88173506667771506251D+00, &
+      0.03942164444076165508D+00, &
+      0.03942164444076165508D+00, &
+      0.03942164444076165508D+00, &
+      0.42508258143523242056D+00, &
+      0.42508258143523242056D+00, &
+      0.07491741856476755168D+00, &
+      0.42508258143523242056D+00, &
+      0.07491741856476755168D+00, &
+      0.07491741856476755168D+00, &
+      0.16430689704436540755D+00, &
+      0.16430689704436540755D+00, &
+      0.33569310295563459245D+00, &
+      0.16430689704436540755D+00, &
+      0.33569310295563459245D+00, &
+      0.33569310295563459245D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.13721495722868609635D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.76468706758018034630D+00, &
+      0.04904898759556675092D+00, &
+      0.04904898759556675092D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.73892100404438987304D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.23282680458942511814D+00, &
+      0.01412609568309253390D+00, &
+      0.01412609568309253390D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.59196519052911877878D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.28324176830779468350D+00, &
+      0.06239652058154325498D+00, &
+      0.06239652058154325498D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.60897627080456984139D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.01283187405611824032D+00, &
+      0.18909592756965598603D+00, &
+      0.18909592756965598603D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.06269383942142089938D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.38727096031949032051D+00, &
+      0.27501760012954440393D+00, &
+      0.27501760012954440393D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.95087214413962473092D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.03723805935523542138D+00, &
+      0.00594489825256994554D+00, &
+      0.00594489825256994554D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.01509427794912522776D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.74829410783088590176D+00, &
+      0.11830580710999444305D+00, &
+      0.11830580710999444305D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.39080211141879206416D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.51463578878883953216D+00, &
+      0.51463578878883953216D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.08011846127872501722D+00, &
+      0.01444363851364341769D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.06995093322963369387D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.16457394683790985135D+00, &
+      0.16457394683790985135D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.31025854986272727309D+00, &
+      0.45521657006972920945D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.85571569922057522106D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.03435867950145695543D+00, &
+      0.03435867950145695543D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.10852408019289846997D+00, &
+      0.00140154108506938347D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.01098323448764900422D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.66253175448505097211D+00, &
+      0.66253175448505097211D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.24838249878149545880D+00, &
+      0.07810251224580459783D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01878187449597509828D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.01226898678006518861D+00, &
+      0.01226898678006518861D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.39600912110670349886D+00, &
+      0.57294001761725621424D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.13624495088858953884D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.20546049913241051788D+00, &
+      0.20546049913241051788D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.06367516197137305933D+00, &
+      0.59461938800762692559D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.13875357096122531431D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.46106788607969945160D+00, &
+      0.46106788607969945160D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.17576504661391043061D+00, &
+      0.22441349634516483125D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.32213983065389956151D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.01344788610299629122D+00, &
+      0.01344788610299629122D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00, &
+      0.47799425320067046030D+00, &
+      0.18641803004243370778D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00403487893723887027D+00, &
+      0.00403487893723887027D+00, &
+      0.00403487893723887027D+00, &
+      0.00403487893723887027D+00, &
+      0.00526342800804762822D+00, &
+      0.00526342800804762822D+00, &
+      0.00526342800804762822D+00, &
+      0.00526342800804762822D+00, &
+      0.01078639106857763770D+00, &
+      0.01078639106857763770D+00, &
+      0.01078639106857763770D+00, &
+      0.01078639106857763770D+00, &
+      0.00189234002903099674D+00, &
+      0.00189234002903099674D+00, &
+      0.00189234002903099674D+00, &
+      0.00189234002903099674D+00, &
+      0.00601451100300045855D+00, &
+      0.00601451100300045855D+00, &
+      0.00601451100300045855D+00, &
+      0.00601451100300045855D+00, &
+      0.00601451100300045855D+00, &
+      0.00601451100300045855D+00, &
+      0.00869219123287302310D+00, &
+      0.00869219123287302310D+00, &
+      0.00869219123287302310D+00, &
+      0.00869219123287302310D+00, &
+      0.00869219123287302310D+00, &
+      0.00869219123287302310D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00350762328578499297D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00118866227331919806D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00434522531446666742D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00266068657020316615D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00555317430212401344D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00015314314053958077D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00223120413671567923D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00247237715624996999D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00659612289181792533D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00060043490676974214D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00224233099687652735D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00082444223624718370D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00438801583526791071D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00345427842574096231D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00, &
+      0.00392928947333557113D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule17 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule17() returns the rule of precision 17.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 364
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.10925941103913998365D+00, &
+      0.67222176688258006294D+00, &
+      0.10925941103913998365D+00, &
+      0.10925941103913998365D+00, &
+      0.01706905335350990607D+00, &
+      0.94879283993947027831D+00, &
+      0.01706905335350990607D+00, &
+      0.01706905335350990607D+00, &
+      0.06030276440208671290D+00, &
+      0.81909170679373988211D+00, &
+      0.06030276440208671290D+00, &
+      0.06030276440208671290D+00, &
+      0.18029367787524874789D+00, &
+      0.45911896637425375634D+00, &
+      0.18029367787524874789D+00, &
+      0.18029367787524874789D+00, &
+      0.29243575056800774625D+00, &
+      0.20756424943199228150D+00, &
+      0.29243575056800774625D+00, &
+      0.20756424943199228150D+00, &
+      0.29243575056800774625D+00, &
+      0.20756424943199228150D+00, &
+      0.43649438124963818586D+00, &
+      0.06350561875036178638D+00, &
+      0.43649438124963818586D+00, &
+      0.06350561875036178638D+00, &
+      0.43649438124963818586D+00, &
+      0.06350561875036178638D+00, &
+      0.35742590514301658677D+00, &
+      0.14257409485698341323D+00, &
+      0.35742590514301658677D+00, &
+      0.14257409485698341323D+00, &
+      0.35742590514301658677D+00, &
+      0.14257409485698341323D+00, &
+      0.48474501038864181712D+00, &
+      0.01525498961135818114D+00, &
+      0.48474501038864181712D+00, &
+      0.01525498961135818114D+00, &
+      0.48474501038864181712D+00, &
+      0.01525498961135818114D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.10925941103913998365D+00, &
+      0.10925941103913998365D+00, &
+      0.67222176688258006294D+00, &
+      0.10925941103913998365D+00, &
+      0.01706905335350990607D+00, &
+      0.01706905335350990607D+00, &
+      0.94879283993947027831D+00, &
+      0.01706905335350990607D+00, &
+      0.06030276440208671290D+00, &
+      0.06030276440208671290D+00, &
+      0.81909170679373988211D+00, &
+      0.06030276440208671290D+00, &
+      0.18029367787524874789D+00, &
+      0.18029367787524874789D+00, &
+      0.45911896637425375634D+00, &
+      0.18029367787524874789D+00, &
+      0.20756424943199228150D+00, &
+      0.29243575056800774625D+00, &
+      0.29243575056800774625D+00, &
+      0.20756424943199228150D+00, &
+      0.20756424943199228150D+00, &
+      0.29243575056800774625D+00, &
+      0.06350561875036178638D+00, &
+      0.43649438124963818586D+00, &
+      0.43649438124963818586D+00, &
+      0.06350561875036178638D+00, &
+      0.06350561875036178638D+00, &
+      0.43649438124963818586D+00, &
+      0.14257409485698341323D+00, &
+      0.35742590514301658677D+00, &
+      0.35742590514301658677D+00, &
+      0.14257409485698341323D+00, &
+      0.14257409485698341323D+00, &
+      0.35742590514301658677D+00, &
+      0.01525498961135818114D+00, &
+      0.48474501038864181712D+00, &
+      0.48474501038864181712D+00, &
+      0.01525498961135818114D+00, &
+      0.01525498961135818114D+00, &
+      0.48474501038864181712D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.10925941103913998365D+00, &
+      0.10925941103913998365D+00, &
+      0.10925941103913998365D+00, &
+      0.67222176688258006294D+00, &
+      0.01706905335350990607D+00, &
+      0.01706905335350990607D+00, &
+      0.01706905335350990607D+00, &
+      0.94879283993947027831D+00, &
+      0.06030276440208671290D+00, &
+      0.06030276440208671290D+00, &
+      0.06030276440208671290D+00, &
+      0.81909170679373988211D+00, &
+      0.18029367787524874789D+00, &
+      0.18029367787524874789D+00, &
+      0.18029367787524874789D+00, &
+      0.45911896637425375634D+00, &
+      0.20756424943199228150D+00, &
+      0.20756424943199228150D+00, &
+      0.20756424943199228150D+00, &
+      0.29243575056800774625D+00, &
+      0.29243575056800774625D+00, &
+      0.29243575056800774625D+00, &
+      0.06350561875036178638D+00, &
+      0.06350561875036178638D+00, &
+      0.06350561875036178638D+00, &
+      0.43649438124963818586D+00, &
+      0.43649438124963818586D+00, &
+      0.43649438124963818586D+00, &
+      0.14257409485698341323D+00, &
+      0.14257409485698341323D+00, &
+      0.14257409485698341323D+00, &
+      0.35742590514301658677D+00, &
+      0.35742590514301658677D+00, &
+      0.35742590514301658677D+00, &
+      0.01525498961135818114D+00, &
+      0.01525498961135818114D+00, &
+      0.01525498961135818114D+00, &
+      0.48474501038864181712D+00, &
+      0.48474501038864181712D+00, &
+      0.48474501038864181712D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.67222176688258006294D+00, &
+      0.10925941103913998365D+00, &
+      0.10925941103913998365D+00, &
+      0.10925941103913998365D+00, &
+      0.94879283993947027831D+00, &
+      0.01706905335350990607D+00, &
+      0.01706905335350990607D+00, &
+      0.01706905335350990607D+00, &
+      0.81909170679373988211D+00, &
+      0.06030276440208671290D+00, &
+      0.06030276440208671290D+00, &
+      0.06030276440208671290D+00, &
+      0.45911896637425375634D+00, &
+      0.18029367787524874789D+00, &
+      0.18029367787524874789D+00, &
+      0.18029367787524874789D+00, &
+      0.29243575056800774625D+00, &
+      0.29243575056800774625D+00, &
+      0.20756424943199228150D+00, &
+      0.29243575056800774625D+00, &
+      0.20756424943199228150D+00, &
+      0.20756424943199228150D+00, &
+      0.43649438124963818586D+00, &
+      0.43649438124963818586D+00, &
+      0.06350561875036178638D+00, &
+      0.43649438124963818586D+00, &
+      0.06350561875036178638D+00, &
+      0.06350561875036178638D+00, &
+      0.35742590514301658677D+00, &
+      0.35742590514301658677D+00, &
+      0.14257409485698341323D+00, &
+      0.35742590514301658677D+00, &
+      0.14257409485698341323D+00, &
+      0.14257409485698341323D+00, &
+      0.48474501038864181712D+00, &
+      0.48474501038864181712D+00, &
+      0.01525498961135818114D+00, &
+      0.48474501038864181712D+00, &
+      0.01525498961135818114D+00, &
+      0.01525498961135818114D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.42985087772169894293D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.00660562854593635396D+00, &
+      0.28177174686618233768D+00, &
+      0.28177174686618233768D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.14613374514974236673D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.34730767552697888734D+00, &
+      0.25327928966163937297D+00, &
+      0.25327928966163937297D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.24814743940887118434D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.51296319321353045506D+00, &
+      0.11944468368879919418D+00, &
+      0.11944468368879919418D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.03659130655086657857D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.40401351501313786940D+00, &
+      0.27969758921799775520D+00, &
+      0.27969758921799775520D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.60455012316108380777D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.27715057680379789895D+00, &
+      0.05914965001755916052D+00, &
+      0.05914965001755916052D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.63959776306916293898D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.33726932317139624029D+00, &
+      0.01156645687972039128D+00, &
+      0.01156645687972039128D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.40176767565660237436D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.08899213511967390966D+00, &
+      0.25462009461186185799D+00, &
+      0.25462009461186185799D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.90330040063629690739D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.08335377000797282443D+00, &
+      0.00667291467786515838D+00, &
+      0.00667291467786515838D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.73202622121560489976D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.14887385146092257937D+00, &
+      0.05954996366173629513D+00, &
+      0.05954996366173629513D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.16834930641823020459D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01308047471312759683D+00, &
+      0.01308047471312759683D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.09563829425828948572D+00, &
+      0.72293192461035271634D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.01062246299591423221D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.63765519934162528948D+00, &
+      0.63765519934162528948D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.06035751534893870479D+00, &
+      0.29136482231352184291D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.01289545879798303755D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.15750628240845837569D+00, &
+      0.15750628240845837569D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.57206296627532715604D+00, &
+      0.25753529251823142898D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.06489065131906320005D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.15309636122213676757D+00, &
+      0.15309636122213676757D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.59828716184995478500D+00, &
+      0.18372582560884528902D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.04707766223753579587D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01165500297046612177D+00, &
+      0.01165500297046612177D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.08721077921772252273D+00, &
+      0.85405655557427551106D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.01048009320013414646D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.40853289101632561664D+00, &
+      0.40853289101632561664D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.41377996806619143921D+00, &
+      0.16720704771734881677D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.07360595669274641595D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.01167932299246963838D+00, &
+      0.01167932299246963838D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.39049895837194248394D+00, &
+      0.52421576194284147387D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.02545430962429987704D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.00816368037123298140D+00, &
+      0.00816368037123298140D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.77350174035347174506D+00, &
+      0.19288026965099538956D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.32269864692600430667D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.15298860550317516793D+00, &
+      0.15298860550317516793D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00, &
+      0.05603440494408157974D+00, &
+      0.46827834262673895260D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00294341105468265462D+00, &
+      0.00294341105468265462D+00, &
+      0.00294341105468265462D+00, &
+      0.00294341105468265462D+00, &
+      0.00048212545621309732D+00, &
+      0.00048212545621309732D+00, &
+      0.00048212545621309732D+00, &
+      0.00048212545621309732D+00, &
+      0.00163341188233597076D+00, &
+      0.00163341188233597076D+00, &
+      0.00163341188233597076D+00, &
+      0.00163341188233597076D+00, &
+      0.00893726054473396696D+00, &
+      0.00893726054473396696D+00, &
+      0.00893726054473396696D+00, &
+      0.00893726054473396696D+00, &
+      0.00353928104113144419D+00, &
+      0.00353928104113144419D+00, &
+      0.00353928104113144419D+00, &
+      0.00353928104113144419D+00, &
+      0.00353928104113144419D+00, &
+      0.00353928104113144419D+00, &
+      0.00512787677512291287D+00, &
+      0.00512787677512291287D+00, &
+      0.00512787677512291287D+00, &
+      0.00512787677512291287D+00, &
+      0.00512787677512291287D+00, &
+      0.00512787677512291287D+00, &
+      0.00850596170577665525D+00, &
+      0.00850596170577665525D+00, &
+      0.00850596170577665525D+00, &
+      0.00850596170577665525D+00, &
+      0.00850596170577665525D+00, &
+      0.00850596170577665525D+00, &
+      0.00136200105956508968D+00, &
+      0.00136200105956508968D+00, &
+      0.00136200105956508968D+00, &
+      0.00136200105956508968D+00, &
+      0.00136200105956508968D+00, &
+      0.00136200105956508968D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00195270359469908281D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00355248233270215579D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00473503787208788118D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00407620405252378040D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00439788961603859111D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00081599154180394791D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00643692740335644054D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00022909370299782243D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00318874669420498007D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00199126625996987874D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00120994663686878074D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00294341798218390217D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00345409455481056381D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00082411354147775707D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00138354237817018503D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00178144523592653806D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00069693163510014015D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00, &
+      0.00572288840189160569D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule18 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule18() returns the rule of precision 18.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 436
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.20637218186812095189D+00, &
+      0.38088345439563714434D+00, &
+      0.20637218186812095189D+00, &
+      0.20637218186812095189D+00, &
+      0.16253879451764061126D+00, &
+      0.51238361644707808296D+00, &
+      0.16253879451764061126D+00, &
+      0.16253879451764061126D+00, &
+      0.31162667282556427706D+00, &
+      0.06511998152330712719D+00, &
+      0.31162667282556427706D+00, &
+      0.31162667282556427706D+00, &
+      0.33072791608903129301D+00, &
+      0.00781625173290610535D+00, &
+      0.33072791608903129301D+00, &
+      0.33072791608903129301D+00, &
+      0.03374408201299505805D+00, &
+      0.89876775396101482585D+00, &
+      0.03374408201299505805D+00, &
+      0.03374408201299505805D+00, &
+      0.06568138278425954268D+00, &
+      0.80295585164722138583D+00, &
+      0.06568138278425954268D+00, &
+      0.06568138278425954268D+00, &
+      0.01169072420259710532D+00, &
+      0.96492782739220872568D+00, &
+      0.01169072420259710532D+00, &
+      0.01169072420259710532D+00, &
+      0.19482708587852060056D+00, &
+      0.30517291412147939944D+00, &
+      0.19482708587852060056D+00, &
+      0.30517291412147939944D+00, &
+      0.19482708587852060056D+00, &
+      0.30517291412147939944D+00, &
+      0.25018283465846002933D+00, &
+      0.24981716534153994291D+00, &
+      0.25018283465846002933D+00, &
+      0.24981716534153994291D+00, &
+      0.25018283465846002933D+00, &
+      0.24981716534153994291D+00, &
+      0.48663347708394377733D+00, &
+      0.01336652291605620185D+00, &
+      0.48663347708394377733D+00, &
+      0.01336652291605620185D+00, &
+      0.48663347708394377733D+00, &
+      0.01336652291605620185D+00, &
+      0.24965765642411447134D+00, &
+      0.25034234357588552866D+00, &
+      0.24965765642411447134D+00, &
+      0.25034234357588552866D+00, &
+      0.24965765642411447134D+00, &
+      0.25034234357588552866D+00, &
+      0.16754822774571606625D+00, &
+      0.33245177225428396151D+00, &
+      0.16754822774571606625D+00, &
+      0.33245177225428396151D+00, &
+      0.16754822774571606625D+00, &
+      0.33245177225428396151D+00, &
+      0.16710640252945341278D+00, &
+      0.33289359747054658722D+00, &
+      0.16710640252945341278D+00, &
+      0.33289359747054658722D+00, &
+      0.16710640252945341278D+00, &
+      0.33289359747054658722D+00, &
+      0.39461100170587065650D+00, &
+      0.10538899829412931575D+00, &
+      0.39461100170587065650D+00, &
+      0.10538899829412931575D+00, &
+      0.39461100170587065650D+00, &
+      0.10538899829412931575D+00, &
+      0.45682278058633507545D+00, &
+      0.04317721941366493843D+00, &
+      0.45682278058633507545D+00, &
+      0.04317721941366493843D+00, &
+      0.45682278058633507545D+00, &
+      0.04317721941366493843D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.20637218186812095189D+00, &
+      0.20637218186812095189D+00, &
+      0.38088345439563714434D+00, &
+      0.20637218186812095189D+00, &
+      0.16253879451764061126D+00, &
+      0.16253879451764061126D+00, &
+      0.51238361644707808296D+00, &
+      0.16253879451764061126D+00, &
+      0.31162667282556427706D+00, &
+      0.31162667282556427706D+00, &
+      0.06511998152330712719D+00, &
+      0.31162667282556427706D+00, &
+      0.33072791608903129301D+00, &
+      0.33072791608903129301D+00, &
+      0.00781625173290610535D+00, &
+      0.33072791608903129301D+00, &
+      0.03374408201299505805D+00, &
+      0.03374408201299505805D+00, &
+      0.89876775396101482585D+00, &
+      0.03374408201299505805D+00, &
+      0.06568138278425954268D+00, &
+      0.06568138278425954268D+00, &
+      0.80295585164722138583D+00, &
+      0.06568138278425954268D+00, &
+      0.01169072420259710532D+00, &
+      0.01169072420259710532D+00, &
+      0.96492782739220872568D+00, &
+      0.01169072420259710532D+00, &
+      0.30517291412147939944D+00, &
+      0.19482708587852060056D+00, &
+      0.19482708587852060056D+00, &
+      0.30517291412147939944D+00, &
+      0.30517291412147939944D+00, &
+      0.19482708587852060056D+00, &
+      0.24981716534153994291D+00, &
+      0.25018283465846002933D+00, &
+      0.25018283465846002933D+00, &
+      0.24981716534153994291D+00, &
+      0.24981716534153994291D+00, &
+      0.25018283465846002933D+00, &
+      0.01336652291605620185D+00, &
+      0.48663347708394377733D+00, &
+      0.48663347708394377733D+00, &
+      0.01336652291605620185D+00, &
+      0.01336652291605620185D+00, &
+      0.48663347708394377733D+00, &
+      0.25034234357588552866D+00, &
+      0.24965765642411447134D+00, &
+      0.24965765642411447134D+00, &
+      0.25034234357588552866D+00, &
+      0.25034234357588552866D+00, &
+      0.24965765642411447134D+00, &
+      0.33245177225428396151D+00, &
+      0.16754822774571606625D+00, &
+      0.16754822774571606625D+00, &
+      0.33245177225428396151D+00, &
+      0.33245177225428396151D+00, &
+      0.16754822774571606625D+00, &
+      0.33289359747054658722D+00, &
+      0.16710640252945341278D+00, &
+      0.16710640252945341278D+00, &
+      0.33289359747054658722D+00, &
+      0.33289359747054658722D+00, &
+      0.16710640252945341278D+00, &
+      0.10538899829412931575D+00, &
+      0.39461100170587065650D+00, &
+      0.39461100170587065650D+00, &
+      0.10538899829412931575D+00, &
+      0.10538899829412931575D+00, &
+      0.39461100170587065650D+00, &
+      0.04317721941366493843D+00, &
+      0.45682278058633507545D+00, &
+      0.45682278058633507545D+00, &
+      0.04317721941366493843D+00, &
+      0.04317721941366493843D+00, &
+      0.45682278058633507545D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.20637218186812095189D+00, &
+      0.20637218186812095189D+00, &
+      0.20637218186812095189D+00, &
+      0.38088345439563714434D+00, &
+      0.16253879451764061126D+00, &
+      0.16253879451764061126D+00, &
+      0.16253879451764061126D+00, &
+      0.51238361644707808296D+00, &
+      0.31162667282556427706D+00, &
+      0.31162667282556427706D+00, &
+      0.31162667282556427706D+00, &
+      0.06511998152330712719D+00, &
+      0.33072791608903129301D+00, &
+      0.33072791608903129301D+00, &
+      0.33072791608903129301D+00, &
+      0.00781625173290610535D+00, &
+      0.03374408201299505805D+00, &
+      0.03374408201299505805D+00, &
+      0.03374408201299505805D+00, &
+      0.89876775396101482585D+00, &
+      0.06568138278425954268D+00, &
+      0.06568138278425954268D+00, &
+      0.06568138278425954268D+00, &
+      0.80295585164722138583D+00, &
+      0.01169072420259710532D+00, &
+      0.01169072420259710532D+00, &
+      0.01169072420259710532D+00, &
+      0.96492782739220872568D+00, &
+      0.30517291412147939944D+00, &
+      0.30517291412147939944D+00, &
+      0.30517291412147939944D+00, &
+      0.19482708587852060056D+00, &
+      0.19482708587852060056D+00, &
+      0.19482708587852060056D+00, &
+      0.24981716534153994291D+00, &
+      0.24981716534153994291D+00, &
+      0.24981716534153994291D+00, &
+      0.25018283465846002933D+00, &
+      0.25018283465846002933D+00, &
+      0.25018283465846002933D+00, &
+      0.01336652291605620185D+00, &
+      0.01336652291605620185D+00, &
+      0.01336652291605620185D+00, &
+      0.48663347708394377733D+00, &
+      0.48663347708394377733D+00, &
+      0.48663347708394377733D+00, &
+      0.25034234357588552866D+00, &
+      0.25034234357588552866D+00, &
+      0.25034234357588552866D+00, &
+      0.24965765642411447134D+00, &
+      0.24965765642411447134D+00, &
+      0.24965765642411447134D+00, &
+      0.33245177225428396151D+00, &
+      0.33245177225428396151D+00, &
+      0.33245177225428396151D+00, &
+      0.16754822774571606625D+00, &
+      0.16754822774571606625D+00, &
+      0.16754822774571606625D+00, &
+      0.33289359747054658722D+00, &
+      0.33289359747054658722D+00, &
+      0.33289359747054658722D+00, &
+      0.16710640252945341278D+00, &
+      0.16710640252945341278D+00, &
+      0.16710640252945341278D+00, &
+      0.10538899829412931575D+00, &
+      0.10538899829412931575D+00, &
+      0.10538899829412931575D+00, &
+      0.39461100170587065650D+00, &
+      0.39461100170587065650D+00, &
+      0.39461100170587065650D+00, &
+      0.04317721941366493843D+00, &
+      0.04317721941366493843D+00, &
+      0.04317721941366493843D+00, &
+      0.45682278058633507545D+00, &
+      0.45682278058633507545D+00, &
+      0.45682278058633507545D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.38088345439563714434D+00, &
+      0.20637218186812095189D+00, &
+      0.20637218186812095189D+00, &
+      0.20637218186812095189D+00, &
+      0.51238361644707808296D+00, &
+      0.16253879451764061126D+00, &
+      0.16253879451764061126D+00, &
+      0.16253879451764061126D+00, &
+      0.06511998152330712719D+00, &
+      0.31162667282556427706D+00, &
+      0.31162667282556427706D+00, &
+      0.31162667282556427706D+00, &
+      0.00781625173290610535D+00, &
+      0.33072791608903129301D+00, &
+      0.33072791608903129301D+00, &
+      0.33072791608903129301D+00, &
+      0.89876775396101482585D+00, &
+      0.03374408201299505805D+00, &
+      0.03374408201299505805D+00, &
+      0.03374408201299505805D+00, &
+      0.80295585164722138583D+00, &
+      0.06568138278425954268D+00, &
+      0.06568138278425954268D+00, &
+      0.06568138278425954268D+00, &
+      0.96492782739220872568D+00, &
+      0.01169072420259710532D+00, &
+      0.01169072420259710532D+00, &
+      0.01169072420259710532D+00, &
+      0.19482708587852060056D+00, &
+      0.19482708587852060056D+00, &
+      0.30517291412147939944D+00, &
+      0.19482708587852060056D+00, &
+      0.30517291412147939944D+00, &
+      0.30517291412147939944D+00, &
+      0.25018283465846002933D+00, &
+      0.25018283465846002933D+00, &
+      0.24981716534153994291D+00, &
+      0.25018283465846002933D+00, &
+      0.24981716534153994291D+00, &
+      0.24981716534153994291D+00, &
+      0.48663347708394377733D+00, &
+      0.48663347708394377733D+00, &
+      0.01336652291605620185D+00, &
+      0.48663347708394377733D+00, &
+      0.01336652291605620185D+00, &
+      0.01336652291605620185D+00, &
+      0.24965765642411447134D+00, &
+      0.24965765642411447134D+00, &
+      0.25034234357588552866D+00, &
+      0.24965765642411447134D+00, &
+      0.25034234357588552866D+00, &
+      0.25034234357588552866D+00, &
+      0.16754822774571606625D+00, &
+      0.16754822774571606625D+00, &
+      0.33245177225428396151D+00, &
+      0.16754822774571606625D+00, &
+      0.33245177225428396151D+00, &
+      0.33245177225428396151D+00, &
+      0.16710640252945341278D+00, &
+      0.16710640252945341278D+00, &
+      0.33289359747054658722D+00, &
+      0.16710640252945341278D+00, &
+      0.33289359747054658722D+00, &
+      0.33289359747054658722D+00, &
+      0.39461100170587065650D+00, &
+      0.39461100170587065650D+00, &
+      0.10538899829412931575D+00, &
+      0.39461100170587065650D+00, &
+      0.10538899829412931575D+00, &
+      0.10538899829412931575D+00, &
+      0.45682278058633507545D+00, &
+      0.45682278058633507545D+00, &
+      0.04317721941366493843D+00, &
+      0.45682278058633507545D+00, &
+      0.04317721941366493843D+00, &
+      0.04317721941366493843D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.79851846263959136429D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.13527540213032007710D+00, &
+      0.03310306761504428624D+00, &
+      0.03310306761504428624D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.60959096405941781693D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.00117187904704725305D+00, &
+      0.19461857844676747065D+00, &
+      0.19461857844676747065D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.64567894766242728277D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.32789600981495031773D+00, &
+      0.01321252126131118240D+00, &
+      0.01321252126131118240D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.73385185721435863826D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.02028399843152169785D+00, &
+      0.12293207217705982848D+00, &
+      0.12293207217705982848D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.52611375613426714093D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.34989612196236530295D+00, &
+      0.06199506095168379888D+00, &
+      0.06199506095168379888D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.66517316936487369539D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.16668307969529239099D+00, &
+      0.08407187546991698457D+00, &
+      0.08407187546991698457D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.79834794312821710793D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.18591795912287514825D+00, &
+      0.00786704887445389099D+00, &
+      0.00786704887445389099D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.66737760887226360573D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.24827074115031172452D+00, &
+      0.04217582498871236263D+00, &
+      0.04217582498871236263D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.91565199398803465147D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.06698102226768763712D+00, &
+      0.00868349187213884009D+00, &
+      0.00868349187213884009D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.48592121868664212014D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.29184170779811624552D+00, &
+      0.11111853675762081717D+00, &
+      0.11111853675762081717D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.21619828180153019548D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.06377078964518405335D+00, &
+      0.06377078964518405335D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.00368546384560602220D+00, &
+      0.71634546470767967996D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.04866034767929566102D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.00402409810322379782D+00, &
+      0.00402409810322379782D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.09147563979493070208D+00, &
+      0.85583991442254980786D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.02814320586294362034D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.41687745973852602388D+00, &
+      0.41687745973852602388D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.13265637401840363330D+00, &
+      0.42232296038012673289D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.02919443405619611201D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24643302248016774048D+00, &
+      0.24643302248016774048D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.44391986692788093505D+00, &
+      0.28045267653575517430D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.24575744971175611520D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.12712074880700960366D+00, &
+      0.12712074880700960366D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.23954508858951903405D+00, &
+      0.38757671289171524709D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.07023964653694080018D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.21370490618618503964D+00, &
+      0.21370490618618503964D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.16571308871687792652D+00, &
+      0.55034235855999624754D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.06661063766146717302D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.32903530148779736031D+00, &
+      0.32903530148779736031D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.17887766860263659696D+00, &
+      0.42547639224809885583D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.18879993728241270534D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.00495031595694936898D+00, &
+      0.00495031595694936898D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.33401761167261062591D+00, &
+      0.47223213508802724947D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.07104964990519174739D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.00784628836168125426D+00, &
+      0.00784628836168125426D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.54587730091263853005D+00, &
+      0.37522676082048844748D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.25298824003743208833D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.12935575346620128978D+00, &
+      0.12935575346620128978D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00, &
+      0.02510439859007851382D+00, &
+      0.59255160790628813583D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00150538840675059553D+00, &
+      0.00150538840675059553D+00, &
+      0.00150538840675059553D+00, &
+      0.00150538840675059553D+00, &
+      0.00720144153152843611D+00, &
+      0.00720144153152843611D+00, &
+      0.00720144153152843611D+00, &
+      0.00720144153152843611D+00, &
+      0.00580180123369481490D+00, &
+      0.00580180123369481490D+00, &
+      0.00580180123369481490D+00, &
+      0.00580180123369481490D+00, &
+      0.00246508839284979072D+00, &
+      0.00246508839284979072D+00, &
+      0.00246508839284979072D+00, &
+      0.00246508839284979072D+00, &
+      0.00082352710591100209D+00, &
+      0.00082352710591100209D+00, &
+      0.00082352710591100209D+00, &
+      0.00082352710591100209D+00, &
+      0.00239615339582495944D+00, &
+      0.00239615339582495944D+00, &
+      0.00239615339582495944D+00, &
+      0.00239615339582495944D+00, &
+      0.00016620265380624529D+00, &
+      0.00016620265380624529D+00, &
+      0.00016620265380624529D+00, &
+      0.00016620265380624529D+00, &
+      0.00004747626606883917D+00, &
+      0.00004747626606883917D+00, &
+      0.00004747626606883917D+00, &
+      0.00004747626606883917D+00, &
+      0.00004747626606883917D+00, &
+      0.00004747626606883917D+00, &
+      0.00056549604041758049D+00, &
+      0.00056549604041758049D+00, &
+      0.00056549604041758049D+00, &
+      0.00056549604041758049D+00, &
+      0.00056549604041758049D+00, &
+      0.00056549604041758049D+00, &
+      0.00112664484758759819D+00, &
+      0.00112664484758759819D+00, &
+      0.00112664484758759819D+00, &
+      0.00112664484758759819D+00, &
+      0.00112664484758759819D+00, &
+      0.00112664484758759819D+00, &
+      0.00134824615188020068D+00, &
+      0.00134824615188020068D+00, &
+      0.00134824615188020068D+00, &
+      0.00134824615188020068D+00, &
+      0.00134824615188020068D+00, &
+      0.00134824615188020068D+00, &
+      0.00036570690966776829D+00, &
+      0.00036570690966776829D+00, &
+      0.00036570690966776829D+00, &
+      0.00036570690966776829D+00, &
+      0.00036570690966776829D+00, &
+      0.00036570690966776829D+00, &
+      0.00585317199256511420D+00, &
+      0.00585317199256511420D+00, &
+      0.00585317199256511420D+00, &
+      0.00585317199256511420D+00, &
+      0.00585317199256511420D+00, &
+      0.00585317199256511420D+00, &
+      0.00195669103482143045D+00, &
+      0.00195669103482143045D+00, &
+      0.00195669103482143045D+00, &
+      0.00195669103482143045D+00, &
+      0.00195669103482143045D+00, &
+      0.00195669103482143045D+00, &
+      0.00167324425217903932D+00, &
+      0.00167324425217903932D+00, &
+      0.00167324425217903932D+00, &
+      0.00167324425217903932D+00, &
+      0.00167324425217903932D+00, &
+      0.00167324425217903932D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00168440997312563432D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00094897330309711499D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00103908313593165276D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00286855832424034790D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00367220278457213193D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00474715554659636309D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00041508840782129717D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00250499012224768280D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00026299196277102378D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00523794881864567390D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00095305173455027987D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00044240794980280441D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00175617900842293820D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00243426688175015339D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00393651196593819332D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00319979126910645674D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00379761031215874838D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00149593856263098113D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00170399618122472484D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00, &
+      0.00362877511769905915D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule19 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule19() returns the rule of precision 19.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 487
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.25000000000000000000D+00, &
+      0.09623346794170115071D+00, &
+      0.71129959617489657564D+00, &
+      0.09623346794170115071D+00, &
+      0.09623346794170115071D+00, &
+      0.28407109711855549339D+00, &
+      0.14778670864433349208D+00, &
+      0.28407109711855549339D+00, &
+      0.28407109711855549339D+00, &
+      0.04201218049762309864D+00, &
+      0.87396345850713075265D+00, &
+      0.04201218049762309864D+00, &
+      0.04201218049762309864D+00, &
+      0.37060749878204746199D+00, &
+      0.12939250121795256576D+00, &
+      0.37060749878204746199D+00, &
+      0.12939250121795256576D+00, &
+      0.37060749878204746199D+00, &
+      0.12939250121795256576D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.25000000000000000000D+00, &
+      0.09623346794170115071D+00, &
+      0.09623346794170115071D+00, &
+      0.71129959617489657564D+00, &
+      0.09623346794170115071D+00, &
+      0.28407109711855549339D+00, &
+      0.28407109711855549339D+00, &
+      0.14778670864433349208D+00, &
+      0.28407109711855549339D+00, &
+      0.04201218049762309864D+00, &
+      0.04201218049762309864D+00, &
+      0.87396345850713075265D+00, &
+      0.04201218049762309864D+00, &
+      0.12939250121795256576D+00, &
+      0.37060749878204746199D+00, &
+      0.37060749878204746199D+00, &
+      0.12939250121795256576D+00, &
+      0.12939250121795256576D+00, &
+      0.37060749878204746199D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.25000000000000000000D+00, &
+      0.09623346794170115071D+00, &
+      0.09623346794170115071D+00, &
+      0.09623346794170115071D+00, &
+      0.71129959617489657564D+00, &
+      0.28407109711855549339D+00, &
+      0.28407109711855549339D+00, &
+      0.28407109711855549339D+00, &
+      0.14778670864433349208D+00, &
+      0.04201218049762309864D+00, &
+      0.04201218049762309864D+00, &
+      0.04201218049762309864D+00, &
+      0.87396345850713075265D+00, &
+      0.12939250121795256576D+00, &
+      0.12939250121795256576D+00, &
+      0.12939250121795256576D+00, &
+      0.37060749878204746199D+00, &
+      0.37060749878204746199D+00, &
+      0.37060749878204746199D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.25000000000000000000D+00, &
+      0.71129959617489657564D+00, &
+      0.09623346794170115071D+00, &
+      0.09623346794170115071D+00, &
+      0.09623346794170115071D+00, &
+      0.14778670864433349208D+00, &
+      0.28407109711855549339D+00, &
+      0.28407109711855549339D+00, &
+      0.28407109711855549339D+00, &
+      0.87396345850713075265D+00, &
+      0.04201218049762309864D+00, &
+      0.04201218049762309864D+00, &
+      0.04201218049762309864D+00, &
+      0.37060749878204746199D+00, &
+      0.37060749878204746199D+00, &
+      0.12939250121795256576D+00, &
+      0.37060749878204746199D+00, &
+      0.12939250121795256576D+00, &
+      0.12939250121795256576D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.12524376275400717073D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.76796999473938665215D+00, &
+      0.05339312125330306080D+00, &
+      0.05339312125330306080D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.82346496686563086520D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.16603392532052993480D+00, &
+      0.00525055390691960347D+00, &
+      0.00525055390691960347D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.47079673575173541789D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.10340459950933277022D+00, &
+      0.21289933236946589901D+00, &
+      0.21289933236946589901D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.05983730016135191399D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.13333563464320216663D+00, &
+      0.40341353259772294582D+00, &
+      0.40341353259772294582D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.42298579357668497636D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.55323796780708955900D+00, &
+      0.01188811930811271497D+00, &
+      0.01188811930811271497D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.01386815378495724269D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.80806951519091019254D+00, &
+      0.08903116551206627372D+00, &
+      0.08903116551206627372D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.40963838955252662721D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.48732803652949013840D+00, &
+      0.05151678695899160332D+00, &
+      0.05151678695899160332D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.51738643517605753530D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.24661499436440831312D+00, &
+      0.11799928522976708967D+00, &
+      0.11799928522976708967D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.62968832141581543294D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.27814143188561274433D+00, &
+      0.04608512334928590443D+00, &
+      0.04608512334928590443D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.70978800843203093685D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.00817464994838945115D+00, &
+      0.14101867080978983116D+00, &
+      0.14101867080978983116D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.13220624150024976040D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.58558687675989695709D+00, &
+      0.14110344086992665513D+00, &
+      0.14110344086992665513D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.95381743749973846302D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.03035883809061935140D+00, &
+      0.00791186220482110840D+00, &
+      0.00791186220482110840D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.40167361827768022220D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.24612395878168494279D+00, &
+      0.17610121147031740363D+00, &
+      0.17610121147031740363D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.01162671237541302964D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.76941240411498146301D+00, &
+      0.76941240411498146301D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04531137441520980552D+00, &
+      0.17364950909439569315D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.04902896398807803091D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.11399073433897684293D+00, &
+      0.11399073433897684293D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.19024697703095114210D+00, &
+      0.64673332464199395631D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.05200356315054190798D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.50452241971895417372D+00, &
+      0.50452241971895417372D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.20258821073146207614D+00, &
+      0.24088580639904177971D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.00965102192701457022D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.38993421379383935710D+00, &
+      0.38993421379383935710D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.06280459865457699298D+00, &
+      0.53761016562456909185D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.25422603378974589772D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.01025101977116908356D+00, &
+      0.01025101977116908356D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.16890346110683013281D+00, &
+      0.56661948533225492408D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.28262413489405258105D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.37147093146218235216D+00, &
+      0.37147093146218235216D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.12828022988265455617D+00, &
+      0.21762470376111051062D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.05648574604597608045D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.23237382312598925393D+00, &
+      0.23237382312598925393D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.37531643022483340832D+00, &
+      0.33582400060320127810D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.88403219212764705404D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.02823323910477210444D+00, &
+      0.02823323910477210444D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.08176634693298534540D+00, &
+      0.00596822183459553082D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.01052014400647361021D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.46913734429268588721D+00, &
+      0.46913734429268588721D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.37272150088782102229D+00, &
+      0.14762101081301948202D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.02040787180394685804D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.00624115043425393402D+00, &
+      0.00624115043425393402D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.28810770126174550798D+00, &
+      0.68524327650005367740D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.08369886684600136295D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.25485710093645497221D+00, &
+      0.25485710093645497221D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.00848367703048867258D+00, &
+      0.65296035518705497491D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.05013138003585081159D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.50812259065716169903D+00, &
+      0.50812259065716169903D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.11931280362120331995D+00, &
+      0.32243322568578414167D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.31550288568364137642D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.01094996106379020860D+00, &
+      0.01094996106379020860D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00, &
+      0.41983692014174261997D+00, &
+      0.25371023311082580021D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00947742496442155469D+00, &
+      0.00230965204657903158D+00, &
+      0.00230965204657903158D+00, &
+      0.00230965204657903158D+00, &
+      0.00230965204657903158D+00, &
+      0.00409149276224073360D+00, &
+      0.00409149276224073360D+00, &
+      0.00409149276224073360D+00, &
+      0.00409149276224073360D+00, &
+      0.00117365466744828706D+00, &
+      0.00117365466744828706D+00, &
+      0.00117365466744828706D+00, &
+      0.00117365466744828706D+00, &
+      0.00579775930281866726D+00, &
+      0.00579775930281866726D+00, &
+      0.00579775930281866726D+00, &
+      0.00579775930281866726D+00, &
+      0.00579775930281866726D+00, &
+      0.00579775930281866726D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00202899263910692133D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00020058584851064326D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00290805997245689859D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00253207846328713402D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00073436957363161390D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00107618357453939987D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00198641567713146380D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00504631736429394726D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00269228246053105280D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00133063628850380099D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00178292890085285502D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00012630158261844537D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00324426094381917310D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00104849818571252427D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00360574074573460435D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00256155840786984447D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00149891846783441630D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00181432457232748312D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00288393807399617026D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00319141130522126093D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00039552823369867567D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00164221123191576196D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00046409208974596889D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00121086533999402771D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00365328301727806505D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00, &
+      0.00174479123876261502D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine rule20 ( n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! rule20() returns the rule of precision 20.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    13 April 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer n: the number of quadrature points for this rule.
+!
+!  Output:
+!
+!    real ( kind = rk ) a[n], b[n], c[n], d[n]: the barycentric
+!    coordinates of quadrature points.
+!
+!    real ( kind = rk ) w[n]: the quadrature weights.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00)
+
+  integer n
+  integer, parameter :: n_save = 552
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: a_save = (/  &
+      0.29677595969341313831D+00, &
+      0.10967212091976055732D+00, &
+      0.29677595969341313831D+00, &
+      0.29677595969341313831D+00, &
+      0.12090479721121853707D+00, &
+      0.63728560836634440268D+00, &
+      0.12090479721121853707D+00, &
+      0.12090479721121853707D+00, &
+      0.31779590718810440952D+00, &
+      0.04661227843568670204D+00, &
+      0.31779590718810440952D+00, &
+      0.31779590718810440952D+00, &
+      0.20126557124147897992D+00, &
+      0.39620328627556306023D+00, &
+      0.20126557124147897992D+00, &
+      0.20126557124147897992D+00, &
+      0.16788389692728847291D+00, &
+      0.49634830921813460902D+00, &
+      0.16788389692728847291D+00, &
+      0.16788389692728847291D+00, &
+      0.03621493960968947406D+00, &
+      0.89135518117093159862D+00, &
+      0.03621493960968947406D+00, &
+      0.03621493960968947406D+00, &
+      0.44739755038251621810D+00, &
+      0.05260244961748377496D+00, &
+      0.44739755038251621810D+00, &
+      0.05260244961748377496D+00, &
+      0.44739755038251621810D+00, &
+      0.05260244961748377496D+00, &
+      0.19542144366869579342D+00, &
+      0.30457855633130420658D+00, &
+      0.19542144366869579342D+00, &
+      0.30457855633130420658D+00, &
+      0.19542144366869579342D+00, &
+      0.30457855633130420658D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00 /)
+
+  real ( kind = rk ) b(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: b_save = (/ &
+      0.29677595969341313831D+00, &
+      0.29677595969341313831D+00, &
+      0.10967212091976055732D+00, &
+      0.29677595969341313831D+00, &
+      0.12090479721121853707D+00, &
+      0.12090479721121853707D+00, &
+      0.63728560836634440268D+00, &
+      0.12090479721121853707D+00, &
+      0.31779590718810440952D+00, &
+      0.31779590718810440952D+00, &
+      0.04661227843568670204D+00, &
+      0.31779590718810440952D+00, &
+      0.20126557124147897992D+00, &
+      0.20126557124147897992D+00, &
+      0.39620328627556306023D+00, &
+      0.20126557124147897992D+00, &
+      0.16788389692728847291D+00, &
+      0.16788389692728847291D+00, &
+      0.49634830921813460902D+00, &
+      0.16788389692728847291D+00, &
+      0.03621493960968947406D+00, &
+      0.03621493960968947406D+00, &
+      0.89135518117093159862D+00, &
+      0.03621493960968947406D+00, &
+      0.05260244961748377496D+00, &
+      0.44739755038251621810D+00, &
+      0.44739755038251621810D+00, &
+      0.05260244961748377496D+00, &
+      0.05260244961748377496D+00, &
+      0.44739755038251621810D+00, &
+      0.30457855633130420658D+00, &
+      0.19542144366869579342D+00, &
+      0.19542144366869579342D+00, &
+      0.30457855633130420658D+00, &
+      0.30457855633130420658D+00, &
+      0.19542144366869579342D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00 /)
+
+  real ( kind = rk ) c(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: c_save = (/ &
+      0.29677595969341313831D+00, &
+      0.29677595969341313831D+00, &
+      0.29677595969341313831D+00, &
+      0.10967212091976055732D+00, &
+      0.12090479721121853707D+00, &
+      0.12090479721121853707D+00, &
+      0.12090479721121853707D+00, &
+      0.63728560836634440268D+00, &
+      0.31779590718810440952D+00, &
+      0.31779590718810440952D+00, &
+      0.31779590718810440952D+00, &
+      0.04661227843568670204D+00, &
+      0.20126557124147897992D+00, &
+      0.20126557124147897992D+00, &
+      0.20126557124147897992D+00, &
+      0.39620328627556306023D+00, &
+      0.16788389692728847291D+00, &
+      0.16788389692728847291D+00, &
+      0.16788389692728847291D+00, &
+      0.49634830921813460902D+00, &
+      0.03621493960968947406D+00, &
+      0.03621493960968947406D+00, &
+      0.03621493960968947406D+00, &
+      0.89135518117093159862D+00, &
+      0.05260244961748377496D+00, &
+      0.05260244961748377496D+00, &
+      0.05260244961748377496D+00, &
+      0.44739755038251621810D+00, &
+      0.44739755038251621810D+00, &
+      0.44739755038251621810D+00, &
+      0.30457855633130420658D+00, &
+      0.30457855633130420658D+00, &
+      0.30457855633130420658D+00, &
+      0.19542144366869579342D+00, &
+      0.19542144366869579342D+00, &
+      0.19542144366869579342D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00 /)
+
+  real ( kind = rk ) d(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: d_save = (/ &
+      0.10967212091976055732D+00, &
+      0.29677595969341313831D+00, &
+      0.29677595969341313831D+00, &
+      0.29677595969341313831D+00, &
+      0.63728560836634440268D+00, &
+      0.12090479721121853707D+00, &
+      0.12090479721121853707D+00, &
+      0.12090479721121853707D+00, &
+      0.04661227843568670204D+00, &
+      0.31779590718810440952D+00, &
+      0.31779590718810440952D+00, &
+      0.31779590718810440952D+00, &
+      0.39620328627556306023D+00, &
+      0.20126557124147897992D+00, &
+      0.20126557124147897992D+00, &
+      0.20126557124147897992D+00, &
+      0.49634830921813460902D+00, &
+      0.16788389692728847291D+00, &
+      0.16788389692728847291D+00, &
+      0.16788389692728847291D+00, &
+      0.89135518117093159862D+00, &
+      0.03621493960968947406D+00, &
+      0.03621493960968947406D+00, &
+      0.03621493960968947406D+00, &
+      0.44739755038251621810D+00, &
+      0.44739755038251621810D+00, &
+      0.05260244961748377496D+00, &
+      0.44739755038251621810D+00, &
+      0.05260244961748377496D+00, &
+      0.05260244961748377496D+00, &
+      0.19542144366869579342D+00, &
+      0.19542144366869579342D+00, &
+      0.30457855633130420658D+00, &
+      0.19542144366869579342D+00, &
+      0.30457855633130420658D+00, &
+      0.30457855633130420658D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.11728211563442945964D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81815327336878018727D+00, &
+      0.03228230549839515573D+00, &
+      0.03228230549839515573D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.81655057787613949394D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.16719639318282120133D+00, &
+      0.00812651447051963849D+00, &
+      0.00812651447051963849D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.56359797663450628136D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.06611011876662430120D+00, &
+      0.18514595229943470178D+00, &
+      0.18514595229943470178D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.04966173907117157893D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.12818318452527444062D+00, &
+      0.41107753820177700410D+00, &
+      0.41107753820177700410D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.42324378035557558286D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.55663662483071552067D+00, &
+      0.01005979740685445691D+00, &
+      0.01005979740685445691D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.01114518878267793146D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.82425158114285035360D+00, &
+      0.08230161503723587568D+00, &
+      0.08230161503723587568D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.31668207135555476173D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.60729227143911590492D+00, &
+      0.03801282860266466668D+00, &
+      0.03801282860266466668D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.64128454146268865088D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.19275912042141615799D+00, &
+      0.08297816905794758169D+00, &
+      0.08297816905794758169D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.70625341770771032923D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.22908997931138216919D+00, &
+      0.03232830149045374385D+00, &
+      0.03232830149045374385D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.71463315278586214685D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.00406245917858537135D+00, &
+      0.14065219401777623309D+00, &
+      0.14065219401777623309D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.25519045490803976550D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.51686565726937727661D+00, &
+      0.11397194391129145119D+00, &
+      0.11397194391129145119D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.95991429407753836589D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.02517856316811187614D+00, &
+      0.00745357137717489546D+00, &
+      0.00745357137717489546D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.38725867906033101251D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.39070706747913119816D+00, &
+      0.11101712673026890854D+00, &
+      0.11101712673026890854D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.00976849266758000878D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.53337671427373922750D+00, &
+      0.53337671427373922750D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.05313810503913767025D+00, &
+      0.40371668801954307959D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.76094809236243665662D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09450517146275738689D+00, &
+      0.09450517146275738689D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.09439207428728113580D+00, &
+      0.05015466188752487620D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.00566074794761922250D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.76539556922700235919D+00, &
+      0.76539556922700235919D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.05505445164272957520D+00, &
+      0.17388923118264887346D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.03466187077541209305D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.09751720382220438466D+00, &
+      0.09751720382220438466D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.17986373012343051525D+00, &
+      0.68795719527895304868D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.04613078410418590403D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.40950365861709436821D+00, &
+      0.40950365861709436821D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.21219205477521471681D+00, &
+      0.33217350250350502483D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.00995603037378283567D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.47655572075000696142D+00, &
+      0.47655572075000696142D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.12901615123519602490D+00, &
+      0.38447209764101419882D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.22648131940555421560D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.01376084748677020193D+00, &
+      0.01376084748677020193D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.16148732230661144715D+00, &
+      0.59827051080106408154D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.19442024171940289201D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.41435007414024704886D+00, &
+      0.41435007414024704886D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.10592830789398596791D+00, &
+      0.28530137624636409122D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.03607794123452725404D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.28640831552549533834D+00, &
+      0.28640831552549533834D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.20462293284568089380D+00, &
+      0.47289081039429653464D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.89952402926324104282D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.02361583233015298114D+00, &
+      0.02361583233015298114D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.07441796869877018161D+00, &
+      0.00244216970783581525D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.00437977236379033172D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.50787457592864027056D+00, &
+      0.50787457592864027056D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.29383523596867844319D+00, &
+      0.19391041573889089555D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.02095834844884251688D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.00238861494051180760D+00, &
+      0.00238861494051180760D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.28990049199313028261D+00, &
+      0.68675254461751533697D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.08666224435610116184D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.27800902334886384848D+00, &
+      0.27800902334886384848D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.00692039552760895325D+00, &
+      0.62840833676742602343D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.04625008859127536370D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.54311305749058158554D+00, &
+      0.54311305749058158554D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.10531910689721521446D+00, &
+      0.30531774702092789875D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.40025053885716893598D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.00879232521925877274D+00, &
+      0.00879232521925877274D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00, &
+      0.33876157002929618844D+00, &
+      0.25219556589427610804D+00 /)
+
+  real ( kind = rk ) w(n)
+  real ( kind = rk ), save, dimension ( n_save ) :: w_save = (/ &
+      0.00541845479008464838D+00, &
+      0.00541845479008464838D+00, &
+      0.00541845479008464838D+00, &
+      0.00541845479008464838D+00, &
+      0.00382089798824862721D+00, &
+      0.00382089798824862721D+00, &
+      0.00382089798824862721D+00, &
+      0.00382089798824862721D+00, &
+      0.00405745815233404805D+00, &
+      0.00405745815233404805D+00, &
+      0.00405745815233404805D+00, &
+      0.00405745815233404805D+00, &
+      0.00414767029775032527D+00, &
+      0.00414767029775032527D+00, &
+      0.00414767029775032527D+00, &
+      0.00414767029775032527D+00, &
+      0.00528956660993436072D+00, &
+      0.00528956660993436072D+00, &
+      0.00528956660993436072D+00, &
+      0.00528956660993436072D+00, &
+      0.00097204181986235323D+00, &
+      0.00097204181986235323D+00, &
+      0.00097204181986235323D+00, &
+      0.00097204181986235323D+00, &
+      0.00298817613678045192D+00, &
+      0.00298817613678045192D+00, &
+      0.00298817613678045192D+00, &
+      0.00298817613678045192D+00, &
+      0.00298817613678045192D+00, &
+      0.00298817613678045192D+00, &
+      0.00706174692352836125D+00, &
+      0.00706174692352836125D+00, &
+      0.00706174692352836125D+00, &
+      0.00706174692352836125D+00, &
+      0.00706174692352836125D+00, &
+      0.00706174692352836125D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00113801416486596888D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00032843280894395851D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00451730507453316533D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00274395709813969341D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00053451040298663536D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00085276027733658343D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00160867332095061106D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00216402178962303397D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00129896455199082100D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00075402210849808478D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00393639217719707595D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00008260437254311268D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00220259358126582115D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00114291228831241631D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00080373411798849849D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00064410550856333930D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00228480306156802820D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00176821517340358778D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00136409311660403462D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00140951302024202316D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00535219617282092601D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00235725175379895586D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00023355002815190852D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00082991911104483883D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00034803272756201591D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00108130649745930918D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00336359299264356619D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00, &
+      0.00113881952395300545D+00 /)
+
+  a(1:n) = a_save(1:n)
+  b(1:n) = b_save(1:n)
+  c(1:n) = c_save(1:n)
+  d(1:n) = d_save(1:n)
+  w(1:n) = w_save(1:n)
+
+  return
+end
+subroutine tetrahedron_jaskowiec_rule ( p, n, a, b, c, d, w )
+
+!*****************************************************************************80
+!
+!! tetrahedron_jaskowiec_rule() returns a tetrahedron quadrature rule of given precision.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    07 May 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jan Jaskowiec, Natarajan Sukumar,
+!    High order symmetric cubature rules for tetrahedra and pyramids,
+!    International Journal of Numerical Methods in Engineering,
+!    Volume 122, Number 1, pages 148-171, 24 August 2020.
+!
+!  Input:
+!
+!    integer p: the precision, 0 <= p <= 20.
+!
+!    integer n: the order of the rule.
+!
+!  Output:
+!
+!    real a(n), b(n), c(n), d(n): the barycentric coordinates of quadrature points.
+!
+!    real w(n): the weights of quadrature points.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ) b(n)
+  real ( kind = rk ) c(n)
+  real ( kind = rk ) d(n)
+  integer p
+  real ( kind = rk ) w(n)
+
+  if ( p < 0 ) then
+    write ( *, '(a)' ) ''
+    write ( *, '(a)' ) 'tetrahedron_jaskowiec_rule(): Fatal error!'
+    write ( *, '(a)' ) '  Input p < 0.'
+    call exit ( 1 )
+  end if
+
+  if ( 20 < p ) then
+    write ( *, '(a)' ) ''
+    write ( *, '(a)' ) 'tetrahedron_jaskowiec_rule(): Fatal error!'
+    write ( *, '(a)' ) '  Input 20 < p.'
+    call exit ( 1 )
+  end if
+
+  if ( p == 0 ) then
+    call rule00 ( n, a, b, c, d, w )
+  else if ( p == 1 ) then
+    call rule01 ( n, a, b, c, d, w )
+  else if ( p == 2 ) then
+    call rule02 ( n, a, b, c, d, w )
+  else if ( p == 3 ) then
+    call rule03 ( n, a, b, c, d, w )
+  else if ( p == 4 ) then
+    call rule04 ( n, a, b, c, d, w )
+  else if ( p == 5 ) then
+    call rule05 ( n, a, b, c, d, w )
+  else if ( p == 6 ) then
+    call rule06 ( n, a, b, c, d, w )
+  else if ( p == 7 ) then
+    call rule07 ( n, a, b, c, d, w )
+  else if ( p == 8 ) then
+    call rule08 ( n, a, b, c, d, w )
+  else if ( p == 9 ) then
+    call rule09 ( n, a, b, c, d, w )
+  else if ( p == 10 ) then
+    call rule10 ( n, a, b, c, d, w )
+  else if ( p == 11 ) then
+    call rule11 ( n, a, b, c, d, w )
+  else if ( p == 12 ) then
+    call rule12 ( n, a, b, c, d, w )
+  else if ( p == 13 ) then
+    call rule13 ( n, a, b, c, d, w )
+  else if ( p == 14 ) then
+    call rule14 ( n, a, b, c, d, w )
+  else if ( p == 15 ) then
+    call rule15 ( n, a, b, c, d, w )
+  else if ( p == 16 ) then
+    call rule16 ( n, a, b, c, d, w )
+  else if ( p == 17 ) then
+    call rule17 ( n, a, b, c, d, w )
+  else if ( p == 18 ) then
+    call rule18 ( n, a, b, c, d, w )
+  else if ( p == 19 ) then
+    call rule19 ( n, a, b, c, d, w )
+  else if ( p == 20 ) then
+    call rule20 ( n, a, b, c, d, w )
+  end if
+
+  return
+end
+function tetrahedron_unit_monomial_integral ( expon )
+
+!*****************************************************************************80
+!
+!! tetrahedron_unit_monomial_integral() integrates a monomial over the unit tetrahedron.
+!
+!  Discussion:
+!
+!    This routine integrates a monomial of the form
+!
+!      product ( 1 <= dim <= dim_num ) x(dim)^expon(dim)
+!
+!    where the exponents are nonnegative integers.  Note that
+!    if the combination 0^0 is encountered, it should be treated
+!    as 1.
+!
+!    Integral ( over unit tetrahedron ) x^l y^m z^n dx dy = 
+!    l! * m! * n! / ( m + n + 3 )!
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license. 
+!
+!  Modified:
+!
+!    23 May 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Input:
+!
+!    integer EXPON(3), the exponents.
+!
+!  Output:
+!
+!    real ( kind = rk ) tetrahedron_unit_monomial_integral, the integral value.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer expon(3)
+  integer i
+  integer k
+  real ( kind = rk ) tetrahedron_unit_monomial_integral
+  real ( kind = rk ) value
+!
+!  The first computation ends with VALUE = 1.0;
+!
+  value = 1.0D+00
+
+  k = 0
+
+  do i = 1, expon(1)
+    k = k + 1
+!   value = value * real ( i, kind = rk ) / real ( k, kind = rk )
+  end do
+
+  do i = 1, expon(2)
+    k = k + 1
+    value = value * real ( i, kind = rk ) / real ( k, kind = rk )
+  end do
+
+  do i = 1, expon(3)
+    k = k + 1
+    value = value * real ( i, kind = rk ) / real ( k, kind = rk )
+  end do
+
+  k = k + 1
+  value = value / real ( k, kind = rk )
+
+  k = k + 1
+  value = value / real ( k, kind = rk )
+
+  k = k + 1
+  value = value / real ( k, kind = rk )
+
+  tetrahedron_unit_monomial_integral = value
+
+  return
+end
+function tetrahedron_unit_volume ( )
+
+!*****************************************************************************80
+!
+!! tetrahedron_unit_volume() computes the volume of a unit tetrahedron.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    23 May 2023
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Output:
+!
+!    real ( kind = rk ) tetrahedron_unit_volume: the volume of 
+!    the unit tetrahedron.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  real ( kind = rk ) tetrahedron_unit_volume
+
+  tetrahedron_unit_volume = 1.0D+00 / 6.0D+00
+
+  return
+end
+function tetrahedron_volume ( tetra )
+
+!*****************************************************************************80
+!
+!! tetrahedron_volume() computes the volume of a tetrahedron.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    30 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Input:
+!
+!    real ( kind = rk ) tetra(4,3): the vertices of the tetrahedron.
+!
+!  Output:
+!
+!    real ( kind = rk ) tetrahedron_volume: the volume of the tetrahedron.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  real ( kind = rk ) a(4,4)
+  real ( kind = rk ) r8mat_det_4d
+  real ( kind = rk ) tetra(4,3)
+  real ( kind = rk ) tetrahedron_volume
+
+  a(1:4,1:3) = tetra(1:4,1:3)
+  a(1:4,4) = 1.0D+00
+
+  tetrahedron_volume = abs ( r8mat_det_4d ( a ) ) / 6.0D+00
+
+  return
+end
+

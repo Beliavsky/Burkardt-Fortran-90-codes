@@ -1,0 +1,56 @@
+ 
+ 9 September 2021   3:18:06.728 PM
+zero_test():
+  FORTRAN90 version.
+  zero() seeks a root of a function F(X)
+  in an interval [A,B].
+ 
+  f_01(x) = sin ( x ) - x / 2
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      1.00000000      1.89549427      2.00000000
+    0.341471         0.00000       -0.907026E-01
+  Number of calls to F =        8
+ 
+  f_02(x) = 2 * x - exp ( - x )
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      0.00000000      0.35173371      1.00000000
+    -1.00000         0.00000         1.63212    
+  Number of calls to F =        7
+ 
+  f_03(x) = x * exp ( - x )
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -1.00000000      0.00000000      0.50000000
+    -2.71828        0.267518E-23    0.303265    
+  Number of calls to F =       12
+ 
+  f_04(x) = exp ( x ) - 1 / ( 100 * x * x )
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      0.00010000      0.09534462     20.00000000
+    -999999.       -0.222045E-15    0.485165E+09
+  Number of calls to F =       16
+ 
+  f_05(x) = (x+3) * (x-1) * (x-1)
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -5.00000000     -3.00000000      2.00000000
+    -72.0000         0.00000         5.00000    
+  Number of calls to F =       14
+ 
+zero_test():
+  Normal end of execution.
+ 
+ 9 September 2021   3:18:06.728 PM

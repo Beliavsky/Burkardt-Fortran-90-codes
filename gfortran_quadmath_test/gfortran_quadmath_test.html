@@ -1,0 +1,156 @@
+<html>
+
+  <head>
+    <title>
+      gfortran_quadmath_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      gfortran_quadmath_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>gfortran_quadmath_test</b>,
+      a Fortran90 code which
+      illustrates the use of quadruple real precision arithmetic
+      with the Gnu Fortran compiler.
+    </p>
+
+    <p>
+      Every Fortran compiler offers a default real datatype as well as a double
+      precision real data type.  
+    </p>
+
+    <p>
+      Starting with Fortran90, it become possible to describe these types in terms
+      of a KIND parameter.  The actual values of the KIND parameter corresponding
+      to particular types was left up to the compiler writer.  For gfortran,
+      real and double precision variables can be declared with KIND values of 4
+      and 8 respectively:
+      <blockquote><b>
+        REAL ( KIND = 4 ) W<br>
+        REAL ( KIND = 8 ) X
+      </b></blockquote>
+    </p>
+
+    <p>
+      On some systems, the gfortran compiler provides a real data type stored in
+      80 bytes, specified by a KIND value of 10, and on some systems, a data type
+      stored in 128 bytes, with a KIND of 128.  Variable declarations would be
+      <blockquote><b>
+        REAL ( KIND = 10 ) Y<br>
+        REAL ( KIND = 16 ) Z
+      </b></blockquote>
+    </p>
+
+    <p>
+      The Macintosh OSX system I have access to seems to have the KIND = 10 option,
+      but not the KIND = 16 option.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages
+    </h3>
+
+    <p>
+      <b>gfortran_quadmath_test</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/gcc_quadmath_test/gcc_quadmath_test.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/g++_quadmath_test/g++_quadmath_test.html">a C++ version</a> and
+      <a href = "gfortran_quadmath_test.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gfortran_test/gfortran_test.html">
+      gfortran_test</a>,
+      Fortran90 codes which
+      investigate the use of the Gnu gfortran compiler with Fortran90 code.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gfortran_intrinsics_test/gfortran_intrinsics_test.html">
+      gfortran_intrinsics_test</a>
+      is a Fortran90 code which
+      illustrates the use of intrinsic functions
+      provided by the Gnu gfortran compiler for Fortran90.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/real_precision/real_precision.html">
+      real_precision</a>,
+      Fortran90 codes which
+      investigate the somewhat awkward methods for requesting
+      a real data type with given precision.  This is the preferred
+      method for requesting double or quadruple precision arithmetic;
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          The Gnu Fortran page,
+          <a href = "https://www.gnu.org/software/Fortran/Fortran.html">
+                     https://www.gnu.org/software/Fortran/Fortran.html </a>.
+        </li>
+        <li>
+          The gfortran Manual,
+          <a href = "https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gfortran.pdf">
+                     https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gfortran.pdf</a>.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "gfortran_quadmath_test.f90">gfortran_quadmath_test.f90</a>,
+          a program that makes a simple test of the quadruple precision real arithmetic
+          facility.
+        </li>
+        <li>
+          <a href = "gfortran_quadmath_test.sh">
+          gfortran_quadmath_test.sh</a>, 
+          runs all the tests;
+        </li>
+        <li>
+          <a href = "gfortran_quadmath_test.txt">
+          gfortran_quadmath_test.txt</a>, 
+          the output file;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 11 July 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

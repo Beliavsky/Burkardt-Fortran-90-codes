@@ -1,0 +1,119 @@
+<html>
+
+  <head>
+    <title>
+      midpoint
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      midpoint
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>midpoint</b>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) midpoint method, with a version of
+      fsolve() handling the associated nonlinear equation,
+      and using a fixed time step.
+    </p>
+
+    <p>
+      Each midpoint step requires the solution of an implicit nonlinear
+      equation representing a backward Euler step.  A corresponding
+      function has been devised, called fsolve_be(), which carries out
+      the iterative solution process.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>midpoint</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/midpoint/midpoint.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/midpoint/midpoint.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/midpoint/midpoint.html">a Fortran77 version</a> and
+      <a href = "midpoint.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/freefem_src/midpoint/midpoint.html">a FreeFem++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/midpoint/midpoint.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/midpoint/midpoint.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/midpoint/midpoint.html">a Python version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/r_src/midpoint/midpoint.html">an R version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../midpoint_test/midpoint_test.html">
+      midpoint_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/f90_ode/f90_ode.html">
+      f90_ode</a>,
+      a Fortran90 code which 
+      solves one or more differential equations (ODE) using a method of a
+      particular order, either explicit or implicit.  Some methods require
+      a nonlinear equation solver.  Some methods used a fixed stepsize,
+      while others adapt the stepsize based on an error estimate.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Catalin Trenchea, John Burkardt,<br>
+          Refactorization of the midpoint rule,<br>
+          Applied Mathematics Letters,<br>
+          Volume 107, September 2020.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "midpoint.f90">midpoint.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "midpoint.sh">midpoint.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 09 November 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

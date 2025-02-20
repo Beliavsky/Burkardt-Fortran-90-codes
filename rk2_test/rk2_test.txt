@@ -1,0 +1,27 @@
+13 November 2024   6:02:58.856 PM
+
+rk2_test():
+  FORTRAN90 version
+  Test rk2() on several ODE's.
+
+predator_prey_rk2_test
+
+  A pair of ordinary differential equations for a population
+  of predators and prey are solved using rk2().
+
+  The exact solution shows periodic behavior, with a fixed
+  period and amplitude.
+ 
+  predator_prey_rk2_test: data stored in "predator_prey_rk2_data.txt".
+  predator_prey_rk2_test: plot commands stored in "predator_prey_rk2_commands.txt".
+
+stiff_rk2_test
+  Solve stiff ODE using rk2().
+ 
+  plot2: data stored in "stiff_rk2_data1.txt" and "stiff_rk2_data2.txt".
+  plot2: plot commands stored in "stiff_rk2_commands.txt".
+
+rk2_test():
+  Normal end of execution.
+
+13 November 2024   6:02:58.857 PM

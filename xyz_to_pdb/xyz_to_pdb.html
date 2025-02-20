@@ -1,0 +1,169 @@
+<html>
+
+  <head>
+    <title>
+      xyz_to_pdb
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      xyz_to_pdb
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>xyz_to_pdb</b>,
+      a Fortran90 code which
+      reads an XYZ file
+      containing a list of spatial coordinates, and writes a
+      Protein Data Bank (PDB) file containing ATOM records 
+      with the given coordinates.
+    </p>
+
+    <p>
+      The PDB file has many fields that must be filled in.  This
+      code attempts to fill in these fields with plausible values,
+      but really only the atomic coordinates will have any meaning.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>xyz_to_pdb</b>
+      </blockquote>
+      starts the code, and prompts for the file names.
+    </p>
+
+    <p>
+      <blockquote>
+        <b>xyz_to_pdb</b> <i>file.xyz</i>  <i>file.pdb</i>
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>file.xyz</i> is the input coordinate data;
+        </li>
+        <li>
+          <i>file.pdb</i> is the PDB file created.
+        </li>
+      </ul>
+      illustrates how the filenames can be specified on the command line.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>xyz_to_pdb</b> is available in
+      <a href = "xyz_to_pdb.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../xyz_to_pdb_test/xyz_to_pdb_test.html">
+      xyz_to_pdb_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/pdb/pdb.html">
+      pdb</a>,
+      a data directory which
+      contains a description and examples of the PDB format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/pdb_extract/pdb_extract.html">
+      pdb_extract</a>,
+      a Fortran90 code which
+      can extract certain records from a PDB file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/pdb_read/pdb_read.html">
+      pdb_read</a>,
+      a Fortran90 code which
+      can read the information
+      in a PDB file.
+    </p>
+
+    <p>
+      <a href = "../pdb_to_xyz/pdb_to_xyz.html">
+      pdb_to_xyz</a>,
+      a Fortran90 code which
+      reads the ATOM records
+      from a PDB file, and writes the atomic coordinates to an XYZ file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xyz/xyz.html">
+      xyz</a>,
+      a data directory which
+      contains a description and examples of the XYZ format.
+    </p>
+
+    <p>
+      <a href = "../xyz_io/xyz_io.html">
+      xyz_io</a>,
+      a Fortran90 code which
+      reads and writes XYZ files.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          <a href = "https://www.rcsb.org/pdb/">
+                     https://www.rcsb.org/pdb/</a> <br>
+          The Protein Data Bank Home Page.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "xyz_to_pdb.f90">xyz_to_pdb.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "xyz_to_pdb.sh">xyz_to_pdb.sh</a>,
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 29 October 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

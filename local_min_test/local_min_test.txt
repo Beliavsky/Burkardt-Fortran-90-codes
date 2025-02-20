@@ -1,0 +1,75 @@
+15 September 2021   8:27:08.691 AM
+ 
+local_min_test():
+  FORTRAN90 version.
+  Test local_min(), which seeks
+  a local minimizer of a function F(X)
+  in an interval [A,B].
+ 
+  g_01(x) = ( x - 2 ) * ( x - 2 ) + 1
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      0.00000000      2.00000000      3.14159265
+     5.00000         1.00000         2.30323    
+  Number of calls to F =        6
+ 
+  g_02(x) = x * x + exp ( - x )
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      0.00000000      0.35173372      1.00000000
+     1.00000        0.827184         1.36788    
+  Number of calls to F =        9
+ 
+  g_03(x) = x^4 + 2x^2 + x + 3
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -2.00000000     -0.23673290      2.00000000
+     25.0000         2.87849         29.0000    
+  Number of calls to F =       12
+ 
+  g_04(x) = exp ( x ) + 1 / ( 100 x )
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      0.00010000      0.09534462      1.00000000
+     101.000         1.20492         2.72828    
+  Number of calls to F =       14
+ 
+  g_05(x) = exp ( x ) - 2x + 1/(100x) - 1/(1000000x^2)
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      0.00020000      0.70320484      2.00000000
+     25.9998        0.628026         3.39406    
+  Number of calls to F =       11
+ 
+  g_06(x) = -x*sin(10*pi*x)-1.0
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      1.80000000      1.85054747      1.90000000
+    -1.00000        -2.85027        -1.00000    
+  Number of calls to F =        9
+ 
+  g_07(x) = max(-2(x-1),8(x-1)) + 25*(x-1)^2
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -1.20000000      0.99999999      2.70000000
+     125.400        0.193619E-07     85.8500    
+  Number of calls to F =       38
+ 
+local_min_test():
+  Normal end of execution.
+ 
+15 September 2021   8:27:08.691 AM

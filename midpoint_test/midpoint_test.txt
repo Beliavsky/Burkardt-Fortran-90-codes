@@ -1,0 +1,34 @@
+13 November 2024   8:48:26.004 PM
+
+midpoint_test():
+  Fortran90 version
+  Test midpoint().
+ x(1) =    0.0000000000000000     
+
+humps_test():
+ x(1) =    0.0000000000000000     
+ 
+  humps_test(): data stored in "humps_data.txt".
+  humps_test(): plot commands stored in "humps_commands.txt".
+
+predator_prey_test()
+
+  A pair of ordinary differential equations for a population
+  of predators and prey are solved using midpoint().
+
+  The exact solution shows periodic behavior, with a fixed
+  period and amplitude.
+ 
+  predator_prey_test: data stored in "predator_prey_data.txt".
+  predator_prey_test: plot commands stored in "predator_prey_commands.txt".
+
+stiff_test():
+  Solve stiff ODE using midpoint()
+ 
+  plot2: data stored in "stiff_data1.txt" and "stiff_data2.txt".
+  plot2: plot commands stored in "stiff_commands.txt".
+
+midpoint_test():
+  Normal end of execution.
+
+13 November 2024   8:48:26.006 PM

@@ -1,0 +1,31 @@
+11 September 2022   7:46:10.202 AM
+
+levenshtein_distance_test():
+  FORTRAN90 version
+  levenshtein_distance() computes the Levenshtein distance
+  between two strings.
+
+  S = "water"
+  T = "wine"
+  Computed distance =    3
+  Correct distance  =    3
+
+  S = "kitten"
+  T = "sitting"
+  Computed distance =    3
+  Correct distance  =    3
+
+  S = "saturday"
+  T = "sunday"
+  Computed distance =    3
+  Correct distance  =    3
+
+  S = "pheromones"
+  T = "photographer"
+  Computed distance =    8
+  Correct distance  =    8
+
+levenshtein_distance_test():
+  Normal end of execution.
+
+11 September 2022   7:46:10.202 AM

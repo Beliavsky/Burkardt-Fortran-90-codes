@@ -1,0 +1,36 @@
+06 January 2023  11:25:02.664 AM
+
+ellipsoid_test():
+  Fortran90 version
+  Test ellipsoid().
+
+ellipsoid_area_test():
+  ellipsoid_area() computes the surface area of an ellipsoid
+  satisfying the equation:
+    (x/a)^2+(y/b)^2+(z/c)^2=1
+
+           A           B           C        Area
+
+     1.00000        0.800000        0.625000         8.15162    
+     1.00000         1.00000        0.500000         8.67188    
+     1.00000         1.00000         1.00000         12.5664    
+     2.00000         1.00000        0.250000         13.6992    
+     4.00000         3.00000         2.00000         111.546    
+
+ellipsoid_volume_test():
+  ellipsoid_volume() computes the volume of an ellipsoid
+  satisfying the equation:
+    (x/a)^2+(y/b)^2+(z/c)^2=1
+
+           A           B           C        Volume
+
+     1.00000        0.800000        0.625000         2.09440    
+     1.00000         1.00000        0.500000         2.09440    
+     1.00000         1.00000         1.00000         4.18879    
+     2.00000         1.00000        0.250000         2.09440    
+     2.00000         3.00000         4.00000         100.531    
+
+ellipsoid_test():
+  Normal end of execution.
+
+06 January 2023  11:25:02.664 AM

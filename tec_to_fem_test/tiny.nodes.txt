@@ -1,0 +1,12 @@
+#  tiny.nodes.txt
+#  created by DTABLE_HEADER_WRITE.F90
+#
+#  Spatial dimension M =        2
+#  Number of points N =        5
+#  EPSILON (unit roundoff) =   0.222045E-15
+#
+   0.00000       0.00000    
+   1.00000       0.00000    
+   2.00000       0.00000    
+   0.00000       1.00000    
+   1.00000       1.00000    

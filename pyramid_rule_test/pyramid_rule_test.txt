@@ -1,0 +1,32 @@
+28 March 2023   1:21:59.247 PM
+ 
+pyramid_rule():
+  FORTRAN90 version
+  Compute a quadrature rule for approximating
+  the integral of a function over a pyramid.
+ 
+  The user specifies:
+ 
+  LEGENDRE_ORDER, the order of the Legendre rule for X and Y.
+  JACOBI_ORDER, the order of the Jacobi rule for Z,
+  FILENAME, the prefix of the three output files:
+    filename_w.txt - the weight file
+    filename_x.txt - the abscissa file.
+    filename_r.txt - the region file.
+ 
+  The requested Legendre order of the rule is        2
+ 
+  The requested Jacobi order of the rule is        4
+ 
+  Creating quadrature files.
+ 
+  "Root" file name is   "pyramid_l2x2_j4".
+ 
+  Weight file will be   "pyramid_l2x2_j4_w.txt".
+  Abscissa file will be "pyramid_l2x2_j4_x.txt".
+  Region file will be   "pyramid_l2x2_j4_r.txt".
+ 
+PYRAMID_RULE:
+  Normal end of execution.
+ 
+28 March 2023   1:21:59.248 PM

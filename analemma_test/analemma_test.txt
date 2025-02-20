@@ -1,0 +1,14 @@
+26 August 2021  10:03:55.015 AM
+
+analemma():
+  FORTRAN90 version
+  Compute and plot the analemma, equation of time, and declination.
+  This program is based on a C program by Brian Tung.
+
+  Created data file "analemma_data.txt".
+  Created command file "analemma_commands.txt".
+
+analemma:
+  Normal end of execution.
+
+26 August 2021  10:03:55.038 AM

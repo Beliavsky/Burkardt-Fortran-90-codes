@@ -1,0 +1,192 @@
+<html>
+
+  <head>
+    <title>
+      xerror
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      xerror
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>xerror</b>,
+      a FORTRAN90 code which
+      collects information about errors that
+      occur during a program's execution, and takes the appropriate
+      action, which may include printing a message, diverting to
+      a user routine, or aborting execution of the program.
+    </p>
+
+    <p>
+      Most users never encounter xerror() directly.  However,
+      they may receive warnings and other error messages produced
+      by xerror(), if the software they are calling has encountered
+      an error condition and uses xerror() to report and
+      handle the problem.
+    </p>
+
+    <p>
+      An experienced user or software developer may wish to incorporate
+      xerror into software being developed, or to modify the
+      behavior of xerror in software they are using.  The package
+      includes many routines to customize its behavior, to reduce
+      the level of output, to make multiple copies of the error output,
+      to control the number of times a particular error message is printed,
+      or to halt execution of the program if certain kinds of error occur.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>xerror</b> is available in
+      <a href = "xerror.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../xerror_test/xerror_test.html">
+      xerror_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/dlap/dlap.html">
+      DLAP</a>,
+      a FORTRAN90 library which
+      contains iterative linear equation solvers
+      which includes
+      a version of the <b>xerror</b> library.
+    </p>
+
+    <p>
+      <a href = "../dqed/dqed.html">
+      DQED</a>,
+      a FORTRAN90 library which
+      contains constrained minimization routines
+      which includes
+      a version of the <b>xerror</b> library.
+    </p>
+
+    <p>
+      <a href = "../machine/machine.html">
+      MACHINE</a>,
+      a FORTRAN90 library which
+      tabulates the values
+      of certain machine-specific arithmetic quantities.  The
+      <b>xerror</b> library calls it for some simple information.
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      NMS</a>,
+      a FORTRAN90 library which
+      includes a version of the <b>xerror</b> library.
+    </p>
+
+    <p>
+      <a href = "../quadpack/quadpack.html">
+      QUADPACK</a>,
+      a FORTRAN90 library which
+      estimate integrals, and which calls the <b>xerror</b> library.
+    </p>
+
+    <p>
+      <a href = "../slatec/slatec.html">
+      SLATEC</a>,
+      a FORTRAN90 library which
+      collects together a number of standard numerical libraries,
+      including BLAS, DASSL, DEPAC, EISPACK, FFTPACK, FISHPACK, FNLIB, LINPACK, 
+      PCHIP, QUADPACK, SDRIV, SLAP, xerror.
+    </p>
+
+    <p>
+      <a href = "../starpac/starpac.html">
+      STARPAC</a>,
+      a FORTRAN90 library which
+      contains statistical routines, and includes
+      a version of the <b>xerror</b> library.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Phyllis Fox, Andrew Hall, Norman Schryer,<br>
+          Algorithm 528:<br>
+          Framework for a Portable Library,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 4, Number 2, June 1978, page 176-188.
+        </li>
+        <li>
+          Ron Jones, David Kahaner,<br>
+          xerror, The SLATEC Error Handling Package,<br>
+          Software: Practice and Experience,<br>
+          Volume 13, Number 3, 1983, pages 251-257.
+        </li>
+        <li>
+          Ron Jones, David Kahaner,<br>
+          xerror, The SLATEC Error Handling Package,<br>
+          Technical Report SAND82-0800,<br>
+          Sandia National Laboratories, 1982.
+        </li>
+        <li>
+          David Kahaner, Cleve Moler, Steven Nash,<br>
+          Numerical Methods and Software,<br>
+          Prentice Hall, 1989,<br>
+          ISBN: 0-13-627258-4,<br>
+          LC: TA345.K34.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "xerror.f90">xerror.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "xerror.sh">xerror.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last modified on 03 September 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

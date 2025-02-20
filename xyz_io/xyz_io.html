@@ -1,0 +1,263 @@
+<html>
+
+  <head>
+    <title>
+      xyz_io
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      xyz_io
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>xyz_io</b>,
+      a Fortran90 code which
+      reads and writes simple graphics files in the XYZ, XYZL and XYZF formats.
+    </p>
+
+    <p>
+      XYZ files are a simple way of storing information about sets of points in 3D.
+    </p>
+
+    <p>
+      An XYZ file has a simple structure.  There are three kinds of records:
+      <ul>
+        <li>
+          COMMENT LINES begin with the character '#' and are ignored;
+        </li>
+        <li>
+          BLANK LINES are ignored;
+        </li>
+        <li>
+          COORDINATE LINES each contain one triple of XYZ coordinates;
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Here is an example of an XYZ file containing 13 points:
+      <pre>
+#  cube.xyz
+#
+        0.000000        0.000000        0.000000
+        1.000000        0.000000        0.000000
+        1.000000        1.000000        0.000000
+        0.000000        1.000000        0.000000
+        0.000000        0.000000        1.000000
+        1.000000        0.000000        1.000000
+        1.000000        1.000000        1.000000
+        0.000000        1.000000        1.000000
+      </pre>
+    </p>
+
+    <p>
+      Of course, in many cases, we would like to describe LINES between the points.
+      We can add this information by including a second file, called an XYZL file,
+      which consists of a string of point indices.  A line is drawn from one point
+      to the next, and so on, through all the points index on the record.  Thus, an XYZL file
+      associated with the above XYZ file might be:
+      <pre>
+#  cube.xyzl
+#
+  1 2 3 4 1
+  5 6 7 8 5
+  1 5
+  2 6
+  3 7
+  4 8
+      </pre>
+    </p>
+
+    <p>
+      We might also like to describe FACES defined by the points.
+      We can add this information by including a file, called an XYZF file,
+      which consists of a string of point indices.  A face is defined by
+      listing in counterclockwise order the vertices that lie on it.
+      The first vertex is not repeated
+      as the final vertex. Thus, an XYZF file
+      associated with the above XYZ file might be:
+      <pre>
+#  cube.xyzf
+#
+  1 4 3 2
+  2 3 7 6
+  5 6 7 8
+  5 8 4 1
+  1 2 6 5
+  3 4 8 7
+      </pre>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>xyz_io</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyz_io/xyz_io.html">a C++ version</a> and
+      <a href = "xyz_io.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyz_io/xyz_io.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../xyz_io_test/xyz_io_test.html">
+      xyz_io_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/ivread/ivread.html">
+      ivread</a>,
+      a Fortran90 code which
+      converts graphics information between various 3D formats,
+      including the XYZ format.
+    </p>
+
+    <p>
+      <a href = "../pdb_to_xyz/pdb_to_xyz.html">
+      pdb_to_xyz</a>,
+      a Fortran90 code which
+      reads the ATOM records
+      from a PDB file, and writes the atomic coordinates to an XYZ file.
+    </p>
+
+    <p>
+      <a href = "../sphere_voronoi/sphere_voronoi.html">
+      sphere_voronoi</a>,
+      a Fortran90 code which
+      reads an XYZ file of 3D points on the unit sphere, and
+      computes and plots Delaunay triangulations and Voronoi diagrams.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xy/xy.html">
+      xy</a>,
+      a data directory which
+      contains examples of XY files,
+      a simple 2D graphics point and line format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xyz/xyz.html">
+      xyz</a>,
+      a data directory which
+      contains examples of XYZ files,
+      a simple 3D graphics point and line format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyz_display/xyz_display.html">
+      xyz_display</a>,
+      a MATLAB code which
+      reads XYZ information defining points in 3D, and displays
+      an image.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyz_display_opengl/xyz_display_opengl.html">
+      xyz_display_opengl</a>,
+      a C++ code which
+      reads an XYZ file of 3D point coordinates, and displays
+      an image of those points using OpenGL.
+    </p>
+
+    <p>
+      <a href = "../xyz_to_pdb/xyz_to_pdb.html">
+      xyz_to_pdb</a>,
+      a Fortran90 code which
+      reads a set of XYZ spatial coordinates, and
+      rewrites them as ATOM records in a PDB file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xyzf/xyzf.html">
+      xyzf</a>,
+      a data directory which
+      contains examples of XYZF files,
+      a simple 3D graphics point and face format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyzf_display/xyzf_display.html">
+      xyzf_display</a>,
+      a MATLAB code which
+      reads XYZF information defining points and faces in 3D,
+      and displays an image.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyzf_display_opengl/xyzf_display_opengl.html">
+      xyzf_display_opengl</a>,
+      a C++ code which
+      reads XYZL information defining points and faces in 3D, and displays
+      an image using OpenGL.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/xyzl/xyzl.html">
+      xyzl</a>,
+      a data directory which
+      contains examples of XYZL files,
+      a simple 3D graphics point and line format;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyzl_display/xyzl_display.html">
+      xyzl_display</a>,
+      a MATLAB code which
+      reads XYZL information defining points and lines in 3D,
+      and displays an image.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyzl_display_opengl/xyzl_display_opengl.html">
+      xyzl_display_opengl</a>,
+      a C++ code which
+      reads XYZL information defining points and lines in 3D, and displays
+      an image using OpenGL.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "xyz_io.f90">xyz_io.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "xyz_io.sh">xyz_io.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 29 October 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+

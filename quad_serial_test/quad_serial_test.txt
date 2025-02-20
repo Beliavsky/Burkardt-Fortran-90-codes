@@ -1,0 +1,20 @@
+18 October 2024   6:58:34.033 PM
+  
+ quad_serial_test():
+   Fortran90 version
+   Estimate the integral of f(x) from A to B.
+   f(x) = 50 / ( pi * ( 2500 * x * x + 1 ) ).
+  
+   A        =    0.0000000000000000     
+   B        =    10.000000000000000     
+   N        =     10000000
+  
+   Exact    =   0.49936338107645672     
+   Estimate =   0.49937128891912641     
+   Error    =    7.9078426696854720E-006
+   Time     =    7.8821999999999989E-002
+  
+ quad_serial_test():
+   Normal end of execution.
+  
+18 October 2024   6:58:34.111 PM

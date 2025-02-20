@@ -1,0 +1,129 @@
+<html>
+
+  <head>
+    <title>
+      hb_to_st_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      hb_to_st_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>hb_to_st_test</b>,
+      a Fortran90 code which
+      calls hb_to_st(), which
+      reads the definition
+      of a sparse matrix from a file in Harwell-Boeing format, and writes
+      the information into a Sparse Triplet file.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../hb_to_st/hb_to_st.html">
+      hb_to_st</a>,
+      a Fortran90 code which
+      reads the definition
+      of a sparse matrix from a file in Harwell-Boeing format, and writes
+      the information into a Sparse Triplet file.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <b>5BY5</b> is a simple 5 by 5 matrix:
+      <pre>
+        1.1  0.0  0.0  1.4  0.0
+        0.0  2.2  0.0  0.0  0.0
+        3.1  3.2  3.3  3.4  3.5
+        0.0  0.0  0.0  4.4  4.5
+        5.1  5.2  0.0  0.0  5.5
+      </pre>
+      <ul>
+        <li>
+          <a href = "5by5_rua.hb">5by5_rua.hb</a>,
+          the Harwell-Boeing file containing the matrix.
+        </li>
+        <li>
+          <a href = "5by5_rua.st">5by5_rua.st</a>,
+          is the corresponding sparse triple file;
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>KERSHAW</b> is a simple 4 by 4 matrix:
+      <pre>
+         3  -2   0   2
+        -2   3  -2   0
+         0  -2   3  -2
+         2   0  -2   3
+      </pre>
+      <ul>
+        <li>
+          <a href = "kershaw_rua.hb">kershaw_rua.hb</a>,
+          the Harwell-Boeing file containing the matrix.
+        </li>
+        <li>
+          <a href = "kershaw_rua.st">kershaw_rua.st</a>,
+          is the corresponding sparse triple file;
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      List of Routines:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <b>MAIN</b> is the main program for HB_TO_ST.
+        </li>
+        <li>
+          <b>GET_UNIT</b> returns a free Fortran unit number.
+        </li>
+        <li>
+          <b>TIMESTAMP</b> prints the current YMDHMS date as a time stamp.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      You can go up one level to <a href = "../f_src.html">
+      the Fortran90 source codes</a>.
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 31 October 2008.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

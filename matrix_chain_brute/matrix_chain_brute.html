@@ -1,0 +1,189 @@
+<html>
+
+  <head>
+    <title>
+      matrix_chain_brute
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      matrix_chain_brute
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>matrix_chain_brute</b>,
+      a Fortran90 code which 
+      finds the cost of the most efficient ordering to use when
+      multiplying a sequence of matrices, using brute force.
+    </p>
+
+    <p>
+      We are given a sequence of n matrices of conformable dimensions.
+      Matrix Ai has D(i) rows and D(i+1) columns.  
+      The product A1 * A2 * ... * An is to be computed.  
+      In terms of scalar multiplications, the cost of computing
+      A(i) * A(i+1) is D(i) * D(i+1) * D(i+2).
+      We may carry out the pairs of multiplication in any order we wish.  
+      The total cost of the computation will, in general, vary depending
+      on the order in which we compute the individual matrix multiplications.
+      The goal of the algorithm is simply to determine the cost of the
+      most efficient ordering.
+    </p>
+
+    <p>
+      Given n matrices, there are (n-1)! possible orderings for the 
+      sequence of matrix multiplications.  The brute force approach
+      considers each of these orderings, determines each cost, and
+      reports the minimum.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>matrix_chain_brute</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/matrix_chain_brute/matrix_chain_brute.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/matrix_chain_brute/matrix_chain_brute.html">a C++ version</a> and
+      <a href = "matrix_chain_brute.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/matrix_chain_brute/matrix_chain_brute.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/matrix_chain_brute/matrix_chain_brute.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/matrix_chain_brute/matrix_chain_brute.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../matrix_chain_brute_test/matrix_chain_brute_test.html">
+      matrix_chain_brute_test</a>
+    </p>
+
+    <p>
+      <a href = "../closest_pair_brute/closest_pair_brute.html">
+      closest_pair_brute</a>,
+      a Fortran90 code which
+      uses brute force to solve a 2D version of the closest pair problem,
+      which identifies the closest pair of points in a given collection.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/knapsack_01_brute/knapsack_01_brute.html">
+      knapsack_01_brute</a>,
+      a Fortran90 code which
+      uses brute force to solve small versions of the 0/1 knapsack problem;
+    </p>
+
+    <p>
+      <a href = "../matrix_chain_dynamic/matrix_chain_dynamic.html">
+      matrix_chain_dynamic</a>,
+      a Fortran90 code which 
+      finds the cost of the most efficient ordering to use when
+      multiplying a sequence of matrices, using dynamic programming.
+    </p>
+
+    <p>
+      <a href = "../mxm/mxm.html">
+      mxm</a>,
+      a Fortran90 code which
+      sets up a matrix multiplication problem A=B*C of arbitrary size,
+      and compares the time required 
+      for IJK, IKJ, JIK, JKI, KIJ and KJI orderings of the loops.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/partition_brute/partition_brute.html">
+      partition_brute</a>,
+      a Fortran90 code which
+      uses brute force to find solutions of the partition problem, 
+      in which a set of integers must be split into two subsets with equal sum.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/satisfy_brute/satisfy_brute.html">
+      satisfy_brute</a>,
+      a Fortran90 code which
+      uses brute force to find all assignments of values to a set of 
+      logical variables which make a complicated logical statement true.
+    </p>
+
+    <p>
+      <a href = "../subset_sum_brute/subset_sum_brute.html">
+      subset_sum_brute</a>,
+      a Fortran90 code which
+      uses brute force to solve the subset sum problem,
+      to find a subset of a set of integers which has a given sum.
+    </p>
+
+    <p>
+      <a href = "../tsp_brute/tsp_brute.html">
+      tsp_brute</a>,
+      a Fortran90 code which
+      is given a city-to-city distance table, and solves a (small) 
+      traveling salesperson problem (TSP), using brute force.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Thomas Cormen, Charles Leiserson, Ronald Rivest, Clifford Stein,<br>
+          Introduction to Algorithms,<br>
+          MIT Press, 2001,<br>
+          ISBN: 978-0-262-03293-3,<br>
+          LC: QA76.C662.
+        </li>
+        <li>
+          Matrix Chain Multiplication,<br>
+          Wikipedia page,<br>
+          https://en.wikipedia.org/wiki/matrix_chain_multiplication
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "matrix_chain_brute.f90">matrix_chain_brute.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "matrix_chain_brute.sh">matrix_chain_brute.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 27 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

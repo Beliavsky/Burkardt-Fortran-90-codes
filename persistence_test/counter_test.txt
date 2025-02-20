@@ -1,0 +1,22 @@
+14 September 2021   7:36:05.167 PM
+
+counter_test():
+  FORTRAN90 version
+  Test counter(), with the interface:
+    counter( )
+
+counter() has been called    1 times.
+counter() has been called    2 times.
+counter() has been called    3 times.
+counter() has been called    4 times.
+counter() has been called    5 times.
+counter() has been called    6 times.
+counter() has been called    7 times.
+counter() has been called    8 times.
+counter() has been called    9 times.
+counter() has been called   10 times.
+
+counter_test():
+  Normal end of execution.
+
+14 September 2021   7:36:05.167 PM

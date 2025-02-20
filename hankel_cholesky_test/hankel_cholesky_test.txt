@@ -1,0 +1,48 @@
+27 March 2023   7:37:14.275 PM
+
+hankel_cholesky_test():
+  FORTRAN90 version
+  Test HANKEL_CHOLESKY().
+
+hankel_cholesky_upper_test():
+  HANKEL_CHOLESKY_UPPER() is given a Hankel matrix H and
+  computes an upper triangular matrix R such that
+  H = R' * R
+ 
+  The Hankel matrix H:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1:  0.110794      0.720541E-01  0.771660       1.26254       6.76384    
+    2:  0.720541E-01  0.771660       1.26254       6.76384       15.3560    
+    3:  0.771660       1.26254       6.76384       15.3560       63.7834    
+    4:   1.26254       6.76384       15.3560       63.7834       170.204    
+    5:   6.76384       15.3560       63.7834       170.204       624.374    
+ 
+  R computed by R8MAT_CHOLESKY_FACTOR_UPPER:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1:  0.332857      0.216472       2.31829       3.79304       20.3206    
+    2:      0.        0.851352      0.893516       6.98038       12.8703    
+    3:      0.            0.        0.768761      0.423441       6.73105    
+    4:      0.            0.            0.        0.700899      0.623935    
+    5:      0.            0.            0.            0.        0.327207    
+ 
+  R computed by HANKEL_CHOLESKY:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1:  0.332857      0.216472       2.31829       3.79304       20.3206    
+    2:      0.        0.851352      0.893516       6.98038       12.8703    
+    3:      0.            0.        0.768761      0.423441       6.73105    
+    4:      0.            0.            0.        0.700899      0.623935    
+    5:      0.            0.            0.            0.        0.327207    
+
+HANKEL_CHOLESKY_TEST
+  Normal end of execution.
+
+27 March 2023   7:37:14.276 PM

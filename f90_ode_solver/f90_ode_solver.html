@@ -1,0 +1,202 @@
+<html>
+
+  <head>
+    <title>
+      f90_ode
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      f90_ode
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>f90_ode</b>,
+      a Fortran90 code which 
+      solves one or more differential equations (ODE) using a method of a
+      particular order, either explicit or implicit.  Some methods require
+      a nonlinear equation solver.  Some methods used a fixed stepsize,
+      while others adapt the stepsize based on an error estimate.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>f90_ode</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/c_ode/c_ode.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/cpp_ode/cpp_ode.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/f90_ode/f90_ode.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../backward_euler/backward_euler.html">
+      backward_euler</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) backward Euler method, using a version of
+      fsolve() for the implicit equation.
+    </p>
+
+    <p>
+      <a href = "../bdf2/bdf2.html">
+      bdf2</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) backward difference formula of order 2 (BDF2), 
+      using fsolve() to solve the implicit equation.
+    </p>
+
+    <p>
+      <a href = "../euler/euler.html">
+      euler</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the forward Euler method.
+    </p>
+
+    <p>
+      <a href = "../fsolve/fsolve.html">
+      fsolve</a>,
+      a Fortran90 code which 
+      solves systems of nonlinear equations,
+      inspired by the fsolve() function in minpack(), 
+      with special interfaces fsolve_bdf2(), fsolve_be() and
+      fsolve_tr() for handling systems associated
+      with implicit ODE solvers of type bdf2, backward Euler,
+      midpoint, or trapezoidal.
+    </p>
+
+    <p>
+      <a href = "../midpoint/midpoint.html">
+      midpoint</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) midpoint method, with a version of
+      fsolve() handling the associated nonlinear equations,
+      and using a fixed time step.
+    </p>
+
+    <p>
+      <a href = "../midpoint_explicit/midpoint_explicit.html">
+      midpoint_explicit</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (explicit) midpoint method.
+    </p>
+
+    <p>
+      <a href = "../midpoint_fixed/midpoint_fixed.html">
+      midpoint_fixed</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) midpoint method, using a fixed point method
+      for the implicit equation.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/midpoint_gsl_test/midpoint_gsl_test.html">
+      midpoint_gsl_test</a>,
+      a Fortran90 code which 
+      calls the Gnu Scientific Library (GSL) implicit midpoint method 
+      solver for ordinary differential equation (ODE), and uses
+      gnuplot() to plot the resulting solution.
+    </p>
+
+    <p>
+      <a href = "../ode/ode.html">
+      ode</a>,
+      a Fortran90 code which
+      solves a system of ordinary differential equations (ODE),
+      by Shampine and Gordon.
+    </p>
+
+    <p>
+      <a href = "../rk1/rk1.html">
+      rk1</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using an explicit Runge-Kutta method of order 1, usually known
+      as Euler's explicit method.
+    </p>
+
+    <p>
+      <a href = "../rk1_implicit/rk1_implicit.html">
+      rk1_implicit</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the Runge-Kutta order 1 implicit method, using fsolve() 
+      to solve the implicit equation, and using a fixed time step.
+      rk1_implicit() is commonly called the backward Euler method.
+    </p>
+
+    <p>
+      <a href = "../rk2/rk2.html">
+      rk2</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using an explicit Runge-Kutta method of order 2,
+      also known as Heun's method, the explicit midpoint method,
+      or the modified Euler method.
+    </p>
+
+    <p>
+      <a href = "../rk4/rk4.html">
+      rk4</a>,
+      a Fortran90 code which
+      applies the fourth order Runge-Kutta (RK) algorithm to estimate the
+      solution of an ordinary differential equation (ODE).
+    </p>
+
+    <p>
+      <a href = "../rkf45/rkf45.html">
+      rkf45</a>,
+      a Fortran90 code which
+      implements the Runge-Kutta-Fehlberg solver for ordinary differential
+      equations (ODE).
+    </p>
+
+    <p>
+      <a href = "../test_ode/test_ode.html">
+      test_ode</a>,
+      a Fortran90 code which
+      contains routines which define some test problems for ODE solvers.
+    </p>
+
+    <p>
+      <a href = "../trapezoidal/trapezoidal.html">
+      trapezoidal</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) trapezoidal method, and a version of
+      fsolve() to handle the nonlinear equation.
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 13 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

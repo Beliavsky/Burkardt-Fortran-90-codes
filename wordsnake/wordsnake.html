@@ -1,0 +1,132 @@
+<html>
+
+  <head>
+    <title>
+      wordsnake
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      wordsnake
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>wordsnake</b>
+      a Fortran90 code which
+      tries to find a good solution to the "Wordsnake Puzzle", in which
+      a list of words is reordered, trying to maximize the overlap of
+      successive words.
+    <p>
+
+    <p>
+      The code is given a list of words and tries to arrange them
+      in a list so that the end of one word has maximum overlap with the
+      beginning of the next word.  The entire list is called a "wordsnake",
+      and is scored by squaring the overlaps of each consecutive pair, and
+      adding.  We allow the wordsnake to "wraparound", so there's one extra
+      score for overlap from the last word to the first.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>wordsnake</b> is available in
+      <a href = "wordsnake.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../wordsnake_test/wordsnake_test.html">
+      wordsnake_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/anagram/anagram.html">
+      anagram</a>,
+      a C++ code which
+      determines anagrams of a string,
+      by James Cherry;
+    </p>
+
+    <p>
+      <a href = "../puzzles/puzzles.html">
+      puzzles</a>,
+      a Fortran90 code which
+      solves various puzzles.
+    </p>
+
+    <p>
+      <a href = "../subanagram/subanagram.html">
+      subanagram</a>,
+      a Fortran90 code which
+      finds words which are anagrams formed from some of the letters
+      of a given master word.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/words/words.html">
+      words</a>,
+      a dataset directory which
+      contains lists of words;
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Dennis Shasha,<br>
+          Wordsnakes,<br>
+          Dr Dobb's Journal,<br>
+          July 2000, pages 143-144.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "wordsnake.f90">wordsnake.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "wordsnake.sh">wordsnake.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 29 February 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

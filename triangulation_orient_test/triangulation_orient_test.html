@@ -1,0 +1,100 @@
+<html>
+
+  <head>
+    <title>
+      triangulation_orient_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      triangulation_orient_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>triangulation_orient_test</b>,
+      a Fortran90 code which
+      calls triangulation_orient(), which
+      reads a triangulation, and reorients each triangle that
+      has a negative area.  If at least one such triangle is encountered,
+      the program writes out a new copy of the triangle file in which
+      all the triangles have been correctly oriented.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../triangulation_orient/triangulation_orient.html">
+      triangulation_orient</a>,
+      a Fortran90 code which
+      reads a triangulation, and reorients each triangle that
+      has a negative area.  If at least one such triangle is encountered,
+      the program writes out a new copy of the triangle file in which
+      all the triangles have been correctly oriented.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "triangulation_orient_test.sh">triangulation_orient_test.sh</a>, 
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "triangulation_orient_test.txt">triangulation_orient_test.txt</a>, 
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>P15</b> is a triangulation created by DISTMESH.
+      Unfortunately, 512 of the triangles have a negative orientation.
+      In this example, <b>TRIANGULATION_ORIENT</b> was used to reorient
+      those triangles.
+      <ul>
+        <li>
+          <a href = "p15_nodes.txt">p15_nodes.txt</a>,
+          a set of nodes.
+        </li>
+        <li>
+          <a href = "p15_elements.txt">p15_elements.txt</a>,
+          a set of order 3 triangles.
+        </li>
+        <li>
+          <a href = "p15_orient_elements.txt">p15_orient_elements.txt</a>,
+          the set of order 3 triangles after <b>TRIANGULATION_ORIENT</b>
+          has reoriented them.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 01 September 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

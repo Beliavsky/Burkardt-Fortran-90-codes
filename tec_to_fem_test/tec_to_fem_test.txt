@@ -1,0 +1,30 @@
+31 May 2024   9:11:42.781 PM
+ 
+tec_to_fem():
+  FORTRAN90 version
+  Read a TECPLOT FEPOINT file;
+  Write finite element files.
+ 
+  Reading TEC file "tiny.dat".
+ 
+  Spatial dimension         =        2
+  Number of nodes           =        5
+  Number of elements        =        3
+  Element order             =        3
+  Number of node data items =        2
+ 
+  Writing FEM files:"
+    "tiny.nodes.txt".
+    "tiny.elements.txt".
+    "tiny.values.txt".
+ 
+FEM_WRITE wrote node coordinates to "tiny.nodes.txt".
+ 
+FEM_WRITE wrote element data to "tiny.elements.txt".
+ 
+FEM_WRITE wrote node data to "tiny.values.txt".
+ 
+TEC_TO_FEM
+  Normal end of execution.
+ 
+31 May 2024   9:11:42.782 PM

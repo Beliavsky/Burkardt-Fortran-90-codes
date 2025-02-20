@@ -1,0 +1,225 @@
+<html>
+
+  <head>
+    <title>
+      fftw_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      fftw_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>fftw_test</b> 
+      Fortran90 code which
+      calls fftw(), which
+      computes fast Fourier transforms,
+      written by Matteo Frigo and Steven Johnson.
+    </p>
+
+    <p>
+      fftw() computes the discrete Fourier transform of:
+      <ul>
+        <li>
+          complex data;
+        </li>
+        <li>
+          real data;
+        </li>
+        <li> 
+          even-symmetric real data (cosine transform);
+        </li>
+        <li>
+          odd-symmetric real data (sine transform);
+        </li>
+      </ul>
+      fftw() can also compute the discrete Hartley 
+      transform of real data.
+    </p>
+
+    <p>
+      The length of the data is not required to be a power of
+      2.  Any length of data can be processed.
+    </p>
+
+    <p>
+      The data is not restricted to 1 dimensional vectors.  fftw()
+      can handle data that is 2 or 3 dimensional.  In fact, the program
+      can handle data with any dimensionality.
+    </p>
+
+    <p>
+      Interested users should go to the fftw() home page:
+      <a href = "https://www.fftw.org/">
+                 https://www.fftw.org/</a>
+      which contains the current source code, examples, and documentation.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      Any Fortran program, subroutine or function that calls the fftw() 
+      functions must include, in its declarations, the statement
+      <pre><code>
+        include "fftw3.f90"
+      </code></pre>
+      which will add the appropriate declarations for the FFTW functions.
+    </p>
+
+    <p>
+      At link time, you must include the compiled fftw() library, which
+      is probably a file with the name <b>libfftw.a</b>.  
+      If <b>directory</b> is the directory where this library is stored,
+      then an appropriate command might be
+      <pre><code>
+        gfortran myprog.f90 -L<b>directory</b> -lfftw
+      </code></pre>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      the MIT license
+    </p>
+
+    <p>
+      Non-free licenses may also be purchased from MIT, for users who do not 
+      want their programs protected by the GPL. 
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>fftw_test()</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/fftw_test/fftw_test.html">a C version</a> and
+      <a href = "fftw_test.html">a Fortran90 version</a>. 
+    </p>
+
+    <h3 align = "center">
+      Related Programs:
+    </h3>
+
+    <p>
+      <a href = "../fftpack5/fftpack5.html">
+      fftpack5</a>,
+      a Fortran90 library which
+      implements the Fast Fourier Transform
+      by Paul Swarztrauber and Dick Valent;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/fftpack5.1/fftpack5.1.html">
+      fftpack5.1</a>,
+      a Fortran90 library which
+      implements the Fast Fourier Transform
+      by Paul Swarztrauber and Dick Valent;
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      nms</a>,
+      a Fortran90 library which 
+      includes a number of FFT routines.
+    </p>
+
+    <p>
+      <a href = "../sftpack/sftpack.html">
+      sftpack</a>,
+      a Fortran90 library which
+      implements the "slow" Fourier transform, intended as a teaching
+      tool and comparison with the fast Fourier transform.
+    </p>
+
+    <p>
+      <a href = "../walsh_transform/walsh_transform.html">
+      walsh_transform</a>,
+      a Fortran90 library which
+      implements versions of the Walsh and Haar transforms.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Matteo Frigo, Steven Johnson.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          William Briggs, Van Emden Henson,<br>
+          The Discrete Fourier Transform,<br> 
+          SIAM,<br>
+          LC: QA403.5 B75
+        </li>
+        <li>
+          Elbert Brigham,<br>
+          The Fast Fourier Transform and Its Applications,<br>
+          Prentice-Hall, 1988.
+        </li>
+        <li>
+          Matteo Frigo, Steven Johnson,<br>
+          User Manual for FFTW.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "fftw_test.f90">fftw_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "fftw_test.sh">fftw_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "fftw_test.txt">fftw_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "fftw3.f90">fftw3.f90</a>,
+          the include file.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 08 September 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

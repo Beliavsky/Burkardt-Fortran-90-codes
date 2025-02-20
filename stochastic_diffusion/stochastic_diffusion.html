@@ -1,0 +1,209 @@
+<html>
+
+  <head>
+    <title>
+      stochastic_diffusion
+    </title>
+  </head>
+
+  <body bgcolor="#eeeeee" link="#cc0000" alink="#ff3300" vlink="#000055">
+
+    <h1 align="center">
+      stochastic_diffusion
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>stochastic_diffusion</b>,
+      a Fortran90 code which 
+      implements several versions of a stochastic diffusivity coefficient,
+      using gnuplot() to create graphic images of sample realizations of
+      the diffusivity field.
+    </p>
+
+    <p>
+      The 1D diffusion equation has the form
+      </p><pre>        - d/dx ( DC(X) d/dx U(X) ) = F(X).
+      </pre>
+      where DC(X) is a function called the <i>diffusivity</i> and F(X) is
+      called the <i>source term</i> or <i>forcing term</i>.
+    <p></p>
+
+    <p>
+      In the 1D stochastic version of the problem, the diffusivity function
+      includes the influence of stochastic parameters:
+      </p><pre>        - d/dx ( DC(X;OMEGA) d/dx U(X;OMEGA) ) = F(X).
+      </pre>
+    <p></p>
+
+    <p>
+      The 2D diffusion equation has the form
+      </p><pre>        - Del ( DC(X,Y) Del U(X,Y) ) = F(X,Y).
+      </pre>
+    <p></p>
+
+    <p>
+      In the 2D stochastic version of the problem, the diffusivity function
+      includes the influence of stochastic parameters:
+      </p><pre>        - Del ( DC(X,Y;OMEGA) Del U(X,Y;OMEGA) ) = F(X,Y).
+      </pre>
+    <p></p>
+
+    <h3 align="center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align="center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>stochastic_diffusion</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/stochastic_diffusion/stochastic_diffusion.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/stochastic_diffusion/stochastic_diffusion.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/stochastic_diffusion/stochastic_diffusion.html">a Fortran77 version</a> and
+      <a href = "stochastic_diffusion.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/stochastic_diffusion/stochastic_diffusion.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/stochastic_diffusion/stochastic_diffusion.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/stochastic_diffusion/stochastic_diffusion.html">a Python version</a>.
+    </p>
+
+    <h3 align="center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../stochastic_diffusion_test/stochastic_diffusion_test.html">
+      stochastic_diffusion_test</a>
+    </p>
+
+    <p>
+      <a href = "../black_scholes/black_scholes.html">
+      black_scholes</a>, 
+      a Fortran90 code which
+      implements some simple approaches to 
+      the Black-Scholes option valuation theory;
+    </p>
+
+    <p>
+      <a href = "../correlation/correlation.html">
+      correlation</a>,
+      a Fortran90 code which
+      contains examples of statistical correlation functions.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gnuplot_test/gnuplot_test.html">
+      gnuplot_test</a>,
+      a Fortran90 code which
+      illustrates how a code can write 
+      data and command files so that gnuplot can create plots of the code results.
+    </p>
+
+    <p>
+      <a href = "../ornstein_uhlenbeck/ornstein_uhlenbeck.html">
+      ornstein_uhlenbeck</a>,
+      a Fortran90 code which 
+      approximates solutions of the Ornstein-Uhlenbeck 
+      stochastic differential equation (SDE) using the Euler method and
+      the Euler-Maruyama method.
+    </p>
+
+    <p>
+      <a href = "../pce_ode_hermite/pce_ode_hermite.html">
+      pce_ode_hermite</a>,
+      a Fortran90 code which
+      sets up a simple scalar ODE for exponential decay with an uncertain
+      decay rate, using a polynomial chaos expansion in terms of Hermite
+      polynomials.
+    </p>
+
+    <p>
+      <a href = "../sde/sde.html">
+      sde</a>, 
+      a Fortran90 code which
+      illustrates the properties of stochastic differential equations, and
+      common algorithms for their analysis, 
+      by Desmond Higham;
+    </p>
+
+    <h3 align="center">
+      Reference:
+    </h3>
+
+    <p>
+      </p><ol>
+        <li>
+          Ivo Babuska, Fabio Nobile, Raul Tempone,<br>
+          A Stochastic Collocation Method for Elliptic Partial Differential Equations 
+          with Random Input Data,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 45, Number 3, 2007, pages 1005-1034.
+        </li>
+        <li>
+          Howard Elman, Darran Furnaval,<br>
+          Solving the stochastic steady-state diffusion problem using multigrid,<br>
+          IMA Journal on Numerical Analysis,<br>
+          Volume 27, Number 4, 2007, pages 675-688.
+        </li>
+        <li>
+          Roger Ghanem, Pol Spanos,<br>
+          Stochastic Finite Elements: A Spectral Approach,<br>
+          Revised Edition,<br>
+          Dover, 2003,<br>
+          ISBN: 0486428184,<br>
+          LC: TA347.F5.G56.
+        </li>
+        <li>
+          Xiang Ma, Nicholas Zabaras,<br>
+          An adaptive hierarchical sparse grid collocation algorithm for the solution
+          of stochastic differential equations,<br>
+          Journal of Computational Physics,<br>
+          Volume 228, pages 3084-3113, 2009.
+        </li>
+        <li>
+          Fabio Nobile, Raul Tempone, Clayton Webster,<br>
+          A Sparse Grid Stochastic Collocation Method for Partial Differential
+          Equations with Random Input Data,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 46, Number 5, 2008, pages 2309-2345.
+        </li>
+        <li>
+          Dongbin Xiu, George Karniadakis,<br>
+          Modeling uncertainty in steady state diffusion problems via
+          generalized polynomial chaos,<br>
+          Computer Methods in Applied Mechanics and Engineering,<br>
+          Volume 191, 2002, pages 4927-4948.
+        </li>
+      </ol>
+    <p></p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "stochastic_diffusion.f90">
+          stochastic_diffusion.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "stochastic_diffusion.sh">
+          stochastic_diffusion.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last modified on 08 July 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

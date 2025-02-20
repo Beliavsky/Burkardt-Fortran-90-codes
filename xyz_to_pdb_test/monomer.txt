@@ -1,0 +1,17 @@
+29 October 2024   1:15:12.088 PM
+ 
+xyz_to_pdb():
+  Fortran90 version
+  Read XYZ data from a file.
+  Rewrite it as atomic coordinates in
+  ATOM records of a PDB file.
+ 
+Reading XYZ file "monomer.xyz".
+ 
+       890 lines read from XYZ file.
+       888 coordinate records found in XYZ file.
+ 
+xyz_to_pdb():
+  Normal end of execution.
+ 
+29 October 2024   1:15:12.094 PM

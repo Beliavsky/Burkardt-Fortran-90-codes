@@ -1,0 +1,42 @@
+28 March 2023   8:19:20.075 AM
+ 
+md_test():
+  FORTRAN90 version
+  md() is a molecular dynamics program.
+ 
+MD
+  FORTRAN90 version
+  A molecular dynamics program.
+ 
+  ND, the spatial dimension, is        3
+  NP, the number of particles in the simulation is      500
+  STEP_NUM, the number of time steps, is      500
+  DT, the size of each time step, is   0.100000    
+ 
+  At each step, we report the potential and kinetic energies.
+  The sum of these energies should be a constant.
+  As an accuracy check, we also print the relative error
+  in the total energy.
+ 
+      Step      Potential       Kinetic        (P+K-E0)/E0
+                Energy P        Energy K       Relative Energy Error
+ 
+         0     124434.         0.00000         0.00000    
+        50     124621.         1361.66        0.124454E-01
+       100     124732.         1374.65        0.134415E-01
+       150     124747.         1370.06        0.135308E-01
+       200     124750.         1371.80        0.135614E-01
+       250     124750.         1371.96        0.135660E-01
+       300     124750.         1372.76        0.135726E-01
+       350     124750.         1372.96        0.135744E-01
+       400     124750.         1373.21        0.135764E-01
+       450     124750.         1373.21        0.135764E-01
+       500     124750.         1373.21        0.135764E-01
+ 
+  Elapsed cpu time for main computation:
+     6.22222     seconds
+ 
+md_test():
+  Normal end of execution.
+ 
+28 March 2023   8:19:26.297 AM

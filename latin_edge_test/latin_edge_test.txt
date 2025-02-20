@@ -1,0 +1,90 @@
+31 March 2023   8:33:36.286 AM
+ 
+latin_edge_test():
+  FORTRAN90 version
+  Test the LATIN_EDGE library.
+ 
+TEST00
+  GET_SEED returns a seed for the random number
+  generator, based on the current time.
+  RANDOM_INITIALIZE uses that seed to initialize
+  the FORTRAN90 random number generator.
+ 
+  GET_SEED returns SEED =   1068524182
+ 
+TEST01
+  LATIN_EDGE chooses a Latin cell arrangement,
+  which includes the edge points.
+ 
+  Spatial dimension =       2
+  Number of points =       11
+  Random number SEED =   1068524182
+ 
+  The Latin Edge Square points:
+ 
+      0.7000    0.0000
+      0.5000    0.8000
+      0.9000    0.3000
+      0.3000    0.9000
+      0.0000    0.2000
+      0.4000    0.1000
+      0.6000    0.6000
+      0.8000    0.4000
+      0.2000    0.5000
+      0.1000    0.7000
+      1.0000    1.0000
+ 
+LATIN_EDGE_TEST:
+  Repeat TEST01 with a different seed from the first run.
+ 
+TEST01
+  LATIN_EDGE chooses a Latin cell arrangement,
+  which includes the edge points.
+ 
+  Spatial dimension =       2
+  Number of points =       11
+  Random number SEED =   1492330008
+ 
+  The Latin Edge Square points:
+ 
+      0.5000    0.7000
+      0.0000    0.0000
+      0.6000    1.0000
+      0.3000    0.5000
+      0.8000    0.9000
+      0.2000    0.4000
+      0.4000    0.1000
+      0.1000    0.6000
+      1.0000    0.2000
+      0.7000    0.8000
+      0.9000    0.3000
+ 
+LATIN_EDGE_TEST:
+  Repeat TEST01 with the same seed as the first run.
+ 
+TEST01
+  LATIN_EDGE chooses a Latin cell arrangement,
+  which includes the edge points.
+ 
+  Spatial dimension =       2
+  Number of points =       11
+  Random number SEED =   1068524182
+ 
+  The Latin Edge Square points:
+ 
+      0.7000    0.0000
+      0.5000    0.8000
+      0.9000    0.3000
+      0.3000    0.9000
+      0.0000    0.2000
+      0.4000    0.1000
+      0.6000    0.6000
+      0.8000    0.4000
+      0.2000    0.5000
+      0.1000    0.7000
+      1.0000    1.0000
+ 
+LATIN_EDGE_TEST:
+  Normal end of execution.
+ 
+31 March 2023   8:33:36.286 AM

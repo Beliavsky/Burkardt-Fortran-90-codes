@@ -1,0 +1,46 @@
+31 March 2023   9:16:34.249 PM
+ 
+prime_test():
+  FORTRAN90 version
+  Test prime().
+ 
+PRIME_NUMBER_SWEEP():
+  Call PRIME_NUMBER to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         1         0  0.200000E-05
+         2         1  0.100000E-05
+         4         2   0.00000    
+         8         4   0.00000    
+        16         6   0.00000    
+        32        11  0.100000E-05
+        64        18  0.300000E-05
+       128        31  0.700000E-05
+       256        54  0.220000E-04
+       512        97  0.740000E-04
+      1024       172  0.250000E-03
+      2048       309  0.920000E-03
+      4096       564  0.317200E-02
+      8192      1028  0.114760E-01
+     16384      1900  0.405480E-01
+     32768      3512  0.148796    
+     65536      6542  0.555399    
+    131072     12251   2.08775    
+ 
+PRIME_NUMBER_SWEEP():
+  Call PRIME_NUMBER to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         5         3   0.00000    
+        50        15  0.200000E-05
+       500        95  0.820000E-04
+      5000       669  0.437300E-02
+     50000      5133  0.332500    
+    500000     41538   27.1382    
+ 
+prime_test():
+  Normal end of execution.
+ 
+31 March 2023   9:17:04.574 PM

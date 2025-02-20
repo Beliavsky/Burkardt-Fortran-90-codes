@@ -1,0 +1,132 @@
+<html>
+
+  <head>
+    <title>
+      spiral_exact
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      spiral_exact
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>spiral_exact</b>,
+      a Fortran90 code which
+      defines a 2D velocity vector field that satisfies the
+      continuity equation, and writes the nodes and velocities to a file,
+      suitable for analysis or plotting.
+    </p>
+
+    <p>
+      The continuous velocity field <b>(U,V)(X,Y)</b> that is discretely
+      sampled here satisfies the homogeneous continuity equation, that is,
+      it has zero divergence.  In other words:
+      <pre><b>
+        dU/dX + dV/dY = 0.
+      </b></pre>
+      This is by construction, since we have
+      <pre><b>
+        U(X,Y) =  10 * d/dY ( PHI(X) * PHI(Y) )
+        V(X,Y) = -10 * d/dX ( PHI(X) * PHI(Y) )
+      </b></pre>
+      which guarantees zero divergence.
+     </p>
+
+    <p>
+      The underlying function PHI is defined by
+      <pre><b>
+        PHI(Z) = ( 1 - cos ( C * pi * Z ) ) * ( 1 - Z )^2
+      </b></pre>
+      where C is a parameter.
+    </p>
+
+    <p>
+      The velocity data satisifes the (continuous) continuity equation;
+      this in <b>no way</b> implies that it satisfies the momentum equations
+      associated with Stokes or Navier-Stokes flow!  Moreover, a flow solution
+      for those equations would normally also require specifying a value
+      for the scalar pressure field <b>P(X,Y)</b>.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>spiral_exact</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/spiral_exact/spiral_exact.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/spiral_exact/spiral_exact.html">a C++ version</a> and
+      <a href = "spiral_exact.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/spiral_exact/spiral_exact.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/spiral_exact/spiral_exact.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/spiral_exact/spiral_exact.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gnuplot/gnuplot.html">
+      GNUPLOT</a>,
+      Fortran90 programs which
+      illustrate the use of the gnuplot graphics program.
+    </p>
+
+    <p>
+      <a href = "../navier_stokes_2d_exact/navier_stokes_2d_exact.html">
+      NAVIER_STOKES_2D_EXACT</a>,
+      a Fortran90 library which
+      evaluates an exact solution to the incompressible time-dependent
+      Navier-Stokes equations over an arbitrary domain in 2D.
+    </p>
+
+    <p>
+      <a href = "../stokes_2d_exact/stokes_2d_exact.html">
+      STOKES_2D_EXACT</a>,
+      a Fortran90 library which
+      evaluates exact solutions to the incompressible steady
+      Stokes equations over the unit square in 2D.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "spiral_exact.f90">spiral_exact.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "spiral_exact.sh">spiral_exact.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 01 July 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

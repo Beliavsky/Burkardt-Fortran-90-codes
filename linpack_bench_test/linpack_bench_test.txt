@@ -1,0 +1,20 @@
+July  1 2024   9:09:50.764 PM
+ 
+linpack_bench():
+  Fortran90 version
+  Datatype: Real Double Precision
+  Matrix order N =                   1000
+  Leading matrix dimension LDA =     1001
+ 
+     Norm. Resid      Resid           MACHEP         X(1)          X(N)
+ 
+  1.23840195E+01  1.37490019E-12  2.22044605E-16  1.00000000E+00  1.00000000E+00
+ 
+      Factor     Solve      Total     MFLOPS       Unit      Ratio
+ 
+  4.221E-01  1.305E-03  4.234E-01  1.579E+03  1.267E-03  7.561E+00
+ 
+linpack_bench():
+  Normal end of execution.
+ 
+July  1 2024   9:09:51.232 PM

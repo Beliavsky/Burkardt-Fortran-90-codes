@@ -1,0 +1,182 @@
+10 May 2023   8:17:27.855 AM
+ 
+HYPERCUBE_EXACTNESS
+  FORTRAN90 version
+ 
+  Investigate the polynomial exactness of a quadrature
+  rule by integrating all monomials of a given degree
+  over the [0,1] hypercube.
+ 
+  The rule will be adjusted to the [0,1] hypercube.
+ 
+HYPERCUBE_EXACTNESS: User input:
+  Quadrature rule X file = "cc_d1_o2_x.txt".
+  Quadrature rule W file = "cc_d1_o2_w.txt".
+  Quadrature rule R file = "cc_d1_o2_r.txt".
+  Maximum total degree to check =        5
+ 
+  Spatial dimension =        1
+  Number of points  =        2
+ 
+          Error          Degree  Exponents
+ 
+        0.0000000000000000    0      0
+ 
+        0.0000000000000000    1      1
+ 
+        0.5000000000000000    2      2
+ 
+        1.0000000000000000    3      3
+ 
+        1.5000000000000000    4      4
+ 
+        2.0000000000000000    5      5
+ 
+HYPERCUBE_EXACTNESS:
+  Normal end of execution.
+ 
+10 May 2023   8:17:27.855 AM
+10 May 2023   8:17:27.857 AM
+ 
+HYPERCUBE_EXACTNESS
+  FORTRAN90 version
+ 
+  Investigate the polynomial exactness of a quadrature
+  rule by integrating all monomials of a given degree
+  over the [0,1] hypercube.
+ 
+  The rule will be adjusted to the [0,1] hypercube.
+ 
+HYPERCUBE_EXACTNESS: User input:
+  Quadrature rule X file = "cc_d1_o3_x.txt".
+  Quadrature rule W file = "cc_d1_o3_w.txt".
+  Quadrature rule R file = "cc_d1_o3_r.txt".
+  Maximum total degree to check =        5
+ 
+  Spatial dimension =        1
+  Number of points  =        3
+ 
+          Error          Degree  Exponents
+ 
+        0.0000000000500001    0      0
+ 
+        0.0000000000500000    1      1
+ 
+        0.0000000000625000    2      2
+ 
+        0.0000000000750000    3      3
+ 
+        0.0416666665781249    4      4
+ 
+        0.1249999998968752    5      5
+ 
+HYPERCUBE_EXACTNESS:
+  Normal end of execution.
+ 
+10 May 2023   8:17:27.857 AM
+10 May 2023   8:17:27.858 AM
+ 
+HYPERCUBE_EXACTNESS
+  FORTRAN90 version
+ 
+  Investigate the polynomial exactness of a quadrature
+  rule by integrating all monomials of a given degree
+  over the [0,1] hypercube.
+ 
+  The rule will be adjusted to the [0,1] hypercube.
+ 
+HYPERCUBE_EXACTNESS: User input:
+  Quadrature rule X file = "cc_d2_o3x3_x.txt".
+  Quadrature rule W file = "cc_d2_o3x3_w.txt".
+  Quadrature rule R file = "cc_d2_o3x3_r.txt".
+  Maximum total degree to check =        5
+ 
+  Spatial dimension =        2
+  Number of points  =        9
+ 
+          Error          Degree  Exponents
+ 
+        0.0000000000000004    0      0  0
+ 
+        0.0000000000000002    1      1  0
+        0.0000000000000003    1      0  1
+ 
+        0.0000000000000002    2      2  0
+        0.0000000000000002    2      1  1
+        0.0000000000000002    2      0  2
+ 
+        0.0000000000000002    3      3  0
+        0.0000000000000002    3      2  1
+        0.0000000000000002    3      1  2
+        0.0000000000000002    3      0  3
+ 
+        0.0416666666666663    4      4  0
+        0.0000000000000003    4      3  1
+        0.0000000000000001    4      2  2
+        0.0000000000000003    4      1  3
+        0.0416666666666663    4      0  4
+ 
+        0.1249999999999998    5      5  0
+        0.0416666666666663    5      4  1
+        0.0000000000000002    5      3  2
+        0.0000000000000002    5      2  3
+        0.0416666666666663    5      1  4
+        0.1249999999999998    5      0  5
+ 
+HYPERCUBE_EXACTNESS:
+  Normal end of execution.
+ 
+10 May 2023   8:17:27.858 AM
+10 May 2023   8:17:27.859 AM
+ 
+HYPERCUBE_EXACTNESS
+  FORTRAN90 version
+ 
+  Investigate the polynomial exactness of a quadrature
+  rule by integrating all monomials of a given degree
+  over the [0,1] hypercube.
+ 
+  The rule will be adjusted to the [0,1] hypercube.
+ 
+HYPERCUBE_EXACTNESS: User input:
+  Quadrature rule X file = "ccgl_d2_o3x2_x.txt".
+  Quadrature rule W file = "ccgl_d2_o3x2_w.txt".
+  Quadrature rule R file = "ccgl_d2_o3x2_r.txt".
+  Maximum total degree to check =        5
+ 
+  Spatial dimension =        2
+  Number of points  =        6
+ 
+          Error          Degree  Exponents
+ 
+        0.0000000000000001    0      0  0
+ 
+        0.0000000000000002    1      1  0
+        0.0000000000000002    1      0  1
+ 
+        0.0000000000000002    2      2  0
+        0.0000000000000002    2      1  1
+        0.0000000000000002    2      0  2
+ 
+        0.0000000000000002    3      3  0
+        0.0000000000000002    3      2  1
+        0.0000000000000000    3      1  2
+        0.0000000000000001    3      0  3
+ 
+        0.0416666666666665    4      4  0
+        0.0000000000000001    4      3  1
+        0.0000000000000000    4      2  2
+        0.0000000000000001    4      1  3
+        0.0277777777777779    4      0  4
+ 
+        0.1250000000000000    5      5  0
+        0.0416666666666665    5      4  1
+        0.0000000000000000    5      3  2
+        0.0000000000000000    5      2  3
+        0.0277777777777779    5      1  4
+        0.0833333333333333    5      0  5
+ 
+HYPERCUBE_EXACTNESS:
+  Normal end of execution.
+ 
+10 May 2023   8:17:27.859 AM

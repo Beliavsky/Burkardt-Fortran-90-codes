@@ -1,0 +1,51 @@
+25 October 2022   6:34:11.115 PM
+
+subset_sum_brute_test():
+  FORTRAN90 version.
+  Test subset_sum_brute().
+
+subset_sum_brute_test01():
+  subset_sum_brute() looks for a selection 
+  from a set of weights that adds up to a 
+  given target.
+
+  Target value:
+   2463098
+
+   I  W(I)
+
+   1    518533
+   2   1037066
+   3   2074132
+   4   1648264
+   5    796528
+   6   1593056
+   7    686112
+   8   1372224
+   9    244448
+  10    488896
+  11    977792
+  12   1955584
+  13   1411168
+  14    322336
+  15    644672
+  16   1289344
+  17     78688
+  18    157376
+  19    314752
+  20    629504
+  21   1259008
+
+   I*     W*
+
+   2   1037066
+   5    796528
+  20    629504
+
+  Sum:         2463098
+  Target:      2463098
+
+subset_sum_brute_test():
+  Normal end of execution.
+
+25 October 2022   6:34:11.158 PM

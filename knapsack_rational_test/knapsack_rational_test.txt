@@ -1,0 +1,64 @@
+November 16 2024  10:21:09.790 AM
+
+knapsack_rational_test():
+  Fortran90 version
+  Test knapsack_rational().
+
+knapsack_rational_test():
+  knapsack_rational() solves the rational knapsack problem.
+
+  Object, Profit, Mass, "Profit Density"
+
+     1 24.000 12.000  2.000
+     2 13.000  7.000  1.857
+     3 23.000 11.000  2.091
+     4 15.000  8.000  1.875
+     5 16.000  9.000  1.778
+
+  After reordering by Profit Density:
+
+  Object, Profit, Mass, "Profit Density"
+
+     1 23.000 11.000  2.091
+     2 24.000 12.000  2.000
+     3 15.000  8.000  1.875
+     4 13.000  7.000  1.857
+     5 16.000  9.000  1.778
+
+  Total mass restriction is  26.000
+
+  Object, Density, Choice, Profit, Mass
+
+     1  2.091  1.000 23.000 11.000
+     2  2.000  1.000 24.000 12.000
+     3  1.875  0.375  5.625  3.000
+     4  1.857  0.000  0.000  0.000
+     5  1.778  0.000  0.000  0.000
+
+  Total:             52.625 26.000
+
+knapsack_reorder_test():
+  knapsack_reorder() reorders the knapsack data.
+
+  Object, Profit, Mass, "Profit Density"
+
+       1   24.000   12.000    2.000
+       2   13.000    7.000    1.857
+       3   23.000   11.000    2.091
+       4   15.000    8.000    1.875
+       5   16.000    9.000    1.778
+
+  After reordering by Profit Density:
+
+  Object, Profit, Mass, "Profit Density"
+
+       1   23.000   11.000    2.091
+       2   24.000   12.000    2.000
+       3   15.000    8.000    1.875
+       4   13.000    7.000    1.857
+       5   16.000    9.000    1.778
+
+knapsack_rational_test():
+  Normal end of execution.
+
+November 16 2024  10:21:09.791 AM

@@ -1,0 +1,208 @@
+<html>
+
+  <head>
+    <title>
+      toms647
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      toms647
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>toms647</b>,
+      a FORTRAN90 code which
+      implements the Faure, Halton, and
+      Sobol quasirandom sequences.
+    </p>
+
+    <p>
+      A quasirandom or low discrepancy sequence, such as the Faure,
+      Halton, Hammersley, Niederreiter or Sobol sequences, is
+      "less random" than a pseudorandom number sequence, but
+      more useful for such tasks as approximation of integrals in
+      higher dimensions, and in global optimization.
+      This is because low discrepancy sequences tend to sample
+      space "more uniformly" than random numbers.  Algorithms
+      that use such sequences may have superior convergence.
+    </p>
+
+    <p>
+      The version displayed here has been converted to FORTRAN90,
+      and other internal changes have been made to suit me.
+    </p>
+
+    <p>
+      The text of many ACM TOMS algorithms is available online
+      through ACM:
+              <a href = "https://calgo.acm.org">
+                         https://calgo.acm.org/</a> 
+      or NETLIB:
+      <a href = "https://www.netlib.org/toms/index.html">
+      https://www.netlib.org/toms/index.html</a>.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>toms647</b> is available in
+      <a href = "toms647.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../faure/faure.html">
+      FAURE</a>,
+      a FORTRAN90 code which
+      computes elements of a Faure sequence.
+    </p>
+
+    <p>
+      <a href = "../halton/halton.html">
+      HALTON</a>,
+      a FORTRAN90 code which
+      computes elements of a Halton sequence.
+    </p>
+
+    <p>
+      <a href = "../hammersley/hammersley.html">
+      HAMMERSLEY</a>,
+      a FORTRAN90 code which
+      computes elements of a Hammersley sequence.
+    </p>
+
+    <p>
+      <a href = "../sobol/sobol.html">
+      SOBOL</a>,
+      a FORTRAN90 code which
+      computes elements of a Sobol sequence.
+    </p>
+
+    <p>
+      <a href = "../toms647_test/toms647_test.html">
+      toms647_test</a>
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Antonov, Saleev,<br>
+          USSR Computational Mathematics and Mathematical Physics,<br>
+          Volume 19, 1980, pages 252 - 256.
+        </li>
+        <li>
+          Paul Bratley, Bennett Fox,<br>
+          Algorithm 659:
+          Implementing Sobol's Quasirandom Sequence Generator,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 14, Number 1, pages 88-100, 1988.
+        </li>
+        <li>
+          Paul Bratley, Bennett Fox, Harald Niederreiter,<br>
+          Algorithm 738:
+          Programs to Generate Niederreiter's Low-Discrepancy Sequences,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 20, Number 4, pages 494-495, 1994.
+        </li>
+        <li>
+          Paul Bratley, Bennett Fox, Linus Schrage,<br>
+          A Guide to Simulation,<br>
+          Springer Verlag, pages 201-202, 1983.
+        </li>
+        <li>
+          Paul Bratley, Bennett Fox, Harald Niederreiter,<br>
+          Implementation and Tests of Low Discrepancy Sequences,<br>
+          ACM Transactions on Modeling and Computer Simulation,<br>
+          Volume 2, Number 3, pages 195-213, 1992.
+        </li>
+        <li>
+          Henri Faure,<br>
+          Discrepance de suites associees a un systeme de numeration
+          (en dimension s),<br>
+          Acta Arithmetica,<br>
+          Volume XLI, 1982, pages 337-351, especially page 342.
+        </li>
+        <li>
+          Bennett Fox,<br>
+          Algorithm 647:
+          Implementation and Relative Efficiency of Quasirandom
+          Sequence Generators,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 12, Number 4, pages 362-376, 1986.
+        </li>
+        <li>
+          John Halton, G B Smith,<br>
+          Algorithm 247: Radical-Inverse Quasi-Random Point Sequence,<br>
+          Communications of the ACM,<br>
+          Volume 7, 1964, pages 701-702.
+        </li>
+        <li>
+          Harald Niederreiter,<br>
+          Random Number Generation and quasi-Monte Carlo Methods,<br>
+          SIAM, 1992.
+        </li>
+        <li>
+          I Sobol,<br>
+          USSR Computational Mathematics and Mathematical Physics,<br>
+          Volume 16, pages 236-242, 1977.
+        </li>
+        <li>
+          I Sobol, Levitan, <br>
+          The Production of Points Uniformly Distributed in a Multidimensional
+          Cube (in Russian),<br>
+          Preprint IPM Akad. Nauk SSSR, <br>
+          Number 40, Moscow 1976.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "toms647.f90">toms647.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "toms647.sh">toms647.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 14 March 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

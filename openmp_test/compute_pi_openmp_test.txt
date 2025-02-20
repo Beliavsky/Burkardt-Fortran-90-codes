@@ -1,0 +1,228 @@
+ 
+COMPUTE_PI():
+  FORTRAN90/OpenMP version
+ 
+  Estimate the value of PI by summing a series.
+ 
+  The number of processors available =       16
+  The number of threads available    =        1
+ 
+R8_TEST:
+  Estimate the value of PI.
+ 
+  N = number of terms computed and added;
+ 
+  MODE = SEQ for sequential code;
+  MODE = OMP for Open MP enabled code;
+  (performance depends on whether Open MP is used,
+  and how many processes are available!)
+ 
+  ESTIMATE = the computed estimate of PI;
+ 
+  ERROR = ( the computed estimate - PI );
+ 
+  TIME = elapsed wall clock time;
+ 
+  Note that you can't increase N forever, because:
+  A) ROUNDOFF starts to be a problem, and
+  B) maximum integer size is a problem.
+ 
+  The maximum integer:              2147483647
+ 
+ 
+             N Mode    Estimate        Error           Time
+ 
+             1  SEQ    3.2000000000    0.584073E-01    0.316002E-06
+             1  OMP    3.2000000000    0.584073E-01    0.400900E-05
+            10  SEQ    3.1424259850    0.833331E-03    0.263000E-06
+            10  OMP    3.1424259850    0.833331E-03    0.688000E-06
+           100  SEQ    3.1416009869    0.833333E-05    0.190800E-05
+           100  OMP    3.1416009869    0.833333E-05    0.229300E-05
+          1000  SEQ    3.1415927369    0.833333E-07    0.185870E-04
+          1000  OMP    3.1415927369    0.833333E-07    0.189190E-04
+         10000  SEQ    3.1415926544    0.833341E-09    0.185452E-03
+         10000  OMP    3.1415926544    0.833341E-09    0.185804E-03
+        100000  SEQ    3.1415926536    0.836842E-11    0.185136E-02
+        100000  OMP    3.1415926536    0.836842E-11    0.182228E-02
+       1000000  SEQ    3.1415926536    0.284217E-13    0.183937E-01
+       1000000  OMP    3.1415926536    0.284217E-13    0.207610E-01
+      10000000  SEQ    3.1415926536    0.621725E-13    0.169510    
+      10000000  OMP    3.1415926536    0.621725E-13    0.169340    
+     100000000  SEQ    3.1415926536    0.633271E-12     1.69914    
+     100000000  OMP    3.1415926536    0.633271E-12     1.69317    
+    1000000000  SEQ    3.1415926536    0.177636E-12     16.9645    
+    1000000000  OMP    3.1415926536    0.177636E-12     17.0145    
+ 
+COMPUTE_PI():
+  Normal end of execution.
+ 
+COMPUTE_PI():
+  FORTRAN90/OpenMP version
+ 
+  Estimate the value of PI by summing a series.
+ 
+  The number of processors available =       16
+  The number of threads available    =        2
+ 
+R8_TEST:
+  Estimate the value of PI.
+ 
+  N = number of terms computed and added;
+ 
+  MODE = SEQ for sequential code;
+  MODE = OMP for Open MP enabled code;
+  (performance depends on whether Open MP is used,
+  and how many processes are available!)
+ 
+  ESTIMATE = the computed estimate of PI;
+ 
+  ERROR = ( the computed estimate - PI );
+ 
+  TIME = elapsed wall clock time;
+ 
+  Note that you can't increase N forever, because:
+  A) ROUNDOFF starts to be a problem, and
+  B) maximum integer size is a problem.
+ 
+  The maximum integer:              2147483647
+ 
+ 
+             N Mode    Estimate        Error           Time
+ 
+             1  SEQ    3.2000000000    0.584073E-01    0.379001E-06
+             1  OMP    3.2000000000    0.584073E-01    0.141469E-03
+            10  SEQ    3.1424259850    0.833331E-03    0.245000E-06
+            10  OMP    3.1424259850    0.833331E-03    0.245700E-05
+           100  SEQ    3.1416009869    0.833333E-05    0.173200E-05
+           100  OMP    3.1416009869    0.833333E-05    0.193200E-05
+          1000  SEQ    3.1415927369    0.833333E-07    0.168950E-04
+          1000  OMP    3.1415927369    0.833333E-07    0.951300E-05
+         10000  SEQ    3.1415926544    0.833341E-09    0.168603E-03
+         10000  OMP    3.1415926544    0.833336E-09    0.852330E-04
+        100000  SEQ    3.1415926536    0.836842E-11    0.168560E-02
+        100000  OMP    3.1415926536    0.835332E-11    0.843774E-03
+       1000000  SEQ    3.1415926536    0.284217E-13    0.168746E-01
+       1000000  OMP    3.1415926536    0.106137E-12    0.100337E-01
+      10000000  SEQ    3.1415926536    0.621725E-13    0.168872    
+      10000000  OMP    3.1415926536    0.129674E-12    0.845060E-01
+     100000000  SEQ    3.1415926536    0.633271E-12     1.68642    
+     100000000  OMP    3.1415926536    0.116351E-12    0.843506    
+    1000000000  SEQ    3.1415926536    0.177636E-12     16.8877    
+    1000000000  OMP    3.1415926536    0.107914E-12     8.43212    
+ 
+COMPUTE_PI():
+  Normal end of execution.
+ 
+COMPUTE_PI():
+  FORTRAN90/OpenMP version
+ 
+  Estimate the value of PI by summing a series.
+ 
+  The number of processors available =       16
+  The number of threads available    =        4
+ 
+R8_TEST:
+  Estimate the value of PI.
+ 
+  N = number of terms computed and added;
+ 
+  MODE = SEQ for sequential code;
+  MODE = OMP for Open MP enabled code;
+  (performance depends on whether Open MP is used,
+  and how many processes are available!)
+ 
+  ESTIMATE = the computed estimate of PI;
+ 
+  ERROR = ( the computed estimate - PI );
+ 
+  TIME = elapsed wall clock time;
+ 
+  Note that you can't increase N forever, because:
+  A) ROUNDOFF starts to be a problem, and
+  B) maximum integer size is a problem.
+ 
+  The maximum integer:              2147483647
+ 
+ 
+             N Mode    Estimate        Error           Time
+ 
+             1  SEQ    3.2000000000    0.584073E-01    0.376000E-06
+             1  OMP    3.2000000000    0.584073E-01    0.142382E-03
+            10  SEQ    3.1424259850    0.833331E-03    0.230000E-06
+            10  OMP    3.1424259850    0.833331E-03    0.833060E-04
+           100  SEQ    3.1416009869    0.833333E-05    0.173300E-05
+           100  OMP    3.1416009869    0.833333E-05    0.183300E-05
+          1000  SEQ    3.1415927369    0.833333E-07    0.168920E-04
+          1000  OMP    3.1415927369    0.833333E-07    0.559700E-05
+         10000  SEQ    3.1415926544    0.833341E-09    0.168611E-03
+         10000  OMP    3.1415926544    0.833330E-09    0.434990E-04
+        100000  SEQ    3.1415926536    0.836842E-11    0.173427E-02
+        100000  OMP    3.1415926536    0.833289E-11    0.489515E-03
+       1000000  SEQ    3.1415926536    0.284217E-13    0.169310E-01
+       1000000  OMP    3.1415926536    0.826006E-13    0.565135E-02
+      10000000  SEQ    3.1415926536    0.621725E-13    0.169411    
+      10000000  OMP    3.1415926536    0.123457E-12    0.430533E-01
+     100000000  SEQ    3.1415926536    0.633271E-12     1.69361    
+     100000000  OMP    3.1415926536    0.110578E-12    0.429181    
+    1000000000  SEQ    3.1415926536    0.177636E-12     16.9485    
+    1000000000  OMP    3.1415926536    0.275335E-13     4.29181    
+ 
+COMPUTE_PI():
+  Normal end of execution.
+ 
+COMPUTE_PI():
+  FORTRAN90/OpenMP version
+ 
+  Estimate the value of PI by summing a series.
+ 
+  The number of processors available =       16
+  The number of threads available    =        8
+ 
+R8_TEST:
+  Estimate the value of PI.
+ 
+  N = number of terms computed and added;
+ 
+  MODE = SEQ for sequential code;
+  MODE = OMP for Open MP enabled code;
+  (performance depends on whether Open MP is used,
+  and how many processes are available!)
+ 
+  ESTIMATE = the computed estimate of PI;
+ 
+  ERROR = ( the computed estimate - PI );
+ 
+  TIME = elapsed wall clock time;
+ 
+  Note that you can't increase N forever, because:
+  A) ROUNDOFF starts to be a problem, and
+  B) maximum integer size is a problem.
+ 
+  The maximum integer:              2147483647
+ 
+ 
+             N Mode    Estimate        Error           Time
+ 
+             1  SEQ    3.2000000000    0.584073E-01    0.228003E-06
+             1  OMP    3.2000000000    0.584073E-01    0.237621E-03
+            10  SEQ    3.1424259850    0.833331E-03    0.224998E-06
+            10  OMP    3.1424259850    0.833331E-03    0.277600E-05
+           100  SEQ    3.1416009869    0.833333E-05    0.179000E-05
+           100  OMP    3.1416009869    0.833333E-05    0.305500E-05
+          1000  SEQ    3.1415927369    0.833333E-07    0.173630E-04
+          1000  OMP    3.1415927369    0.833333E-07    0.507400E-05
+         10000  SEQ    3.1415926544    0.833341E-09    0.173125E-03
+         10000  OMP    3.1415926544    0.833333E-09    0.276430E-04
+        100000  SEQ    3.1415926536    0.836842E-11    0.174147E-02
+        100000  OMP    3.1415926536    0.833156E-11    0.408342E-03
+       1000000  SEQ    3.1415926536    0.284217E-13    0.174280E-01
+       1000000  OMP    3.1415926536    0.781597E-13    0.295031E-02
+      10000000  SEQ    3.1415926536    0.621725E-13    0.170668    
+      10000000  OMP    3.1415926536    0.102141E-13    0.253574E-01
+     100000000  SEQ    3.1415926536    0.633271E-12     1.70605    
+     100000000  OMP    3.1415926536    0.217604E-13    0.260407    
+    1000000000  SEQ    3.1415926536    0.177636E-12     17.0599    
+    1000000000  OMP    3.1415926536    0.248690E-13     2.51323    
+ 
+COMPUTE_PI():
+  Normal end of execution.

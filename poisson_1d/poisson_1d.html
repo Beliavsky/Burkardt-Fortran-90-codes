@@ -1,0 +1,190 @@
+<html>
+
+  <head>
+    <title>
+      poisson_1d
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      poisson_1d
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>poisson_1d</b>,
+      a Fortran90 code which
+      solves a discretized version of the Poisson equation -uxx = f(x) 
+      on the interval a &le; x &le; b, with Dirichlet boundary conditions
+      u(a) = ua, u(b) = ub.
+      The linear system is solved using Gauss-Seidel iteration.
+    </p>
+
+    <p>
+      The 1D Poisson equation is assumed to have the form
+      <pre>
+        -u''(x) = f(x), for a < x < b
+         u(a) = ua, u(b) = ub
+      </pre>
+    </p>
+
+    <p>
+      Let K be a small positive integer called the mesh index, and let
+      N = 2^K be the corresponding number of uniform subintervals into which
+      [A,B] is divided.  Assigning a value U(I) to each of the N+1 equally
+      spaced nodes with coordinate X(I), we approximate the equation by
+      <pre>
+        -U(i-1) + 2 U(i) - U(i+1)
+        -------------------------   = f( X(i) ), 1 < I < N+1
+                  h^2
+
+        U(1) = ua, U(N+1) = ub.
+      </pre>
+    </p>
+
+    <p>
+      It remains to solve the linear system for the desired values of U.
+      This could be done directly, or iteratively.  An iterative method
+      such as Jacobi, Gauss-Seidel or SOR might be suitable, but experience
+      shows that the convergence rate of these iterative methods decreases
+      drastically as the value of K is increased - that is, as a more
+      refined and accurate answer is sought.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>poisson_1d</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/poisson_1d/poisson_1d.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/poisson_1d/poisson_1d.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/poisson_1d/poisson_1d.html">a Fortran77 version</a> and
+      <a href = "poisson_1d.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/freefem_src/poisson_1d/poisson_1d.html">a FreeFem++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/poisson_1d/poisson_1d.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/poisson_1d/poisson_1d.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/python_src/poisson_1d/poisson_1d.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../poisson_1d_test/poisson_1d_test.html">
+      poisson_1d_test</a>
+    </p>
+
+    <p>
+      <a href = "../cg/cg.html">
+      cg</a>,
+      a Fortran90 code which
+      implements the conjugate gradient method for solving 
+      a positive definite sparse linear system A*x=b.
+    </p>
+
+    <p>
+      <a href = "../cyclic_reduction/cyclic_reduction.html">
+      cyclic_reduction</a>,
+      a Fortran90 code which
+      solves a tridiagonal linear system using cyclic reduction.
+    </p>
+
+    <p>
+      <a href = "../fd1d_bvp/fd1d_bvp.html">
+      fd1d_bvp</a>,
+      a Fortran90 code which
+      applies the finite difference method
+      to a two point boundary value problem in one spatial dimension.
+    </p>
+
+    <p>
+      <a href = "../gauss_seidel/gauss_seidel.html">
+      gauss_seidel</a>,
+      a Fortran90 code which
+      uses the Gauss-Seidel iteration to solve a linear system
+      with a symmetric positive definite (SPD) matrix.
+    </p>
+
+    <p>
+      <a href = "../jacobi/jacobi.html">
+      jacobi</a>,
+      a Fortran90 code which
+      uses the Jacobi iteration to solving a system of linear equations
+      with a symmetric positive definite (SPD) matrix.
+    </p>
+
+    <p>
+      <a href = "../mgmres/mgmres.html">
+      mgmres</a>,
+      a Fortran90 code which
+      applies the restarted GMRES algorithm to solve a sparse linear system,
+      by Lili Ju.
+    </p>
+
+    <p>
+      <a href = "../poisson_1d_multigrid/poisson_1d_multigrid.html">
+      poisson_1d_multigrid</a>,
+      a Fortran90 code which
+      applies the multigrid method to a discretized version of the 
+      1D Poisson equation.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          William Hager,<br>
+          Applied Numerical Linear Algebra,<br>
+          Prentice-Hall, 1988,<br>
+          ISBN13: 978-0130412942,<br>
+          LC: QA184.H33.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "poisson_1d.f90">poisson_1d.f90</a>, 
+          the source code.
+        </li>
+        <li>
+          <a href = "poisson_1d.sh">poisson_1d.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 01 October 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,51 @@
+21 August 2021   8:26:27.804 AM
+ 
+PROBLEM1_MAIN
+  FORTRAN90 version
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+ 
+TEST01
+  Call PRIOR_SAMPLE many times.
+  Compare statistics to PDF parameters.
+  Note that the covariance estimate can be very bad
+  unless the matrix is strongly diagonal.
+ 
+  Parameter dimension is      5
+  Number of samples is  10000
+ 
+ Index       Min            Ave              Max             MU
+ 
+     1    -3.46050       -0.523015E-02     3.50215         0.00000    
+     2    -5.27238       -0.157644E-01     5.29426         0.00000    
+     3    -6.59353       -0.147050E-01     5.97985         0.00000    
+     4    -6.53287       -0.446194E-01     7.21085         0.00000    
+     5    -8.63950       -0.317812E-01     8.22550         0.00000    
+ 
+  Sample covariance:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1:  0.982887      0.483798      0.470432      0.459696      0.453060    
+    2:  0.483798       2.04467      0.488343      0.461622      0.517688    
+    3:  0.470432      0.488343       2.96325      0.437732      0.496079    
+    4:  0.459696      0.461622      0.437732       3.90837      0.357130    
+    5:  0.453060      0.517688      0.496079      0.357130       4.91869    
+ 
+  PDF covariance:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1:      1.        0.500000      0.500000      0.500000      0.500000    
+    2:  0.500000          2.        0.500000      0.500000      0.500000    
+    3:  0.500000      0.500000          3.        0.500000      0.500000    
+    4:  0.500000      0.500000      0.500000          4.        0.500000    
+    5:  0.500000      0.500000      0.500000      0.500000          5.      
+ 
+PROBLEM1_MAIN
+  Normal end of execution.
+ 
+21 August 2021   8:26:27.809 AM

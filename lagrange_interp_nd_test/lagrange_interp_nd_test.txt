@@ -1,0 +1,136 @@
+15 September 2021   8:27:05.584 AM
+
+LAGRANGE_INTERP_ND_TEST:
+  FORTRAN90 version
+  Test the LAGRANGE_INTERP_ND library.
+  The R8LIB library is needed.
+
+TEST01:
+  Interpolate in 1D, using orders.
+  LAGRANGE_INTERP_ND_GRID sets the interpolant.
+  LAGRANGE_INTERP_ND_VALUE evaluates it.
+
+         Zinterp          Zexact      Error
+
+    0.147727        0.147726        0.43E-06
+    0.292315        0.292289        0.26E-04
+    0.680839        0.680860        0.21E-04
+    0.695232        0.695250        0.18E-04
+    0.463772        0.463768        0.40E-05
+
+TEST02:
+  Interpolate in 2D, using orders.
+  LAGRANGE_INTERP_ND_GRID sets the interpolant.
+  LAGRANGE_INTERP_ND_VALUE evaluates it.
+
+         Zinterp          Zexact      Error
+
+    0.771167        0.770812        0.35E-03
+    0.796560        0.797536        0.98E-03
+    0.864320        0.864426        0.11E-03
+    0.746707        0.745196        0.15E-02
+    0.736863        0.735224        0.16E-02
+
+TEST03:
+  Interpolate in 3D, using orders.
+  LAGRANGE_INTERP_ND_GRID sets the interpolant.
+  LAGRANGE_INTERP_ND_VALUE evaluates it.
+
+         Zinterp          Zexact      Error
+
+    0.849191        0.849590        0.40E-03
+    0.827371        0.828498        0.11E-02
+    0.971872        0.971844        0.28E-04
+    0.954639        0.955111        0.47E-03
+    0.895286        0.895968        0.68E-03
+
+TEST04:
+  Interpolate in 3D, using orders.
+  Use a sequence of increasing orders.
+
+  Level     Order   Average Error
+
+      0         1    0.36E-01
+      1        27    0.51E-02
+      2       125    0.20E-03
+      3       729    0.54E-05
+      4      4913    0.22E-07
+      5     35937    0.43E-09
+
+TEST05:
+  Repeat test #1, using levels.
+  LAGRANGE_INTERP_ND_GRID2 sets the interpolant.
+  LAGRANGE_INTERP_ND_VALUE2 evaluates it.
+
+         Zinterp          Zexact      Error
+
+    0.806153        0.806142        0.12E-04
+    0.353698        0.353673        0.25E-04
+    0.602272        0.602296        0.25E-04
+    0.616962        0.616988        0.26E-04
+    0.610117        0.610143        0.25E-04
+
+TEST06:
+  Repeat test #2, using levels.
+  LAGRANGE_INTERP_ND_GRID2 sets the interpolant.
+  LAGRANGE_INTERP_ND_VALUE2 evaluates it.
+
+         Zinterp          Zexact      Error
+
+    0.453657        0.454673        0.10E-02
+    0.422585        0.426353        0.38E-02
+    0.878607        0.879120        0.51E-03
+    0.690033        0.688910        0.11E-02
+    0.174610        0.170691        0.39E-02
+
+TEST07:
+  Repeat test #3,  using levels.
+  LAGRANGE_INTERP_ND_GRID2 sets the interpolant.
+  LAGRANGE_INTERP_ND_VALUE2 evaluates it.
+
+         Zinterp          Zexact      Error
+
+    0.629679        0.626806        0.29E-02
+    0.934364        0.934391        0.27E-04
+    0.892032        0.892091        0.59E-04
+    0.968055        0.968107        0.53E-04
+    0.673496        0.673147        0.35E-03
+
+TEST08:
+  Interpolate in 3D, using levels.
+  Use a sequence of increasing levels.
+
+  Level     Order   Average Error
+
+      0         1    0.37E-01
+      1        27    0.56E-02
+      2       125    0.32E-03
+      3       729    0.83E-05
+      4      4913    0.14E-06
+      5     35937    0.59E-09
+
+TEST09:
+  Interpolate in 3D, using orders.
+  Use a sequence of increasing orders.
+  Use anisotropic resolution.
+  The interpolant is a polynomial of degrees 3, 5, 2
+  so our orders need to be at least 4, 6, 3 to match it.
+
+  Level     Orders   Average Error
+
+      0      1      1      1    0.91E-01
+      1      2      1      1    0.73E-01
+      2      1      2      1    0.83E-01
+      3      1      1      2    0.93E-01
+      4      4      2      2    0.36E-01
+      5      2      4      2    0.63E-01
+      6      2      2      4    0.80E-01
+      7      2      2      4    0.80E-01
+      8      6      4      4    0.78E-03
+      9      4      6      4    0.19E-15
+     10      4      4      6    0.78E-03
+
+TEST:
+  Normal end of execution.
+
+15 September 2021   8:27:05.600 AM

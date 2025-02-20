@@ -1,0 +1,15 @@
+29 October 2024  12:54:24.748 PM
+ 
+pdb_to_xyz()
+  FORTRAN90 version
+  Write PDB Atom XYZ coordinates to an XYZ file.
+ 
+Reading PDB file "monomer.pdb".
+ 
+     890 lines read from PDB file.
+     888 atom records found in PDB file.
+ 
+pdb_to_xyz()
+  Normal end of execution.
+ 
+29 October 2024  12:54:24.755 PM

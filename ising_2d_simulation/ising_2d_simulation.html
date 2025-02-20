@@ -1,0 +1,234 @@
+<html>
+
+  <head>
+    <title>
+      ising_2d_simulation
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      ising_2d_simulation
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>ising_2d_simulation</b>,
+      a FORTRAN90 code which
+      carries out a Monte Carlo simulation of a 2D Ising model,
+      using gnuplot() to create graphics images of the initial and final configurations.
+    </p>
+
+    <p>
+      A 2D Ising model is defined on an MxN array of cells.  Each cell
+      can have a "charge" or "spin" of +1 or -1.  A neighborhood of a cell is defined to
+      be itself, and the four immediate neighbors to the north, south, east, and
+      west.  A cell may change its charge; the likelihood of doing so depends
+      on whether the charge of the neighbors agrees with the charge of the cell.
+    </p>
+
+    <p>
+      This program begins with a random assignment of charges to the cells.
+      It then computes the neighbor agreement at each cell.  It then updates 
+      the entire configuration in one step, using the neighbor agreement
+      to determine the likelihood of flipping.
+    </p>
+
+    <p>
+      Currently, the chance that a cell will "flip" is determined from a table
+      of probabilities based on the number of agreeing neighbors:
+    </p>
+
+    <p>
+      <table border="1" align="center">
+        <tr>
+          <th>Agree</th><td>1</td><td>2</td><td>3</td><td>4</td><td>4</td>
+        </tr>
+        <tr>
+          <th>Prob</th><td>0.98</td><td>0.85</td><td>0.50</td><td>0.15</td><td>0.02</td>
+        </tr>
+      </table>
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>ising_2d_simulation</b> <i>m</i> <i>n</i> <i>iterations</i> <i>thresh</i> <i>seed</i>
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>m</i> and <i>n</i> are the number of rows and columns of cells.
+          The default values are 10.
+        </li>
+        <li>
+          <i>iterations</i> is the number of iterations to take.  The default value is 15.
+        </li>
+        <li>
+          <i>thresh</i> is a number between 0 and 1 that chooses the percentage of
+          negative (red) charges.  The default value is 0.5.
+        </li>
+        <li>
+          <i>seed</i> is a seed for the random number generator.  The default
+          value is 123456789.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Note that the user might also want to vary the transition probabilities.
+      This cannot currently be done on the command line, and requires editing
+      the program and recompiling it.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>ising_2d_simulation</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/ising_2d_simulation/ising_2d_simulation.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/ising_2d_simulation/ising_2d_simulation.html">a C++ version</a> and
+      <a href = "ising_2d_simulation.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/ising_2d_simulation/ising_2d_simulation.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/ising_2d_simulation/ising_2d_simulation.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/ising_2d_simulation/ising_2d_simulation.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../duel_simulation/duel_simulation.html">
+      duel_simulation</a>,
+      a FORTRAN90 code which
+      simulates N repetitions of a duel between two players, each of
+      whom has a known firing accuracy.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/gamblers_ruin_simulation/gamblers_ruin_simulation.html">
+      gamblers_ruin_simulation</a>,
+      a MATLAB program which
+      simulates the game of gambler's ruin.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gnuplot_test/gnuplot_test.html">
+      gnuplot_test</a>,
+      FORTRAN90 codes which
+      write data and command files so that gnuplot() can create plots.
+    </p>
+
+    <p>
+      <a href = "../high_card_simulation/high_card_simulation.html">
+      high_card_simulation</a>,
+      a FORTRAN90 code which
+      simulates a situation in which you see the cards in a deck one by one,
+      and must select the one you think is the highest and stop;
+      the program uses gnuplot() for graphics.
+    </p>
+
+    <p>
+      <a href = "../ising_2d_simulation_test/ising_2d_simulation_test.html">
+      ising_2d_simulation_test</a>
+    </p>
+
+    <p>
+      <a href = "../ising_3d_simulation/ising_3d_simulation.html">
+      ising_3d_simulation</a>,
+      a FORTRAN90 code which
+      carries out a Monte Carlo simulation of a 3D Ising model.
+    </p>
+
+    <p>
+      <a href = "../mandelbrot/mandelbrot.html">
+      mandelbrot</a>,
+      a FORTRAN90 code which
+      generates an ASCII PPM image of the Mandelbrot set;
+    </p>
+
+    <p>
+      <a href = "../reactor_simulation/reactor_simulation.html">
+      reactor_simulation</a>,
+      a FORTRAN90 code which
+      is a simple Monte Carlo simulation of the shielding effect of a slab
+      of a certain thickness in front of a neutron source.  This program was
+      provided as an example with the book "Numerical Methods and Software."
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/two_body_simulation/two_body_simulation.html">
+      two_body_simulation</a>,
+      a FORTRAN90 code which
+      simulates the behavior of two bodies, constrained to lie in a plane,
+      moving under the influence of gravity, with one body much more massive 
+      than the other, creating graphics files for processing by gnuplot.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          American National Standard for Programming Language: Fortran - Extended,<br>
+          American National Standards Institute, 1992,<br>
+          pages 296-299.
+        </li>
+        <li>
+          Bryan Hayes,<br>
+          The World in a Spin,<br>
+          On the Ising model of ferromagnets and other physical systems,<br>
+          American Scientist,<br>
+          Volume 88, Number 5, September-October 2000, pages 384-388,
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "ising_2d_simulation.f90">ising_2d_simulation.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "ising_2d_simulation.sh">ising_2d_simulation.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 19 July 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,18 @@
+# orbital_decay_commands.txt
+#
+# Usage:
+#  gnuplot < orbital_decay_commands.txt
+#
+set term png
+set output "orbital_decay.png"
+set xlabel "X"
+set ylabel "Y"
+set title "Orbital decay after 20 orbits"
+set size ratio -1
+set grid
+set style data lines
+set style fill solid
+set object 1 circle fc rgb "red"
+set object 1 circle at 0,0 size 0.05
+plot "orbital_decay_data.txt" using 3:5 lw 3 linecolor rgb "blue"
+quit

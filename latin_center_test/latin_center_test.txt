@@ -1,0 +1,85 @@
+31 March 2023   9:23:43.816 AM
+ 
+latin_center_test():
+  FORTRAN90 version
+  Test latin_center().
+ 
+TEST00
+  GET_SEED returns a seed for the random number
+  generator, based on the current time.
+  RANDOM_INITIALIZE uses that seed to initialize
+  the FORTRAN90 random number generator.
+ 
+  GET_SEED returns SEED =   1255770917
+ 
+TEST01
+  LATIN_CENTER chooses a Latin cell arrangement,
+  and returns the centers of those cells.
+ 
+  Spatial dimension =         2
+  Number of points =         10
+  Random number SEED =   1255770917
+ 
+  The Latin Center Square points:
+ 
+      0.1500      0.5500
+      0.8500      0.8500
+      0.4500      0.7500
+      0.0500      0.9500
+      0.5500      0.6500
+      0.6500      0.2500
+      0.9500      0.0500
+      0.7500      0.1500
+      0.3500      0.4500
+      0.2500      0.3500
+ 
+  Repeat TEST01 with a different seed from the first run.
+ 
+TEST01
+  LATIN_CENTER chooses a Latin cell arrangement,
+  and returns the centers of those cells.
+ 
+  Spatial dimension =         2
+  Number of points =         10
+  Random number SEED =   1939210765
+ 
+  The Latin Center Square points:
+ 
+      0.9500      0.0500
+      0.7500      0.3500
+      0.0500      0.6500
+      0.4500      0.9500
+      0.3500      0.5500
+      0.6500      0.4500
+      0.5500      0.8500
+      0.2500      0.2500
+      0.1500      0.7500
+      0.8500      0.1500
+ 
+  Repeat TEST01 with the same seed as the first run.
+ 
+TEST01
+  LATIN_CENTER chooses a Latin cell arrangement,
+  and returns the centers of those cells.
+ 
+  Spatial dimension =         2
+  Number of points =         10
+  Random number SEED =   1255770917
+ 
+  The Latin Center Square points:
+ 
+      0.1500      0.5500
+      0.8500      0.8500
+      0.4500      0.7500
+      0.0500      0.9500
+      0.5500      0.6500
+      0.6500      0.2500
+      0.9500      0.0500
+      0.7500      0.1500
+      0.3500      0.4500
+      0.2500      0.3500
+ 
+latin_center_test():
+  Normal end of execution.
+ 
+31 March 2023   9:23:43.816 AM

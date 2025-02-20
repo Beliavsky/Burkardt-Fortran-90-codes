@@ -1,0 +1,13 @@
+19 November 2024   4:51:15.125 PM
+  
+ SPARSEKIT_PRB05
+  FORTRAN90 version
+ 
+ A set of tests for SPARSKIT
+  
+ ierr =            0  nrhs            1
+ 
+SPARSEKIT_PRB05
+  Normal end of execution.
+ 
+19 November 2024   4:51:15.128 PM

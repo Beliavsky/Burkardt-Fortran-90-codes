@@ -1,0 +1,229 @@
+<html>
+
+  <head>
+    <title>
+      HB_IO
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      HB_IO
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>HB_IO</b>,
+      a Fortran90 code which
+      reads and writes files in the Harwell Boeing sparse matrix format.
+    </p>
+
+    <p>
+      A special feature of HB_IO is the routine HB_FILE_READ(),
+      which can read all the information from an HBSMC file of arbitrary
+      size.  The data can then be accessed by the user by "using"
+      the module <i>HB_FILE_MODULE</i>.  Suggestions on how to compile,
+      store and access the module are sketched out in the sample problem
+      source code and in the command files.
+    </p>
+
+    <p>
+      Note that the most common "flavor" of HBSMC file is an assembled
+      sparse matrix, but that there are some lesser used options,
+      including storage of the matrix as unassembled finite element
+      matrices, and corresponding storage of vectors.  These secondary
+      options are less well documented, and are only marginally supported
+      in this package.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>hb_io</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/hb_io/hb_io.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/hb_io/hb_io.html">a C++ version</a> and
+      <a href = "hb_io.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/hb_io/hb_io.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/hb_io/hb_io.html">an Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../hb_io_test/hb_io_test.html">
+      hb_io_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/cc_io/cc_io.html">
+      cc_io</a>,
+      a Fortran90 code which
+      reads and writes sparse linear systems 
+      stored in the Compressed Column (CC) format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/dlap_io/dlap_io.html">
+      dlap_io</a>,
+      a Fortran90 code which
+      reads and writes matrices in a variety of formats, and includes a
+      routine for reading matrices in HB format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/hb/hb.html">
+      hb</a>,
+      a dataset directory which
+      contains a collection of sparse matrices in the HB format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/hb_read/hb_read.html">
+      hb_read</a>,
+      a Fortran90 code which
+      reads files 
+      in the Harwell Boeing (HB) sparse matrix format;
+      This is a simplified interface intended to handle only the
+      most common format, complex unsymmetric assembled (CUA)
+      or real unsymmetric assembled (RUA).
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/hb_to_msm/hb_to_msm.html">
+      hb_to_msm</a>,
+      a MATLAB code which
+      reads an HB file and converts the matrix to MATLAB's sparse matrix format.
+    </p>
+
+    <p>
+      <a href = "../hb_to_st/hb_to_st.html">
+      hb_to_st</a>,
+      a Fortran90 code which
+      converts the sparse matrix information stored in a Harwell-Boeing
+      file into a sparse triplet file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/hbsmc/hbsmc.html">
+      hbsmc</a>,
+      a dataset directory which
+      contains the Harwell Boeing Sparse Matrix Collection;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/linplus/linplus.html">
+      linplus</a>,
+      a Fortran90 code which
+      contains some routines to manipulate matrices stored in the HB sparse matrix
+      format.
+    </p>
+
+    <p>
+      <a href = "../mm_io/mm_io.html">
+      mm_io</a>,
+      a Fortran90 code which
+      reads and writes matrices in the Matrix Market format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/msm_to_hb/msm_to_hb.html">
+      msm_to_hb</a>,
+      a MATLAB program which
+      takes a matrix in MATLAB's sparse
+      matrix format and writes it out in the HB format.
+    </p>
+
+    <p>
+      <a href = "../st_io/st_io.html">
+      st_io</a>,
+      a Fortran90 code which
+      reads and writes sparse linear systems 
+      stored in the Sparse Triplet (ST) format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/superlu/superlu.html">
+      superlu</a>,
+      a Fortran90 code which
+      uses the SUPERLU library,
+      which applies a fast direct solution method to solve
+      sparse linear systems,
+      by James Demmel, John Gilbert, and Xiaoye Li.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Iain Duff, Roger Grimes, John Lewis,<br>
+          User's Guide for the Harwell-Boeing Sparse Matrix Collection,<br>
+          Technical Report TR/PA/92/86, CERFACS,<br>
+          October 1992.
+        </li>
+        <li>
+          Iain Duff, Roger Grimes, John Lewis,<br>
+          The Rutherford-Boeing Sparse Matrix Collection,<br>
+          Technical Report RAL-TR-97-031,<br>
+          Rutherford Appleton Laboratory, 1997.
+        </li>
+        <li>
+          Iain Duff, Roger Grimes, John Lewis,<br>
+          Sparse Matrix Test Problems,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 15, pages 1-14, March 1989.
+        </li>
+        <li>
+          <a href = "https://math.nist.gov/MatrixMarket/data/Harwell-Boeing/">
+                     https://math.nist.gov/MatrixMarket/data/Harwell-Boeing/</a>
+          the Harwell-Boeing area of the MatrixMarket web site.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "hb_io.f90">hb_io.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "hb_io.sh">hb_io.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 29 February 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

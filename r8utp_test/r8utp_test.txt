@@ -1,0 +1,167 @@
+15 August 2022   9:36:16.180 AM
+ 
+r8utp_test():
+  FORTRAN90 version:
+  Test r8utp().
+ 
+r8ge_to_r8utp_test():
+  r8ge_to_r8utp() converts an r8ge matrix to r8utp format.
+ 
+  The random r8ge matrix:
+ 
+  Col:        1             2             3             4       
+  Row
+  ---
+    1    11.0000       12.0000       13.0000       14.0000    
+    2    21.0000       22.0000       23.0000       24.0000    
+    3    31.0000       32.0000       33.0000       34.0000    
+    4    41.0000       42.0000       43.0000       44.0000    
+    5    51.0000       52.0000       53.0000       54.0000    
+ 
+  The r8utp matrix
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1    11.0000       12.0000       13.0000       14.0000    
+    2    0.00000       22.0000       23.0000       24.0000    
+    3    0.00000       0.00000       33.0000       34.0000    
+    4    0.00000       0.00000       0.00000       44.0000    
+    5    0.00000       0.00000       0.00000       0.00000    
+ 
+r8utp_det_test():
+  r8utp_det() computes the determinant of an r8utp matrix.
+ 
+  The matrix A:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    1.00000       2.00000       4.00000       7.00000       11.0000    
+    2    0.00000       3.00000       5.00000       8.00000       12.0000    
+    3    0.00000       0.00000       6.00000       9.00000       13.0000    
+    4    0.00000       0.00000       0.00000       10.0000       14.0000    
+    5    0.00000       0.00000       0.00000       0.00000       15.0000    
+ 
+  Determinant is    2700.00    
+ 
+r8utp_indicator_test():
+  r8utp_indicator() sets up an indicator matrix.
+ 
+  Matrix rows M =           5
+  Matrix columns N =        4
+ 
+  The r8utp indicator matrix:
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1    11.0000       12.0000       13.0000       14.0000    
+    2    0.00000       22.0000       23.0000       24.0000    
+    3    0.00000       0.00000       33.0000       34.0000    
+    4    0.00000       0.00000       0.00000       44.0000    
+    5    0.00000       0.00000       0.00000       0.00000    
+ 
+r8utp_print_test()
+  r8utp_print() prints an r8utp matrix.
+ 
+  Matrix rows M =           6
+  Matrix columns N =        4
+ 
+  The r8utp matrix:
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1    11.0000       12.0000       13.0000       14.0000    
+    2    0.00000       22.0000       23.0000       24.0000    
+    3    0.00000       0.00000       33.0000       34.0000    
+    4    0.00000       0.00000       0.00000       44.0000    
+    5    0.00000       0.00000       0.00000       0.00000    
+    6    0.00000       0.00000       0.00000       0.00000    
+ 
+r8utp_print_some_test():
+  r8utp_print_some() prints some of an r8utp matrix.
+ 
+  Matrix rows M =           4
+  Matrix columns N =        6
+ 
+  Some of the matrix:
+ 
+  Col:       4             5             6       
+  Row
+  ---
+    1    14.0000       15.0000       26.0000    
+    2    24.0000       25.0000       36.0000    
+    3    34.0000       35.0000       46.0000    
+ 
+r8utp_random_test():
+  r8utp_random() randomizes an r8utp matrix.
+ 
+  Matrix order M, N =        5       4
+ 
+  The matrix:
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1   0.728752      0.587765      0.967291      0.730969    
+    2    0.00000      0.446218      0.280756      0.593215    
+    3    0.00000       0.00000      0.422545      0.376164    
+    4    0.00000       0.00000       0.00000      0.147343    
+    5    0.00000       0.00000       0.00000       0.00000    
+ 
+r8utp_size_test():
+  r8utp_size() determines storage for an R8UTP matrix.
+ 
+   M   N   Size  Size(check)
+
+   4   3   6   6
+   4   4  10  10
+   4   6  18  18
+ 
+r8utp_to_r8ge_test():
+  r8utp_to_r8ge() converts an r8utp matrix to r8ge format.
+ 
+  The random r8utp matrix:
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1   0.391789      0.799541      0.132746      0.837406E-01
+    2    0.00000      0.555088      0.993200      0.367655    
+    3    0.00000       0.00000      0.869550      0.118597    
+    4    0.00000       0.00000       0.00000      0.634932    
+    5    0.00000       0.00000       0.00000       0.00000    
+ 
+  The r8ge matrix
+ 
+  Col:        1             2             3             4       
+  Row
+  ---
+    1   0.391789      0.799541      0.132746      0.837406E-01
+    2    0.00000      0.555088      0.993200      0.367655    
+    3    0.00000       0.00000      0.869550      0.118597    
+    4    0.00000       0.00000       0.00000      0.634932    
+    5    0.00000       0.00000       0.00000       0.00000    
+ 
+r8utp_zeros_test():
+  r8utp_zeros() zeros out a matrix in r8utp format.
+ 
+  Matrix order M, N =        5       4
+ 
+  The matrix:
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1    0.00000       0.00000       0.00000       0.00000    
+    2    0.00000       0.00000       0.00000       0.00000    
+    3    0.00000       0.00000       0.00000       0.00000    
+    4    0.00000       0.00000       0.00000       0.00000    
+    5    0.00000       0.00000       0.00000       0.00000    
+ 
+r8utp_test():
+  Normal end of execution.
+ 
+15 August 2022   9:36:16.180 AM

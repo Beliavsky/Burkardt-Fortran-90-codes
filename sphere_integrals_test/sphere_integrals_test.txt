@@ -1,0 +1,42 @@
+ 1 June 2024  10:06:10.110 AM
+
+SPHERE_INTEGRALS_TEST():
+  FORTRAN90 version
+  Test SPHERE_INTEGRALS().
+
+TEST01
+  Estimate monomial integrals using Monte Carlo
+  over the surface of the unit sphere in 3D.
+
+  Number of sample points used is   4192
+
+  If any exponent is odd, the integral is zero.
+  We will restrict this test to randomly chosen even exponents.
+
+  Ex  Ey  Ez     MC-Estimate           Exact      Error
+
+   8   8   0    0.403948E-02    0.402050E-02    0.19E-04
+   4   0   6    0.528285E-01    0.543999E-01    0.16E-02
+   8   2   8    0.205218E-03    0.211605E-03    0.64E-05
+   4   8   6    0.905528E-04    0.906880E-04    0.14E-06
+   0   8   0     1.46185         1.39626        0.66E-01
+   4   6   8    0.894680E-04    0.906880E-04    0.12E-05
+   2   8   8    0.214805E-03    0.211605E-03    0.32E-05
+   6   6   6    0.639961E-04    0.647772E-04    0.78E-06
+   4   2   8    0.190447E-02    0.195282E-02    0.48E-04
+   4   8   4    0.345319E-03    0.344615E-03    0.70E-06
+   6   6   6    0.639961E-04    0.647772E-04    0.78E-06
+   4   6   6    0.244017E-03    0.246153E-03    0.21E-05
+   6   0   2    0.192066        0.199466        0.74E-02
+   0   4   0     2.57785         2.51327        0.65E-01
+   2   8   4    0.195362E-02    0.195282E-02    0.81E-06
+   8   6   2    0.581579E-03    0.574358E-03    0.72E-05
+   6   0   6    0.200322E-01    0.209230E-01    0.89E-03
+   8   0   2    0.121941        0.126933        0.50E-02
+   0   6   0     1.86092         1.79520        0.66E-01
+   0   4   4    0.118207        0.119680        0.15E-02
+
+SPHERE_INTEGRALS_TEST
+  Normal end of execution.
+
+ 1 June 2024  10:06:10.112 AM

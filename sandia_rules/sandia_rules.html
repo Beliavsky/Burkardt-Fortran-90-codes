@@ -1,0 +1,331 @@
+<html>
+
+  <head>
+    <title>
+      sandia_rules
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      sandia_rules
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>sandia_rules</b>,
+      a FORTRAN90 code which
+      generates a variety of quadrature rules of various orders and types.
+    </p>
+
+    <p>
+      This library is used, in turn, by several other libraries, including
+      sparse_grid_mixed() and sgmga().  This means that a program
+      that calls any of those libraries must have access to a compiled
+      copy of sandia_rules() as well.
+    </p>
+
+    <p>
+      <table border=1>
+        <tr>
+          <th>Name</th>
+          <th>Usual domain</th>
+          <th>Weight function</th>
+        </tr>
+        <tr>
+          <td>Gauss-Legendre</td>
+          <td>[-1,+1]</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Clenshaw-Curtis</td>
+          <td>[-1,+1]</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Fejer Type 2</td>
+          <td>[-1,+1]</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Gauss-Chebyshev 1</td>
+          <td>[-1,+1]</td>
+          <td>1/sqrt(1-x<sup>2</sup>)</td>
+        </tr>
+        <tr>
+          <td>Gauss-Chebyshev 2</td>
+          <td>[-1,+1]</td>
+          <td>sqrt(1-x<sup>2</sup>)</td>
+        </tr>
+        <tr>
+          <td>Gauss-Gegenbauer</td>
+          <td>[-1,+1]</td>
+          <td>(1-x<sup>2</sup>)<sup>alpha</sup></td>
+        </tr>
+        <tr>
+          <td>Gauss-Jacobi</td>
+          <td>[-1,+1]</td>
+          <td>(1-x)<sup>alpha</sup> (1+x)<sup>beta</sup></td>
+        </tr>
+        <tr>
+          <td>Gauss-Laguerre</td>
+          <td>[0,+oo)</td>
+          <td>e<sup>-x</sup></td>
+        </tr>
+        <tr>
+          <td>Generalized Gauss-Laguerre</td>
+          <td>[0,+oo)</td>
+          <td>x<sup>alpha</sup> e<sup>-x</sup></td>
+        </tr>
+        <tr>
+          <td>Gauss-Hermite</td>
+          <td>(-oo,+oo)</td>
+          <td>e<sup>-x*x</sup></td>
+        </tr>
+        <tr>
+          <td>Generalized Gauss-Hermite</td>
+          <td>(-oo,+oo)</td>
+          <td>|x|<sup>alpha</sup> e<sup>-x*x</sup></td>
+        </tr>
+        <tr>
+          <td>Hermite Genz-Keister</td>
+          <td>(-oo,+oo)</td>
+          <td>e<sup>-x*x</sup></td>
+        </tr>
+        <tr>
+          <td>Newton-Cotes-Closed</td>
+          <td>[-1,+1]</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Newton-Cotes-Open</td>
+          <td>[-1,+1]</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Newton-Cotes-Open-Half</td>
+          <td>[-1,+1]</td>
+          <td>1</td>
+        </tr>
+      </table>
+    </p>
+
+    <p>
+      For example, a Gauss-Gegenbauer quadrature rule is used to approximate:
+      <pre>
+        Integral ( -1 &lt;= x &lt;= +1 ) f(x) (1-x^2)^alpha dx
+      </pre>
+      where <b>alpha</b> is a real parameter chosen by the user.
+    </p>
+
+    <p>
+      The approximation to the integral is formed by computing a weighted sum
+      of function values at specific points:
+      <pre>
+        Sum ( 1 &lt;= i &lt;= n ) w(i) * f(x(i))
+      </pre>
+      The quantities <b>x</b> are the <i>abscissas</i> of the quadrature rule,
+      the values <b>w</b> are the <i>weights</i> of the quadrature rule, and the
+      number of terms <b>n</b> in the sum is the <i>order</i> of the quadrature rule.
+    </p>
+
+    <p>
+      As a matter of convenience, most of the quadrature rules are available
+      through three related functions:
+      <ul>
+        <li>
+          <b>name_COMPUTE</b> returns points X and weights W;
+        </li>
+        <li>
+          <b>name_COMPUTE_POINTS</b> returns points X;
+        </li>
+        <li>
+          <b>name_COMPUTE_WEIGHTS</b> returns weights W;
+        </li>
+      </ul>
+      In some cases, it is possible to compute points or weights separately;
+      in other cases, the point and weight functions actually call the
+      underlying function for the entire rule, and then discard the unrequested
+      information.
+    </p>
+
+    <p>
+      Some of these quadrature rules expect a parameter ALPHA, and perhaps also
+      a parameter BETA, in order to fully define the rule.  Therefore, the
+      argument lists of these functions vary.  They always include the input
+      quantity ORDER, but may have one or two additional inputs.  In order to offer
+      a uniform interface, there is also a family of functions with a standard
+      set of input arguments, ORDER, NP, and P.  Here NP is parameter counter,
+      and P is the parameter value vector P.  Using this interface, it is possible
+      to call all the quadrature functions with the same argument list.
+      The uniform interface functions can be identified by the
+      suffix <b>_NP</b> that appears in their names.  Generally, these functions
+      "unpack" the parameter vector where needed, and then call the corresponding
+      basic function.  Of course, for many rules NP is zero and P may be a null
+      pointer.
+      <ul>
+        <li>
+          <b>name_COMPUTE_NP ( ORDER, NP, P, X, W )</b>
+          unpacks parameters, calls name_COMPUTE, returns points X and weights W;
+        </li>
+        <li>
+          <b>name_COMPUTE_POINTS_NP ( ORDER, NP, P, X )</b>
+          unpacks parameters, calls name_COMPUTE_POINTS, returns points X;
+        </li>
+        <li>
+          <b>name_COMPUTE_WEIGHTS_NP ( ORDER, NP, P, W )</b>
+          unpacks parameters, calls name_COMPUTE_WEIGHTS, returns weights W;
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>sandia_rules</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/sandia_rules/sandia_rules.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/sandia_rules/sandia_rules.html">a C++ version</a> and
+      <a href = "sandia_rules.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/sandia_rules/sandia_rules.html">a MATLAB version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../sandia_rules_test/sandia_rules_test.html">
+      sandia_rules_test</a>
+    </p>
+
+    <p>
+      <a href = "../quad_rule/quad_rule.html">
+      quad_rule</a>,
+      a FORTRAN90 library which
+      defines quadrature rules for 1-dimensional domains.
+    </p>
+
+    <p>
+      <a href = "../sgmga/sgmga.html">
+      sgmga</a>,
+      a FORTRAN90 library which
+      creates sparse grids based on a mixture of 1D quadrature rules,
+      allowing anisotropic weights for each dimension.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Milton Abramowitz, Irene Stegun,<br>
+          Handbook of Mathematical Functions,<br>
+          National Bureau of Standards, 1964,<br>
+          ISBN: 0-486-61272-4,<br>
+          LC: QA47.A34.
+        </li>
+        <li>
+          William Cody,<br>
+          An Overview of Software Development for Special Functions,<br>
+          in Numerical Analysis Dundee, 1975,<br>
+          edited by GA Watson,<br>
+          Lecture Notes in Mathematics 506,<br>
+          Springer, 1976.
+        </li>
+        <li>
+          Philip Davis, Philip Rabinowitz,<br>
+          Methods of Numerical Integration,<br>
+          Second Edition,<br>
+          Dover, 2007,<br>
+          ISBN: 0486453391,<br>
+          LC: QA299.3.D28.
+        </li>
+        <li>
+          Sylvan Elhay, Jaroslav Kautsky,<br>
+          Algorithm 655: IQPACK, FORTRAN Subroutines for the Weights of 
+          Interpolatory Quadrature,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 13, Number 4, December 1987, pages 399-415.
+        </li>
+        <li>
+          Alan Genz, Bradley Keister,<br>
+          Fully symmetric interpolatory rules for multiple integrals
+          over infinite regions with Gaussian weight,<br>
+          Journal of Computational and Applied Mathematics,<br>
+          Volume 71, 1996, pages 299-309.
+        </li>
+        <li>
+          John Hart, Ward Cheney, Charles Lawson, Hans Maehly,
+          Charles Mesztenyi, John Rice, Henry Thatcher,
+          Christoph Witzgall,<br>
+          Computer Approximations,<br>
+          Wiley, 1968,<br>
+          LC: QA297.C64.
+        </li>
+        <li>
+          Knut Petras,<br>
+          Smolyak Cubature of Given Polynomial Degree with Few Nodes
+          for Increasing Dimension,<br>
+          Numerische Mathematik,<br>
+          Volume 93, Number 4, February 2003, pages 729-753.
+        </li>
+        <li>
+          Arthur Stroud, Don Secrest,<br>
+          Gaussian Quadrature Formulas,<br>
+          Prentice Hall, 1966,<br>
+          LC: QA299.4G3S7.
+        </li>
+        <li>
+          Shanjie Zhang, Jianming Jin,<br>
+          Computation of Special Functions,<br>
+          Wiley, 1996,<br>
+          ISBN: 0-471-11963-6,<br>
+          LC: QA351.C45
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "sandia_rules.f90">sandia_rules.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "sandia_rules.sh">sandia_rules.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 January 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

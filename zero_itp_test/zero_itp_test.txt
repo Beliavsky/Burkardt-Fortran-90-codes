@@ -1,0 +1,77 @@
+ 
+ 3 March 2024   5:55:22.293 PM
+zero_itp_test():
+  Fortran90 version.
+  Test zero_itp(), which seeks a root of a function F(X)
+  in an interval [A,B].
+ 
+  f_01(x) = sin ( x ) - x / 2
+ 
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+ 
+      1.89549427      1.89549427      1.89549427
+    0.166533E-14   -0.222045E-13   -0.458522E-13
+  Number of calls to F =        8
+  Tolerance epsi =   0.149012E-07
+  Parameters k1 =  0.200000    , k2 =    2.00000    , n0 =    1
+ 
+  f_02(x) = 2 * x - exp ( - x )
+ 
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+ 
+      0.35173371      0.35173371      0.35173371
+   -0.122125E-14    0.636341E-10    0.127270E-09
+  Number of calls to F =        8
+  Tolerance epsi =   0.149012E-07
+  Parameters k1 =  0.200000    , k2 =    2.00000    , n0 =    1
+ 
+  f_03(x) = x * exp ( - x )
+ 
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+ 
+     -0.00000000      0.00000000      0.00000000
+   -0.159644E-13    0.251342E-11    0.504281E-11
+  Number of calls to F =        8
+  Tolerance epsi =   0.149012E-07
+  Parameters k1 =  0.133333    , k2 =    2.00000    , n0 =    1
+ 
+  f_04(x) = exp ( x ) - 1 / ( 100 * x * x )
+ 
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+ 
+      0.09534462      0.09534463      0.09534465
+   -0.224874E-07    0.337748E-06    0.697984E-06
+  Number of calls to F =       31
+  Tolerance epsi =   0.149012E-07
+  Parameters k1 =  0.100001E-01, k2 =    2.00000    , n0 =    1
+ 
+  f_05(x) = (x+3) * (x-1) * (x-1)
+ 
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+ 
+     -3.00000000     -3.00000000     -3.00000000
+     0.00000         0.00000         0.00000    
+  Number of calls to F =        2
+  Tolerance epsi =   0.149012E-07
+  Parameters k1 =  0.285714E-01, k2 =    2.00000    , n0 =    1
+ 
+  f_06(x) = x^3 - x - 2
+ 
+      A                 Z             B
+    F(A)              F(Z)          F(B)
+ 
+      1.52128478      1.52140184      1.52151889
+   -0.564170E-03    0.131544E-03    0.827384E-03
+  Number of calls to F =        4
+  Tolerance epsi =   0.500000E-03
+  Parameters k1 =  0.200000    , k2 =    2.00000    , n0 =    1
+ 
+zero_itp_test():
+  Normal end of execution.
+ 
+ 3 March 2024   5:55:22.293 PM

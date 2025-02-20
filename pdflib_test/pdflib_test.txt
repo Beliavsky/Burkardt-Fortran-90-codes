@@ -1,0 +1,202 @@
+14 September 2021   7:36:04.041 PM
+ 
+PDFLIB_TEST
+  FORTRAN90 version
+  Test the PDFLIB library.
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+ 
+I4_BINOMIAL_PDF_TEST
+  I4_BINOMIAL_PDF reports
+  PROB, the probability that
+  N trials, with
+  P probability of success result in
+  K successes.
+
+   N         P   K        PROB
+
+   5    0.2500   0    0.237305    
+   5    0.2500   1    0.395508    
+   5    0.2500   2    0.263672    
+   5    0.2500   3    0.878906E-01
+   5    0.2500   4    0.146484E-01
+   5    0.2500   5    0.976562E-03
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+
+I4_BINOMIAL_SAMPLE_TEST
+  I4_BINOMIAL_SAMPLE samples the binomial distribution.
+
+   N         P   K        PDF
+
+  17    0.3237   4    0.161781    
+  19    0.3244   4    0.119698    
+  10    0.4934   5    0.245879    
+   7    0.2887   4    0.875263E-01
+   8    0.3530   5    0.831384E-01
+   5    0.1540   1    0.394405    
+  17    0.5662  11    0.158130    
+  11    0.8207  10    0.273448    
+   6    0.3255   1    0.272660    
+   5    0.3401   0    0.125158    
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+
+I4_UNIFORM_SAMPLE_TEST
+  I4_UNIFORM_SAMPLE samples the uniform distribution
+  on integers.  Generate C between A and B.
+
+    A    B   C
+
+   -3   13   -1
+   -7   14    2
+    3    6    6
+    9   10    9
+   -3   -2   -3
+   10   15   14
+   -2    1    1
+    3    6    4
+   -8    8    3
+   -3    0   -1
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+ 
+R8_CHI_SAMPLE_TEST
+  R8_CHI_SAMPLE ( DF ) samples the Chi distribution with
+  DF degrees of freedom.
+ 
+  Current generator index =  2
+ 
+   I       DF       R8_CHI_SAMPLE ( DF )
+ 
+   1     3.10629         6.84461    
+   2     2.85937         2.69742    
+   3     5.38024         4.72515    
+   4     5.26012         4.24260    
+   5     2.01339         2.96716    
+   6     1.84183         1.28498    
+   7     2.96542         1.52971    
+   8     1.54945        0.286261E-03
+   9     1.23015         1.31913    
+  10     3.68364        0.425069    
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+ 
+R8VEC_MULTINORMAL_PDF_TEST
+  R8VEC_MULTINORMAL_PDF evaluates the PDF for the
+  multinormal distribution.
+ 
+  The covariance matrix is C.
+  The definition uses the inverse of C;
+  R8VEC_MULTINORMAL_PDF uses the Cholesky factor.
+  Verify that the algorithms are equivalent.
+ 
+  R1:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1   0.323711      0.324392      0.288730      0.566211      0.895177    
+    2                 0.493388      0.353007      0.820720      0.336599    
+    3                               0.153961      0.325495      0.285023    
+    4                                             0.340080      0.503381    
+    5                                                           0.773531    
+ 
+  C:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.104789      0.105009      0.934649E-01  0.183289      0.289778    
+    2   0.105009      0.348662      0.267831      0.588607      0.456462    
+    3   0.934649E-01  0.267831      0.231683      0.503315      0.421168    
+    4   0.183289      0.588607      0.503315       1.21578       1.04708    
+    5   0.289778      0.456462      0.421168       1.04708       1.84762    
+ 
+  R2:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1   0.323711      0.324392      0.288730      0.566211      0.895177    
+    2                 0.493388      0.353007      0.820720      0.336599    
+    3                               0.153961      0.325495      0.285023    
+    4                                             0.340080      0.503381    
+    5                                                           0.773531    
+ 
+  Determinant of C =   0.418435E-04
+ 
+  C_INV:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    23.6444      -2.36974      -17.3041       7.88943      -3.64946    
+    2   -2.36974       27.1525      -25.5779      -3.44532       1.44659    
+    3   -17.3041      -25.5779       83.5630      -21.4414       2.13595    
+    4    7.88943      -3.44532      -21.4414       12.3081      -2.47378    
+    5   -3.64946       1.44659       2.13595      -2.47378       1.67126    
+ 
+  MU:
+ 
+         1:   0.20830247    
+         2:   -1.1836216    
+         3:    2.3114632    
+         4:   0.93221792    
+         5:  -0.30229341E-01
+ 
+  X:
+ 
+         1:   0.20726776    
+         2:   -1.1718233    
+         3:    2.3030669    
+         4:   0.92844370    
+         5:  -0.30140030E-01
+ 
+  PDF1 =    1.55774    
+  PDF2 =    1.55153    
+ 
+INITIALIZE - Note:
+  The RNGLIB package has been initialized.
+ 
+R8PO_FA_TEST
+  R8PO_FA computes the Cholesky factor R of a
+  positive definite matrix A, so that A = R' * R.
+ 
+  Start with random R1;
+  Compute A = R1' * R1.
+  Call R8PO_FA and see if you recover R2 = R1.
+ 
+  R1:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.323711      0.324392      0.288730      0.566211      0.895177    
+    2    0.00000      0.493388      0.353007      0.820720      0.336599    
+    3    0.00000       0.00000      0.153961      0.325495      0.285023    
+    4    0.00000       0.00000       0.00000      0.340080      0.503381    
+    5    0.00000       0.00000       0.00000       0.00000      0.773531    
+ 
+  A:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.104789      0.105009      0.934649E-01  0.183289      0.289778    
+    2   0.105009      0.348662      0.267831      0.588607      0.456462    
+    3   0.934649E-01  0.267831      0.231683      0.503315      0.421168    
+    4   0.183289      0.588607      0.503315       1.21578       1.04708    
+    5   0.289778      0.456462      0.421168       1.04708       1.84762    
+ 
+  Frobenius difference between R1 and R2 =   0.122502E-14
+ 
+PDFLIB_TEST
+  Normal end of execution.
+ 
+14 September 2021   7:36:04.042 PM

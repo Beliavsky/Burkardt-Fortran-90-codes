@@ -1,0 +1,97 @@
+ 8 September 2021   8:25:01.774 AM
+ 
+CONDITION_TEST:
+  FORTRAN90 version
+  Test the CONDITION library.
+  The R8LIB library must also be available.
+ 
+CONDITION_LINPACK_TEST
+  CONDITION_LINPACK estimates the L1 condition number
+  of a matrix in general storage mode.
+ 
+  Matrix               Order   Condition         Linpack
+ 
+  Combinatorial            4     10.0000         7.00000    
+  CONEX1                   4     80601.0         565.586    
+  CONEX2                   3     601.970         7.50657    
+  CONEX3                   5     80.0000         5.00000    
+  CONEX4                   4     4488.00         3238.09    
+  KAHAN                    4     646.712         574.664    
+  RANDOM                   4     49.5258         31.4138    
+  RANDOM                   4     29.4317         23.5857    
+  RANDOM                   4     105.386         81.9440    
+  RANDOM                   4     8.47885         5.45768    
+  RANDOM                   4     23.0418         15.5382    
+ 
+CONDITION_SAMPLE1_TEST
+  CONDITION_SAMPLE1 estimates the L1 condition number using sampling
+  for a matrix in general storage,
+ 
+  Matrix                 Samples Order   Condition        Estimate
+ 
+  Combinatorial               10     4     10.0000         7.20871    
+  Combinatorial             1000     4     10.0000         8.69041    
+  Combinatorial           100000     4     10.0000         9.56976    
+ 
+  CONEX1                      10     4     80601.0         4.04391    
+  CONEX1                    1000     4     80601.0         29.3131    
+  CONEX1                  100000     4     80601.0         414.037    
+ 
+  CONEX2                      10     3     601.970         4.10995    
+  CONEX2                    1000     3     601.970         51.8372    
+  CONEX2                  100000     3     601.970         351.326    
+ 
+  CONEX3                      10     5     80.0000         1.91132    
+  CONEX3                    1000     5     80.0000         9.09894    
+  CONEX3                  100000     5     80.0000         38.1791    
+ 
+  CONEX4                      10     4     4488.00         16.7150    
+  CONEX4                    1000     4     4488.00         53.4881    
+  CONEX4                  100000     4     4488.00         438.725    
+ 
+  KAHAN                       10     4     646.712         5.18858    
+  KAHAN                     1000     4     646.712         23.2171    
+  KAHAN                   100000     4     646.712         294.887    
+ 
+  RANDOM                      10     4     39.1737         6.40739    
+  RANDOM                    1000     4     39.1737         19.0652    
+  RANDOM                  100000     4     39.1737         34.0286    
+ 
+  RANDOM                      10     4     13.0775         5.19711    
+  RANDOM                    1000     4     13.0775         11.2064    
+  RANDOM                  100000     4     13.0775         12.1400    
+ 
+  RANDOM                      10     4     418.932         8.69745    
+  RANDOM                    1000     4     418.932         23.3190    
+  RANDOM                  100000     4     418.932         159.889    
+ 
+  RANDOM                      10     4     11.8545         5.04584    
+  RANDOM                    1000     4     11.8545         9.64289    
+  RANDOM                  100000     4     11.8545         11.1011    
+ 
+  RANDOM                      10     4     266.794         3.49166    
+  RANDOM                    1000     4     266.794         26.8156    
+  RANDOM                  100000     4     266.794         109.482    
+ 
+CONDITION_HAGER_TEST
+  CONDITION_HAGER estimates the L1 condition number
+  for a matrix in general storage,
+ 
+  Matrix               Order   Condition         Hager
+ 
+  Combinatorial            4     10.0000         10.0000    
+  CONEX1                   4     80601.0         810.020    
+  CONEX2                   3     601.970         601.970    
+  CONEX3                   5     80.0000         80.0000    
+  CONEX4                   4     4488.00         4488.00    
+  KAHAN                    4     646.712         646.712    
+  RANDOM                   4     22.6151         22.6151    
+  RANDOM                   4     41.3600         41.3600    
+  RANDOM                   4     44.4912         44.4912    
+  RANDOM                   4     26.9796         18.6096    
+  RANDOM                   4     99.2673         99.2673    
+ 
+CONDITION_TEST:
+  Normal end of execution.
+ 
+ 8 September 2021   8:25:02.168 AM

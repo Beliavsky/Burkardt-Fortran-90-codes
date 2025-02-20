@@ -1,0 +1,178 @@
+<html>
+
+  <head>
+    <title>
+      pce_ode_hermite
+    </title>
+  </head>
+
+  <body bgcolor="#eeeeee" link="#cc0000" alink="#ff3300" vlink="#000055">
+
+    <h1 align = "center">
+      pce_ode_hermite
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>pce_ode_hermite</b>,
+      a FORTRAN90 code which
+      defines and solves a time-dependent scalar exponential decay ODE
+      with uncertain decay coefficient, using a polynomial chaos expansion, 
+      in terms of Hermite polynomials.
+    </p>
+
+    <p>
+      The deterministic equation is
+      <pre>
+        du/dt = - alpha * u,
+        u(0) = u0
+      </pre>
+      In the stochastic version, it is assumed that the decay coefficient
+      ALPHA is a Gaussian random variable with mean value ALPHA_MU and variance
+      ALPHA_SIGMA^2.
+    </p>
+
+    <p>
+      The exact expected value of the stochastic equation is known to be
+      <pre>
+        u(t) = u0 * exp ( t^2/2)
+      </pre>
+      This should be matched by the first component of the polynomial chaos
+      expansion.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>pce_ode_hermite</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/pce_ode_hermite/pce_ode_hermite.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/pce_ode_hermite/pce_ode_hermite.html">a C++ version</a> and
+      <a href = "pce_ode_hermite.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/pce_ode_hermite/pce_ode_hermite.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../pce_ode_hermite_test/pce_ode_hermite_test.html">
+      pce_ode_hermite_test</a>
+    </p>
+
+    <p>
+      <a href = "../black_scholes/black_scholes.html">
+      black_scholes</a>,
+      a FORTRAN90 library which
+      implements some simple approaches to
+      the Black-Scholes option valuation theory,
+      by Desmond Higham.
+    </p>
+
+    <p>
+      <a href = "../hermite_polynomial/hermite_polynomial.html">
+      hermite_polynomial</a>,
+      a FORTRAN90 library which
+      evaluates the physicist's Hermite polynomial, the probabilist's Hermite polynomial,
+      the Hermite function, and related functions.
+    </p>
+
+    <p>
+      <a href = "../ornstein_uhlenbeck/ornstein_uhlenbeck.html">
+      ornstein_uhlenbeck</a>,
+      a FORTRAN90 library which 
+      approximates solutions of the Ornstein-Uhlenbeck 
+      stochastic differential equation (SDE) using the Euler method
+      and the Euler-Maruyama method.
+    </p>
+
+    <p>
+      <a href = "../pce_burgers/pce_burgers.html">
+      pce_burgers</a>,
+      a FORTRAN90 program which
+      defines and solves a version of the time-dependent viscous Burgers equation,
+      with uncertain viscosity, using a polynomial chaos expansion in terms
+      of Hermite polynomials,
+      by Gianluca Iaccarino.
+    </p>
+
+    <p>
+      <a href = "../sde/sde.html">
+      sde</a>,
+      a FORTRAN90 library which
+      illustrates the properties of stochastic differential equations, and
+      common algorithms for their analysis,
+      by Desmond Higham;
+    </p>
+
+    <p>
+      <a href = "../stochastic_rk/stochastic_rk.html">
+      stochastic_rk</a>,
+      a FORTRAN90 library which
+      applies a Runge Kutta (RK) scheme to a stochastic differential equation.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Roger Ghanem, Pol Spanos,<br>
+          Stochastic Finite Elements: A Spectral Approach,<br>
+          Revised Edition,<br>
+          Dover, 2003,<br>
+          ISBN: 0486428184,<br>
+          LC: TA347.F5.G56.
+        </li>
+        <li>
+          Dongbin Xiu,<br>
+          Numerical Methods for Stochastic Computations: A Spectral Method Approach,<br>
+          Princeton, 2010,<br>
+          ISBN13: 978-0-691-14212-8,<br>
+          LC: QA274.23.X58.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "pce_ode_hermite.f90">pce_ode_hermite.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "pce_ode_hermite.sh">pce_ode_hermite.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last modified on 12 October 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+

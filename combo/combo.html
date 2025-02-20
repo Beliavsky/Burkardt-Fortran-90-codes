@@ -1,0 +1,295 @@
+<html>
+
+  <head>
+    <title>
+      combo
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      combo
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>combo</b>,
+      a Fortran90 code which
+      ranks, unranks, enumerates, lists and 
+      randomly selects balanced sequences, cycles, graphs, Gray codes, 
+      subsets, partitions, permutations, restricted growth functions, 
+      Pruefer codes and trees.
+    </p>
+
+    <p>
+      The objects include:
+      <ul>
+        <li>
+          <b>BAL</b>, balanced sequences, included nested parentheses,
+          Dyck lattice paths, ballot paths;
+        </li>
+        <li>
+          <b>CYCLE</b>, permutations of the first N integers in cycle form;
+        </li>
+        <li>
+          <b>GRAPH</b>, graphs stored as a list of edges.
+        </li>
+        <li>
+          <b>GRAY</b>, Gray codes;
+        </li>
+        <li>
+          <b>KNAPSACK</b>, optimally filling a knapsack of given size using
+          a set of smaller objects;
+        </li>
+        <li>
+          <b>KSUBSET</b>, subsets of size exactly K from a set of N objects;
+        </li>
+        <li>
+          <b>NPART</b>, partitions of an integer having exactly N parts;
+        </li>
+        <li>
+          <b>PART</b>, partitions of an integer;
+        </li>
+        <li>
+          <b>PERM</b>, permutations of the first N integers in standard form;
+        </li>
+        <li>
+          <b>PRUEFER</b>, Pruefer codes;
+        </li>
+        <li>
+          <b>RGF</b>, restricted growth functions;
+        </li>
+        <li>
+          <b>SETPART</b>, partitions of a set;
+        </li>
+        <li>
+          <b>SUBSET</b>, subsets of a set of N objects;
+        </li>
+        <li>
+          <b>TABLEAU</b>, tableaus;
+        </li>
+        <li>
+          <b>TREE</b>, trees;
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Some of these sets of objects can be ordered in several different
+      ways, and in some cases, a separate set of ranking, unranking, and
+      successor routines are available for the various orderings
+      (lexical, colexical, revolving door, Trotter-Johnson).
+    </p>
+
+    <p>
+      Kreher and Stinson provide C source-code for the routines,
+      as well as other information, at
+      <a href = "https://www.math.mtu.edu/~kreher/cages.html">
+      their web site.</a>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>combo</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/combo/combo.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/combo/combo.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/combo/combo.html">a Fortran77 version</a> and
+      <a href = "combo.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/combo/combo.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/combo/combo.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/combo/combo.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../combo_test/combo_test.html">
+      combo_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/change_dynamic/change_dynamic.html">
+      change_dynamic</a>,
+      a Fortran90 code which
+      considers the change making problem,
+      in which a given sum is to be formed using coins of various denominations.
+    </p>
+
+    <p>
+      <a href = "../floyd/floyd.html">
+      floyd</a>,
+      a Fortran90 code which
+      implements Floyd's algorithm for finding the shortest distance between 
+      pairs of nodes on a directed graph.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/knapsack/knapsack.html">
+      knapsack</a>,
+      a Fortran77 code which
+      solves a variety of knapsack problems.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/knapsack_01_brute/knapsack_01_brute.html">
+      knapsack_01_brute</a>,
+      a Fortran90 code which
+      uses brute force to solve small versions of the 0/1 knapsack problem;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/lamp/lamp.html">
+      lamp</a>,
+      a Fortran77 code which
+      solves linear assignment and matching problems.
+    </p>
+
+    <p>
+      <a href = "../lau_np/lau_np.html">
+      lau_np</a>,
+      a Fortran90 code which
+      implements heuristic algorithms for various NP-hard combinatorial problems.
+    </p>
+
+    <p>
+      <a href = "../legendre_product_polynomial/legendre_product_polynomial.html">
+      legendre_product_polynomial</a>,
+      a Fortran90 code which
+      defines Legendre product polynomials, creating a multivariate 
+      polynomial as the product of univariate Legendre polynomials.
+    </p>
+
+    <p>
+      <a href = "../monomial/monomial.html">
+      monomial</a>,
+      a Fortran90 code which
+      enumerates, lists, ranks, unranks and randomizes multivariate monomials 
+      in a space of M dimensions, with total degree less than N,
+      equal to N, or lying within a given range.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/partial_digest/partial_digest.html">
+      partial_digest</a>,
+      a Fortran90 code which
+      solves the partial digest problem.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/partition_problem/partition_problem.html">
+      partition_problem</a>,
+      a Fortran90 code which
+      seeks solutions of the partition problem, splitting a set of integers into
+      two subsets with equal sum.
+    </p>
+
+    <p>
+      <a href = "../polynomial/polynomial.html">
+      polynomial</a>,
+      a Fortran90 code which
+      adds, multiplies, differentiates, evaluates and prints multivariate 
+      polynomials in a space of M dimensions.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/select/select.html">
+      select</a>,
+      a Fortran90 code which
+      generates various combinatorial objects.
+    </p>
+
+    <p>
+      <a href = "../set_theory/set_theory.html">
+      set_theory</a>,
+      a Fortran90 code which
+      demonstrates various set theoretic operations using several models of a set.
+    </p>
+
+    <p>
+      <a href = "../subset/subset.html">
+      subset</a>,
+      a Fortran90 code which
+      generates, ranks and unranks various combinatorial objects.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/subset_sum/subset_sum.html">
+      subset_sum</a>,
+      a Fortran90 code which
+      seeks solutions of the subset sum problem.
+    </p>
+
+    <p>
+      <a href = "../toms515/toms515.html">
+      toms515</a>,
+      a Fortran90 code which
+      selects subsets of size K from a set of size N.
+      This is a version of ACM TOMS Algorithm 515,
+      by Bill Buckles, Matthew Lybanon.
+    </p>
+
+    <p>
+      <a href = "../unicycle/unicycle.html">
+      unicycle</a>,
+      a Fortran90 code which
+      considers permutations containing a single cycle, sometimes called 
+      cyclic permutations.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Donald Kreher, Douglas Simpson,<br>
+          Combinatorial Algorithms,<br>
+          CRC Press, 1998,<br>
+          ISBN: 0-8493-3988-X,<br>
+          LC: QA164.K73.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "combo.f90">combo.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "combo.sh">combo.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 10 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

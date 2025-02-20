@@ -1,0 +1,294 @@
+<html>
+
+  <head>
+    <title>
+      quadpack
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      quadpack
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>quadpack</b>,
+      a FORTRAN90 code which
+      estimates integrals using numerical quadrature,
+      using double precision arithmetic,
+      by Piessens, deDoncker-Kapenga, Ueberhuber, and Kahaner.
+    </p>
+
+    <p>
+      There are routines for nonadaptive
+      or adaptive integration, finite, semi-infinite or fully infinite
+      integration regions, integrands with singularities, and integrands
+      that include a factor of SIN(X) or COS(X).
+    </p>
+
+    </p>
+      Many subroutines come in two versions, a "simple" interface and
+      an "extended" interface.  Compare, for example, the routines
+      QAWF and QAWFE.  The first one simply makes sensible choices for
+      many parameter values.  The second one gives the user full control
+      over all the parameters. 
+    </p>
+
+    <h3>
+      Routines for a finite region:
+    </h3>
+
+    <p>
+      How to decide what routine to use, if your integration region
+      is finite:
+      <ul>
+        <li>
+          If you can factor the integrand as F(X)=W(X)*G(X), where G
+          is smooth on [A,B] and W(X)=COS(OMEGA*X) or SIN(OMEGA*X) then 
+          use QAWO.
+        </li>
+        <li>
+          Otherwise, if you can factor F(X)=W(X)*G(X) where G is smooth
+          and W(X)=(X-A)**ALFA * (B-X)**BETA * (LOG(X-A))**L * (LOG(B-X))**K
+          with K, L = 0 or 1, and ALFA, BETA greater than -1, then use QAWS.
+        </li>
+        <li>
+          Otherwise, if you can factor F(X)=W(X)*G(X) where G is smooth
+          and W(X)=1/(X-C) for some constant C, use QAWC.
+        </li>
+        <li>
+          Otherwise, if you do not care too much about possible
+          inefficient use of computer time, and do not want to further
+          analyze the problem, use QAGS.
+        </li>
+        <li>
+          Otherwise, if the integrand is smooth, use QNG or QAG.
+        </li>
+        <li>
+          Otherwise, if there are discontinuities or singularities
+          of the integrand or of its derivative, and you know where they
+          are, split the integration range at these points and analyze
+          each subinterval.  You can also use QAGP, which is to be provided
+          with the x-locations of the singularities or discontinuities.
+        </li>
+        <li>
+          Otherwise, if the integrand has end point singularities, use QAGS.
+        </li>
+        <li>
+          Otherwise, if the integrand has an oscillatory behavior of
+          nonspecific type, and no singularities, use QAG with KEY=6.
+        </li>
+        <li>
+          Otherwise, use QAGS.
+        </li>
+      </ul>
+    </p>
+
+    <h3>
+      Routines for an infinite region:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          If the integrand decays rapidly to zero, truncate the
+          interval and use the finite interval decision tree.
+        </li>
+        <li>
+          Otherwise, if the integrand oscillates over the entire infinite range,
+          and the integral is a Fourier transform, use QAWF.
+        </li>
+        <li>
+          Or, if the integrand oscillates over the entire infinite range,
+          but is not a Fourier transform, then sum the successive positive 
+          and negative contributions by integrating between the zeroes of the
+          integrand.  Apply convergence acceleration with QELG.
+        </li>
+        <li>
+          Otherwise, if you are not constrained by computer time, and
+          do not wish to analyze the problem further, use QAGI.
+        </li>
+        <li>
+          Otherwise, if the integrand has a non-smooth behavior in
+          the range, and you know where it occurs, split off these regions
+          and use the appropriate finite range routines to integrate over
+          them.  Then begin this tree again to handle the remainder of the region.
+        </li>
+        <li>
+          Otherwise, truncation of the interval, or application of
+          a suitable transformation for reducing the problem to a finite
+          range may be possible.  And you may also call QAGI.
+        </li>
+      </ul>
+    </p>
+ 
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>quadpack</b> is available in
+      <a href = "quadpack.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../quadpack_test/quadpack_test.html">
+      quadpack_test</a>
+    </p>
+
+    <p>
+      <a href = "../intlib/intlib.html">
+      INTLIB</a>,
+      a FORTRAN90 code which
+      numerically estimates integrals.
+    </p>
+
+    <p>
+      <a href = "../kronrod/kronrod.html">
+      KRONROD</a>,
+      a FORTRAN90 code which
+      can compute a Gauss and Gauss-Kronrod pair of quadrature rules
+      of arbitrary order, 
+      by Robert Piessens, Maria Branders.
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      NMS</a>,
+      a FORTRAN90 code which
+      includes QUADPACK.
+    </p>
+
+    <p>
+      <a href = "../product_rule/product_rule.html">
+      PRODUCT_RULE</a>, 
+      a FORTRAN90 code which
+      can create a multidimensional quadrature rule as a product of
+      one dimensional rules.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrule/quadrule.html">
+      QUADRULE</a>,
+      a FORTRAN90 code which
+      defines quadrature rules for
+      various intervals and weight functions.
+    </p>
+
+    <p>
+      <a href = "../slatec/slatec.html">
+      SLATEC</a>,
+      a FORTRAN90 code which 
+      includes QUADPACK.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stroud/stroud.html">
+      STROUD</a>,
+      a FORTRAN90 code which
+      defines quadrature rules for
+      various geometric shapes.
+    </p>
+
+    <p>
+      <a href = "../test_int/test_int.html">
+      TEST_INT</a>,
+      a FORTRAN90 code which
+      defines some test integration problems.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms351/toms351.html">
+      TOMS351</a>, 
+      a FORTRAN77 library which 
+      estimates an integral using Romberg
+      integration.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms379/toms379.html">
+      TOMS379</a>,
+      a FORTRAN77 library which 
+      estimates an integral.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms418/toms418.html">
+      TOMS418</a>, 
+      a FORTRAN77 library which 
+      estimates the integral of a function
+      with a sine or cosine factor.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms424/toms424.html">
+      TOMS424</a>, 
+      a FORTRAN77 library which 
+      estimates the integral of a function
+      using Clenshaw-Curtis quadrature.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms468/toms468.html">
+      TOMS468</a>, 
+      a FORTRAN77 library which
+      carries out the automatic integration of a function.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Robert Piessens, Elise deDoncker-Kapenga, 
+      Christian Ueberhuber, David Kahaner.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Robert Piessens, Elise deDoncker-Kapenga, 
+          Christian Ueberhuber, David Kahaner,<br>
+          QUADPACK: A Subroutine Package for Automatic Integration,<br>
+          Springer, 1983,<br>
+          ISBN: 3540125531,<br>
+          LC: QA299.3.Q36.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "quadpack.f90">quadpack.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "quadpack.sh">quadpack.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 November 2023.
+    </i>
+
+  </body>
+
+</html>

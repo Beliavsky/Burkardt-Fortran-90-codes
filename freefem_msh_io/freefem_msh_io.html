@@ -1,0 +1,147 @@
+<html>
+
+  <head>
+    <title>
+      freefem_msh_io
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      freefem_msh_io
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>freefem_msh_io</b>,
+      a FORTRAN90 code which
+      reads and writes files used by the FreeFem++ finite element code
+      to store mesh information.
+    </p>
+
+    <p>
+      Note that the GMSH code creates mesh files that use the ".msh"
+      extension, but which are an entirely different format.
+    </p>
+
+    <p>
+      The msh file format is obliquely described in section 12.5 of the
+      FreeFem++ documentation.
+    <p>
+
+    <p>
+      At least for the 2D case of a triangular mesh, the format seems 
+      to be as follows:
+      <ol>
+        <li>
+          a single line giving NV, NE, NT, the number of vertices, boundary edges, and triangles
+        </li>
+        <li>
+          NV lines, each containing the (X,Y) coordinates and integer label for a node.
+        </li>
+        <li>
+          NT lines, each containing three vertex indices and integer label for a triangle.
+        </li>
+        <li>
+          NE lines, each containing two vertex indices and integer label for a boundary edge.
+        </li>
+      </ol>
+      The "labels" seem to be "0" for interior objects and 1 for boundary objects.
+      All edges are boundary objects.  (This might not be true.  A geometry
+      might include internal edges, and perhaps these count as interior objects,
+      but definitely, the edge list does not include arbitrary triangle edges,
+      only those on the boundary.)  All triangles are interior objects.
+      Vertices may be boundary or interior objects.
+    <p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>freefem_msh_io</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/freefem_msh_io/freefem_msh_io.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/freefem_msh_io/freefem_msh_io.html">a C++ version</a> and
+      <a href = "freefem_msh_io.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/freefem_msh_io/freefem_msh_io.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/freefem_msh_io/freefem_msh_io.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../freefem_msh_io_test/freefem_msh_io_test.html">
+      freefem_msh_io_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/freefem_msh/freefem_msh.html">
+      FREEFEM_MSH</a>,
+      a data directory which
+      contains examples of the mesh files created by the FreeFem++ code,
+      which use the extension ".msh".
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Frederic Hecht,<br>
+          New development in FreeFem++,<br>
+          Journal of Numerical Mathematics,<br>
+          Volume 20, Number 3-4, 2012, pages 251-265.
+        </li>
+        <li>
+          Frederic Hecht,<br>
+          BAMG: Bidimensional Anisotropic Mesh Generator,<br>
+          draft version v1.00, December 2006.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "freefem_msh_io.f90">freefem_msh_io.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "freefem_msh_io.sh">freefem_msh_io.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 27 October 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

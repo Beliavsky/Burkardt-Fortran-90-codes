@@ -1,0 +1,64 @@
+01 April 2023  11:58:10.202 AM
+
+poisson_simulation_test():
+  FORTRAN90 version.
+  Test poisson_simulation().
+
+TEST01:
+  POISSON_FIXED_EVENTS simulates a Poisson process
+  until a given number of events have occurred.
+
+  Simulate a Poisson process, for which, on average,
+  LAMBDA events occur per unit time.
+  Run until you have observed EVENT_NUM events.
+
+  LAMBDA =   0.500000    
+  EVENT_NUM =   1000
+
+  Minimum wait =   0.442115E-02
+  Average wait =    2.04824    
+  Maximum wait =    14.4673    
+
+ Count            Time            Wait
+
+     0     0.00000         0.00000    
+     1    0.170566        0.170566    
+     2     3.36295         3.19238    
+     3     4.60783         1.24488    
+     4     5.44315        0.835319    
+     5     8.13475         2.69160    
+  ....  ..............  ..............
+   995     2033.79        0.388740    
+   996     2036.64         2.84122    
+   997     2039.39         2.75319    
+   998     2040.82         1.43278    
+   999     2046.06         5.23488    
+  1000     2048.24         2.18445    
+ 
+  Data stored in "poisson_timeline_data.txt".
+  Plot commands stored in "poisson_timeline_commands.txt".
+ 
+  Data stored in "poisson_times_data.txt".
+  Plot commands stored in "poisson_times_commands.txt".
+
+TEST02:
+  POISSON_FIXED_TIME simulates a Poisson process
+  counting the number of events that occur during
+  a given time.
+
+  Simulate a Poisson process, for which, on average,
+  LAMBDA events occur per unit time.
+  Run for a total of    1000.00     time units.
+  LAMBDA =   0.500000    
+
+  Mean number of events =    501.119    
+  Variance =    495.517    
+  STD =    22.2602    
+ 
+  Data stored in "poisson_events_data.txt".
+  Plot commands stored in "poisson_events_commands.txt".
+
+poisson_simulation_test():
+  Normal end of execution.
+
+01 April 2023  11:58:10.408 AM

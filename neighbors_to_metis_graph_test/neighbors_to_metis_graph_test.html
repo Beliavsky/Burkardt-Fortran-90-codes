@@ -1,0 +1,96 @@
+<html>
+
+  <head>
+    <title>
+      neighbors_to_metis_graph_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      neighbors_to_metis_graph_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>neighbors_to_metis_graph_test</b>,
+      a Fortran90 code which
+      calls neighbors_to_metis_graph(), which
+      reads a file describing
+      the graph-theoretic adjacency structure of the
+      elements in a mesh of triangles or tetrahedrons and writes out a similar file
+      that is suitable for input to the mesh partitioning
+      program metis().
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Related Programs:
+    </h3>
+
+    <p>
+      <a href = "../neighbors_to_metis_graph/neighbors_to_metis_graph.html">
+      neighbors_to_metis_graph</a>,
+      a Fortran90 code which
+      reads a file describing the neighbor
+      structure of a triangulation or tet mesh, and writes a
+      metis() graph file suitable for input to one of the family of programs 
+      based on metis().
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "neighbors_to_metis_graph_test.sh">
+          neighbors_to_metis_graph_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "neighbors_to_metis_graph_test.txt">
+          neighbors_to_metis_graph_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "cube_tetra.neighbors">cube_tetra.neighbors</a>,
+          a sample tet mesh neighbor file that can be used as input
+          to the program.
+        </li>
+        <li>
+          <a href = "cube_tetra.metis_graph">cube_tetra.metis_graph</a>,
+          the modified tet mesh neighbor file created by the program,
+          suitable for input to METIS.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 22 September 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

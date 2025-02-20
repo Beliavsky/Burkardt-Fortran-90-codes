@@ -1,0 +1,32 @@
+ 
+22 September 2024   1:32:03.696 PM
+ 
+NEIGHBORS_TO_METIS_GRAPH:
+  FORTRAN90 version:
+ 
+  Write triangle or tet mesh neighbors in MeTiS graph file format.
+ 
+  Read the header of "cube_tetra.neighbors".
+ 
+  Element faces =        4
+  Number of elements  =        6
+ 
+  Read the data in "cube_tetra.neighbors".
+ 
+  Portion of ELEMENT_NEIGHBOR:
+ 
+  Row       1      2      3      4
+  Col
+ 
+    1      -1      2     -1      3
+    2      -1      1     -1      5
+    3      -1      1      4     -1
+    4      -1      6      3     -1
+    5      -1      2      6     -1
+    6      -1      4      5     -1
+  Wrote the tetrahedron neighbor information to "cube_tetra.metis_graph".
+ 
+NEIGHBORS_TO_METIS_GRAPH:
+  Normal end of execution.
+ 
+22 September 2024   1:32:03.697 PM

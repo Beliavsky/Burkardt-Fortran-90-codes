@@ -1,0 +1,174 @@
+<html>
+
+  <head>
+    <title>
+      tiler_3d
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      tiler_3d
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>tiler_3d</b>,
+      a FORTRAN90 code which
+      uses transfinite interpolation to "tile" a 3D box that has already been
+      subdivided into sub-boxes.
+    </p>
+
+    <p>
+      A simple "tile pattern" of a tetrahedron
+      is used, and the resulting object is written out as a <b>TRI</b>
+      graphics file.
+    </p>
+
+    <p>
+      The <b>TRI</b> graphics file can be easily converted to other
+      3D formats, such as <b>IV</b> or <b>STLA</b>.  In particular,
+      if the <b>STLA</b> format is used, then the object can be
+      read into MATLAB and displayed, using the <b>STLA_DISPLAY</b>
+      program.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>tiler_3d</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/tiler_3d/tiler_3d.html">a C++ version</a> and
+      <a href = "tiler_3d.html">a FORTRAN90 version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../tiler_3d_test/tiler_3d_test.html">
+      tiler_3d_test</a>
+    </p>
+
+    <p>
+      <a href = "../blend/blend.html">
+      blend</a>,
+      a FORTRAN90 code which
+      blends data, as demonstrated by TILER_3D.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/iv/iv.html">
+      iv</a>,
+      a data directory which
+      contains a description and examples of the IV (Inventor)
+      3D graphics format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/ivcon/ivcon.html">
+      ivcon</a>,
+      a C++ code which
+      converts the TRI
+      file output by TILER_3D into various other formats.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/ivread/ivread.html">
+      ivread</a>,
+      a FORTRAN90 code which
+      converts the TRI
+      file output by TILER_3D into various other formats.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/stla/stla.html">
+      stla</a>,
+      a data directory which
+      contains a description and examples of the ASCII STL (stereolithography)
+      3D graphics format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/stla_display/stla_display.html">
+      stla_display</a>,
+      a MATLAB code which
+      reads in an ASCII STL file and displays
+      the 3D graphics image it describes.
+    </p>
+
+    <p>
+      <a href = "../tiler_2d/tiler_2d.html">
+      tiler_2d</a>,
+      a FORTRAN90 code which
+      is a 2D version of TILER_3D.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tria/tria.html">
+      tria</a>,
+      a data directory which
+      contains a description and examples of the ASCII TRI 3D graphics format.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          William Gordon, Charles Hall,<br>
+          Construction of Curvilinear Coordinate Systems and Application to
+          Mesh Generation,<br>
+          International Journal of Numerical Methods in Engineering,<br>
+          Volume 7, pages 461-477, 1973.
+        </li>
+        <li>
+          Joe Thompson, Bharat Soni, Nigel Weatherill,<br>
+          Handbook of Grid Generation,<br>
+          CRC Press, 1999.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "tiler_3d.f90">tiler_3d.f90</a>,
+          the source code;
+        </li>
+        <li>
+          <a href = "tiler_3d.sh">tiler_3d.sh</a>,
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 21 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

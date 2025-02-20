@@ -1,0 +1,11 @@
+ 1 March 2023  10:00:02.039 AM
+
+album_bar():
+  FORTRAN90 version
+  Create a bar plot of music album sales over time.
+  Create corresponding GNUPLOT input files.
+  album_bar: plot commands stored in "album_commands.txt".
+
+album_bar:
+  Normal end of execution.
+ 1 March 2023  10:00:02.039 AM

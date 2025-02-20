@@ -1,0 +1,213 @@
+<html>
+
+  <head>
+    <title>
+      zero_brent
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      zero_brent
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>zero_brent</b>,
+      a Fortran90 code which 
+      finds a zero of a scalar function of a scalar variable,
+      by Richard Brent.
+    </p>
+
+    <p>
+      The method does not require the use of derivatives, and does not assume that
+      the function is differentiable.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>zero_brent</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/zero_brent/zero_brent.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/zero_brent/zero_brent.html">a C++ version</a> and
+      <a href = "zero_brent.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/zero_brent/zero_brent.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/zero_brent/zero_brent.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/zero_brent/zero_brent.html">a Python version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/r_src/zero_brent/zero_brent.html">an R version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../zero_brent_test/zero_brent_test.html">
+      zero_brent_test</a>
+    </p>
+
+    <p>
+      <a href = "../bisection/bisection.html">
+      bisection</a>,
+      a Fortran90 code which
+      applies the bisection method to seek a root of f(x) 
+      over a change-of-sign interval a <= x <= b.
+    </p>
+
+    <p>
+      <a href = "../bisection_integer/bisection_integer.html">
+      bisection_integer</a>,
+      a Fortran90 code which
+      seeks an integer solution to the equation F(X)=0,
+      using bisection within a user-supplied change of sign interval [A,B].
+    </p>
+
+    <p>
+      <a href = "../bisection_rc/bisection_rc.html">
+      bisection_rc</a>,
+      a Fortran90 code which
+      seeks a solution to the equation F(X)=0 using bisection
+      within a user-supplied change of sign interval [A,B].
+      The procedure is written using reverse communication.
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      nms</a>,
+      a Fortran90 code which
+      includes versions of Brent's zero finder.
+    </p>
+
+    <p>
+      <a href = "../slatec/slatec.html">
+      slatec</a>,
+      a Fortran90 code which 
+      includes the zero finder fzero().
+    </p>
+
+    <p> 
+      <a href = "../test_zero/test_zero.html">
+      test_zero</a>,
+      a Fortran90 code which
+      defines some test functions for which zeroes can be sought.
+    </p>
+
+    <p>
+      <a href = "../toms419/toms419.html">
+      toms419</a>,
+      a Fortran90 code which
+      seeks all the roots of a polynomial with complex coefficients,
+      commonly known as cpoly();
+      this is a version of ACM TOMS algorithm 419.
+    </p>
+
+    <p>
+      <a href = "../zero_chandrupatla/zero_chandrupatla.html">
+      zero_chandrupatla</a>,
+      a Fortran90 code which 
+      finds a zero of a scalar function of a scalar variable,
+      starting from a change of sign interval, using the
+      Chandrupatla method, which can converge faster than
+      bisection, regula falsi, or Brent's method,
+      by Tirupathi Chandrapatla.
+    </p>
+
+    <p>
+      <a href = "../zero_itp/zero_itp.html">
+      zero_itp</a>,
+      a Fortran90 code which
+      finds a zero of a scalar function of a scalar variable,
+      starting from a change of sign interval, using the
+      Interpolate/Truncate/Project (ITP) method, which has
+      faster convergence than the bisection method.
+    </p>
+
+    <p>
+      <a href = "../zero_muller/zero_muller.html">
+      zero_muller</a>,
+      a Fortran90 code which
+      seeks a root of a nonlinear equation using the Muller method,
+      with complex arithmetic.
+    </p>
+
+    <p>
+      <a href = "../zero_rc/zero_rc.html">
+      zero_rc</a>,
+      a Fortran90 code which
+      seeks solutions of a scalar nonlinear equation f(x) = 0, 
+      or a system of nonlinear equations,
+      using reverse communication (RC).
+    </p>
+
+    <p>
+      <a href = "../zoomin/zoomin.html">
+      zoomin</a>,
+      a Fortran90 code which
+      includes various zero finder routines.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Original Fortran77 version by Richard Brent;
+      This version by John Burkardt.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Richard Brent,<br>
+          Algorithms for Minimization without Derivatives,<br>
+          Dover, 2002,<br>
+          ISBN: 0-486-41998-3,<br>
+          LC: QA402.5.B74.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "zero_brent.f90">zero_brent.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "zero_brent.sh">zero_brent.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 26 March 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

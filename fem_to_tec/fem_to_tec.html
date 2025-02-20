@@ -1,0 +1,209 @@
+<html>
+
+  <head>
+    <title>
+      FEM_TO_TEC
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      FEM_TO_TEC
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>FEM_TO_TEC</b>,
+      a FORTRAN90 code which
+      reads three files
+      defining a finite element model (FEM format) and writes a
+      TECPLOT ASCII file suitable for display by TECPLOT.
+    </p>
+
+    <p>
+      The finite element model is assumed to include three items:
+      <ul>
+        <li>
+          Node coordinates, stored in a "node coordinate file";
+        </li>
+        <li>
+          Elements defined by a sequence of node indices, store in an
+          "element file";
+        </li>
+        <li>
+          Node data, such as finite element coefficients for pressure,
+          velocity, and so on, stored in a "node data file";
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>FEM_TO_TEC</b> reads these three files and writes an equivalent
+      TECPLOT ASCII file that can be processed by the <b>TECPLOT</b> graphics program.
+    </p>
+
+    <p>
+      <a href = "http://www.tecplot.com/">
+      The TECPLOT home page</a> contains a description of the
+      <b>TECPLOT</b> program.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>fem_to_tec</b> ( '<i>node_file</i>', '<i>element_file</i>',
+          '<i>value_file</i>', '<i>tec_file</i>' )
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>node_file</i> is the FEM node file;
+        </li>
+        <li>
+          <i>element_file</i> is the FEM element file;
+        </li>
+        <li>
+          <i>value_file</i> is the FEM value file;
+        </li>
+        <li>
+          <i>tec_file</i> is the TEC file to be created.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>fem_to_tec</b> is available in
+      <a href = "fem_to_tec.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/fem_to_tec/fem_to_tec.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../fem_to_tec_test/fem_to_tec_test.html">
+      fem_to_tec_test</a>
+    </p>
+
+    <p>
+      <a href = "../fem_io/fem_io.html">
+      FEM_IO</a>,
+      a FORTRAN90 library which
+      reads or writes an  FEM model.
+    </p>
+
+    <p>
+      <a href = "../fem_to_medit/fem_to_medit.html">
+      FEM_TO_MEDIT</a>,
+      a FORTRAN90 program which
+      reads a pair of FEM files defining node coordinates and elements,
+      and creates a corresponding MEDIT mesh file.
+    </p>
+
+    <p>
+      <a href = "../fem_to_triangle/fem_to_triangle.html">
+      FEM_TO_TRIANGLE</a>,
+      a FORTRAN90 program which
+      reads FEM files defining a 2D mesh of triangles, namely
+      a file of node coordinates and a file of elements defined by
+      node indices, and creates a corresponding pair of node
+      and element files for use by Jonathan Shewchuk's triangle program.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/fem2d/fem2d.html">
+      FEM2D</a>,
+      a data directory which
+      contains examples of 2D FEM files,
+      text files that describe a 2D finite element geometry
+      and associated nodal values;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tec/tec.html">
+      TEC</a>,
+      a data directory which
+      contains a description and examples of TEC graphics files.
+    </p>
+
+    <p>
+      <a href = "../tec_io/tec_io.html">
+      TEC_IO</a>,
+      a FORTRAN90 library which
+      reads or writes a TEC file containing a finite element model.
+    </p>
+
+    <p>
+      <a href = "../tec_to_fem/tec_to_fem.html">
+      TEC_TO_FEM</a>,
+      a FORTRAN90 program which
+      converts a TEC file into an FEM model.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          Tecplot, Inc,<br>
+          TECPLOT Reference Manual,<br>
+          Version 10, Release 4,<br>
+          Tecplot, Inc, 2005.
+        </li>
+        <li>
+          Tecplot, Inc,<br>
+          TECPLOT User's Manual,<br>
+          Version 10,<br>
+          Tecplot, Inc, 2005.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "fem_to_tec.f90">fem_to_tec.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "fem_to_tec.sh">fem_to_tec.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 24 February 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

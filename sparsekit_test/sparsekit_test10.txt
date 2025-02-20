@@ -1,0 +1,19 @@
+19 November 2024   4:51:15.490 PM
+  
+SPARSEKIT_PRB10
+  FORTRAN90 version
+ 
+ This program demonstrates the use of GEN57BL
+ to generate a block sparse matrix derived from a 5 or
+ 7 point stencil on an NX by NY by NZ grid.
+  
+ In this example, the block size is 3.
+  
+ The matrix is then stored in Harwell-Boeing format
+ in a file, using routine PRTMT.
+  
+ 
+SPARSEKIT_PRB10
+  Normal end of execution.
+ 
+19 November 2024   4:51:15.492 PM

@@ -1,0 +1,197 @@
+10 April 2023   9:57:27.381 AM
+ 
+r8sr_test():
+  FORTRAN90 version:
+  Test r8sr().
+ 
+R8SR_DIF2_TEST
+  R8SR_DIF2 sets up an R8SR second difference matrix;
+ 
+  Matrix order N =        5
+ 
+  The R8SR indicator matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   -2.00000       1.00000          0.            0.            0.      
+    2    1.00000      -2.00000       1.00000          0.            0.      
+    3       0.         1.00000      -2.00000       1.00000          0.      
+    4       0.            0.         1.00000      -2.00000       1.00000    
+    5       0.            0.            0.         1.00000      -2.00000    
+ 
+R8SR_INDICATOR_TEST
+  R8SR_INDICATOR sets up an R8SR indicator matrix;
+ 
+  Matrix order N =        5
+ 
+  The R8SR indicator matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000          0.            0.         15.0000    
+    2       0.         22.0000          0.            0.         25.0000    
+    3    31.0000          0.         33.0000          0.            0.      
+    4    41.0000          0.            0.         44.0000          0.      
+    5       0.         52.0000       53.0000          0.         55.0000    
+ 
+R8SR_MTV_TEST
+  R8SR_MTV multiplies a vector by an R8SR matrix;
+ 
+  Matrix order N =        5
+ 
+  The R8SR matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.956318          0.            0.        0.829509    
+    2       0.        0.561695          0.            0.        0.415307    
+    3   0.257578          0.        0.661187E-01      0.            0.      
+    4   0.438290E-01      0.            0.        0.109957          0.      
+    5       0.        0.617272E-01  0.449539          0.        0.633966    
+ 
+  The vector x:
+ 
+         1:    1.0000000    
+         2:    0.0000000    
+         3:    0.0000000    
+         4:    0.0000000    
+         5:   -1.0000000    
+ 
+  The product A' * x:
+ 
+         1:   0.21841830    
+         2:   0.89459035    
+         3:  -0.44953896    
+         4:    0.0000000    
+         5:   0.19554352    
+ 
+R8SR_MV_TEST
+  R8SR_MV multiplies an R8SR matrix by a vector;
+ 
+  Matrix order N =        5
+ 
+  The R8SR matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.956318          0.            0.        0.829509    
+    2       0.        0.561695          0.            0.        0.415307    
+    3   0.257578          0.        0.661187E-01      0.            0.      
+    4   0.438290E-01      0.            0.        0.109957          0.      
+    5       0.        0.617272E-01  0.449539          0.        0.633966    
+ 
+  The vector x:
+ 
+         1:    1.0000000    
+         2:    0.0000000    
+         3:    0.0000000    
+         4:    0.0000000    
+         5:   -1.0000000    
+ 
+  The product A * x:
+ 
+         1:  -0.61109094    
+         2:  -0.41530708    
+         3:   0.25757779    
+         4:   0.43828998E-01
+         5:  -0.63396571    
+ 
+R8SR_PRINT_TEST
+  R8SR_PRINT prints an R8SR matrix.
+ 
+  Matrix order N =        5
+ 
+  The R8SR matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.956318          0.            0.        0.829509    
+    2       0.        0.561695          0.            0.        0.415307    
+    3   0.257578          0.        0.661187E-01      0.            0.      
+    4   0.438290E-01      0.            0.        0.109957          0.      
+    5       0.        0.617272E-01  0.449539          0.        0.633966    
+ 
+R8SR_PRINT_SOME_TEST
+  R8SR_PRINT_SOME prints some of an R8SR matrix.
+ 
+  Matrix order N =        5
+ 
+  Rows 1:N, column 5
+ 
+  Col:        5       
+  Row
+  ---
+    1   0.829509    
+    2   0.415307    
+    3       0.      
+    4       0.      
+    5   0.633966    
+ 
+R8SR_RANDOM_TEST
+  R8SR_RANDOM randomizes an R8SR matrix
+ 
+  Matrix order N =        5
+ 
+  The R8SR matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.956318          0.            0.        0.829509    
+    2       0.        0.561695          0.            0.        0.415307    
+    3   0.257578          0.        0.661187E-01      0.            0.      
+    4   0.438290E-01      0.            0.        0.109957          0.      
+    5       0.        0.617272E-01  0.449539          0.        0.633966    
+ 
+R8SR_TO_R8GE_TEST
+  R8SR_TO_R8GE converts a matrix from R8SR to R8GE format.
+ 
+  Matrix order N =        5
+ 
+  The R8SR matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.956318          0.            0.        0.829509    
+    2       0.        0.561695          0.            0.        0.415307    
+    3   0.257578          0.        0.661187E-01      0.            0.      
+    4   0.438290E-01      0.            0.        0.109957          0.      
+    5       0.        0.617272E-01  0.449539          0.        0.633966    
+ 
+  The R8GE matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.956318       0.00000       0.00000      0.829509    
+    2    0.00000      0.561695       0.00000       0.00000      0.415307    
+    3   0.257578       0.00000      0.661187E-01   0.00000       0.00000    
+    4   0.438290E-01   0.00000       0.00000      0.109957       0.00000    
+    5    0.00000      0.617272E-01  0.449539       0.00000      0.633966    
+ 
+R8SR_ZEROS_TEST
+  R8SR_ZEROS zeros an R8SR matrix
+ 
+  Matrix order N =        5
+ 
+  The R8SR matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    0.00000       0.00000          0.            0.         0.00000    
+    2       0.         0.00000          0.            0.         0.00000    
+    3    0.00000          0.         0.00000          0.            0.      
+    4    0.00000          0.            0.         0.00000          0.      
+    5       0.         0.00000       0.00000          0.         0.00000    
+ 
+r8sr_test():
+  Normal end of execution.
+ 
+10 April 2023   9:57:27.382 AM

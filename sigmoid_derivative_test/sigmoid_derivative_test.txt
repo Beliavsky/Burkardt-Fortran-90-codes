@@ -1,0 +1,56 @@
+23 May 2024  10:11:52.202 AM
+
+sigmoid_derivative_test():
+  Fortran90 version
+  Test sigmoid_derivative.
+
+sigmoid_derivative_coef_test():
+  sigmoid_derivative_coef() returns the coefficients of
+  the expansion of the nth derivative of the sigmoid
+  function in terms of powers of the sigmoid function.
+ 
+  s^(0)(x) = 
+         +   1.00000     * s(x)
+ 
+  s^(1)(x) = 
+         +   1.00000     * s(x)
+         -   1.00000     * s(x) ^   2
+ 
+  s^(2)(x) = 
+         +   1.00000     * s(x)
+         -   3.00000     * s(x) ^   2
+         +   2.00000     * s(x) ^   3
+ 
+  s^(3)(x) = 
+         +   1.00000     * s(x)
+         -   7.00000     * s(x) ^   2
+         +   12.0000     * s(x) ^   3
+         -   6.00000     * s(x) ^   4
+ 
+  s^(4)(x) = 
+         +   1.00000     * s(x)
+         -   15.0000     * s(x) ^   2
+         +   50.0000     * s(x) ^   3
+         -   60.0000     * s(x) ^   4
+         +   24.0000     * s(x) ^   5
+
+sigmoid_derivative_value_test():
+  sigmoid_derivative_value() evaluates the nth derivative
+  of the sigmoid function at the location x.
+ 
+  Created graphics data file "sigmoid_derivative_0_data.txt".
+  Created command file "sigmoid_derivative_0_commands.txt".
+ 
+  Created graphics data file "sigmoid_derivative_1_data.txt".
+  Created command file "sigmoid_derivative_1_commands.txt".
+ 
+  Created graphics data file "sigmoid_derivative_2_data.txt".
+  Created command file "sigmoid_derivative_2_commands.txt".
+ 
+  Created graphics data file "sigmoid_derivative_3_data.txt".
+  Created command file "sigmoid_derivative_3_commands.txt".
+
+sigmoid_derivative_test():
+  Normal end of execution.
+
+23 May 2024  10:11:52.203 AM

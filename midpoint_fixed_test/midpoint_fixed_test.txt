@@ -1,0 +1,27 @@
+15 September 2023   8:58:51.914 PM
+
+midpoint_fixed_test():
+  FORTRAN90 version
+  Test midpoint_fixed() on several ODE's.
+
+predator_prey_midpoint_fixed_test()
+
+  A pair of ordinary differential equations for a population
+  of predators and prey are solved using midpoint_fixed().
+
+  The exact solution shows periodic behavior, with a fixed
+  period and amplitude.
+ 
+  predator_prey_midpoint_fixed_test: data stored in "predator_prey_midpoint_fixed_data.txt".
+  predator_prey_midpoint_fixed_test: plot commands stored in "predator_prey_midpoint_fixed_commands.txt".
+
+stiff_midpoint_fixed_test
+  Solve stiff ODE using midpoint_fixed()
+ 
+  plot2: data stored in "stiff_midpoint_fixed_data1.txt" and "stiff_midpoint_fixed_data2.txt".
+  plot2: plot commands stored in "stiff_midpoint_fixed_commands.txt".
+
+midpoint_fixed_test():
+  Normal end of execution.
+
+15 September 2023   8:58:51.915 PM

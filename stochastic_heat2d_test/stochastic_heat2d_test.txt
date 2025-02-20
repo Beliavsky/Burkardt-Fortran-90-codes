@@ -1,0 +1,47 @@
+08 July 2024   8:13:21.470 PM
+
+stochastic_heat2d_test():
+  Fortran90 version
+  test  stochastic_heat2d().
+
+TEST01:
+  Consider the steady heat equation in the unit square,
+  with 0 Dirichlet boundary conditions, 
+  and a heat source term F that is a Gaussian centered at (0.60,0.80).
+
+  Model the diffusivity coefficient as spatially varying,
+  with a stochastic dependence on parameters OMEGA(1:4),
+  as described in Babuska, Nobile, Tempone (BNT).
+
+  Compute and display the solution U for a given choice
+  of the parameters OMEGA.
+ 
+  Sampled OMEGA values:
+ 
+         1:   -2.1500835    
+         2:    1.0497579    
+         3:   0.13170264    
+         4:   -1.8778741    
+ 
+  Created graphics data file "solution_data.txt".
+  Created graphics command file "solution_commands.txt".
+ 
+  Mean value of U is   0.244197    
+
+TEST02:
+  Fix OMEGA(3) = 4, OMEGA(4) = 0, and
+  examine dependence of average temperature on OMEGA(1) and OMEGA(2)
+  over the range [-10,+10].
+
+  Omega(3) fixed at    4.00000    
+  Omega(4) fixed at    0.00000    
+ 
+  Created graphics data file "umean_data.txt".
+  Created graphics command file "umean_commands.txt".
+
+  U_Mean_Max =   0.641953    
+
+stochastic_heat2d_test():
+  Normal end of execution.
+
+08 July 2024   8:13:23.649 PM

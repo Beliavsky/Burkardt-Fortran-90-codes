@@ -1,0 +1,20 @@
+#! /bin/bash
+#
+gfortran -c -Wall medit_to_fem.f90
+if [ $? -ne 0 ]; then
+  echo "Compile error."
+  exit
+fi
+#
+gfortran medit_to_fem.o
+if [ $? -ne 0 ]; then
+  echo "Load error."
+  exit
+fi
+#
+rm medit_to_fem.o
+#
+chmod ugo+x a.out
+mv a.out ~/bin/medit_to_fem
+#
+echo "Normal end of execution."

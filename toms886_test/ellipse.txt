@@ -1,0 +1,20 @@
+24 March 2023   9:37:40.762 AM
+ 
+ELLIPSE():
+  FORTRAN90 version
+  Interpolation of the Franke function
+  on the disk with center = (0.5,0.5) and radius = 0.5
+  of degree =     60
+
+  Wrote F(x,y) at Padua points in "ellipse_fpd.txt".
+  Wrote F(x,y) at target points in "ellipse_ftg.txt".
+  Wrote I(F)(x,y) at target points in "ellipse_itg.txt".
+
+  Estimated error:  0.1465E-08
+  Actual error:     0.1769E-09
+  Expected error:   0.1769E-09
+ 
+ELLIPSE():
+  Normal end of execution.
+ 
+24 March 2023   9:37:40.827 AM

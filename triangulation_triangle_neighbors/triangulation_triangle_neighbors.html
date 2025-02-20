@@ -1,0 +1,351 @@
+<html>
+
+  <head>
+    <title>
+      triangulation_triangle_neighbors
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      triangulation_triangle_neighbors
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>triangulation_triangle_neighbors</b>,
+      a Fortran90 code which 
+      computes the three neighboring triangles of each triangle in a triangulation.
+    </p>
+
+    <p>
+      The user supplies a node file and a triangle file, containing
+      the coordinates of the nodes, and the indices of the nodes that
+      make up each triangle.  Either 3-node or 6-node triangles may
+      be used.
+    </p>
+
+    <p>
+      The code reads the data, computes the triangle neighbor information,
+      and writes out the information to a file.  In cases where one side
+      of a triangle has no triangle neighbor, a value of -1 is assigned.
+    </p>
+
+    <p>
+      The triangle neighbor array is useful if the triangulation has
+      to be searched to find the triangle containing a given point.
+      It is also useful when analyzing the bandwidth of the adjacency
+      matrix, or of a finite element matrix derived from the triangulation.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>triangulation_triangle_neighbors</b> <i>prefix</i>
+      </blockquote>
+      where <i>prefix</i> is the common prefix for the node and triangle files,
+      and will also be used to name the output file:
+      <ul>
+        <li>
+          <i>prefix</i><b>_nodes.txt</b>,    the node coordinates (input);
+        </li>
+        <li>
+          <i>prefix</i><b>_elements.txt</b>,    the triangulation (input);
+        </li>
+        <li>
+          <i>prefix</i><b>_element_neighbors.txt</b>,  the triangle neighbors (output);
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>triangulation_triangle_neighbors</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/triangulation_triangle_neighbors/triangulation_triangle_neighbors.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/triangulation_triangle_neighbors/triangulation_triangle_neighbors.html">a C++ version</a> and
+      <a href = "triangulation_triangle_neighbors.html">a Fortran90 version</a>  and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangulation_triangle_neighbors/triangulation_triangle_neighbors.html"> a MATLAB version</a>  and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/triangulation_triangle_neighbors/triangulation_triangle_neighbors.html"> an Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../triangulation_triangle_neighbors_test/triangulation_triangle_neighbors_test.html">
+      triangulation_triangle_neighbors_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mesh_bandwidth/mesh_bandwidth.html">
+      mesh_bandwidth</a>,
+      a Fortran90 code which
+      returns the geometric bandwidth associated with a mesh of
+      elements of any order and in a space of arbitrary dimension.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mesh_to_xml/mesh_to_xml.html">
+      mesh_to_xml</a>,
+      a Fortran90 code which
+      reads information defining a 1D, 2D or 3D mesh, namely
+      a file of node coordinates and a file of elements defined by
+      node indices, and creates a corresponding XML file for input
+      to DOLFIN or FENICS.
+    </p>
+
+    <p>
+      <a href = "../neighbors_to_metis_graph/neighbors_to_metis_graph.html">
+      neighbors_to_metis_graph</a>,
+      a Fortran90 code which 
+      reads a triangle mesh neighbor file created by
+      triangulation_triangle_neighbors()
+      and writes a modified version of the same data suitable for input
+      to the mesh partitioning code <b>METIS</b>.
+    </p>
+
+    <p>
+      <a href = "../rcm/rcm.html">
+      rcm</a>, 
+      a Fortran90 code which
+      carries out reverse Cuthill-McKee computations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/table_delaunay/table_delaunay.html">
+      table_delaunay</a>, 
+      a Fortran90 code which
+      triangulates a set of nodes whose coordinates are stored in a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/tet_mesh_rcm/tet_mesh_rcm.html">
+      tet_mesh_rcm</a>,
+      a Fortran90 code which 
+      applies the reverse Cuthill-McKee reordering to a tetrahedral
+      mesh of nodes in 3D.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/triangle/triangle.html">
+      triangle</a>,
+      a C code which
+      computes a triangulation of a geometric region.
+    </p>
+
+    <p>
+      <a href = "../triangulation/triangulation.html">
+      triangulation</a>, 
+      a Fortran90 code which
+      carries out various operations on order 3 ("linear") or order 6 
+      ("quadratic") triangulations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_boundary_nodes/triangulation_boundary_nodes.html">
+      triangulation_boundary_nodes</a>, 
+      a Fortran90 code which
+      reads data defining a triangulation, determines which nodes
+      lie on the boundary, and writes their coordinates to a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_corner/triangulation_corner.html">
+      triangulation_corner</a>,
+      a Fortran90 code which 
+      patches triangulations so that no triangle has two sides on the boundary.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_delaunay_discrepancy/triangulation_delaunay_discrepancy.html">
+      triangulation_delaunay_discrepancy</a>, 
+      a Fortran90 code which 
+      measures the amount by which a triangulation fails the local Delaunay test;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/triangulation_display_opengl/triangulation_display_opengl.html">
+      triangulation_display_opengl</a>, 
+      a C++ code which
+      reads files defining a triangulation and displays an image
+      using Open GL.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_histogram/triangulation_histogram.html">
+      triangulation_histogram</a>, 
+      a Fortran90 code which 
+      computes histograms of data over a triangulation.
+    </p>
+
+    <p>
+      <a href = "../triangulation_l2q/triangulation_l2q.html">
+      triangulation_l2q</a>, 
+      a Fortran90 code which
+      reads data defining a 3-node triangulation and generates
+      midside nodes and writes out the corresponding 6-node triangulation.
+    </p>
+
+    <p>
+      <a href = "../triangulation_mask/triangulation_mask.html">
+      triangulation_mask</a>, 
+      a Fortran90 code which
+      takes an existing triangulation and deletes triangles and
+      their corresponding nodes as requested by the user.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/triangulation_order3/triangulation_order3.html">
+      triangulation_order3</a>, 
+      a directory which 
+      contains a description and
+      examples of order 3 triangulations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/triangulation_order6/triangulation_order6.html">
+      triangulation_order6</a>, 
+      a directory which 
+      contains a description and
+      examples of order 6 triangulations.
+    </p>
+
+    <p>
+      <a href = "../triangulation_orient/triangulation_orient.html">
+      triangulation_orient</a>, 
+      a Fortran90 code which
+      reads data defining a triangulation, makes sure that
+      every triangle has positive orientation, and if not, writes a
+      corrected triangle file.
+    </p>
+
+    <p>
+      <a href = "../triangulation_plot/triangulation_plot.html">
+      triangulation_plot</a>, 
+      a Fortran90 code which
+      reads data defining a triangulation and creates a
+      PostScript image of the nodes and triangles.
+    </p>
+
+    <p>
+      <a href = "../triangulation_q2l/triangulation_q2l.html">
+      triangulation_q2l</a>, 
+      a Fortran90 code which
+      reads data defining a 6-node triangulation, and subdivides
+      each triangle into 4 3-node triangles, writing the resulting
+      triangulation to a file.
+    </p>
+
+    <p>
+      <a href = "../triangulation_quad/triangulation_quad.html">
+      triangulation_quad</a>,
+      a Fortran90 code which
+      estimates the integral of a function over a triangulated region.
+    </p>
+
+    <p>
+      <a href = "../triangulation_quality/triangulation_quality.html">
+      triangulation_quality</a>, 
+      a Fortran90 code which
+      reads data defining a triangulation and computes a number
+      of quality measures.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_rcm/triangulation_rcm.html">
+      triangulation_rcm</a>, 
+      a Fortran90 code which 
+      can reorder the nodes of
+      a triangulation so that the bandwidth of the associated adjacency
+      matrix is reduced.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_refine/triangulation_refine.html">
+      triangulation_refine</a>, 
+      a Fortran90 code which 
+      refines 
+      a triangulation.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/trig_to_neib/trig_to_neib.html">
+      trig_to_neib</a>, 
+      a C code which 
+      reads "NODE" and "ELE" files (a format prescribed by <b>triangle</b>)
+      describing a triangulation, and produces a file defining the 
+      neighbor triangles of each element; the code can also produce
+      information about the Voronoi diagram.  The code is by Lili Ju.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Marc deBerg, Marc Krevald, Mark Overmars, 
+          Otfried Schwarzkopf,<br>
+          Computational Geometry,<br>
+          Springer, 2000,<br>
+          ISBN: 3-540-65620-0.
+        </li>
+        <li>
+          Joseph ORourke,<br>
+          Computational Geometry,<br>
+          Second Edition,<br>
+          Cambridge, 1998,<br>
+          ISBN: 0521649765,<br>
+          LC: QA448.D38.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "triangulation_triangle_neighbors.f90">
+          triangulation_triangle_neighbors.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "triangulation_triangle_neighbors.sh">
+          triangulation_triangle_neighbors.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

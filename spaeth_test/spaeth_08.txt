@@ -1,0 +1,99 @@
+# spaeth_08.txt
+#
+#  Discussion:
+#
+#    Data matrix with 80 rows and 2 columns.
+#
+#    This data naturally groups into three long thin ellipsoids.
+#
+#  Modified:
+#
+#    04 April 2002
+#
+#  Reference:
+#
+#    Helmut Spaeth,
+#    Cluster Dissection and Analysis,
+#    Theory, FORTRAN Programs, Examples,
+#    Ellis Horwood, 1985, page 161.
+#
+16 50
+37 50
+40 50
+20 49
+37 48
+34 46
+38 45
+21 44
+35 43
+24 42
+32 42
+32 39
+24 38
+30 38
+27 36
+30 35
+25 34
+28 34
+27 32
+ 1 31
+29 31
+25 30
+ 3 29
+23 29
+29 29
+24 28
+ 2 26
+ 6 26 
+19 26
+22 26
+32 26
+10 25
+20 24
+ 5 22
+12 22
+16 22
+34 22
+ 9 20
+15 20
+13 19
+18 19
+15 18
+13 17
+22 17
+11 15
+15 15
+18 15
+24 15
+36 15
+39 14
+12 13
+10 12
+15 12
+19 12
+24 12
+29 12
+37 11
+ 9 10
+ 7  9
+22  9
+26  9
+41  9
+29  8
+34  8
+39  8
+ 6  7
+ 4  5
+26  5
+37  5
+42  5
+44  5
+32  4
+ 2  3
+37  2
+47  2
+ 1  1
+30  1
+41  1
+44  1
+46  1

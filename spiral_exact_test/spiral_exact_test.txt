@@ -1,0 +1,34 @@
+26 April 2024  10:42:18.670 AM
+
+spiral_exact_test():
+  FORTRAN90 version
+  Test spiral_exact().
+
+TEST01
+  Sample a spiral velocity field and estimate
+  the range of the solution values.
+
+           Minimum       Maximum
+
+  U:      -1.85404         2.22494    
+  V:      -2.23154         1.85234    
+
+TEST02:
+  Sample a spiral velocity field and estimate the
+  range of residuals in the continuity equation.
+
+           Minimum       Maximum
+
+  Pr:       0.00000         0.00000    
+
+TEST03:
+  Generate a spiral velocity field on a regular grid.
+  Store in GNUPLOT data and command files.
+
+  Data written to "spiral_data.txt".
+  Commands written to "spiral_commands.txt".
+
+spiral_exact_test():
+  Normal end of execution.
+
+26 April 2024  10:42:18.672 AM

@@ -1,0 +1,493 @@
+02 January 2025  10:35:48.993 AM
+
+ubvec_test():
+  FORTRAN90 version
+  Test ubvec().
+
+MORSE_THUE_TEST
+  MORSE_THUE computes the Morse-Thue numbers.
+
+    0110100110
+    0101101001
+    0110011010
+    0110010110
+    0110100101
+    1010011001
+    0110100101
+    1001101001
+    0110100110
+    0101100110
+    1
+
+NIM_SUM_TEST
+  NIM_SUM computes the Nim sum of two integers.
+
+    I    J    Nim(I+J)
+
+
+  I1, I2, I3 in decimal:
+
+  444
+   40
+  404
+
+  I1, I2, I3 in binary:
+
+  00000000000000000000000110111100
+  00000000000000000000000000101000
+  00000000000000000000000110010100
+
+  I1, I2, I3 in decimal:
+
+  217
+  539
+  706
+
+  I1, I2, I3 in binary:
+
+  00000000000000000000000011011001
+  00000000000000000000001000011011
+  00000000000000000000001011000010
+
+  I1, I2, I3 in decimal:
+
+  903
+  612
+  483
+
+  I1, I2, I3 in binary:
+
+  00000000000000000000001110000111
+  00000000000000000000001001100100
+  00000000000000000000000111100011
+
+  I1, I2, I3 in decimal:
+
+   74
+  390
+  460
+
+  I1, I2, I3 in binary:
+
+  00000000000000000000000001001010
+  00000000000000000000000110000110
+  00000000000000000000000111001100
+
+  I1, I2, I3 in decimal:
+
+   61
+  361
+  340
+
+  I1, I2, I3 in binary:
+
+  00000000000000000000000000111101
+  00000000000000000000000101101001
+  00000000000000000000000101010100
+
+UBVEC_ADD_TEST
+  UBVEC_ADD adds unsigned binary vectors
+  representing unsigned integers;
+
+        I        J        K = I + J    K = I + J
+                          Directly     UBVEC_ADD
+
+        45        35        80        80
+        95        47       142       142
+        81        68       149       149
+        11        72        83        83
+        78         1        79        79
+        20        68        88        88
+        82         1        83        83
+        40        97       137       137
+        61        76       137       137
+        79        33       112       112
+
+UBVEC_AND_TEST
+  UBVEC_AND computes the AND of two
+  unsigned binary vectors representing unsigned integers;
+
+        I        J        K = I AND J
+
+        79        77        77
+        39        21         5
+        14        92        12
+        67        92        64
+        21        50        16
+        71        74        66
+        16        43         0
+         1        81         1
+        22         3         2
+        97        91        65
+
+UBVEC_COMPLEMENT1_TEST
+  UBVEC_COMPLEMENT1 returns the 1's complement
+  of an unsigned binary vector.
+
+  UBVEC  Comp1
+
+  10001  01110
+  11110  00001
+  11100  00011
+  10111  01000
+  00111  11000
+
+UBVEC_ENUM_TEST
+  UBVEC_ENUM enumerates unsigned binary vectors
+  of N digits
+
+   N      Number
+
+   0         1
+   1         2
+   2         4
+   3         8
+   4        16
+   5        32
+   6        64
+   7       128
+   8       256
+   9       512
+  10      1024
+
+UBVEC_NEXT_TEST
+  UBVEC_NEXT computes the "next" unsigned binary vector.
+
+  0000
+  0001
+  0010
+  0011
+  0100
+  0101
+  0110
+  0111
+  1000
+  1001
+  1010
+  1011
+  1100
+  1101
+  1110
+  1111
+  0000
+
+UBVEC_NEXT_GRAY_TEST
+  UBVEC_NEXT_GRAY returns the next UBVEC in the Gray code.
+
+   K  UBVEC
+
+   0   0 0 0 0
+   1   0 0 0 1
+   2   0 0 1 1
+   3   0 0 1 0
+   4   0 1 1 0
+   5   0 1 1 1
+   6   0 1 0 1
+   7   0 1 0 0
+   8   1 1 0 0
+   9   1 1 0 1
+  10   1 1 1 1
+  11   1 1 1 0
+  12   1 0 1 0
+  13   1 0 1 1
+  14   1 0 0 1
+  15   1 0 0 0
+
+UBVEC_NEXT_GRLEX_TEST
+  UBVEC_NEXT_GRLEX computes unsigned binary vectors in GRLEX order.
+
+   0:  0000
+   1:  0001
+   2:  0010
+   3:  0100
+   4:  1000
+   5:  0011
+   6:  0101
+   7:  0110
+   8:  1001
+   9:  1010
+  10:  1100
+  11:  0111
+  12:  1011
+  13:  1101
+  14:  1110
+  15:  1111
+  16:  0000
+
+UBVEC_OR_TEST
+  UBVEC_OR computes the OR of two
+  unsigned binary vectors representing unsigned integers;
+
+        I        J        K = I OR J
+
+        19        42        59
+        99        16       115
+        85        87        87
+        39        75       111
+        49        13        61
+        67        30        95
+        55        53        55
+        56        22        62
+        92        34       126
+        53        68       117
+
+UBVEC_PRINT_TEST
+  UBVEC_PRINT prints an unsigned binary vector.
+
+  UBVEC:
+  1001011100
+
+UBVEC_RANDOM_TEST
+  UBVEC_RANDOM randomizes an unsigned binary vector.
+
+  10001
+  11110
+  11100
+  10111
+  00111
+
+UBVEC_RANK_GRAY_TEST
+  UBVEC_RANK_GRAY ranks a UBVEC in the Gray ordering.
+
+  UBVEC   Rank
+
+   0 0 0 0 0   0
+   0 0 0 0 1   1
+   0 0 0 1 0   3
+   0 0 0 1 1   2
+   0 0 1 0 0   7
+   0 0 1 0 1   6
+   0 0 1 1 0   4
+   0 0 1 1 1   5
+   0 1 0 0 0  15
+   0 1 0 0 1  14
+   0 1 0 1 0  12
+   0 1 0 1 1  13
+   0 1 1 0 0   8
+   0 1 1 0 1   9
+   0 1 1 1 0  11
+   0 1 1 1 1  10
+   1 0 0 0 0  31
+   1 0 0 0 1  30
+   1 0 0 1 0  28
+   1 0 0 1 1  29
+   1 0 1 0 0  24
+   1 0 1 0 1  25
+   1 0 1 1 0  27
+   1 0 1 1 1  26
+   1 1 0 0 0  16
+   1 1 0 0 1  17
+   1 1 0 1 0  19
+   1 1 0 1 1  18
+   1 1 1 0 0  23
+   1 1 1 0 1  22
+   1 1 1 1 0  20
+   1 1 1 1 1  21
+
+UBVEC_REVERSE_TEST
+  UBVEC_REVERSE reverses an unsigned binary vector.
+
+  UBVEC  Reversed
+
+  10001  10001
+  11110  01111
+  11100  00111
+  10111  11101
+  00111  11100
+
+UBVEC_TO_UI4_TEST
+  UBVEC_TO_UI4 converts an unsigned binary vector
+  to an unsigned integer;
+
+   UBVEC  -->  I
+
+  0000000000    0
+  0000000001    1
+  0000000010    2
+  0000000011    3
+  0000000100    4
+  0000000101    5
+  0000000110    6
+  0000000111    7
+  0000001000    8
+  0000001001    9
+  0000001010   10
+
+UBVEC_UNRANK_GRAY_TEST
+  UBVEC_UNRANK_GRAY unranks a UBVEC.
+
+  Rank  UBVEC
+
+     0   0 0 0 0 0
+     1   0 0 0 0 1
+     2   0 0 0 1 1
+     3   0 0 0 1 0
+     4   0 0 1 1 0
+     5   0 0 1 1 1
+     6   0 0 1 0 1
+     7   0 0 1 0 0
+     8   0 1 1 0 0
+     9   0 1 1 0 1
+    10   0 1 1 1 1
+    11   0 1 1 1 0
+    12   0 1 0 1 0
+    13   0 1 0 1 1
+    14   0 1 0 0 1
+    15   0 1 0 0 0
+    16   1 1 0 0 0
+    17   1 1 0 0 1
+    18   1 1 0 1 1
+    19   1 1 0 1 0
+    20   1 1 1 1 0
+    21   1 1 1 1 1
+    22   1 1 1 0 1
+    23   1 1 1 0 0
+    24   1 0 1 0 0
+    25   1 0 1 0 1
+    26   1 0 1 1 1
+    27   1 0 1 1 0
+    28   1 0 0 1 0
+    29   1 0 0 1 1
+    30   1 0 0 0 1
+    31   1 0 0 0 0
+
+UBVEC_UNRANK_GRLEX_TEST
+  UBVEC_UNRANK_GRLEX returns the UBVEC of given rank
+  in the graded lexicographical ordering.
+  --  --------
+   0   0 0 0 0
+  --  --------
+   1   0 0 0 1
+   2   0 0 1 0
+   3   0 1 0 0
+   4   1 0 0 0
+  --  --------
+   5   0 0 1 1
+   6   0 1 0 1
+   7   0 1 1 0
+   8   1 0 0 1
+   9   1 0 1 0
+  10   1 1 0 0
+  --  --------
+  11   0 1 1 1
+  12   1 0 1 1
+  13   1 1 0 1
+  14   1 1 1 0
+  --  --------
+  15   1 1 1 1
+
+UBVEC_XOR_TEST
+  UBVEC_XOR computes the exclusive OR of two
+  unsigned binary vectors representing unsigned integers;
+
+        I        J        K = I XOR J
+
+        55        67       116
+        46         4        42
+        77        54       123
+        69        67         6
+        15        89        86
+        46        88       118
+        46         0        46
+        57        82       107
+        39        95       120
+        22        88        78
+
+UI4_RANK_GRAY_TEST
+  UI4_RANK_GRAY ranks an unsigned I4 in the Gray ordering.
+
+ UI4  Rank  (binary)
+
+   0     0   0 0 0 0 0
+   1     1   0 0 0 0 1
+   2     3   0 0 0 1 0
+   3     2   0 0 0 1 1
+   4     7   0 0 1 0 0
+   5     6   0 0 1 0 1
+   6     4   0 0 1 1 0
+   7     5   0 0 1 1 1
+   8    15   0 1 0 0 0
+   9    14   0 1 0 0 1
+  10    12   0 1 0 1 0
+  11    13   0 1 0 1 1
+  12     8   0 1 1 0 0
+  13     9   0 1 1 0 1
+  14    11   0 1 1 1 0
+  15    10   0 1 1 1 1
+  16    31   1 0 0 0 0
+  17    30   1 0 0 0 1
+  18    28   1 0 0 1 0
+  19    29   1 0 0 1 1
+  20    24   1 0 1 0 0
+  21    25   1 0 1 0 1
+  22    27   1 0 1 1 0
+  23    26   1 0 1 1 1
+  24    16   1 1 0 0 0
+  25    17   1 1 0 0 1
+  26    19   1 1 0 1 0
+  27    18   1 1 0 1 1
+  28    23   1 1 1 0 0
+  29    22   1 1 1 0 1
+  30    20   1 1 1 1 0
+  31    21   1 1 1 1 1
+
+UI4_TO_UBVEC_TEST
+  UI4_TO_UBVEC converts an unsigned integer to an 
+  unsigned binary vector;
+
+  I --> UBVEC
+
+    0  0000000000
+    1  0000000001
+    2  0000000010
+    3  0000000011
+    4  0000000100
+    5  0000000101
+    6  0000000110
+    7  0000000111
+    8  0000001000
+    9  0000001001
+   10  0000001010
+
+UI4_UNRANK_GRAY_TEST
+  UI4_UNRANK_GRAY unranks a Gray code.
+
+  Rank   I  (binary)
+
+   0     0   0 0 0 0 0
+   1     1   0 0 0 0 1
+   2     3   0 0 0 1 1
+   3     2   0 0 0 1 0
+   4     6   0 0 1 1 0
+   5     7   0 0 1 1 1
+   6     5   0 0 1 0 1
+   7     4   0 0 1 0 0
+   8    12   0 1 1 0 0
+   9    13   0 1 1 0 1
+  10    15   0 1 1 1 1
+  11    14   0 1 1 1 0
+  12    10   0 1 0 1 0
+  13    11   0 1 0 1 1
+  14     9   0 1 0 0 1
+  15     8   0 1 0 0 0
+  16    24   1 1 0 0 0
+  17    25   1 1 0 0 1
+  18    27   1 1 0 1 1
+  19    26   1 1 0 1 0
+  20    30   1 1 1 1 0
+  21    31   1 1 1 1 1
+  22    29   1 1 1 0 1
+  23    28   1 1 1 0 0
+  24    20   1 0 1 0 0
+  25    21   1 0 1 0 1
+  26    23   1 0 1 1 1
+  27    22   1 0 1 1 0
+  28    18   1 0 0 1 0
+  29    19   1 0 0 1 1
+  30    17   1 0 0 0 1
+  31    16   1 0 0 0 0
+
+ubvec_test():
+  Normal end of execution.
+
+02 January 2025  10:35:48.996 AM

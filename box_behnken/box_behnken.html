@@ -1,0 +1,241 @@
+<html>
+
+  <head>
+    <title>
+      box_behnken
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      box_behnken
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>box_behnken</b>,
+      a FORTRAN90 code which
+      returns a set of sample argument values to be
+      used to analyze the behavior of a function.
+    </p>
+
+    <p>
+      Given DIM_NUM parameters, each of which is prescribed to
+      lie between a minimum and maximum range, and a function taking
+      these parameters as arguments, this program returns a table of
+      sets of argument values that may be used to sample the function's
+      behavior.
+    </p>
+
+    <p>
+      One sample point is the average.  All other sample points are generated
+      by setting a single spatial coordinate to its average value, and
+      all other spatial coordinates to either the minimum or maximum.  In
+      this way, 1 + DIM_NUM*2**DIM_NUM-1) points are generated.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>box_behnken</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/box_behnken/box_behnken.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/box_behnken/box_behnken.html">a C++ version</a> and
+      <a href = "box_behnken.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/box_behnken/box_behnken.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../box_behnken_test/box_behnken_test.html">
+      box_behnken_test</a>
+    </p>
+
+    <p>
+      <a href = "../cvt/cvt.html">
+      CVT</a>,
+      a FORTRAN90 code
+      which computes elements of a Centroidal Voronoi Tessellation.
+    </p>
+
+    <p>
+      <a href = "../faure/faure.html">
+      FAURE</a>,
+      a FORTRAN90 code which
+      computes elements of a Faure sequence.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/grid/grid.html">
+      GRID</a>,
+      a FORTRAN90 code which
+      computes elements of a grid sequence.
+    </p>
+
+    <p>
+      <a href = "../halton/halton.html">
+      HALTON</a>,
+      a FORTRAN90 code which
+      computes elements of a Halton sequence.
+    </p>
+
+    <p>
+      <a href = "../hammersley/hammersley.html">
+      HAMMERSLEY</a>,
+      a FORTRAN90 code which
+      computes elements of a Hammersley sequence.
+    </p>
+
+    <p>
+      <a href = "../hex_grid/hex_grid.html">
+      HEX_GRID</a>,
+      a FORTRAN90 code which
+      computes elements of a hexagonal grid dataset.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/ihs/ihs.html">
+      IHS</a>,
+      a FORTRAN90 code which
+      computes elements of an improved distributed Latin hypercube dataset.
+    </p>
+
+    <p>
+      <a href = "../latin_center/latin_center.html">
+      LATIN_CENTER</a>,
+      a FORTRAN90 code which
+      computes elements of a Latin Hypercube dataset, choosing center points.
+    </p>
+
+    <p>
+      <a href = "../latin_edge/latin_edge.html">
+      LATIN_EDGE</a>,
+      a FORTRAN90 code which
+      computes elements of a Latin Hypercube dataset, choosing edge points.
+    </p>
+
+    <p>
+      <a href = "../latin_random/latin_random.html">
+      LATIN_RANDOM</a>,
+      a FORTRAN90 code which
+      computes elements of a Latin Hypercube dataset, choosing
+      points at random.
+    </p>
+
+    <p>
+      <a href = "../latinize/latinize.html">
+      LATINIZE</a>,
+      a FORTRAN90 code which
+      can "latinize" a dataset.
+    </p>
+
+    <p>
+      <a href = "../lcvt/lcvt.html">
+      LCVT</a>,
+      a FORTRAN90 code which
+      computes a latinized Centroidal Voronoi Tessellation.
+    </p>
+
+    <p>
+      <a href = "../niederreiter2/niederreiter2.html">
+      NIEDERREITER2</a>,
+      a FORTRAN90 code which
+      computes elements of a Niederreiter sequence using base 2.
+    </p>
+
+    <p>
+      <a href = "../sobol/sobol.html">
+      SOBOL</a>,
+      a FORTRAN90 code which
+      computes elements of a Sobol sequence.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/table_latinize/table_latinize.html">
+      TABLE_LATINIZE</a>,
+      a FORTRAN90 code which
+      reads a table file containing a set of data, and writes out a corresponding
+      "latinized" version.
+    </p>
+
+    <p>
+      <a href = "../toms647/toms647.html">
+      TOMS647</a>,
+      a FORTRAN90 code which
+      implements a version of ACM TOMS algorithm 647,
+      for evaluating Faure, Halton and Sobol sequences.
+    </p>
+
+    <p>
+      <a href = "../uniform/uniform.html">
+      UNIFORM</a>,
+      a FORTRAN90 code which
+      computes elements of a uniform pseudorandom sequence.
+    </p>
+
+    <p>
+      <a href = "../van_der_corput/van_der_corput.html">
+      VAN_DER_CORPUT</a>,
+      a FORTRAN90 code which
+      computes elements of a (1 dimensional) van der Corput sequence.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          George Box, Donald Behnken,<br>
+          Some new three level designs for the study of quantitative variables,<br>
+          Technometrics,<br>
+          Volume 2, pages 455-475, 1960.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "box_behnken.f90">box_behnken.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "box_behnken.sh">box_behnken.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 03 September 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

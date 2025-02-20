@@ -1,0 +1,44 @@
+20 March 2023   9:21:20.700 PM
+ 
+XERROR_TEST():
+  FORTRAN90 version
+  Test XERROR().
+ 
+TEST01
+  XERROR can be called when an error occurs.
+ 
+      X           SQRT(X)
+ 
+ 
+Warning in...
+TEST01 - Illegal argument to SQRT
+  Error number =          1
+    0.912635    0.955319
+    0.659019    0.811800
+    0.123391    0.351270
+ 
+Warning in...
+TEST01 - Illegal argument to SQRT
+  Error number =          1
+ 
+Warning in...
+TEST01 - Illegal argument to SQRT
+  Error number =          1
+ 
+Warning in...
+TEST01 - Illegal argument to SQRT
+  Error number =          1
+ 
+Warning in...
+TEST01 - Illegal argument to SQRT
+  Error number =          1
+ 
+Warning in...
+TEST01 - Illegal argument to SQRT
+  Error number =          1
+    0.267931    0.517621
+ 
+XERROR_TEST():
+  Normal end of execution.
+ 
+20 March 2023   9:21:20.700 PM

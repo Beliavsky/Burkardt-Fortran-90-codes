@@ -1,0 +1,22 @@
+21 December 2024   9:17:23.216 PM
+
+naca_test():
+  FORTRAN90 version
+  Test naca().
+
+TEST01():
+  NACA4_SYMMETRIC() evaluates y(x) for a NACA
+  symmetric airfoil defined by a 4-digit code.
+  Data saved in file "symmetric_data.txt"
+  Created command file "symmetric_commands.txt".
+
+TEST02():
+  NACA4_CAMBERED() evaluates (xu,yu) and (xl,yl) for a NACA
+  cambered airfoil defined by a 4-digit code.
+  Data saved in file "cambered_data.txt"
+  Created command file "cambered_commands.txt".
+
+naca_test():
+  Normal end of execution.
+
+21 December 2024   9:17:23.217 PM

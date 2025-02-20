@@ -1,0 +1,173 @@
+ 7 December 2023   9:25:14.652 AM
+ 
+normal_test():
+  FORTRAN90 version;
+  Test normal().
+ 
+C8_NORMAL_01_TEST
+  C8_NORMAL_01 computes pseudorandom double precision
+  complex values with Normal 01 circular distribution.
+         1     -0.26146765      1.39945787
+         2     -0.06090045      0.52947224
+         3      1.04151799      0.22791976
+         4     -0.11516668      0.14622996
+         5      1.10082944     -0.77839172
+         6      0.18200131      0.76949211
+         7      0.17804802     -0.73914423
+         8      0.62548032     -1.86135960
+         9     -1.28235776      0.30877442
+        10     -0.78036165      1.65310384
+ 
+c8vec_normal_01_test():
+  c8vec_normal_01() computes a vector of Normal 01 values.
+ 
+  Vector of Normal 01 values:
+ 
+         1   -0.869258     -0.548629    
+         2    0.292130     -0.853881E-01
+         3    0.421151E-01   1.67424    
+         4     2.55304      0.540505    
+         5     2.22138      0.858312    
+         6    0.224068     -0.618780    
+         7    -1.19673      0.435508    
+         8    0.465072       1.71071    
+         9    0.364112     -0.372012    
+        10   -0.995484      0.982369    
+
+I4_NORMAL_AB_TEST
+  I4_NORMAL_AB computes integer pseudonormal values 
+  with mean MU and standard deviation SIGMA.
+
+  MU =    70.0000    
+  SIGMA =    10.0000    
+
+         1        67
+         2        69
+         3        82
+         4        77
+         5        63
+         6        52
+         7        56
+         8        61
+         9        57
+        10        85
+ 
+R8_NORMAL_01_TEST
+  R8_NORMAL_01 computes pseudonormal values 
+  with mean 0.0 and standard deviation 1.0.
+         1    0.457240    
+         2    -1.14255    
+         3     1.11963    
+         4    0.698218    
+         5    -1.11039    
+         6    -1.01330    
+         7    0.780832    
+         8    -1.31742    
+         9    -1.25661    
+        10   -0.225627    
+ 
+R8_NORMAL_AB_TEST
+  R8_NORMAL_AB computes pseudonormal values 
+  with mean MU and standard deviation SIGMA.
+ 
+  MU =    10.0000    
+  SIGMA =    2.00000    
+ 
+         1     13.16223698
+         2      9.13823297
+         3      9.51199574
+         4      9.93752794
+         5      8.25239808
+         6     10.93528560
+         7      9.05827462
+         8     11.53452159
+         9      9.85071643
+        10     12.30488057
+ 
+R8MAT_NORMAL_01_TEST
+  R8MAT_NORMAL_01 returns a matrix of Normal 01 values.
+ 
+  Matrix of Normal 01 values:
+ 
+  Col          1             2             3             4      
+  Row
+ 
+    1: -0.715166     -0.569070      0.259974     -0.553422    
+    2: -0.126040      -2.83472      0.268491     -0.828701    
+    3: -0.529650     -0.188578      0.351653      -1.07879    
+    4:  0.492259     -0.668629E-01  -1.50446      -1.19099    
+    5:  0.177434       2.20505     -0.346152      0.443863    
+ 
+R8MAT_NORMAL_AB_TEST
+  R8MAT_NORMAL_AB returns a matrix of Normal AB values.
+ 
+  MU =    100.000    
+  SIGMA =    5.00000    
+ 
+  Matrix of Normal AB values:
+ 
+  Col          1             2             3             4      
+  Row
+ 
+    1:   100.448       101.268       91.4635       100.918    
+    2:   98.6076       99.8582       95.5944       95.2159    
+    3:   97.0229       100.594       98.9230       108.693    
+    4:   89.7920       96.6125       110.593       98.1656    
+    5:   101.458       96.8284       102.043       104.867    
+ 
+r8vec_normal_01_test():
+  r8vec_normal_01() computes a vector of Normal 01 values.
+ 
+  Vector of Normal 01 values:
+ 
+         1:  -0.66840684    
+         2:   0.47602493    
+         3:   0.14085977    
+         4:   0.88740668    
+         5:   0.47977237    
+         6:   0.49654439E-01
+         7:  -0.17845539    
+         8:  -0.77549812    
+         9:  -0.45270025    
+        10:    1.1678753    
+ 
+R8VEC_NORMAL_AB_TEST
+  R8VEC_NORMAL_AB computes a vector of Normal AB values.
+ 
+  MU =    15.0000    
+  SIGMA =   0.250000    
+ 
+  Vector of Normal AB values:
+ 
+         1:    14.473489    
+         2:    15.065147    
+         3:    15.268601    
+         4:    14.864420    
+         5:    14.865803    
+         6:    15.019255    
+         7:    14.799033    
+         8:    15.000021    
+         9:    15.168859    
+        10:    15.059766    
+ 
+R8VEC_UNIFORM_01_TEST
+  R8VEC_UNIFORM_01 returns a random R8VEC 
+  with entries in [0,1].
+ 
+  Random R8VEC:
+ 
+         1:   0.63983066    
+         2:   0.60460350    
+         3:   0.31554124    
+         4:   0.89035261    
+         5:   0.19189419    
+         6:   0.61749447    
+         7:   0.82671820    
+         8:   0.65704891    
+         9:   0.31557401    
+        10:   0.79335826    
+ 
+normal_test():
+  Normal end of execution.
+ 
+ 7 December 2023   9:25:14.652 AM

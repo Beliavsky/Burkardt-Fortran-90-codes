@@ -1,0 +1,46 @@
+15 May 2024   1:59:01.211 PM
+ 
+normal_dataset():
+  Fortran90 version
+  Generate a multivariate normal random dataset.
+ 
+  The program requests input values from the user:
+ 
+  * M, the spatial dimension,
+  * N, the number of points to generate,
+  * SEED, a positive integer.
+  * MU, the mean vector.
+  * A, the variance-covariance matrix.
+ 
+  The program generates the data and
+  writes it to the file
+ 
+    normal_M_N.txt
+ 
+  where "M" and "N" are the numeric values.
+ 
+  Spatial dimension M =        2
+ 
+  Number of points N =     1000
+ 
+  Seed SEED =    123456789
+ 
+  Mean vector MU:
+ 
+         1     1.0000000    
+         2     2.0000000    
+ 
+  Variance/covariance matrix A:
+ 
+  Col          1             2      
+  Row
+ 
+    1       1.            0.      
+    2       0.            3.      
+ 
+  The data was written to the file "normal_02_01000.txt".
+ 
+normal_dataset():
+  Normal end of execution.
+ 
+15 May 2024   1:59:01.215 PM

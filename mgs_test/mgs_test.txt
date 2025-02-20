@@ -1,0 +1,11 @@
+ 
+MGS_TEST:
+  Test cases for MGS.
+ 
+           5          20   3.31060761E-07
+           3          15   1.15167111E-07
+          13           2   1.50267198E-07
+          16          11   3.91173302E-07
+ 
+MGS_TEST:
+  Normal end of execution.

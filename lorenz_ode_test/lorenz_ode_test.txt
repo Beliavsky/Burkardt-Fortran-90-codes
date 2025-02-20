@@ -1,0 +1,13 @@
+15 September 2021   8:27:08.954 AM
+
+LORENZ_ODE
+  FORTRAN90 version
+  Compute solutions of the Lorenz system.
+  Write data to a file for use by gnuplot.
+  Created data file "lorenz_ode_data.txt".
+  Created command file "lorenz_ode_commands.txt".
+
+LORENZ_ODE:
+  Normal end of execution.
+
+15 September 2021   8:27:08.996 AM

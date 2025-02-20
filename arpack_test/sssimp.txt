@@ -1,0 +1,81 @@
+13 July 2024   7:34:39.527 PM
+ 
+SSSIMP:
+  Fortran90 version
+  A simple ARPACK calling program.
+  This program defines an eigenproblem for a
+  symmetric matrix.
+
+ _saupd: number of update iterations taken
+ -----------------------------------------
+    1 -    1: 32767
+  
+
+ _saupd: number of "converged" Ritz values
+ -----------------------------------------
+    1 -    1: 32767
+  
+
+ _saupd: final Ritz values
+ -------------------------
+    1 -    4:   8.912E+02   9.198E+02   9.198E+02   9.484E+02
+  
+
+ _saupd: corresponding error bounds
+ ----------------------------------
+    1 -    4:   8.370E-08   1.761E-06   4.339E-05   1.267E-14
+  
+
+
+     ==========================================
+     = Symmetric implicit Arnoldi update code =
+     = Version Number: 2.4                    =
+     = Version Date:   07/31/96               =
+     ==========================================
+     = Summary of timing statistics           =
+     ==========================================
+
+
+     Total number update iterations             =     4
+     Total number of OP*x operations            =    65
+     Total number of B*x operations             =     0
+     Total number of reorthogonalization steps  =    65
+     Total number of iterative refinement steps =     0
+     Total number of restart steps              =     0
+     Total time in user OP*x operation          =     0.001036
+     Total time in user B*x operation           =     0.000000
+     Total time in Arnoldi update routine       =     0.007479
+     Total time in saup2 routine                =     0.006886
+     Total time in basic Arnoldi iteration loop =     0.003644
+     Total time in reorthogonalization phase    =     0.001232
+     Total time in (re)start vector generation  =     0.000171
+     Total time in trid eigenvalue subproblem   =     0.000930
+     Total time in getting the shifts           =     0.000105
+     Total time in applying the shifts          =     0.001726
+     Total time in convergence testing          =     0.000021
+
+ Ritz values and relative residuals
+ ----------------------------------
+               Col   1       Col   2
+  Row   1:    8.91167E+02   3.75404E-07
+  Row   2:    9.19780E+02   6.45297E-07
+  Row   3:    9.19781E+02   2.59298E-07
+  Row   4:    9.48395E+02   5.50597E-07
+  
+ 
+SSSIMP:
+====== 
+ 
+  Size of the matrix is    100
+  The number of Ritz values requested is      4
+  The number of Arnoldi vectors generated (NCV) is     20
+  What portion of the spectrum: LM
+  The number of converged Ritz values is      4
+  The number of Implicit Arnoldi update iterations taken is      4
+  The number of OP*x is     65
+  The convergence criterion is   0.596046E-07
+ 
+SSSIMP:
+  Normal end of execution.
+ 
+13 July 2024   7:34:39.528 PM

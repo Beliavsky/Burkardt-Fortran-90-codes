@@ -1,0 +1,152 @@
+<html>
+
+  <head>
+    <title>
+      eigs
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      eigs
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>eigs</b>,
+      a Fortran90 code which
+      calculates the eigenvalues of a real matrix.
+    </p>
+
+    <p>
+      In cases like MATLAB, Octave, and Python, there is a standard
+      built-in function for computing eigenvalues which is appropriate
+      for this task, and we simply supply a code eigs_test() to demonstrate
+      its use.
+    </p>
+
+    <p>
+      In other cases, particularly C, C++, Fortran77 and Fortran90,
+      pre-existing eigenvalue software has been rearranged and packaged
+      to form a simple function of the form eigs(n,A,lambda), which
+      saves the user from the usual trouble of arranging a proper call.
+    </p>
+
+    <p>
+      Here, the Fortran90 version of eigs() relies on a call to the lapack() 
+      function dgeev() to produce its results.  It is assumed that a
+      precompiled copy of the lapack() library is available at link time.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../eigs_test/eigs_test.html">
+      eigs_test</a>
+    </p>
+
+    <p>
+      <a href = "../arpack/arpack.html">
+      arpack</a>,
+      a Fortran90 code which
+      uses Arnoldi iteration to compute eigenvalues for large matrices.
+      It includes a reverse communication (RC) feature.
+      It is Richard Lehoucq, Danny Sorensen, Chao Yang;
+    </p>
+
+    <p>
+      <a href = "../eispack/eispack.html">
+      eispack</a>,
+      a Fortran90 code which
+      carries out eigenvalue computations.
+      It includes a function to compute the singular value decomposition (SVD)
+      of a rectangular matrix.
+      superseded by lapack();
+    </p>
+
+    <p>
+      <a href = "../jacobi_eigenvalue/jacobi_eigenvalue.html">
+      jacobi_eigenvalue</a>,
+      a Fortran90 code which
+      implements the Jacobi iteration for the iterative determination
+      of the eigenvalues and eigenvectors of a real symmetric matrix.
+    </p>
+
+    <p>
+      <a href = "../lapack_test/lapack_test.html">
+      lapack_test</a>,
+      a Fortran90 code which 
+      calls lapack(), which
+      is a standard linear algebra package for solving linear systems,
+      computing matrix factorizations, and solving eigenvalue problems.
+      A precompiled copy of the lapack() library is often available
+      on most scientific computing systems.
+    </p>
+
+    <p>
+      <a href = "../power_method/power_method.html">
+      power_method</a>,
+      a Fortran90 code which
+      carries out the power method for finding a dominant eigenvalue
+      and its eigenvector.
+    </p>
+
+    <p>
+      <a href = "../test_eigen/test_eigen.html">
+      test_eigen</a>,
+      a Fortran90 code which
+      defines various eigenvalue test cases.
+    </p>
+
+    <p>
+      <a href = "../test_matrix/test_matrix.html">
+      test_matrix</a>,
+      a Fortran90 code which
+      defines test matrices, some of
+      which have known eigenvalues and eigenvectors.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "eigs.f90">eigs.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "eigs.sh">eigs.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 05 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

@@ -1,0 +1,209 @@
+29 February 2024  10:48:05.755 AM
+ 
+wordsnake_test()
+  Fortran90 version
+  Test wordsnake(), which creates a high scoring
+  wordsnake from a given set of words.
+
+  Reading word list file "wordlist.txt"
+ 
+FILE_RECORD_COUNT:
+  Number of lines:               48
+  Number of data records:        39
+  Number of comment records:      9
+ 
+  Number of records in the input file is     39
+ 
+  The word list:
+ 
+   1  alas
+   2  ally
+   3  blemish
+   4  blend
+   5  certain
+   6  dense
+   7  denude
+   8  eloped
+   9  emerge
+  10  essential
+  11  eternal
+  12  geriatric
+  13  gerund
+  14  icer
+  15  incredible
+  16  ingrate
+  17  invent
+  18  lasting
+  19  later
+  20  lending
+  21  merger
+  22  mishapen
+  23  pediatric
+  24  penultimate
+  25  rates
+  26  sea
+  27  seem
+  28  stinger
+  29  sudden
+  30  tense
+  31  terrestrial
+  32  terrible
+  33  tessilate
+  34  trials
+  35  trice
+  36  tricky
+  37  underdevelop
+  38  yes
+  39  yet
+ 
+  Trial number      1
+ 
+wordsnake():
+  Number of words =       39
+ 
+       2       4       4  y ET ernal
+       2       4       8  etern AL ly
+       1       1       9  all Y es
+       2       4      13  y ES sential
+       2       4      17  essenti AL as
+       3       9      26  a LAS ting
+       5      25      51  la STING er
+       3       9      60  stin GER iatric
+       4      16      76  geria TRIC ky
+       0       0      76  tricky  dense
+       2       4      80  den SE a
+       0       0      80  sea  icer
+       3       9      89  i CER tain
+       2       4      93  certa IN credible
+       3       9     102  incredi BLE nd
+       4      16     118  b LEND ing
+       3       9     127  lend ING rate
+       4      16     143  ing RATE s
+       3       9     152  ra TES silate
+       4      16     168  tessi LATE r
+       3       9     177  la TER restrial
+       5      25     202  terres TRIAL s
+       1       1     203  trial S udden
+       3       9     212  sud DEN ude
+       1       1     213  denud E merge
+       5      25     238  e MERGE r
+       3       9     247  mer GER und
+       3       9     256  ger UND erdevelop
+       4      16     272  underdev ELOP ed
+       3       9     281  elo PED iatric
+       4      16     297  pedia TRIC e
+       0       0     297  trice  blemish
+       4      16     313  ble MISH apen
+       3       9     322  misha PEN ultimate
+       2       4     326  penultima TE rrible
+       0       0     326  terrible  invent
+       1       1     327  inven T ense
+       2       4     331  ten SE em
+       0       0     331  seem  yet
+ 
+  Total number of characters =      254
+  Reduced number of characters =      155
+  The wordsnake score is    331
+ 
+  Trial number      2
+ 
+wordsnake():
+  Number of words =       39
+ 
+       1       1       1  trial S udden
+       3       9      10  sud DEN se
+       2       4      14  den SE em
+       2       4      18  se EM erge
+       5      25      43  e MERGE r
+       3       9      52  mer GER und
+       3       9      61  ger UND erdevelop
+       4      16      77  underdev ELOP ed
+       3       9      86  elo PED iatric
+       4      16     102  pedia TRIC e
+       3       9     111  tr ICE r
+       3       9     120  i CER tain
+       2       4     124  certa IN credible
+       3       9     133  incredi BLE nd
+       4      16     149  b LEND ing
+       3       9     158  lend ING rate
+       4      16     174  ing RATE s
+       3       9     183  ra TES silate
+       4      16     199  tessi LATE r
+       3       9     208  la TER restrial
+       2       4     212  terrestri AL ly
+       1       1     213  all Y es
+       2       4     217  y ES sential
+       2       4     221  essenti AL as
+       3       9     230  a LAS ting
+       5      25     255  la STING er
+       3       9     264  stin GER iatric
+       4      16     280  geria TRIC ky
+       1       1     281  trick Y et
+       2       4     285  y ET ernal
+       0       0     285  eternal  terrible
+       3       9     294  terri BLE mish
+       4      16     310  ble MISH apen
+       3       9     319  misha PEN ultimate
+       2       4     323  penultima TE nse
+       2       4     327  ten SE a
+       0       0     327  sea  invent
+       0       0     327  invent  denude
+       0       0     327  denude  trials
+ 
+  Total number of characters =      254
+  Reduced number of characters =      153
+  The wordsnake score is    327
+ 
+  Trial number      3
+ 
+wordsnake():
+  Number of words =       39
+ 
+       3       9       9  ra TES silate
+       4      16      25  tessi LATE r
+       3       9      34  la TER rible
+       3       9      43  terri BLE nd
+       4      16      59  b LEND ing
+       3       9      68  lend ING rate
+       2       4      72  ingra TE nse
+       2       4      76  ten SE em
+       2       4      80  se EM erge
+       5      25     105  e MERGE r
+       3       9     114  mer GER iatric
+       4      16     130  geria TRIC ky
+       1       1     131  trick Y es
+       2       4     135  y ES sential
+       2       4     139  essenti AL as
+       3       9     148  a LAS ting
+       5      25     173  la STING er
+       3       9     182  stin GER und
+       3       9     191  ger UND erdevelop
+       4      16     207  underdev ELOP ed
+       3       9     216  elo PED iatric
+       4      16     232  pedia TRIC e
+       3       9     241  tr ICE r
+       3       9     250  i CER tain
+       2       4     254  certa IN vent
+       1       1     255  inven T rials
+       1       1     256  trial S ea
+       1       1     257  se A lly
+       1       1     258  all Y et
+       2       4     262  y ET ernal
+       0       0     262  eternal  mishapen
+       3       9     271  misha PEN ultimate
+       2       4     275  penultima TE rrestrial
+       0       0     275  terrestrial  sudden
+       3       9     284  sud DEN se
+       0       0     284  dense  incredible
+       3       9     293  incredi BLE mish
+       0       0     293  blemish  denude
+       0       0     293  denude  rates
+ 
+  Total number of characters =      254
+  Reduced number of characters =      161
+  The wordsnake score is    293
+ 
+wordsnake_test():
+  Normal end of execution.
+ 
+29 February 2024  10:48:08.682 AM

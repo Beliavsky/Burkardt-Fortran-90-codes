@@ -1,0 +1,332 @@
+<html>
+
+  <head>
+    <title>
+      toms738
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      toms738
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>toms738</b>,
+      a FORTRAN90 code which
+      implements ACM TOMS algorithm 738,
+      to compute Niederreiter's low discrepancy sequence.
+    </p>
+
+    <p>
+      A low discrepancy or quasirandom sequence, such as the Faure,
+      Halton, Hammersley, Niederreiter, or Sobol sequence,
+      is "less random" than a pseudorandom number sequence, but
+      more useful for such tasks as approximation of integrals in
+      higher dimensions, and in global optimization.
+      This is because low discrepancy sequences tend to sample
+      space "more uniformly" than random numbers.  Algorithms
+      that use such sequences may have superior convergence.
+    </p>
+
+    <p>
+      The version displayed here has been converted to FORTRAN90,
+      and other internal changes have been made to suit me.
+    </p>
+
+    <p>
+      The text of many ACM TOMS algorithms is available online
+      through ACM:
+              <a href = "https://calgo.acm.org">
+                         https://calgo.acm.org/</a> 
+      or NETLIB:
+      <a href = "https://www.netlib.org/toms/index.html">
+      https://www.netlib.org/toms/index.html</a>.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>toms738</b> is available in
+      <a href = "toms738.html">a FORTRAN90 version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../cvt/cvt.html">
+      CVT</a>,
+      a FORTRAN90 code which
+      computes elements of a Centroidal Voronoi Tessellation.
+    </p>
+
+    <p>
+      <a href = "../faure/faure.html">
+      FAURE</a>,
+      a FORTRAN90 code which
+      computes elements of a Faure quasirandom sequence.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/grid/grid.html">
+      GRID</a>,
+      a FORTRAN90 code which
+      computes elements of a grid dataset.
+    </p>
+
+    <p>
+      <a href = "../halton/halton.html">
+      HALTON</a>,
+      a FORTRAN90 code which
+      computes elements of a Halton quasirandom sequence.
+    </p>
+
+    <p>
+      <a href = "../hammersley/hammersley.html">
+      HAMMERSLEY</a>,
+      a FORTRAN90 code which
+      computes elements of a Hammersley quasirandom sequence.
+    </p>
+
+    <p>
+      <a href = "../hex_grid/hex_grid.html">
+      HEX_GRID</a>,
+      a FORTRAN90 code which
+      computes elements of a hexagonal grid dataset.
+    </p>
+
+    <p>
+      <a href = "../hex_grid_angle/hex_grid_angle.html">
+      HEX_GRID_ANGLE</a>,
+      a FORTRAN90 code which
+      computes elements of an angled hexagonal grid dataset.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/ihs/ihs.html">
+      IHS</a>,
+      a FORTRAN90 code which
+      computes elements of an improved distributed Latin hypercube dataset.
+    </p>
+
+    <p>
+      <a href = "../latin_center/latin_center.html">
+      LATIN_CENTER</a>,
+      a FORTRAN90 code which
+      computes elements of a Latin Hypercube dataset, choosing center points.
+    </p>
+
+    <p>
+      <a href = "../latin_edge/latin_edge.html">
+      LATIN_EDGE</a>,
+      a FORTRAN90 code which
+      computes elements of a Latin Hypercube dataset, choosing edge points.
+    </p>
+
+    <p>
+      <a href = "../latin_random/latin_random.html">
+      LATIN_RANDOM</a>,
+      a FORTRAN90 code which
+      computes elements of a Latin Hypercube dataset, choosing
+      points at random.
+    </p>
+
+    <p>
+      <a href = "../lcvt/lcvt.html">
+      LCVT</a>,
+      a FORTRAN90 code which
+      computes a latinized Centroidal Voronoi Tessellation.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/niederreiter/niederreiter.html">
+      NIEDERREITER</a>,
+      a FORTRAN90 code which
+      is a modification of ACM TOMS algorithm 738,
+      which, among other things, allows the user to start the
+      sequence at any point.  This is for the arbitrary base
+      calculations.
+    </p>
+
+    <p>
+      <a href = "../niederreiter2/niederreiter2.html">
+      NIEDERREITER2</a>,
+      a FORTRAN90 code which
+      is a modification of ACM TOMS algorithm 738,
+      which, among other things, allows the user to start the
+      sequence at any point.  This is for the base 2 calculations.
+    </p>
+
+    <p>
+      <a href = "../sobol/sobol.html">
+      SOBOL</a>,
+      a FORTRAN90 code which
+      computes elements of a Sobol quasirandom sequence.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/toms738_test/toms738_test.html">
+      toms738_test</a>
+    </p>
+
+    <p>
+      <a href = "../uniform/uniform.html">
+      UNIFORM</a>,
+      a FORTRAN90 code which
+      computes elements of a uniform pseudorandom sequence.
+    </p>
+
+    <p>
+      <a href = "../van_der_corput/van_der_corput.html">
+      VAN_DER_CORPUT</a>,
+      a FORTRAN90 code which
+      computes elements of a van der Corput pseudorandom sequence.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Paul Bratley, Bennett Fox,<br>
+          Algorithm 659:
+          Implementing Sobol's Quasirandom Sequence Generator,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 14, Number 1, pages 88-100, 1988.
+        </li>
+        <li>
+          Paul Bratley, Bennett Fox, Harald Niederreiter,<br>
+          Algorithm 738:
+          Programs to Generate Niederreiter's Low-Discrepancy Sequences,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 20, Number 4, pages 494-495, 1994.
+        </li>
+        <li>
+          Paul Bratley, Bennett Fox, Harald Niederreiter,<br>
+          Implementation and Tests of Low Discrepancy Sequences,<br>
+          ACM Transactions on Modeling and Computer Simulation,<br>
+          Volume 2, Number 3, pages 195-213, 1992.
+        </li>
+        <li>
+          Bennett Fox,<br>
+          Algorithm 647:
+          Implementation and Relative Efficiency of Quasirandom
+          Sequence Generators,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 12, Number 4, pages 362-376, 1986.
+        </li>
+        <li>
+          Rudolf Lidl, Harald Niederreiter, <br>
+          Finite Fields,<br>
+          Cambridge University Press, 1984, page 553.
+        </li>
+        <li>
+          Harald Niederreiter,<br>
+          Low-discrepancy and low-dispersion sequences,<br>
+          Journal of Number Theory,<br>
+          Volume 30, 1988, pages 51-70.
+        </li>
+        <li>
+          Harald Niederreiter,<br>
+          Random Number Generation and quasi-Monte Carlo Methods,<br>
+          SIAM, 1992.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "toms738.sh">toms738.sh</a>, 
+          compiles all the source codes;
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "gfarit.f90">gfarit.f90</a>, 
+          sets up tables of addition and multiplication;
+          gfarit must be run first.
+        </li>
+        <li>
+          <a href = "gfarit.sh">gfarit.sh</a>, 
+          compiles gfarit.f90.
+        </li>
+        <li>
+          <a href = "gfplys.f90">gfplys.f90</a>, 
+          sets up a table of irreducible polynomials.
+          gfplys must be run second.
+        </li>
+        <li>
+          <a href = "gfplys.sh">gfplys.sh</a>, 
+          compiles gfplys.f90.
+        </li>
+        <li>
+          <a href = "genin.f90">genin.f90</a>, 
+          can generate a particular Niederreiter sequence. 
+          It is run after gfarit and gfplys have set up their data files. 
+          The program is interactive, and requires
+          the user to specify a test integral, the spatial dimension, the
+           base, and the number of "warm up" values to skip.
+        </li>
+        <li>
+          <a href = "genin.sh">genin.sh</a>, 
+          compiles genin.f90.
+        </li>
+        <li>
+          <a href = "genin_two.f90">genin_two.f90</a>, 
+          is a special, very efficient version of GENIN
+          for the special case where the base is 2:
+        </li>
+        <li>
+          <a href = "genin_two.sh">genin_two.sh</a>, 
+          compiles genin_two.f90.
+        </li>
+        <li>
+          <a href = "show_two.f90">show_two.f90</a>, 
+          is a variation of GENIN_TWO which simply writes
+          the quasi-random numbers to a file.
+        </li>
+        <li>
+          <a href = "show_two.sh">show_two.sh</a>, 
+          compiles show_two.f90.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 15 March 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

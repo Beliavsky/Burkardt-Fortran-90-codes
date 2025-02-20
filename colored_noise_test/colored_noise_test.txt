@@ -1,0 +1,219 @@
+ 7 September 2021  10:30:57.912 PM
+ 
+COLORED_NOISE_TEST
+  FORTRAN90 version
+  Test COLORED_NOISE().
+
+R8VEC_SFTF_TEST:
+  FORTRAN version
+  R8VEC_SFTF computes "slow" Fourier transform (forward)
+  of a vector of real data.
+  The original data can be recovered using R8VEC_SFTB.
+
+  Fourier coefficients:
+
+    0.400087
+   -0.027110   -0.055258
+   -0.003762   -0.217821
+    0.062669    0.078235
+   -0.122747   -0.209570
+    0.004497   -0.038059
+    0.043927   -0.034001
+   -0.147561   -0.017062
+
+  Compare data R and recovered data R2:
+
+    0.209999    0.209999
+    0.136693    0.136693
+    0.232327    0.232327
+    0.373949    0.373949
+    0.007700    0.007700
+    0.632500    0.632500
+    0.831397    0.831397
+    0.578326    0.578326
+    0.055842    0.055842
+    0.094377    0.094377
+    0.677551    0.677551
+    0.346917    0.346917
+    0.513196    0.513196
+    0.424124    0.424124
+    0.886408    0.886408
+
+R8VEC_SFTF_TEST:
+  Normal end of execution.
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =    0.00000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:   -1.03918    
+         2:    2.09703    
+         3:    1.65099    
+         4:   -1.30118    
+         5:  -0.975551    
+         6:  -0.316034    
+         7:    1.47784    
+         8:   0.281059E-01
+  ......  ..............
+       128:   0.352892    
+  Data written to file "alpha_0.00.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =   0.250000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:  -0.634250E-01
+         2:  -0.172468E-01
+         3:  -0.344508E-01
+         4:   0.200298    
+         5:  -0.133825    
+         6:    1.56757    
+         7:  -0.995044E-01
+         8:   -1.59988    
+  ......  ..............
+       128:   0.964378    
+  Data written to file "alpha_0.25.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =   0.500000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:   0.423846    
+         2:  -0.332093    
+         3:  -0.435114    
+         4:  -0.584443    
+         5:  -0.734561    
+         6:   0.731743    
+         7:   0.649282    
+         8:   0.454226    
+  ......  ..............
+       128:   -1.04873    
+  Data written to file "alpha_0.50.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =   0.750000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:    1.32899    
+         2:    2.20261    
+         3:    1.27236    
+         4:   0.142692    
+         5:   0.207289    
+         6:   -1.20999    
+         7:  -0.902418    
+         8:  -0.881564E-01
+  ......  ..............
+       128:  -0.420899    
+  Data written to file "alpha_0.75.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =    1.00000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:  -0.609214    
+         2:  -0.136656    
+         3:   0.556371    
+         4:  -0.632687    
+         5:  -0.838278    
+         6:    1.11687    
+         7:   0.416847    
+         8:    2.22574    
+  ......  ..............
+       128:   0.515960    
+  Data written to file "alpha_1.00.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =    1.25000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:    1.26472    
+         2:    1.26896    
+         3:    1.71946    
+         4:  -0.580354E-01
+         5:    1.17117    
+         6:    1.71270    
+         7:    1.53698    
+         8:    2.34611    
+  ......  ..............
+       128:  -0.774012    
+  Data written to file "alpha_1.25.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =    1.50000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:    2.31627    
+         2:    2.07260    
+         3:   0.805583    
+         4:  -0.392660    
+         5:   0.748942    
+         6:    1.22146    
+         7:    1.78056    
+         8:    1.01083    
+  ......  ..............
+       128:    3.06011    
+  Data written to file "alpha_1.50.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =    1.75000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:  -0.980063    
+         2:   0.789667    
+         3:  -0.505023    
+         4:   -2.09320    
+         5:   -3.80295    
+         6:   -4.16937    
+         7:   -3.61453    
+         8:   -3.88360    
+  ......  ..............
+       128:   -7.46555    
+  Data written to file "alpha_1.75.txt."
+ 
+COLORED_NOISE_TEST01:
+  Generating      128 sample points.
+  1/F^ALPHA noise has ALPHA =    2.00000    
+  Variance is    1.00000    
+ 
+  Noise sample:
+ 
+         1:   0.543469    
+         2:  -0.276210    
+         3:  -0.831986    
+         4:   -2.18122    
+         5:   -3.19355    
+         6:   -3.81016    
+         7:   -6.80361    
+         8:   -5.46934    
+  ......  ..............
+       128:   -3.87259    
+  Data written to file "alpha_2.00.txt."
+ 
+COLORED_NOISE_TEST:
+  Normal end of execution.
+  
+ 7 September 2021  10:30:57.962 PM

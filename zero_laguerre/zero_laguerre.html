@@ -1,0 +1,208 @@
+<html>
+
+  <head>
+    <title>
+      zero_laguerre
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      zero_laguerre
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>zero_laguerre</b>,
+      a Fortran90 code which
+      uses Laguerre's method to find the zero of a function.
+      The method needs first and second derivative information.
+      The method almost always works when the function is a polynomial.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>zero_laguerre</b> is available in
+      <a href = "zero_laguerre.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../zero_laguerre_test/zero_laguerre_test.html">
+      zero_laguerre_test</a>
+    </p>
+
+    <p>
+      <a href = "../bisection/bisection.html">
+      bisection</a>,
+      a Fortran90 code which
+      applies the bisection method to seek a root of f(x) 
+      over a change-of-sign interval a <= x <= b.
+    </p>
+
+    <p>
+      <a href = "../bisection_integer/bisection_integer.html">
+      bisection_integer</a>,
+      a Fortran90 code which
+      seeks an integer solution to the equation F(X)=0,
+      using bisection within a user-supplied change of sign interval [A,B].
+    </p>
+
+    <p>
+      <a href = "../bisection_rc/bisection_rc.html">
+      bisection_rc</a>,
+      a Fortran90 code which
+      seeks a solution to the equation F(X)=0 using bisection
+      within a user-supplied change of sign interval [A,B].
+      The procedure is written using reverse communication (RC).
+    </p>
+
+    <p>
+      <a href = "../fsolve_test/fsolve_test.html">
+      fsolve_test</a>,
+      a Fortran90 code which
+      calls fsolve() which
+      seeks the solution x of one or more nonlinear equations f(x)=0.
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      nms</a>,
+      a Fortran90 code which
+      includes versions of Brent's zero finder.
+    </p>
+
+    <p>
+      <a href = "../root_rc/root_rc.html">
+      root_rc</a>,
+      a Fortran90 code which
+      seeks a solution of a scalar nonlinear equation f(x) = 0, 
+      or a system of nonlinear equations,
+      using reverse communication (RC), by Gaston Gonnet.
+    </p>
+
+    <p>
+      <a href = "../test_zero/test_zero.html">
+      test_zero</a>,
+      a Fortran90 code which
+      defines functions which can be used to test zero finders.
+    </p>
+
+    <p>
+      <a href = "../toms419/toms419.html">
+      toms419</a>,
+      a Fortran90 code which
+      seeks all the roots of a polynomial with complex coefficients,
+      commonly known as cpoly();
+      this is a version of ACM TOMS algorithm 419.
+    </p>
+
+    <p>
+      <a href = "../zero_brent/zero_brent.html">
+      zero_brent</a>,
+      a Fortran90 code which
+      seeks a solution of a scalar nonlinear equation f(x) = 0, 
+      by Richard Brent.
+    </p>
+
+    <p>
+      <a href = "../zero_chandrupatla/zero_chandrupatla.html">
+      zero_chandrupatla</a>,
+      a Fortran90 code which 
+      finds a zero of a scalar function of a scalar variable,
+      starting from a change of sign interval, using the
+      Chandrupatla method, which can converge faster than
+      bisection, regula falsi, or Brent's method,
+      by Tirupathi Chandrapatla.
+    </p>
+
+    <p>
+      <a href = "../zero_itp/zero_itp.html">
+      zero_itp</a>,
+      a Fortran90 code which
+      finds a zero of a scalar function of a scalar variable,
+      starting from a change of sign interval, using the
+      Interpolate/Truncate/Project (ITP) method, which has
+      faster convergence than the bisection method.
+    </p>
+
+    <p>
+      <a href = "../zero_muller/zero_muller.html">
+      zero_muller</a>,
+      a Fortran90 code which
+      seeks a root of a nonlinear equation using the Muller method,
+      with complex arithmetic.
+    </p>
+
+    <p>
+      <a href = "../zero_rc/zero_rc.html">
+      zero_rc</a>,
+      a Fortran90 code which
+      seeks solutions of a scalar nonlinear equation f(x) = 0, 
+      or a system of nonlinear equations,
+      using reverse communication (RC).
+    </p>
+
+    <p>
+      <a href = "../zoomin/zoomin.html">
+      zoomin</a>,
+      a Fortran90 code which
+      includes various zero finder routines.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Joseph Traub,<br>
+          Iterative Methods for the Solution of Equations,<br>
+          Prentice Hall, 1964.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "zero_laguerre.f90">zero_laguerre.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "zero_laguerre.sh">zero_laguerre.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 26 March 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

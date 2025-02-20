@@ -1,0 +1,336 @@
+<html>
+
+  <head>
+    <title>
+      triangulation_t3_to_t4
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      triangulation_t3_to_t4
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>triangulation_t3_to_t4</b>,
+      a Fortran90 code which
+      reads information
+      describing a triangulation of a set of points using 3-node
+      "T3" triangles, and creates a 4-node "T4"
+      triangulation.
+    </p>
+
+    <p>
+      The same number of triangles are used, but each triangle
+      is given one extra node at the centroid.  The coordinates of
+      these nodes are determined by averaging the coordinates of
+      the vertices of the triangles.
+    </p>
+
+    <p>
+      The input and output files use the simple
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/table/table.html">TABLE format</a>;
+      comment lines begin with a "#" character.  Otherwise, each line
+      of the file contains one set of information, either the coordinates
+      of a node (for a node file), or the indices of nodes that make up
+      a triangle, (for a triangle file).
+    </p>
+
+    <p>
+      The input file <i>prefix</i>_nodes.txt contains the node information
+      for the 3-node triangulation.  Each data line contains the X and
+      Y coordinates of a single node.
+    </p>
+
+    <p>
+      The input file <i>prefix</i>_elements.txt contains the triangle information
+      for the 3-node triangulation.  Each line contains the indices of three
+      nodes that form a triangle, in counterclockwise order.
+    </p>
+
+    <p>
+      The output file <i>prefix</i>_t4_nodes.txt contains the node information
+      for the 4-node triangulation.  It begins with the node information
+      from <i>prefix</i>_nodes.txt, followed by the coordinates of the new nodes.
+    </p>
+
+    <p>
+      The output file <i>prefix</i>_t4_triangles.txt contains the triangle
+      information for the 4-node triangulation.  There are exactly
+      as many triangles as before, but now each triangle uses four nodes.
+      Each line of the file contains the indices of 4 nodes that form the
+      triangle.  The first three indices are the vertices, in counterclockwise
+      order.  The fourth index is the centroid node..
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>triangulation_t3_to_t4</b> <i>prefix</i>
+      </blockquote>
+      where <i>prefix</i> is the common filename prefix:
+      <ul>
+        <li>
+          <i>prefix</i>_nodes.txt contains the node coordinates,
+        </li>
+        <li>
+          <i>prefix</i>_elements.txt contains the element definitions.
+        </li>
+        <li>
+          <i>prefix</i>_t4_nodes.txt is the T4 node coordinates,
+        </li>
+        <li>
+          <i>prefix</i>_t4_elements.txt contains the T4 element definitions.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>triangulation_t3_to_t4</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/triangulation_t3_to_t4/triangulation_t3_to_t4.html">a C++ version</a> and
+      <a href = "triangulation_t3_to_t4.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangulation_t3_to_t4/triangulation_t3_to_t4.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/triangulation_t3_to_t4/triangulation_t3_to_t4.html">an Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../triangulation_t3_to_t4_test/triangulation_t3_to_t4_test.html">
+      triangulation_t3_to_t4_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mesh_to_xml/mesh_to_xml.html">
+      mesh_to_xml</a>,
+      a Fortran90 code which
+      reads information defining a 1D, 2D or 3D mesh, namely
+      a file of node coordinates and a file of elements defined by
+      node indices, and creates a corresponding XML file for input
+      to DOLFIN or FENICS.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/table_delaunay/table_delaunay.html">
+      table_delaunay</a>,
+      a Fortran90 code which
+      computes the triangulation
+      of a set of nodes whose coordinates are stored in a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/triangle/triangle.html">
+      triangle</a>,
+      a C code which
+      computes a triangulation of a geometric region.
+    </p>
+
+    <p>
+      <a href = "../triangulation/triangulation.html">
+      triangulation</a>,
+      a Fortran90 library which
+      carries out various operations on order 3 ("linear") or order 6
+      ("quadratic") triangulations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_boundary_nodes/triangulation_boundary_nodes.html">
+      triangulation_boundary_nodes</a>,
+      a Fortran90 code which
+      reads data defining a triangulation, determines which nodes
+      lie on the boundary, and writes their coordinates to a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_corner/triangulation_corner.html">
+      triangulation_corner</a>,
+      a Fortran90 code which
+      patches triangulations so that no triangle has two sides on the boundary.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_delaunay_discrepancy/triangulation_delaunay_discrepancy.html">
+      triangulation_delaunay_discrepancy</a>,
+      a Fortran90 code which
+      measures the amount by which a triangulation fails the local Delaunay test;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/triangulation_display_opengl/triangulation_display_opengl.html">
+      triangulation_display_opengl</a>,
+      a C++ code which
+      reads files defining a triangulation and displays an image
+      using Open GL.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_histogram/triangulation_histogram.html">
+      triangulation_histogram</a>,
+      a Fortran90 code which
+      computes histograms of data over a triangulation.
+    </p>
+
+    <p>
+      <a href = "../triangulation_l2q/triangulation_l2q.html">
+      triangulation_l2q</a>,
+      a Fortran90 code which
+      reads data defining a 3-node triangulation, and adds midside nodes to
+      create a 6-node triangulation.
+    </p>
+
+    <p>
+      <a href = "../triangulation_mask/triangulation_mask.html">
+      triangulation_mask</a>,
+      a Fortran90 code which
+      takes an existing triangulation and deletes triangles and
+      their corresponding nodes as requested by the user.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/triangulation_order3/triangulation_order3.html">
+      triangulation_order3</a>,
+      a directory which
+      contains a description and
+      examples of order 3 triangulations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/triangulation_order4/triangulation_order4.html">
+      triangulation_order4</a>,
+      a directory which
+      contains a description and
+      examples of order 4 triangulations.
+    </p>
+
+    <p>
+      <a href = "../triangulation_orient/triangulation_orient.html">
+      triangulation_orient</a>,
+      a Fortran90 code which
+      reads data defining a triangulation, makes sure that
+      every triangle has positive orientation, and if not, writes a
+      corrected triangle file.
+    </p>
+
+    <p>
+      <a href = "../triangulation_plot/triangulation_plot.html">
+      triangulation_plot</a>,
+      a Fortran90 code which
+      reads data defining a triangulation and creates a
+      PostScript image of the nodes and triangles.
+    </p>
+
+    <p>
+      <a href = "../triangulation_quad/triangulation_quad.html">
+      triangulation_quad</a>,
+      a Fortran90 code which
+      estimates the integral of a function over a triangulated region.
+    </p>
+
+    <p>
+      <a href = "../triangulation_quality/triangulation_quality.html">
+      triangulation_quality</a>,
+      a Fortran90 code which
+      reads data defining a triangulation and computes a number
+      of quality measures.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_rcm/triangulation_rcm.html">
+      triangulation_rcm</a>,
+      a Fortran90 code which
+      reads data defining a triangulation, determines an ordering
+      of the nodes that will reduce the bandwidth of the adjacency
+      matrix, and writes the new triangulation information to a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_refine/triangulation_refine.html">
+      triangulation_refine</a>,
+      a Fortran90 code which
+      reads data defining a triangulation, replaces each triangle
+      by four congruent smaller ones, and writes the new triangulation
+      information to a file.
+    </p>
+
+    <p>
+      <a href = "../triangulation_triangle_neighbors/triangulation_triangle_neighbors.html">
+      triangulation_triangle_neighbors</a>,
+      a Fortran90 code which
+      reads data defining a triangulation, determines the neighboring
+      triangles of each triangle, and writes that information to a file.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Marc deBerg, Marc Krevald, Mark Overmars,
+          Otfried Schwarzkopf,<br>
+          Computational Geometry,<br>
+          Springer, 2000,<br>
+          ISBN: 3-540-65620-0.
+        </li>
+        <li>
+          Joseph ORourke,<br>
+          Computational Geometry,<br>
+          Second Edition,<br>
+          Cambridge, 1998,<br>
+          ISBN: 0521649765,<br>
+          LC: QA448.D38.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "triangulation_t3_to_t4.f90">triangulation_t3_to_t4.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "triangulation_t3_to_t4.sh">triangulation_t3_to_t4.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 26 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

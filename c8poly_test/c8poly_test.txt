@@ -1,0 +1,44 @@
+06 December 2023   6:49:18.339 PM
+
+c8poly_test():
+  Fortran90 version
+  Test c8poly().
+
+c8poly_print_test():
+  c8poly_print() prints a C8POLY.
+ 
+  The C8POLY:
+
+  p(x) = (   11.0000       12.0000    ) * z ^   5
+         (   9.00000       10.0000    ) * z ^   4
+         (   7.00000       8.00000    ) * z ^   3
+         (   5.00000       6.00000    ) * z ^   2
+         (  -3.00000       4.00000    ) * z
+         (   1.00000       2.00000    )
+
+roots_to_c8poly_test():
+  roots_to_c8poly() is given N complex roots,
+  and constructs the coefficient vector
+  of the corresponding polynomial.
+ 
+  Roots:
+ 
+         1     1.00000       0.00000    
+         2    -4.00000       0.00000    
+         3     3.00000       0.00000    
+         4     0.00000       0.00000    
+         5     3.00000       0.00000    
+ 
+  Corresponding polynomial:
+
+  p(x) = (   1.00000       0.00000    ) * z ^   5
+         (  -3.00000       0.00000    ) * z ^   4
+         (  -13.0000       0.00000    ) * z ^   3
+         (   51.0000       0.00000    ) * z ^   2
+         (  -36.0000       0.00000    ) * z
+         (   0.00000       0.00000    )
+
+c8poly_test():
+  Normal end of execution.
+
+06 December 2023   6:49:18.339 PM

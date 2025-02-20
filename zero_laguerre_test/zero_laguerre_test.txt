@@ -1,0 +1,26 @@
+26 March 2024  10:03:34.532 PM
+ 
+zero_laguerre_test():
+  Fortran90 version
+  Test zero_laguerre().
+ 
+test01():
+  (Polynomial function F(X))
+  Find a root of F(X)=(X+3)*(X+3)*(X-2)=0
+ 
+  Iteration steps taken:  1
+  Estimated root X =    2.00000    
+  F(X) =    0.00000    
+ 
+test02():
+  (Polynomial function F(X))
+  p(x) = x^3 - 2x - 5
+ 
+  Iteration steps taken:  2
+  Estimated root X =    2.09455    
+  F(X) =  -0.847921E-05
+ 
+zero_laguerre_test():
+  Normal end of execution.
+ 
+26 March 2024  10:03:34.532 PM

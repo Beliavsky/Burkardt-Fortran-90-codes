@@ -1,0 +1,100 @@
+27 April 2023   2:23:42.784 PM
+
+PENTOMINOES_TEST
+  FORTRAN90 version
+  Test the PENTOMINOES library.
+
+PENTOMINO_MATRIX_TEST
+  PENTOMINO_MATRIX returns a 0/1 matrix representing a pentomino.
+
+  // trim ( name ) // pentomino ( 3, 3)
+
+    110
+    100
+    100
+
+  // trim ( name ) // pentomino ( 5, 1)
+
+    0
+    0
+    0
+    0
+    0
+
+  // trim ( name ) // pentomino ( 4, 2)
+
+    00
+    00
+    00
+    10
+
+  // trim ( name ) // pentomino ( 2, 4)
+
+    1000
+    1110
+
+  // trim ( name ) // pentomino ( 3, 2)
+
+    10
+    10
+    00
+
+  // trim ( name ) // pentomino ( 3, 3)
+
+    110
+    100
+    100
+
+  // trim ( name ) // pentomino ( 2, 3)
+
+    010
+    110
+
+  // trim ( name ) // pentomino ( 3, 3)
+
+    000
+    000
+    110
+
+  // trim ( name ) // pentomino ( 3, 3)
+
+    000
+    100
+    110
+
+  // trim ( name ) // pentomino ( 3, 3)
+
+    100
+    110
+    100
+
+  // trim ( name ) // pentomino ( 2, 4)
+
+    0100
+    1110
+
+  // trim ( name ) // pentomino ( 3, 3)
+
+    100
+    100
+    110
+
+PENTOMINO_PLOT_TEST
+  PENTOMINO_PLOT plots a pentomino.
+  Created command file "F_commands.txt".
+  Created command file "I_commands.txt".
+  Created command file "L_commands.txt".
+  Created command file "N_commands.txt".
+  Created command file "P_commands.txt".
+  Created command file "T_commands.txt".
+  Created command file "U_commands.txt".
+  Created command file "V_commands.txt".
+  Created command file "W_commands.txt".
+  Created command file "X_commands.txt".
+  Created command file "Y_commands.txt".
+  Created command file "Z_commands.txt".
+
+PENTOMINOES_TEST
+  Normal end of execution.
+
+27 April 2023   2:23:42.786 PM

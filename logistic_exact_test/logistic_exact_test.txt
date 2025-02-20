@@ -1,0 +1,27 @@
+25 May 2024  10:36:44.769 PM
+
+logistic_exact_test():
+  Fortran90 version
+  logistic_exact() evaluates exact solutions of
+  the logistic ODE.
+
+  parameters:
+    r     =    1.00000    
+    k     =    1.00000    
+    t0    =    0.00000    
+    y0    =   0.500000    
+    tstop =    8.00000    
+
+  Evaluate exact solution for varied values of y0:
+    y0 =   0.500000E-01
+    y0 =   0.100000    
+    y0 =   0.200000    
+    y0 =   0.500000    
+ 
+  Data stored in "logistic_exact_data.txt".
+  Plot commands stored in "logistic_exact_commands.txt".
+
+logistic_exact_test():
+  Normal end of execution.
+
+25 May 2024  10:36:44.770 PM

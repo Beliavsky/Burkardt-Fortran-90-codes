@@ -1,0 +1,51 @@
+12 October 2022   5:43:16.298 PM
+ 
+tsp_lau_test():
+  FORTRAN90 version
+  Test tsp_lau().
+ 
+test01():
+  tsp() is to be applied to the distance table stored in
+  the file "five.txt"
+ 
+  Distance matrix:
+ 
+       Col       1             2             3             4             5      
+       Row
+ 
+         1   0.00000       3.00000       4.00000       2.00000       9.00000    
+         2   3.00000       0.00000       4.00000       6.00000       3.00000    
+         3   4.00000       4.00000       0.00000       5.00000       8.00000    
+         4   2.00000       6.00000       5.00000       0.00000       6.00000    
+         5   9.00000       3.00000       8.00000       6.00000       0.00000    
+ 
+  COMPUTED RESULTS:
+ 
+  1  4  2  5  3
+ 
+  Path length =    23.0000    
+ 
+test01():
+  tsp() is to be applied to the distance table stored in
+  the file "fifteen.txt"
+ 
+  COMPUTED RESULTS:
+ 
+  1 13  2 15  9  5  7  3 12 14 10  8  6  4 11
+ 
+  Path length =    291.000    
+ 
+test01():
+  tsp() is to be applied to the distance table stored in
+  the file "seventeen.txt"
+ 
+  COMPUTED RESULTS:
+ 
+  1 13  7  8  6 11  5  2 10  3 15 14 17  4  9 12 16
+ 
+  Path length =    2190.00    
+ 
+tsp_lau_test():
+  Normal end of execution.
+ 
+12 October 2022   5:43:16.298 PM

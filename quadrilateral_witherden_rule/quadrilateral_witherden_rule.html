@@ -1,0 +1,158 @@
+<html>
+
+  <head>
+    <title>
+      quadrilateral_witherden_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      quadrilateral_witherden_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>quadrilateral_witherden_rule</b>,
+      a MATLAB code which
+      returns a Witherden quadrature rule, with exactness up to total degree 21,
+      over the interior of a quadrilateral.
+    </p>
+
+    <p>
+       The unit quadrilateral has vertices (0,0), (1,0), (1,1), (0,1).
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>quadrilateral_witherden_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/quadrilateral_witherden_rule/quadrilateral_witherden_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/quadrilateral_witherden_rule/quadrilateral_witherden_rule.html">a C++ version</a> and
+      <a href = "quadrilateral_witherden_rule.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/quadrilateral_witherden_rule/quadrilateral_witherden_rule.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/quadrilateral_witherden_rule/quadrilateral_witherden_rule.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/quadrilateral_witherden_rule/quadrilateral_witherden_rule.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/quadrilateral_witherden_rule_test/quadrilateral_witherden_rule_test.html">
+      quadrilateral_witherden_rule_test</a>
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Freddie Witherden, Peter Vincent,<br>
+          On the identification of symmetric quadrature rules for finite element methods,<br>
+          Computers and Mathematics with Applications,<br>
+          Volume 69, pages 1232-1241, 2015.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/quadrilateral_unit_area.m">quadrilateral_unit_area.m</a>,
+          computes the area of a unit quadrilateral.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule_order.m">rule_order.m</a>,
+          returns the number of quadrature points used in a rule
+          of given degree.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule01.m">rule01.m</a>,
+          returns the rule of degree 1.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule03.m">rule03.m</a>,
+          returns the rule of degree 3.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule05.m">rule05.m</a>,
+          returns the rule of degree 5.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule07.m">rule07.m</a>,
+          returns the rule of degree 7.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule09.m">rule09.m</a>,
+          returns the rule of degree 9.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule11.m">rule11.m</a>,
+          returns the rule of degree 11.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule13.m">rule13.m</a>,
+          returns the rule of degree 13.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule15.m">rule15.m</a>,
+          returns the rule of degree 15.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule17.m">rule17.m</a>,
+          returns the rule of degree 17.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/rule19.m">rule19.m</a>,
+          returns the rule of degree 19.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_witherden_rule/quadrilateral_witherden_rule_to_matlab.m">
+          quadrilateral_witherden_rule_to_matlab.m</a>,
+          a MATLAB script which reads a data file describing one of
+          the rules and writes a MATLAB function
+          to return points and weights.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 25 April 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

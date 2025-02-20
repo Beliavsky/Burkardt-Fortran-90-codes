@@ -1,0 +1,156 @@
+<html>
+
+  <head>
+    <title>
+      matrix_chain_dynamic
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      matrix_chain_dynamic
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>matrix_chain_dynamic</b>,
+      a Fortran90 code which 
+      finds the cost of the most efficient ordering to use when
+      multiplying a sequence of matrices, using dynamic programming.
+    </p>
+
+    <p>
+      We are given a sequence of n matrices of conformable dimensions.
+      Matrix Ai has D(i) rows and D(i+1) columns.  
+      The product A1 * A2 * ... * An is to be computed.  
+      In terms of scalar multiplications, the cost of computing
+      A(i) * A(i+1) is D(i) * D(i+1) * D(i+2).
+      We may carry out the pairs of multiplication in any order we wish.  
+      The total cost of the computation will, in general, vary depending
+      on the order in which we compute the individual matrix multiplications.
+      The goal of the algorithm is simply to determine the cost of the
+      most efficient ordering.
+    </p>
+
+    <p>
+      Given n matrices, there are (n-1)! possible orderings for the 
+      sequence of matrix multiplications.  One approach to determining
+      the minimum cost would be to consider each of these orderings,
+      but this is considered a wasteful and inefficient approach for
+      large values of n.  The code given here depends instead on a 
+      dynamic programming approach.  As such, it requires several
+      n by n arrays in order to store intermediate information.
+      Thus it needs n^2 space, and the algorithm takes on the order
+      of n^3 operations to determine the result.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>matrix_chain_dynamic</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/matrix_chain_dynamic/matrix_chain_dynamic.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/matrix_chain_dynamic/matrix_chain_dynamic.html">a C++ version</a> and
+      <a href = "matrix_chain_dynamic.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/matrix_chain_dynamic/matrix_chain_dynamic.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/matrix_chain_dynamic/matrix_chain_dynamic.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/matrix_chain_dynamic/matrix_chain_dynamic.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../matrix_chain_dynamic_test/matrix_chain_dynamic_test.html">
+      matrix_chain_dynamic_test</a>
+    </p>
+
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/change_dynamic/change_dynamic.html">
+      change_dynamic</a>,
+      a Fortran90 code which
+      uses dynamic programming to solve the change making problem,
+      which counts the number of ways a given sum can be formed
+      using coins of various denominations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/football_dynamic/football_dynamic.html">
+      football_dynamic</a>,
+      a Fortran90 code which
+      uses dynamic programming to count the ways of achieving 
+      a given score in football, respecting the order of events.
+    </p>
+
+    <p>
+      <a href = "../mxm/mxm.html">
+      mxm</a>,
+      a Fortran90 code which
+      sets up a matrix multiplication problem A=B*C of arbitrary size,
+      and compares the time required 
+      for IJK, IKJ, JIK, JKI, KIJ and KJI orderings of the loops.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Thomas Cormen, Charles Leiserson, Ronald Rivest, Clifford Stein,<br>
+          Introduction to Algorithms,<br>
+          MIT Press, 2001,<br>
+          ISBN: 978-0-262-03293-3,<br>
+          LC: QA76.C662.
+        </li>
+        <li>
+          Matrix Chain Multiplication,<br>
+          Wikipedia page,<br>
+          https://en.wikipedia.org/wiki/matrix_chain_multiplication
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/matrix_chain_dynamic/matrix_chain_dynamic.f">matrix_chain_dynamic.f</a>, the source code.
+        </li>
+        <li>
+          <a href = "matrix_chain_dynamic.sh">matrix_chain_dynamic.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 31 December 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,160 @@
+<html>
+
+  <head>
+    <title>
+      sphere_triangle_quad
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      sphere_triangle_quad
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>sphere_triangle_quad</b>,
+      a FORTRAN90 code which 
+      estimates the integral of a scalar function 
+      F(X,Y,Z) over a spherical triangle on the unit sphere.
+    </p>
+
+    <p>
+      Three methods of estimation are very crude and cannot be improved:
+      <ul>
+        <li>
+          the centroid rule, based on a single function value.
+        </li>
+        <li>
+          the vertex rule, which averages the vertex values.
+        </li>
+        <li>
+          the midside rule, which averages the midside values.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      One method of estimation uses random sampling, the Monte Carlo method, 
+      whose accuracy can be improved by increasing the number of sample points.
+    </p>
+
+    <p>
+      Another method is based on the centroid rule, but allows the
+      user to decompose the original spherical triangle into collection
+      of smaller triangles.  The accuracy of the estimate should improve
+      as the size of these triangles decreases.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>sphere_triangle_quad</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/sphere_triangle_quad/sphere_triangle_quad.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/sphere_triangle_quad/sphere_triangle_quad.html">a C++ version</a> and
+      <a href = "sphere_triangle_quad.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/sphere_triangle_quad/sphere_triangle_quad.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/sphere_triangle_quad/sphere_triangle_quad.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/sphere_triangle_quad/sphere_triangle_quad.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../sphere_triangle_quad_test/sphere_triangle_quad_test.html">
+      sphere_triangle_quad_test</a>
+    </p>
+
+    <p>
+      <a href = "../sphere_quad/sphere_quad.html">
+      sphere_quad</a>,
+      a FORTRAN90 library which 
+      approximates an integral over the surface of the unit sphere 
+      by applying a triangulation to the surface;
+    </p>
+
+    <p>
+      <a href = "../sphere_triangle_monte_carlo/sphere_triangle_monte_carlo.html">
+      SPHERE_TRIANGLE_MONTE_CARLO</a>,
+      a FORTRAN90 library which
+      estimates the integral of a function over a spherical triangle using the Monte Carlo method.
+    </p>
+
+    <p>
+      <a href = "../stripack/stripack.html">
+      STRIPACK</a>,
+      a FORTRAN90 library which 
+      computes the Voronoi diagram or Delaunay
+      triangulation of pointsets on a sphere.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stroud/stroud.html">
+      STROUD</a>,
+      a FORTRAN90 library which 
+      approximates the integral of a function on the surface or in the interior
+      of a variety of geometric shapes.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          Jacob Goodman, Joseph ORourke, editors,<br>
+          Handbook of Discrete and Computational Geometry,<br>
+          Second Edition,<br>
+          CRC/Chapman and Hall, 2004,<br>
+          ISBN: 1-58488-301-4,<br>
+          LC: QA167.H36.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "sphere_triangle_quad.f90">sphere_triangle_quad.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "sphere_triangle_quad.sh">sphere_triangle_quad.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 08 November 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial html skeleton created by HTMLINDEX. -->
+
+</html>

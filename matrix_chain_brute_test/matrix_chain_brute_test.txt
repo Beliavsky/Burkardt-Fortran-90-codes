@@ -1,0 +1,130 @@
+27 June 2024   5:16:17.352 PM
+
+matrix_chain_brute_test():
+  Fortran90 version
+  Test matrix_chain_brute().
+
+  Test # 1
+  Number of dimensions =         5
+  Number of matrices =           4
+  Number of multiplications =    3
+  Matrix dimensions
+    40    20    30    10    30
+  Number of possible parenthesizations is    5
+  Number of possible permutations is    6
+  Minimal cost is  26000
+  Multiplication order:
+   2   1   1
+
+  Test # 2
+  Number of dimensions =         5
+  Number of matrices =           4
+  Number of multiplications =    3
+  Matrix dimensions
+     1     2     3     4     3
+  Number of possible parenthesizations is    5
+  Number of possible permutations is    6
+  Minimal cost is     30
+  Multiplication order:
+   1   1   1
+
+  Test # 3
+  Number of dimensions =         3
+  Number of matrices =           2
+  Number of multiplications =    1
+  Matrix dimensions
+    10    20    30
+  Number of possible parenthesizations is    1
+  Number of possible permutations is    1
+  Minimal cost is   6000
+  Multiplication order:
+   1
+
+  Test # 4
+  Number of dimensions =         4
+  Number of matrices =           3
+  Number of multiplications =    2
+  Matrix dimensions
+    10    30     5    60
+  Number of possible parenthesizations is    2
+  Number of possible permutations is    2
+  Minimal cost is   4500
+  Multiplication order:
+   1   1
+
+  Test # 5
+  Number of dimensions =         2
+  Number of matrices =           1
+  Number of multiplications =    0
+  Matrix dimensions
+    10    20
+  Number of possible parenthesizations is    1
+  Number of possible permutations is    1
+  Minimal cost is      0
+  Multiplication order:
+  [ Empty ]
+
+  Test # 6
+  Number of dimensions =         5
+  Number of matrices =           4
+  Number of multiplications =    3
+  Matrix dimensions
+    40    20     0    10    30
+  Number of possible parenthesizations is    5
+  Number of possible permutations is    6
+  Minimal cost is      0
+  Multiplication order:
+   1   1   1
+
+  Test # 7
+  Number of dimensions =         5
+  Number of matrices =           4
+  Number of multiplications =    3
+  Matrix dimensions
+     1   100     1   100     1
+  Number of possible parenthesizations is    5
+  Number of possible permutations is    6
+  Minimal cost is    201
+  Multiplication order:
+   1   2   1
+
+  Test # 8
+  Number of dimensions =         5
+  Number of matrices =           4
+  Number of multiplications =    3
+  Matrix dimensions
+   100    50     1    50   100
+  Number of possible parenthesizations is    5
+  Number of possible permutations is    6
+  Minimal cost is  20000
+  Multiplication order:
+   1   2   1
+
+  Test # 9
+  Number of dimensions =         5
+  Number of matrices =           4
+  Number of multiplications =    3
+  Matrix dimensions
+     1    50   100    50     1
+  Number of possible parenthesizations is    5
+  Number of possible permutations is    6
+  Minimal cost is  10050
+  Multiplication order:
+   1   1   1
+
+  Test #10
+  Number of dimensions =         6
+  Number of matrices =           5
+  Number of multiplications =    4
+  Matrix dimensions
+     4    10     3    12    20     7
+  Number of possible parenthesizations is   14
+  Number of possible permutations is   24
+  Minimal cost is   1344
+  Multiplication order:
+   1   2   2   1
+
+matrix_chain_brute_test():
+  Normal end of execution.
+
+27 June 2024   5:16:17.352 PM

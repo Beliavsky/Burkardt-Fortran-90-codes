@@ -1,0 +1,46 @@
+26 March 2023   9:47:00.049 AM
+ 
+ising_2d_simulation():
+  FORTRAN90 version
+  Monte Carlo simulation of a 2D Ising model.
+ 
+  The number of rows is M =       10
+  The number of columns is N =       10
+  The number of iterations taken is ITERATIONS =       15
+  The threshhold THRESH =   0.500000    
+ 
+  The transition probability table, based on the number
+  of neighbors with the same spin.
+ 
+      1         2         3         4         5
+ 
+    0.9800    0.8500    0.5000    0.1500    0.0200
+ 
+  Created the gnuplot graphics file "ising_2d_initial.txt".
+ 
+  Step     Positives       Negatives
+             #    %          #    %
+ 
+     0      54   54.00      46   46.00
+     1      50   50.00      50   50.00
+     2      50   50.00      50   50.00
+     3      46   46.00      54   54.00
+     4      44   44.00      56   56.00
+     5      45   45.00      55   55.00
+     6      43   43.00      57   57.00
+     7      36   36.00      64   64.00
+     8      34   34.00      66   66.00
+     9      36   36.00      64   64.00
+    10      37   37.00      63   63.00
+    11      41   41.00      59   59.00
+    12      40   40.00      60   60.00
+    13      38   38.00      62   62.00
+    14      39   39.00      61   61.00
+    15      38   38.00      62   62.00
+ 
+  Created the gnuplot graphics file "ising_2d_final.txt".
+ 
+ISING_2D_SIMULATION
+  Normal end of execution.
+ 
+26 March 2023   9:47:00.050 AM

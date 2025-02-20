@@ -1,0 +1,176 @@
+<html>
+
+  <head>
+    <title>
+      dream_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      dream_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>dream_test</b>,
+      a FORTRAN90 code which
+      calls dream(), which
+      implements the DREAM algorithm for accelerating 
+      Markov Chain Monte Carlo (MCMC) convergence using differential evolution.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../dream/dream.html">
+      dream</a>,
+      a FORTRAN90 code which
+      implements the DREAM algorithm for accelerating 
+      Markov Chain Monte Carlo (MCMC)
+      convergence using differential evolution, 
+      using five user functions to define the problem, by Guannan Zhang.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "dream_test.sh">dream_test.sh</a>, runs all the tests.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>PROBLEM0</b> is a small sample problem, in 10 dimensions, with a 
+      density that is the maximum of two gaussians centered at (-5,-5,...,-5)
+      and (5,5,...,5).
+      <ul>
+        <li>
+          <a href = "problem0.f90">problem0.f90</a>,
+          is a user written file, containing 5 functions, which 
+          define the data for problem 0.
+        </li>
+        <li>
+          <a href = "problem0.txt">problem0.txt</a>,
+          the output file.
+        </li>
+        <li>
+          <a href = "problem0_chain01.txt">problem0_chain01.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain02.txt">problem0_chain02.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain03.txt">problem0_chain03.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain04.txt">problem0_chain04.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain05.txt">problem0_chain05.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain06.txt">problem0_chain06.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain07.txt">problem0_chain07.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain08.txt">problem0_chain08.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain09.txt">problem0_chain09.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_chain10.txt">problem0_chain10.txt</a>,
+          a chain data file.
+        </li>
+        <li>
+          <a href = "problem0_gr.txt">problem0_gr.txt</a>,
+          the Gelman-Rubin statistic file.
+        </li>
+        <li>
+          <a href = "problem0_restart.txt">problem0_restart.txt</a>,
+          the restart file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>PROBLEM1</b> is based on the first example in the Vrugt reference.
+      The Vrugt version involves 100 variables, with a multidimensional
+      normal distribution with specified mean vector and covariance matrix.
+      So far, I have simply set up the user routines, with just 5 variables,
+      and created a small stand-alone main code to test it.
+      <ul>
+        <li>
+          <a href = "problem1.f90">problem1.f90</a>,
+          is a user written file, containing the 5 functions required
+          to define the problem data, as well as other functions to
+          set the covariance for problem 1.
+        </li>
+        <li>
+          <a href = "problem1_main.f90">problem1_main.f90</a>,
+          a stand-alone main code that calls the user functions
+          to make some simple tests.
+        </li>
+        <li>
+          <a href = "problem1_main.txt">problem1_main.txt</a>,
+          the output file from the standalone main code.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>PROBLEM2</b> is based on the second example in the Vrugt reference.
+      The Vrugt version involves 10 variables, with a "twisted" Gaussian
+      density function.
+      <ul>
+        <li>
+          <a href = "problem2.f90">problem2.f90</a>,
+          is a user written file, containing the 5 functions required
+          to define problem 2.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 18 June 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

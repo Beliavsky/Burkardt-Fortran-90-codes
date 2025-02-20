@@ -1,0 +1,330 @@
+15 December 2024   7:12:30.367 PM
+ 
+l4lib_test():
+  Fortran90 version
+  Test l4lib().
+
+I4_TO_L4_TEST
+  I4_TO_L4 converts an I4 to an L4.
+
+  I4   L4
+
+  -5  F
+  -4  F
+  -3  F
+  -2  F
+  -1  F
+   0  F
+   1  F
+   2  F
+   3  F
+   4  F
+   5  F
+
+I4_TO_L4VEC_TEST
+  I4_TO_L4VEC converts an I4 to an L4VEC.
+
+  I4   L4VEC
+
+   0     F F F F F F F F
+   1     F F F F F F F T
+   2     F F F F F F T F
+   3     F F F F F F T T
+   4     F F F F F T F F
+   5     F F F F F T F T
+   6     F F F F F T T F
+   7     F F F F F T T T
+   8     F F F F T F F F
+   9     F F F F T F F T
+  10     F F F F T F T F
+
+L4_TO_I4_TEST
+  L4_TO_I4 converts an L4 to an I4.
+
+  L4   I4
+
+  F  0
+  T  1
+
+L4_TO_S_TEST
+  L4_TO_S converts an L4 to a string.
+
+  L4   S
+
+  F  False
+  T  True 
+ 
+L4_UNIFORM_TEST
+  L4_UNIFORM computes pseudorandom logical values.
+ 
+  The initial seed is    123456789
+ 
+         1  F
+         2  T
+         3  T
+         4  T
+         5  F
+         6  F
+         7  F
+         8  F
+         9  F
+        10  T
+
+L4_XOR_TEST
+  L4_XOR computes the exclusive OR of two L4's
+
+  L1  L2  L4_XOR(L1,L2)
+
+   F   F    F
+   F   T    T
+   T   F    T
+   T   T    F
+ 
+L4MAT_PRINT_TEST
+  L4MAT_PRINT prints an L4MAT.
+ 
+  A(I,J) = I is divisible by J
+ 
+       0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3
+  Col  1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+  Row
+ 
+    1: T F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    2: T T F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    3: T F T F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    4: T T F T F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    5: T F F F T F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    6: T T T F F T F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    7: T F F F F F T F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    8: T T F T F F F T F F F F F F F F F F F F F F F F F F F F F F F F F F F
+    9: T F T F F F F F T F F F F F F F F F F F F F F F F F F F F F F F F F F
+   10: T T F F T F F F F T F F F F F F F F F F F F F F F F F F F F F F F F F
+   11: T F F F F F F F F F T F F F F F F F F F F F F F F F F F F F F F F F F
+   12: T T T T F T F F F F F T F F F F F F F F F F F F F F F F F F F F F F F
+   13: T F F F F F F F F F F F T F F F F F F F F F F F F F F F F F F F F F F
+   14: T T F F F F T F F F F F F T F F F F F F F F F F F F F F F F F F F F F
+   15: T F T F T F F F F F F F F F T F F F F F F F F F F F F F F F F F F F F
+   16: T T F T F F F T F F F F F F F T F F F F F F F F F F F F F F F F F F F
+   17: T F F F F F F F F F F F F F F F T F F F F F F F F F F F F F F F F F F
+   18: T T T F F T F F T F F F F F F F F T F F F F F F F F F F F F F F F F F
+   19: T F F F F F F F F F F F F F F F F F T F F F F F F F F F F F F F F F F
+   20: T T F T T F F F F T F F F F F F F F F T F F F F F F F F F F F F F F F
+ 
+       3 3 3 3 4 4 4 4 4 4 4 4 4 4 5
+  Col  6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+  Row
+ 
+    1: F F F F F F F F F F F F F F F
+    2: F F F F F F F F F F F F F F F
+    3: F F F F F F F F F F F F F F F
+    4: F F F F F F F F F F F F F F F
+    5: F F F F F F F F F F F F F F F
+    6: F F F F F F F F F F F F F F F
+    7: F F F F F F F F F F F F F F F
+    8: F F F F F F F F F F F F F F F
+    9: F F F F F F F F F F F F F F F
+   10: F F F F F F F F F F F F F F F
+   11: F F F F F F F F F F F F F F F
+   12: F F F F F F F F F F F F F F F
+   13: F F F F F F F F F F F F F F F
+   14: F F F F F F F F F F F F F F F
+   15: F F F F F F F F F F F F F F F
+   16: F F F F F F F F F F F F F F F
+   17: F F F F F F F F F F F F F F F
+   18: F F F F F F F F F F F F F F F
+   19: F F F F F F F F F F F F F F F
+   20: F F F F F F F F F F F F F F F
+ 
+L4MAT_PRINT_SOME_TEST
+  L4MAT_PRINT_SOME prints some of an L4MAT.
+
+  Here, our matrix is 20x50, but we print rows 5:15, columns 1:5
+ 
+  A(I,J) = I is divisible by J
+ 
+  Col  1 2 3 4 5
+  Row
+ 
+    5: T F F F T
+    6: T T T F F
+    7: T F F F F
+    8: T T F T F
+    9: T F T F F
+   10: T T F F T
+   11: T F F F F
+   12: T T T T F
+   13: T F F F F
+   14: T T F F F
+   15: T F T F T
+ 
+L4MAT_TRANSPOSE_PRINT_TEST
+  L4MAT_TRANSPOSE_PRINT prints the transpose of an L4MAT.
+ 
+  A(I,J) = I is divisible by J
+ 
+       0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2
+  Row  1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+  Col
+ 
+    1: T T T T T T T T T T T T T T T T T T T T
+    2: F T F T F T F T F T F T F T F T F T F T
+    3: F F T F F T F F T F F T F F T F F T F F
+    4: F F F T F F F T F F F T F F F T F F F T
+    5: F F F F T F F F F T F F F F T F F F F T
+    6: F F F F F T F F F F F T F F F F F T F F
+    7: F F F F F F T F F F F F F T F F F F F F
+    8: F F F F F F F T F F F F F F F T F F F F
+    9: F F F F F F F F T F F F F F F F F T F F
+   10: F F F F F F F F F T F F F F F F F F F T
+   11: F F F F F F F F F F T F F F F F F F F F
+   12: F F F F F F F F F F F T F F F F F F F F
+   13: F F F F F F F F F F F F T F F F F F F F
+   14: F F F F F F F F F F F F F T F F F F F F
+   15: F F F F F F F F F F F F F F T F F F F F
+   16: F F F F F F F F F F F F F F F T F F F F
+   17: F F F F F F F F F F F F F F F F T F F F
+   18: F F F F F F F F F F F F F F F F F T F F
+   19: F F F F F F F F F F F F F F F F F F T F
+   20: F F F F F F F F F F F F F F F F F F F T
+   21: F F F F F F F F F F F F F F F F F F F F
+   22: F F F F F F F F F F F F F F F F F F F F
+   23: F F F F F F F F F F F F F F F F F F F F
+   24: F F F F F F F F F F F F F F F F F F F F
+   25: F F F F F F F F F F F F F F F F F F F F
+   26: F F F F F F F F F F F F F F F F F F F F
+   27: F F F F F F F F F F F F F F F F F F F F
+   28: F F F F F F F F F F F F F F F F F F F F
+   29: F F F F F F F F F F F F F F F F F F F F
+   30: F F F F F F F F F F F F F F F F F F F F
+   31: F F F F F F F F F F F F F F F F F F F F
+   32: F F F F F F F F F F F F F F F F F F F F
+   33: F F F F F F F F F F F F F F F F F F F F
+   34: F F F F F F F F F F F F F F F F F F F F
+   35: F F F F F F F F F F F F F F F F F F F F
+   36: F F F F F F F F F F F F F F F F F F F F
+   37: F F F F F F F F F F F F F F F F F F F F
+   38: F F F F F F F F F F F F F F F F F F F F
+   39: F F F F F F F F F F F F F F F F F F F F
+   40: F F F F F F F F F F F F F F F F F F F F
+   41: F F F F F F F F F F F F F F F F F F F F
+   42: F F F F F F F F F F F F F F F F F F F F
+   43: F F F F F F F F F F F F F F F F F F F F
+   44: F F F F F F F F F F F F F F F F F F F F
+   45: F F F F F F F F F F F F F F F F F F F F
+   46: F F F F F F F F F F F F F F F F F F F F
+   47: F F F F F F F F F F F F F F F F F F F F
+   48: F F F F F F F F F F F F F F F F F F F F
+   49: F F F F F F F F F F F F F F F F F F F F
+   50: F F F F F F F F F F F F F F F F F F F F
+ 
+L4MAT_TRANSPOSE_PRINT_SOME_TEST
+  L4MAT_TRANSPOSE_PRINT_SOME prints some of an L4MAT, transposed.
+
+  Here, our matrix is 20x50, but we print rows 5:15, columns 1:5
+ 
+  A(I,J) = I is divisible by J
+ 
+       0 0 0 0 0 1 1 1 1 1 1
+  Row  5 6 7 8 9 0 1 2 3 4 5
+  Col
+ 
+    1: T T T T T T T T T T T
+    2: F T F T F T F T F T F
+    3: F T F F T F F T F F T
+    4: F F F T F F F T F F F
+    5: T F F F F T F F F F T
+ 
+L4MAT_UNIFORM_TEST
+  L4MAT_UNIFORM computes a vector of
+  pseudorandom logical values.
+ 
+  The initial seed is    123456789
+ 
+  Uniform L4MAT:
+ 
+  Col  1 2 3 4
+  Row
+ 
+    1: F F F F
+    2: T F F T
+    3: T F F F
+    4: T F T F
+    5: F T T F
+
+L4VEC_NEXT_TEST
+  L4VEC_NEXT generates logical vectors.
+
+  FFF
+  FFT
+  FTF
+  FTT
+  TFF
+  TFT
+  TTF
+  TTT
+
+L4VEC_PRINT_TEST
+  L4VEC_PRINT prints an L4VEC.
+ 
+  Is I Prime?:
+ 
+         1: F
+         2: T
+         3: T
+         4: F
+         5: T
+         6: F
+         7: T
+         8: F
+         9: F
+        10: F
+        11: T
+        12: F
+        13: T
+        14: F
+        15: F
+        16: F
+        17: T
+        18: F
+        19: T
+        20: F
+ 
+L4VEC_UNIFORM_TEST
+  L4VEC_UNIFORM computes a vector of
+  pseudorandom logical values.
+ 
+  The initial seed is    123456789
+ 
+  Uniform L4VEC:
+ 
+         1: F
+         2: T
+         3: T
+         4: T
+         5: F
+         6: F
+         7: F
+         8: F
+         9: F
+        10: T
+ 
+S_TO_L4_TEST
+  S_TO_L4 reads logical data from a string.
+ 
+  S   L
+ 
+  0           F
+  F           F
+  f           F
+  1           T
+  T           T
+  t           T
+    0         F
+    1  0      T
+    01        F
+    Talse     T
+ 
+l4lib_test():
+  Normal end of execution.
+ 
+15 December 2024   7:12:30.367 PM

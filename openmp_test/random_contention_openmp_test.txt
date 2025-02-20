@@ -1,0 +1,144 @@
+30 March 2023   8:30:35.664 AM
+ 
+RANDOM_NUMBER_CONTENTION():
+  FORTRAN90 version
+ 
+  This program demonstrates a case where the use
+  of multiple threads in OpenMP may DEGRADE the
+  performance of a program.
+ 
+  In this program, we simply call the FORTRAN90
+  random number generator many times.
+ 
+  Because that function has internal saved variables,
+  when it is accessed by multile threads, there can
+  be huge delays because the threads fight to gain
+  access to the saved variables.
+ 
+  The number of processors available:
+  OMP_GET_NUM_PROCS () =       16
+ 
+   Threads    Wallclock time
+              (seconds)
+ 
+         1    0.171848E-01
+         2    0.106330E-01
+         3    0.843619E-02
+         4    0.545172E-02
+         5    0.542310E-02
+         6    0.387512E-02
+         7    0.353254E-02
+         8    0.462323E-02
+ 
+RANDOM_NUMBER_CONTENTION():
+  Normal end of execution.
+ 
+30 March 2023   8:30:35.723 AM
+30 March 2023   8:30:35.726 AM
+ 
+RANDOM_NUMBER_CONTENTION():
+  FORTRAN90 version
+ 
+  This program demonstrates a case where the use
+  of multiple threads in OpenMP may DEGRADE the
+  performance of a program.
+ 
+  In this program, we simply call the FORTRAN90
+  random number generator many times.
+ 
+  Because that function has internal saved variables,
+  when it is accessed by multile threads, there can
+  be huge delays because the threads fight to gain
+  access to the saved variables.
+ 
+  The number of processors available:
+  OMP_GET_NUM_PROCS () =       16
+ 
+   Threads    Wallclock time
+              (seconds)
+ 
+         1    0.192689E-01
+         2    0.832213E-02
+         3    0.573141E-02
+         4    0.411774E-02
+         5    0.454677E-02
+         6    0.412201E-02
+         7    0.358064E-02
+         8    0.409353E-02
+ 
+RANDOM_NUMBER_CONTENTION():
+  Normal end of execution.
+ 
+30 March 2023   8:30:35.779 AM
+30 March 2023   8:30:35.781 AM
+ 
+RANDOM_NUMBER_CONTENTION():
+  FORTRAN90 version
+ 
+  This program demonstrates a case where the use
+  of multiple threads in OpenMP may DEGRADE the
+  performance of a program.
+ 
+  In this program, we simply call the FORTRAN90
+  random number generator many times.
+ 
+  Because that function has internal saved variables,
+  when it is accessed by multile threads, there can
+  be huge delays because the threads fight to gain
+  access to the saved variables.
+ 
+  The number of processors available:
+  OMP_GET_NUM_PROCS () =       16
+ 
+   Threads    Wallclock time
+              (seconds)
+ 
+         1    0.165208E-01
+         2    0.826012E-02
+         3    0.561571E-02
+         4    0.422362E-02
+         5    0.415974E-02
+         6    0.326929E-02
+         7    0.383789E-02
+         8    0.267833E-02
+ 
+RANDOM_NUMBER_CONTENTION():
+  Normal end of execution.
+ 
+30 March 2023   8:30:35.830 AM
+30 March 2023   8:30:35.831 AM
+ 
+RANDOM_NUMBER_CONTENTION():
+  FORTRAN90 version
+ 
+  This program demonstrates a case where the use
+  of multiple threads in OpenMP may DEGRADE the
+  performance of a program.
+ 
+  In this program, we simply call the FORTRAN90
+  random number generator many times.
+ 
+  Because that function has internal saved variables,
+  when it is accessed by multile threads, there can
+  be huge delays because the threads fight to gain
+  access to the saved variables.
+ 
+  The number of processors available:
+  OMP_GET_NUM_PROCS () =       16
+ 
+   Threads    Wallclock time
+              (seconds)
+ 
+         1    0.164042E-01
+         2    0.839801E-02
+         3    0.558614E-02
+         4    0.436359E-02
+         5    0.439140E-02
+         6    0.340850E-02
+         7    0.384521E-02
+         8    0.422902E-02
+ 
+RANDOM_NUMBER_CONTENTION():
+  Normal end of execution.
+ 
+30 March 2023   8:30:35.882 AM

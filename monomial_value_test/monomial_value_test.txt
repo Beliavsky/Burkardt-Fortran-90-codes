@@ -1,0 +1,56 @@
+12 September 2021  12:27:19.801 PM
+ 
+MONOMIAL_VALUE_TEST():
+  FORTRAN90 version
+  Test MONOMIAL_VALUE().
+
+TEST01
+  monomial_value() evaluates monomials in
+  dimensions 1 through 3.
+
+  Spatial dimension M = 1
+ 
+  Exponents:
+ 
+           0
+
+   V(X)               X(1)
+
+   1.00000         -1.0000
+   1.00000         10.0000
+   1.00000         10.0000
+   1.00000          2.0000
+   1.00000          2.0000
+
+  Spatial dimension M = 2
+ 
+  Exponents:
+ 
+           2          -3
+
+   V(X)               X(1)      X(2)
+
+      Infinity      9.0000    0.0000
+  -4.00000          2.0000   -1.0000
+  0.392000          7.0000    5.0000
+  0.291545E-02      1.0000    7.0000
+  0.416667E-01      3.0000    6.0000
+
+  Spatial dimension M = 3
+ 
+  Exponents:
+ 
+          -1           4           2
+
+   V(X)               X(1)      X(2)      X(3)
+
+   321489.          1.0000    9.0000    7.0000
+   2.00000          2.0000    1.0000    2.0000
+   256.000          1.0000    2.0000    4.0000
+   104976.          1.0000    9.0000    4.0000
+  -0.00000         -1.0000    0.0000   -1.0000
+ 
+MONOMIAL_VALUE_TEST
+  Normal end of execution.
+ 
+12 September 2021  12:27:19.801 PM

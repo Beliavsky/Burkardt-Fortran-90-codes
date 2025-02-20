@@ -1,0 +1,634 @@
+ 2 January 2025   4:35:53.168 PM
+ 
+polygon_test():
+  FORTRAN90 version
+  Test polygon().
+ 
+polygon_angles_test():
+  polygon_angles() computes the angles of a polygon.
+ 
+  Number of polygonal vertices =        6
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   2.00000       1.00000    
+    4:   3.00000       0.00000    
+    5:   3.00000       2.00000    
+    6:   1.00000       2.00000    
+ 
+  Polygonal angles in degrees:
+ 
+         1     63.4349    
+         2     135.000    
+         3     270.000    
+         4     45.0000    
+         5     90.0000    
+         6     116.565    
+ 
+polygon_area_test():
+  polygon_area()   computes the area of a polygon.
+  polygon_area_2() computes the area of a polygon.
+ 
+  Number of polygonal vertices =        4
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2:   2.00000       1.00000    
+    3:   1.00000       2.00000    
+    4:   0.00000       1.00000    
+ 
+  Exact area is           2.00000    
+  polygon_area():         2.00000    
+  polygon_area_2():       2.00000    
+ 
+  Number of polygonal vertices =        8
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   3.00000       0.00000    
+    3:   3.00000       3.00000    
+    4:   2.00000       3.00000    
+    5:   2.00000       1.00000    
+    6:   1.00000       1.00000    
+    7:   1.00000       2.00000    
+    8:   0.00000       2.00000    
+ 
+  Exact area is           6.00000    
+  polygon_area():         6.00000    
+  polygon_area_2():       6.00000    
+ 
+polygon_area_lattice_test():
+  polygon_area_lattice() returns the area
+  of a polygon, measured in lattice points.
+ 
+  Number of interior lattice points =    5
+  Number of boundary lattice points =    6
+  Area of polygon is    7.00000    
+ 
+polygon_centroid_test():
+  polygon_centroid()   computes the centroid of a polygon.
+  polygon_centroid_2() computes the centroid of a polygon.
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2:   2.00000       1.00000    
+    3:   1.00000       2.00000    
+    4:   0.00000       1.00000    
+ 
+  polygon_centroid():
+ 
+         1:    1.0000000    
+         2:    1.0000000    
+ 
+  polygon_centroid_2():
+ 
+         1:    1.0000000    
+         2:    1.0000000    
+ 
+polygon_contains_point_test():
+  polygon_contains_point()   determines if a point is in a polygon.
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   2.00000       1.00000    
+    4:   1.00000       2.00000    
+    5:   0.00000       2.00000    
+ 
+          P          Inside?
+ 
+     1.00000       1.00000        T
+     3.00000       4.00000        F
+     0.00000       2.00000        F
+    0.500000     -0.250000        F
+ 
+polygon_convex_contains_point_test():
+  polygon_convex_contains_point() determines if
+  a point is in a convex polygon.
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   2.00000       1.00000    
+    4:   1.00000       2.00000    
+    5:   0.00000       2.00000    
+ 
+          P          Inside?
+ 
+     1.00000       1.00000        T
+     3.00000       4.00000        F
+     0.00000       2.00000        T
+    0.500000     -0.250000        F
+ 
+polygon_contains_point_3_test():
+  polygon_contains_point_3() determines if a point is in a polygon.
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   2.00000       1.00000    
+    4:   1.00000       2.00000    
+    5:   0.00000       2.00000    
+ 
+          P          Inside?
+ 
+     1.00000       1.00000        T
+     3.00000       4.00000        F
+     0.00000       2.00000        T
+    0.500000     -0.250000        F
+ 
+polygon_data_test():
+  polygon_data_inrad() uses the inradius for polygon data.
+  polygon_data_outrad() uses the outradius for polygon data.
+  polygon_data_side() uses the side for polygon data.
+ 
+  Number of polygonal sides =        3
+ 
+
+    AREA =     0.433013    
+    RADIN =    0.288675    
+    RADOUT =   0.577350    
+    SIDE =      1.00000      (given)
+
+    AREA =     0.433013    
+    RADIN =    0.288675      (given)
+    RADOUT =   0.577350    
+    SIDE =      1.00000    
+
+    AREA =     0.433013    
+    RADIN =    0.288675    
+    RADOUT =   0.577350      (given)
+    SIDE =      1.00000    
+ 
+  Number of polygonal sides =        4
+ 
+
+    AREA =      1.00000    
+    RADIN =    0.500000    
+    RADOUT =   0.707107    
+    SIDE =      1.00000      (given)
+
+    AREA =      1.00000    
+    RADIN =    0.500000      (given)
+    RADOUT =   0.707107    
+    SIDE =      1.00000    
+
+    AREA =      1.00000    
+    RADIN =    0.500000    
+    RADOUT =   0.707107      (given)
+    SIDE =      1.00000    
+ 
+  Number of polygonal sides =        5
+ 
+
+    AREA =      1.72048    
+    RADIN =    0.688191    
+    RADOUT =   0.850651    
+    SIDE =      1.00000      (given)
+
+    AREA =      1.72048    
+    RADIN =    0.688191      (given)
+    RADOUT =   0.850651    
+    SIDE =      1.00000    
+
+    AREA =      1.72048    
+    RADIN =    0.688191    
+    RADOUT =   0.850651      (given)
+    SIDE =      1.00000    
+ 
+polygon_diameter_test():
+  polygon_diameter() computes the diameter of a polygon.
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2:   2.00000       1.00000    
+    3:   1.00000       2.00000    
+    4:   0.00000       1.00000    
+ 
+  Diameter ( computed )    2.00000    
+  Diameter ( exact )       2.00000    
+ 
+polygon_expand_test():
+  polygon_expand() "expands" a polygon by an amount H.
+ 
+  The polygon vertices:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       1.00000    
+    2:   5.00000       1.00000    
+    3:   2.00000       4.00000    
+    4:   1.00000       3.00000    
+ 
+  The expansion amount H =   0.500000    
+ 
+  The expanded polygon:
+ 
+  Row          1             2      
+  Col
+ 
+    1:  0.500000      0.500000    
+    2:   6.20711      0.500000    
+    3:   2.00000       4.70711    
+    4:  0.500000       3.20711    
+ 
+polygon_integral_test():
+  polygon_integral_1()  integrates 1 over a polygon.
+  polygon_integral_x()  integrates x over a polygon.
+  polygon_integral_y()  integrates y over a polygon.
+  polygon_integral_xx() integrates xx over a polygon.
+  polygon_integral_xy() integrates xy over a polygon.
+  polygon_integral_yy() integrates yy over a polygon.
+ 
+  Vertices of polygon V:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       1.00000    
+    2:   4.00000       3.00000    
+    3:   2.00000       5.00000    
+
+  Integral of 1  over V       5.00000    
+  Integral of X  over V       11.6667    
+  Integral of Y  over V       15.0000    
+  Integral of XX over V       29.1667    
+  Integral of XY over V       35.8333    
+  Integral of YY over V       48.3333    
+
+polygon_is_ccw_test():
+  polygon_is_cc2() determines if the vertices of a
+  polygon are listed in counter-clockwise order.
+ 
+  Polygon vertices:
+ 
+  Col          1             2      
+  Row
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   1.00000       1.00000    
+    4:   0.00000       1.00000    
+  The polygon vertices are counter clockwise.
+ 
+  Polygon vertices:
+ 
+  Col          1             2      
+  Row
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   0.00000       1.00000    
+    4:   1.00000       1.00000    
+  The polygon vertices are NOT counter clockwise.
+ 
+  Polygon vertices:
+ 
+  Col          1             2      
+  Row
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       1.00000    
+    3:   1.00000       0.00000    
+    4:   0.00000       1.00000    
+  The polygon vertices are NOT counter clockwise.
+ 
+  Polygon vertices:
+ 
+  Col          1             2      
+  Row
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       1.00000    
+    3:   0.00000       1.00000    
+    4:   1.00000       0.00000    
+  The polygon vertices are NOT counter clockwise.
+ 
+  Polygon vertices:
+ 
+  Col          1             2      
+  Row
+ 
+    1:   0.00000       0.00000    
+    2:   0.00000       1.00000    
+    3:   1.00000       0.00000    
+    4:   1.00000       1.00000    
+  The polygon vertices are NOT counter clockwise.
+ 
+  Polygon vertices:
+ 
+  Col          1             2      
+  Row
+ 
+    1:   0.00000       0.00000    
+    2:   0.00000       1.00000    
+    3:   1.00000       1.00000    
+    4:   1.00000       0.00000    
+  The polygon vertices are NOT counter clockwise.
+ 
+polygon_is_convex_test():
+  polygon_is_convex() determines if a polygon is convex.
+ 
+  A point:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+  The polygon is degenerate and convex.                                           
+ 
+  A line:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       2.00000    
+  The polygon is degenerate and convex.                                           
+ 
+  A triangle:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   2.00000       0.00000    
+    3:   1.00000       0.00000    
+  The polygon is convex and clockwise.                                            
+ 
+  A CCW triangle:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   0.00000       2.00000    
+  The polygon is convex and counterclockwise.                                     
+ 
+  A CW triangle:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   0.00000       2.00000    
+    3:   1.00000       0.00000    
+  The polygon is convex and clockwise.                                            
+ 
+  Polygon with large angle:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2:   2.00000       0.00000    
+    3:   3.00000       1.00000    
+    4:   0.00000       1.00000    
+  The polygon is convex and counterclockwise.                                     
+ 
+  Polygon with huge angle:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:  0.500000      0.500000    
+    3:   1.00000       0.00000    
+    4:   1.00000       1.00000    
+    5:   0.00000       1.00000    
+  The polygon is not convex.                                                      
+ 
+  A five-pointed star:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2: -0.809017      0.587785    
+    3:  0.309017     -0.951057    
+    4:  0.309017      0.951057    
+    5: -0.809017     -0.587785    
+  The polygon is not convex.                                                      
+ 
+  A hexagon:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2:  0.500000      0.866025    
+    3: -0.500000      0.866025    
+    4:  -1.00000      0.122465E-15
+    5: -0.500000     -0.866025    
+    6:  0.500000     -0.866025    
+  The polygon is convex and counterclockwise.                                     
+ 
+  A triangle twice:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   2.00000       0.00000    
+    3:   1.00000       1.00000    
+    4:   0.00000       0.00000    
+    5:   2.00000       0.00000    
+    6:   1.00000       1.00000    
+  The polygon is not convex.                                                      
+ 
+  Square knot:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       0.00000    
+    2:   3.00000       0.00000    
+    3:   3.00000       3.00000    
+    4:   0.00000       3.00000    
+    5:   0.00000       1.00000    
+    6:   2.00000       1.00000    
+    7:   2.00000       2.00000    
+    8:   1.00000       2.00000    
+  The polygon is not convex.                                                      
+ 
+polygon_perimeter_test():
+  polygon_perimeter() computes the perimeter of a polygon.
+ 
+  Vertices of polygon V1:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   1.00000       1.00000    
+    4:   0.00000       1.00000    
+
+  Perimeter of V1 =        4.00000    
+ 
+  Vertices of polygon V2:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       1.00000    
+    2:   4.00000       3.00000    
+    3:   2.00000       5.00000    
+
+  Perimeter of V2 =        10.5571    
+ 
+polygon_perimeter_quad_test():
+  polygon_perimeter_quad() estimates the integral of
+  a function over the perimeter of a polygon using
+  the composite midpoint rule over each side.
+ 
+  Vertices of polygon V1:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   0.00000       0.00000    
+    2:   1.00000       0.00000    
+    3:   1.00000       1.00000    
+    4:   0.00000       1.00000    
+
+  Using HMAX =   0.500000     estimated integral of 1 over perimeter =    4.00000    
+
+  Using HMAX =    1.00000     estimated integral of x^2 over perimeter =    1.50000    
+  Using HMAX =   0.500000     estimated integral of x^2 over perimeter =    1.62500    
+  Using HMAX =   0.250000     estimated integral of x^2 over perimeter =    1.65625    
+ 
+  Vertices of polygon V2:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       1.00000    
+    2:   4.00000       3.00000    
+    3:   2.00000       5.00000    
+
+  Using HMAX =   0.500000     estimated integral of 1 over perimeter =    10.5571    
+
+  Using HMAX =    1.00000     estimated integral of x^2 over perimeter =    60.9706    
+  Using HMAX =   0.500000     estimated integral of x^2 over perimeter =    61.1854    
+  Using HMAX =   0.250000     estimated integral of x^2 over perimeter =    61.2383    
+ 
+POLYGON_POINT_DIST_test():
+  POLYGON_POINT_DIST() computes polygon-point distance.
+ 
+  Vertices of polygon:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       1.00000    
+    2:   4.00000       3.00000    
+    3:   2.00000       5.00000    
+
+       X             Y             DIST
+
+     4.00000         5.00000         1.41421    
+     2.00000         3.00000        0.485071    
+    -2.00000        -1.00000         3.60555    
+ 
+POLYGON_POINT_NEAR_test():
+  POLYGON_POINT_NEAR() computes nearest point on polygon.
+ 
+  Vertices of polygon:
+ 
+  Row          1             2      
+  Col
+ 
+    1:   1.00000       1.00000    
+    2:   4.00000       3.00000    
+    3:   2.00000       5.00000    
+
+       X             Y             XN             YN
+
+     4.00000         5.00000         3.00000         4.00000    
+     2.00000         3.00000         1.52941         3.11765    
+    -2.00000        -1.00000         1.00000         1.00000    
+ 
+POLYGON_SAMPLE_test():
+  POLYGON_SAMPLE() samples a polygon.
+ 
+  Sample points:
+ 
+  Row          1             2      
+  Col
+ 
+    1:  0.452774      0.275949    
+    2:  0.454251      0.627812E-01
+    3:  0.853802      0.862309E-01
+    4:   1.93436      0.694206    
+    5:  0.109814      0.383977    
+    6:  0.295175       1.26189    
+    7:  0.124346      0.240623    
+    8:  0.633619      0.134827    
+    9:   1.72223      0.418959    
+   10:   1.43974      0.558310    
+   11:   1.06880      0.614917    
+   12:  0.252321      0.990048    
+   13:   1.66972      0.481338    
+   14:   1.06011      0.291414    
+   15:   1.37939      0.905018E-01
+   16:  0.561051       1.22575    
+   17:  0.606818      0.886572    
+   18:  0.979698E-01  0.383319    
+   19:   1.92613      0.520110    
+   20:  0.516536       1.49217    
+
+polygon_triangulate_test():
+  polygon_triangulate() triangulates a polygon.
+  Here, we triangulate the comb_10 polygon.
+
+  Triangles:
+
+   1     3   1   2
+   2     5   3   4
+   3     7   5   6
+   4     9   7   8
+   5    10   7   9
+   6     3  10   1
+   7     5  10   3
+   8     7  10   5
+ 
+polygon_test():
+  Normal end of execution.
+ 
+ 2 January 2025   4:35:53.169 PM

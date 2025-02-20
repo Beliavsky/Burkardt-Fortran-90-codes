@@ -1,0 +1,239 @@
+27 November 2024   8:51:59.131 AM
+
+knapsack_brute_test():
+  Fortran90 version
+  Test knapsack_brute()
+
+subset_next_test():
+  Test subset_next()
+
+  Generate in order subsets of size 5
+
+   0  0  0  0  0  0
+   1  0  0  0  0  1
+   2  0  0  0  1  0
+   3  0  0  0  1  1
+   4  0  0  1  0  0
+   5  0  0  1  0  1
+   6  0  0  1  1  0
+   7  0  0  1  1  1
+   8  0  1  0  0  0
+   9  0  1  0  0  1
+  10  0  1  0  1  0
+  11  0  1  0  1  1
+  12  0  1  1  0  0
+  13  0  1  1  0  1
+  14  0  1  1  1  0
+  15  0  1  1  1  1
+  16  1  0  0  0  0
+  17  1  0  0  0  1
+  18  1  0  0  1  0
+  19  1  0  0  1  1
+  20  1  0  1  0  0
+  21  1  0  1  0  1
+  22  1  0  1  1  0
+  23  1  0  1  1  1
+  24  1  1  0  0  0
+  25  1  1  0  0  1
+  26  1  1  0  1  0
+  27  1  1  0  1  1
+  28  1  1  1  0  0
+  29  1  1  1  0  1
+  30  1  1  1  1  0
+  31  1  1  1  1  1
+
+knapsack_brute_test01():
+  knapsack_brute() uses a brute force approach.
+  Maximize profit without exceeding weight limit.
+
+  Problem  1
+  Number of items is  5
+  Knapsack weight limit is      26
+
+   Item 0/1  Value  Weight  Density
+
+      1   0        24        12     2.00
+      2   1        13         7     1.86
+      3   1        23        11     2.09
+      4   1        15         8     1.88
+      5   0        16         9     1.78
+
+  Taken   3        51        26     1.96
+
+  Problem  2
+  Number of items is  6
+  Knapsack weight limit is     190
+
+   Item 0/1  Value  Weight  Density
+
+      1   1        50        56     0.89
+      2   1        50        59     0.85
+      3   0        64        80     0.80
+      4   0        46        64     0.72
+      5   1        50        75     0.67
+      6   0         5        17     0.29
+
+  Taken   3       150       190     0.79
+
+  Problem  3
+  Number of items is  6
+  Knapsack weight limit is      20
+
+   Item 0/1  Value  Weight  Density
+
+      1   1       175        10    17.50
+      2   1        90         9    10.00
+      3   0        20         4     5.00
+      4   0        50         2    25.00
+      5   1        10         1    10.00
+      6   0       200        20    10.00
+
+  Taken   3       275        20    13.75
+
+  Problem  4
+  Number of items is  7
+  Knapsack weight limit is      50
+
+   Item 0/1  Value  Weight  Density
+
+      1   1        70        31     2.26
+      2   0        20        10     2.00
+      3   0        39        20     1.95
+      4   1        37        19     1.95
+      5   0         7         4     1.75
+      6   0         5         3     1.67
+      7   0        10         6     1.67
+
+  Taken   2       107        50     2.14
+
+  Problem  5
+  Number of items is  7
+  Knapsack weight limit is     170
+
+   Item 0/1  Value  Weight  Density
+
+      1   0       442        41    10.78
+      2   1       525        50    10.50
+      3   0       511        49    10.43
+      4   1       593        59    10.05
+      5   0       546        55     9.93
+      6   0       564        57     9.89
+      7   1       617        60    10.28
+
+  Taken   3      1735       169    10.27
+
+  Problem  6
+  Number of items is  8
+  Knapsack weight limit is     104
+
+   Item 0/1  Value  Weight  Density
+
+      1   1       350        25    14.00
+      2   0       400        35    11.43
+      3   1       450        45    10.00
+      4   1        20         5     4.00
+      5   1        70        25     2.80
+      6   0         8         3     2.67
+      7   1         5         2     2.50
+      8   1         5         2     2.50
+
+  Taken   6       900       104     8.65
+
+  Problem  7
+  Number of items is 10
+  Knapsack weight limit is      67
+
+   Item 0/1  Value  Weight  Density
+
+      1   1       505        23    21.96
+      2   0       352        26    13.54
+      3   0       458        20    22.90
+      4   1       220        18    12.22
+      5   0       354        32    11.06
+      6   0       414        27    15.33
+      7   0       498        29    17.17
+      8   1       545        26    20.96
+      9   0       473        30    15.77
+     10   0       543        27    20.11
+
+  Taken   3      1270        67    18.96
+
+  Problem  8
+  Number of items is 10
+  Knapsack weight limit is     165
+
+   Item 0/1  Value  Weight  Density
+
+      1   1        92        23     4.00
+      2   1        57        31     1.84
+      3   1        49        29     1.69
+      4   1        68        44     1.55
+      5   0        60        53     1.13
+      6   1        43        38     1.13
+      7   0        67        63     1.06
+      8   0        84        85     0.99
+      9   0        87        89     0.98
+     10   0        72        82     0.88
+
+  Taken   5       309       165     1.87
+
+  Problem  9
+  Number of items is 15
+  Knapsack weight limit is     750
+
+   Item 0/1  Value  Weight  Density
+
+      1   1       135        70     1.93
+      2   0       139        73     1.90
+      3   1       149        77     1.94
+      4   0       150        80     1.88
+      5   1       156        82     1.90
+      6   0       163        87     1.87
+      7   1       173        90     1.92
+      8   1       184        94     1.96
+      9   1       192        98     1.96
+     10   0       201       106     1.90
+     11   0       210       110     1.91
+     12   0       214       113     1.89
+     13   0       221       115     1.92
+     14   1       229       118     1.94
+     15   1       240       120     2.00
+
+  Taken   8      1458       749     1.95
+
+  Problem 10
+  Number of items is 24
+  Knapsack weight limit is 6404180
+
+   Item 0/1  Value  Weight  Density
+
+      1   1    825594    382745     2.16
+      2   1   1677009    799601     2.10
+      3   0   1676628    909247     1.84
+      4   1   1523970    729069     2.09
+      5   1    943972    467902     2.02
+      6   1     97426     44328     2.20
+      7   0     69666     34610     2.01
+      8   0   1296457    698150     1.86
+      9   0   1679693    823460     2.04
+     10   1   1902996    903959     2.11
+     11   1   1844992    853665     2.16
+     12   0   1049289    551830     1.90
+     13   1   1252836    610856     2.05
+     14   0   1319836    670702     1.97
+     15   0    953277    488960     1.95
+     16   1   2067538    951111     2.17
+     17   0    675367    323046     2.09
+     18   0    853655    446298     1.91
+     19   0   1826027    931161     1.96
+     20   0     65731     31385     2.09
+     21   0    901489    496951     1.81
+     22   1    577243    264724     2.18
+     23   1    466257    224916     2.07
+     24   1    369261    169684     2.18
+
+  Taken  12  13549094   6402560     2.12
+
+knapsack_brute_test():
+  Normal end of execution.
+27 November 2024   8:52:00.079 AM

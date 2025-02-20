@@ -1,0 +1,42 @@
+ 8 September 2021   6:53:52.252 PM
+ 
+DISK01_INTEGRALS_TEST
+  FORTRAN90 version
+  Test the DISK01_INTEGRALS library.
+
+TEST01
+  Estimate monomial integrals using Monte Carlo
+  over the interior of the unit disk in 2D.
+
+  Number of sample points used is   4192
+
+  If any exponent is odd, the integral is zero.
+  We will restrict this test to randomly chosen even exponents.
+
+  Ex  Ey     MC-Estimate           Exact      Error
+
+   8   8    0.367563E-03    0.372843E-03    0.53E-05
+   4   2    0.488541E-01    0.490874E-01    0.23E-03
+   8   4    0.304589E-02    0.306796E-02    0.22E-04
+   2   8    0.145760E-01    0.143172E-01    0.26E-03
+   6   8    0.951434E-03    0.958738E-03    0.73E-05
+   8   8    0.367563E-03    0.372843E-03    0.53E-05
+   4   8    0.307702E-02    0.306796E-02    0.91E-05
+   2   8    0.145760E-01    0.143172E-01    0.26E-03
+   4   8    0.307702E-02    0.306796E-02    0.91E-05
+   2   6    0.248522E-01    0.245437E-01    0.31E-03
+   2   0    0.783930        0.785398        0.15E-02
+   2   2    0.130312        0.130900        0.59E-03
+   8   2    0.143801E-01    0.143172E-01    0.63E-04
+   6   4    0.608640E-02    0.613592E-02    0.50E-04
+   0   2    0.788102        0.785398        0.27E-02
+   0   2    0.788102        0.785398        0.27E-02
+   6   8    0.951434E-03    0.958738E-03    0.73E-05
+   0   4    0.397451        0.392699        0.48E-02
+   0   4    0.397451        0.392699        0.48E-02
+   0   0     3.14159         3.14159        0.44E-15
+ 
+DISK01_INTEGRALS_TEST
+  Normal end of execution.
+ 
+ 8 September 2021   6:53:52.254 PM

@@ -1,0 +1,30 @@
+05 December 2023  12:39:20.557 PM
+
+bisection_test():
+  Fortran90 version
+  Test bisection()
+
+  Function = "x^2 - 2*x - 15"
+  a =    4.999999999999986    , f(a) =  -0.1136868377216160E-12
+  b =    5.000000000000000    , f(b) =    0.000000000000000    
+  Interval tolerance = 0.1776E-13
+  Number of bisections =     49
+  x =    4.999999999999993    , f(x) =  -0.5684341886080801E-13
+
+  Function = "cos(x) - x"
+  a =   0.7390851332151591    , f(a) =   0.2553512956637860E-14
+  b =   0.7390851332151609    , f(b) =  -0.4440892098500626E-15
+  Interval tolerance = 0.2220E-14
+  Number of bisections =     49
+  x =   0.7390851332151600    , f(x) =   0.1110223024625157E-14
+
+  Function = "Kepler function"
+  a =    3.790834555474767    , f(a) =   0.3330669073875470E-13
+  b =    3.790834555474785    , f(b) =  -0.1287858708565182E-13
+  Interval tolerance = 0.2220E-13
+  Number of bisections =     49
+  x =    3.790834555474776    , f(x) =   0.1021405182655144E-13
+
+bisection_test():
+  Normal end of execution.
+05 December 2023  12:39:20.557 PM

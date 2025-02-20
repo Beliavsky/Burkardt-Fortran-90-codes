@@ -1,0 +1,75 @@
+21 September 2022   8:23:26.442 AM
+ 
+football_scores_test()
+  FORTRAN90 version
+  football_scores() computes the number of ways
+  of achieving a particular score in football.
+ 
+  We assume scoring options are:
+ 
+  +1 for a one point safety (returned conversion
+     after the other team scores a touchdown.
+  +2 for a safety;
+  +3 for a field goal;
+  +6 for a touchdown with no followup;
+  +7 for a touchdown with a point bonus;
+  +8 for a touchdown with two point conversion;
+ 
+   Score                  Ways
+ 
+       0                          1
+       1                          1
+       2                          2
+       3                          4
+       4                          7
+       5                         13
+       6                         25
+       7                         47
+       8                         89
+       9                        168
+      10                        317
+      11                        598
+      12                       1128
+      13                       2128
+      14                       4015
+      15                       7575
+      16                      14292
+      17                      26965
+      18                      50875
+      19                      95986
+      20                     181097
+      21                     341676
+      22                     644641
+      23                    1216246
+      24                    2294695
+      25                    4329408
+      26                    8168307
+      27                   15411169
+      28                   29076298
+      29                   54858337
+      30                  103501386
+      31                  195276370
+      32                  368428503
+      33                  695115143
+      34                 1311475790
+      35                 2474365240
+      36                 4668392194
+      37                 8807869317
+      38                16617833010
+      39                31352914537
+      40                59153636300
+      41               111605340020
+      42               210566124081
+      43               397275727152
+      44               749541285774
+      45              1414161753871
+      46              2668103150644
+      47              5033918081146
+      48              9497508086062
+      49             17918976509105
+      50             33807785813320
+ 
+football_scores_test()
+  Normal end of execution.
+ 
+21 September 2022   8:23:26.442 AM

@@ -1,0 +1,42 @@
+26 March 2023   3:59:40.793 PM
+ 
+JACOBI_RULE
+  FORTRAN90 version
+ 
+  Compute a Gauss-Jacobi rule for approximating
+    Integral ( A <= x <= B ) (B-x)^alpha (x-A)^beta f(x) dx
+  of order ORDER.
+ 
+  The user specifies ORDER, ALPHA, BETA, A, B, and FILENAME.
+ 
+  ORDER is the number of points:
+  ALPHA is the exponent of (B-X)
+  BETA is the exponent of (X-A):
+  A is the left endpoint;
+  B is the right endpoint;
+  FILENAME is used to generate 3 files:
+    filename_w.txt - the weight file
+    filename_x.txt - the abscissa file.
+    filename_r.txt - the region file.
+ 
+  Input summary:
+ 
+  ORDER =        4
+  ALPHA =   0.500000    
+  BETA =    1.50000    
+  A =   -1.00000    
+  B =    1.00000    
+  OUTPUT = "jac_o4_a0.5_b1.5".
+ 
+  Creating quadrature files.
+ 
+  "Root" file name is   "jac_o4_a0.5_b1.5".
+ 
+  Weight file will be   "jac_o4_a0.5_b1.5_w.txt".
+  Abscissa file will be "jac_o4_a0.5_b1.5_x.txt".
+  Region file will be   "jac_o4_a0.5_b1.5_r.txt".
+ 
+JACOBI_RULE:
+  Normal end of execution.
+ 
+26 March 2023   3:59:40.803 PM

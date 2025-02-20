@@ -1,0 +1,67 @@
+26 November 2024  11:32:00.489 AM
+ 
+orbital_decay():
+  Fortran90 version
+  This simulation follows a small body for 20 orbits
+  around a relatively massive body - such as Mercury around
+  the sun.
+  Kepler's equations for a two body system are used.
+  Initially, the orbit is NOT an ellipse, but as time passes,
+  the orbit decays into an elliptical shape.
+ 
+  Use rkf45() for the ODE integrator.
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    4.28450    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    9.58170    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    14.8010    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    19.0076    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    23.4479    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    28.7451    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    33.9644    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    38.1710    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    42.6113    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    47.9085    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    53.1278    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    57.3344    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    61.7747    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    67.0719    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    72.2912    
+ 
+RKF45_SOLVE - Warning!
+  Output value of FLAG =    4 at T_OUT =    76.4978    
+  Created data file "orbital_decay_data.txt".
+  Created command file "orbital_decay_commands.txt".
+ 
+orbital_decay()
+  Normal end of execution.
+ 
+26 November 2024  11:32:00.495 AM

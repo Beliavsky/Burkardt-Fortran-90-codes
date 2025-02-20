@@ -1,0 +1,173 @@
+<html>
+
+  <head>
+    <title>
+      toms453
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      toms453
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>toms453</b>,
+      a FORTRAN90 code which
+      implements ACM TOMS algorithm 453, which computes the abscissas
+      and weights of a Gaussian quadrature formula of given order for
+      Bromwich's integral.
+    </p>
+
+    <p>
+      The Bromwich integral is the inverse of the Laplace transform.
+    </p>
+
+    <p>
+      The text of many ACM TOMS algorithms is available online
+      through ACM:
+              <a href = "https://calgo.acm.org">
+                         https://calgo.acm.org/</a> 
+      or NETLIB:
+      <a href = "https://www.netlib.org/toms/index.html">
+      https://www.netlib.org/toms/index.html</a>.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <pre><tt>
+        call bromin ( n, s, tol, xr, xi, wr, wi, eps, ier )
+      </tt></pre>
+      <dl>
+        <dt>
+          <b>N</b
+        </dt>
+        <dd>
+          the order of the rule;
+        </dd>
+        <dt>
+          <b>S</b
+        </dt>
+        <dd>
+          the parameter in the integral;
+        </dd>
+        <dt>
+          <b>TOL</b
+        </dt>
+        <dd>
+          an error tolerance;
+        </dd>
+        <dt>
+          <b>XR, XI</b
+        </dt>
+        <dd>
+          the real and imaginary parts of the abscissas;
+        </dd>
+        <dt>
+          <b>WR, WI</b
+        </dt>
+        <dd>
+          the real and imaginary parts of the weights;
+        </dd>
+        <dt>
+          <b>EPS</b
+        </dt>
+        <dd>
+          the relatve accuracy estimate;
+        </dd>
+        <dt>
+          <b>IER</b
+        </dt>
+        <dd>
+          the error flag.
+        </dd>
+      </dl>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>toms453</b> is available in
+      <a href = "toms453.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Robert Piessens,<br>
+          Some Aspects of Gaussian Quadrature Formulas for
+          the Numerical Inversion of the Laplace Transform,<br>
+          The Computer Journal,<br>
+          November 1971, Volume 14, pages 433-435.
+        </li>
+        <li>
+          Robert Piessens,<br>
+          Algorithm 453: Gaussian Quadrature Formulas for
+          Bromwich's Integral,<br>
+          Communications of the ACM,<br>
+          August 1973, Volume 16, Number 8, pages 486-487.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../toms453_test/toms453_test.html">
+      toms453_test</a>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "toms453.f90">toms453.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "toms453.sh">toms453.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 13 March 2021.
+
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

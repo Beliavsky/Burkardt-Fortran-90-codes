@@ -1,0 +1,15 @@
+ 7 December 2024   7:04:17.071 PM
+
+tec_io_test():
+  Fortran90 version
+  Test tec_io().
+ 
+TEC_IO_TEST01
+  TEC_HEADER_READ can read the header of a TEC file.
+  TEC_DATA_READ can read the data of a TEC file.
+ 
+  In this example, we will read data from "ell.dat".
+ 
+TEC_FILE_HEADER_READ - Fatal error!
+  Error while reading the file,
+  searching for TITLE line.

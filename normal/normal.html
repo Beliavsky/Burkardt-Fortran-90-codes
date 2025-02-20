@@ -1,0 +1,226 @@
+<html>
+
+  <head>
+    <title>
+      normal
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      normal
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>normal</b>,
+      a Fortran90 code which 
+      returns a sequence of normally distributed pseudorandom numbers.
+    </p>
+
+    <p>
+      The code is based on two simple ideas:
+      <ul>
+        <li>
+          the use of a fairly simple uniform pseudorandom number generator,
+          which can be implemented in software;
+        </li>
+        <li>
+          the use of the Box-Muller transformation to convert pairs of 
+          uniformly distributed random values to pairs of normally distributed 
+          random values.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Using these ideas, it is not too hard to generate normal sequences
+      of real or complex values, of single or double precision.  These
+      values can be generated as single quantities, vectors or matrices.
+      An associated seed actually determines the sequence.  Varying
+      the seed will result in producing a different sequence.
+    </p>
+
+    <p>
+      The fundamental underlying random number generator used here
+      is based on a simple, old, and limited linear congruential random 
+      number generator originally used in the IBM System 360.
+    </p>
+
+    <p>
+      This library makes it possible to compare certain computations 
+      that use normal random numbers, written in C, C++, Fortran77,
+      Fortran90, MATLAB or Python.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>normal</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/normal/normal.html">a C version</a> and 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/normal/normal.html">a C++ version</a> and 
+      <a href = "normal.html">a Fortran90 version</a> and 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/normal/normal.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/normal/normal.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/normal/normal.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../f90_random_test/f90_random_test.html">
+      f90_random_test</a>,
+      Fortran90 codes which
+      illustrate the use of Fortran's random number generator routines.
+    </p>
+
+    <p>
+      <a href = "../hammersley/hammersley.html">
+      HAMMERSLEY</a>,
+      a Fortran90 code which
+      computes elements of a Hammersley Quasi Monte Carlo (QMC) sequence,
+      using a simple interface.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/ieee_uniform_sample/ieee_uniform_sample.html">
+      IEEE_UNIFORM_SAMPLE</a>,
+      a Fortran90 code which
+      tries to uniformly sample the discrete set of values that represent the
+      legal IEEE real numbers;
+    </p>
+
+    <p>
+      <a href = "../normal_test/normal_test.html">
+      normal_test</a>
+    </p>
+
+    <p>
+      <a href = "../random_sorted/random_sorted.html">
+      RANDOM_SORTED</a>,
+      a Fortran90 code which
+      generates vectors of random values which are already sorted.
+    </p>
+
+    <p>
+      <a href = "../ranlib/ranlib.html">
+      RANLIB</a>,
+      a Fortran90 code which
+      produces random samples from Probability Density Functions (PDF's), 
+      including Beta, Chi-square Exponential, F, Gamma, Multivariate normal,
+      Noncentral chi-square, Noncentral F, Univariate normal, random permutations,
+      Real uniform, Binomial, Negative Binomial, Multinomial, Poisson
+      and Integer uniform,
+      by Barry Brown and James Lovato.
+    </p>
+
+    <p>
+      <a href = "../truncated_normal/truncated_normal.html">
+      TRUNCATED_NORMAL</a>,
+      a Fortran library which 
+      works with the truncated normal distribution over [A,B], or
+      [A,+oo) or (-oo,B], returning the probability density function (PDF),
+      the cumulative density function (CDF), the inverse CDF, the mean,
+      the variance, and sample values.
+    </p>
+
+    <p>
+      <a href = "../uniform/uniform.html">
+      UNIFORM</a>, 
+      a Fortran90 code which
+      computes elements of a uniformly distributed pseudorandom sequence.  
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Paul Bratley, Bennett Fox, Linus Schrage,<br>
+          A Guide to Simulation,<br>
+          Second Edition,<br>
+          Springer, 1987,<br>
+          ISBN: 0387964673,<br>
+          LC: QA76.9.C65.B73.
+        </li>
+        <li>
+          Bennett Fox,<br>
+          Algorithm 647:
+          Implementation and Relative Efficiency of Quasirandom
+          Sequence Generators,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 12, Number 4, December 1986, pages 362-376.
+        </li>
+        <li>
+          Donald Knuth,<br>
+          The Art of Computer Programming,<br>
+          Volume 2, Seminumerical Algorithms,<br> 
+          Third Edition,<br>
+          Addison Wesley, 1997,<br>
+          ISBN: 0201896842,<br>
+          LC: QA76.6.K64.
+        </li>
+        <li>
+          Pierre LEcuyer,<br>
+          Random Number Generation,<br>
+          in Handbook of Simulation,<br>
+          edited by Jerry Banks,<br>
+          Wiley, 1998,<br>
+          ISBN: 0471134031,<br>
+          LC: T57.62.H37.
+        </li>
+        <li>
+          Peter Lewis, Allen Goodman, James Miller,<br>
+          A Pseudo-Random Number Generator for the System/360,<br>
+          IBM Systems Journal,<br>
+          Volume 8, 1969, pages 136-143.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "normal.f90">normal.f90</a>, 
+          the source code.
+        </li>
+        <li>
+          <a href = "normal.sh">normal.sh</a>, 
+          the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 01 August 2020.
+    </i>
+
+    <!-- John Burkardt -->
+ 
+  </body>
+
+</html>

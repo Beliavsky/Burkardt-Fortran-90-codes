@@ -1,0 +1,173 @@
+10 April 2023   8:48:57.075 PM
+ 
+r8pbl_test():
+  FORTRAN90 version:
+  Test r8pbl().
+ 
+R8PBL_DIF2_TEST
+  R8PBL_DIF2 sets up an R8PBL indicator matrix.
+ 
+  Matrix order N =        5
+  Bandwidth ML =          1
+ 
+  The R8PBL second difference matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    2.00000      -1.00000                                              
+    2   -1.00000       2.00000      -1.00000                                
+    3                 -1.00000       2.00000      -1.00000                  
+    4                               -1.00000       2.00000      -1.00000    
+    5                                             -1.00000       2.00000    
+ 
+R8PBL_INDICATOR_TEST
+  R8PBL_INDICATOR sets up an R8PBL indicator matrix.
+ 
+  Matrix order N =        5
+  Bandwidth ML =          2
+ 
+  The R8PBL indicator matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       21.0000       31.0000                                
+    2    21.0000       22.0000       32.0000       42.0000                  
+    3    31.0000       32.0000       33.0000       43.0000       53.0000    
+    4                  42.0000       43.0000       44.0000       54.0000    
+    5                                53.0000       54.0000       55.0000    
+ 
+R8PBL_MV_TEST
+  R8PBL_MV computes A*x, where A is an R8PBL matrix.
+ 
+  Matrix order N =            5
+  Lower bandwidth ML =        2
+ 
+  Matrix A:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    1.31501      0.218418      0.956318                                
+    2   0.218418       1.69061      0.829509      0.561695                  
+    3   0.956318      0.829509       3.72095      0.415307      0.661187E-01
+    4                 0.561695      0.415307       1.32140      0.257578    
+    5                               0.661187E-01  0.257578      0.483706    
+ 
+  Vector x:
+ 
+       1   1.00000    
+       2   2.00000    
+       3   3.00000    
+       4   4.00000    
+       5   5.00000    
+ 
+  Product b=A*x
+ 
+       1   4.62079    
+       2   8.33495    
+       3   15.7700    
+       4   8.94282    
+       5   3.64720    
+ 
+R8PBL_PRINT_TEST
+  R8PBL_PRINT prints an R8PBL matrix.
+ 
+  Matrix order N =        5
+  Bandwidth ML =          2
+ 
+  The R8PBL matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       21.0000       31.0000                                
+    2    21.0000       22.0000       32.0000       42.0000                  
+    3    31.0000       32.0000       33.0000       43.0000       53.0000    
+    4                  42.0000       43.0000       44.0000       54.0000    
+    5                                53.0000       54.0000       55.0000    
+ 
+R8PBL_PRINT_SOME_TEST
+  R8PBL_PRINT_SOME prints some of an R8PBL matrix.
+ 
+  Matrix order N =        9
+  Bandwidth ML =          4
+ 
+  Row(4:8), Col(5:9):
+ 
+  Col:       5             6             7             8             9       
+  Row
+  ---
+    4    54.0000       64.0000       74.0000       84.0000                  
+    5    55.0000       65.0000       75.0000       85.0000       95.0000    
+    6    65.0000       66.0000       76.0000       86.0000       96.0000    
+    7    75.0000       76.0000       77.0000       87.0000       97.0000    
+    8    85.0000       86.0000       87.0000       88.0000       98.0000    
+ 
+R8PBL_RANDOM_TEST
+  R8PBL_RANDOM sets up a random R8PBL matrix.
+ 
+  Matrix order N =        5
+  Bandwidth ML =          2
+ 
+  The random R8PBL matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    1.31501      0.218418      0.956318                                
+    2   0.218418       1.69061      0.829509      0.561695                  
+    3   0.956318      0.829509       3.72095      0.415307      0.661187E-01
+    4                 0.561695      0.415307       1.32140      0.257578    
+    5                               0.661187E-01  0.257578      0.483706    
+ 
+R8PBL_TO_R8GE_TEST
+  R8PBL_TO_R8GE converts an R8PBL matrix to R8GE format.
+ 
+  Matrix order N =        5
+  Bandwidth ML =          2
+ 
+  The R8PBL matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    1.31501      0.218418      0.956318                                
+    2   0.218418       1.69061      0.829509      0.561695                  
+    3   0.956318      0.829509       3.72095      0.415307      0.661187E-01
+    4                 0.561695      0.415307       1.32140      0.257578    
+    5                               0.661187E-01  0.257578      0.483706    
+ 
+  The R8GE matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    1.31501      0.218418      0.956318       0.00000       0.00000    
+    2   0.218418       1.69061      0.829509      0.561695       0.00000    
+    3   0.956318      0.829509       3.72095      0.415307      0.661187E-01
+    4    0.00000      0.561695      0.415307       1.32140      0.257578    
+    5    0.00000       0.00000      0.661187E-01  0.257578      0.483706    
+ 
+R8PBL_ZEROS_TEST
+  R8PBL_ZEROS sets up an R8PBL zero matrix.
+ 
+  Matrix order N =        5
+  Bandwidth ML =          2
+ 
+  The R8PBL indicator matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    0.00000       0.00000       0.00000                                
+    2    0.00000       0.00000       0.00000       0.00000                  
+    3    0.00000       0.00000       0.00000       0.00000       0.00000    
+    4                  0.00000       0.00000       0.00000       0.00000    
+    5                                0.00000       0.00000       0.00000    
+ 
+r8pbl_test():
+  Normal end of execution.
+ 
+10 April 2023   8:48:57.075 PM

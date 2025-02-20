@@ -1,0 +1,206 @@
+<html>
+
+  <head>
+    <title>
+      asa113
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      asa113
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>asa113</b>,
+      a FORTRAN90 code which
+      divides M points in N dimensions into K clusters
+      seeking the division which minimizes a user-defined criterion,
+      by Banfield and Bassill.
+    </p>
+
+    <p>
+      The code is in some sense a generalization of the K-means algorithm,
+      because the user is allowed to choose the criterion function to be
+      minimized, and because the algorithm considers both all possible transfers
+      of an object from one class to another, and all possible exchanges that
+      swap two objects.
+    </p>
+
+    <p>
+      However, because it is <i>not</i> a K-means algorithm,
+      there is a significant amount of work off-loaded onto the user, and
+      the task of evaluating the change in the criterion function can be far
+      more expensive than in the K-means setting, and the consideration of
+      all possible exchanges can result in an explosion in the running time
+      for large data sets.
+    </p>
+
+    <p>
+      Thus, the algorithm should not be the first choice if a K-means
+      calculation is really what is desired, and it may be far too expensive
+      to use if the size of the data set is significant.
+    </p>
+
+    <p>
+      The code is Applied Statistics Algorithm 113.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>asa113</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/asa113/asa113.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/asa113/asa113.html">a C++ version</a> and
+      <a href = "asa113.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/asa113/asa113/html">a MATLAB version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../asa058/asa058.html">
+      ASA058</a>,
+      a FORTRAN90 code which
+      carries out the K-means algorithm for clustering data.
+    </p>
+
+    <p>
+      <a href = "../asa113_test/asa113_test.html">
+      asa113_test</a>
+    </p>
+
+    <p>
+      <a href = "../asa136/asa136.html">
+      ASA136</a>,
+      a FORTRAN90 code which
+      carries out the K-means algorithm for clustering data.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/cities/cities.html">
+      CITIES</a>,
+      a FORTRAN90 code which
+      handles various problems associated
+      with a set of "cities" on a map.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/cities/cities.html">
+      CITIES</a>,
+      a dataset directory which
+      contains a number of city distance datasets.
+    </p>
+
+    <p>
+      <a href = "../kmeans/kmeans.html">
+      KMEANS</a>,
+      a FORTRAN90 code which
+      contains several implementations of the H-Means and K-Means clustering algorithms.
+    </p>
+
+    <p>
+      <a href = "../lau_np/lau_np.html">
+      LAU_NP</a>,
+      a FORTRAN90 code which
+      contains heuristic algorithms for the K-center and K-median problems.
+    </p>
+
+    <p>
+      <a href = "../spaeth/spaeth.html">
+      SPAETH</a>,
+      a FORTRAN90 code which
+      clusters data according to various principles.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/spaeth/spaeth.html">
+      SPAETH</a>,
+      a dataset directory which
+      contains test data for clustering.
+    </p>
+
+    <p>
+      <a href = "../spaeth2/spaeth2.html">
+      SPAETH2</a>,
+      a FORTRAN90 code which
+      can cluster data according to various principles.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/spaeth2/spaeth2.html">
+      SPAETH2</a>,
+      a dataset directory which
+      contains test data for clustering.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Original FORTRAN77 version by Banfield and Bassill;
+      FORTRAN90 version by John Burkardt.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Colin Banfield, LC Bassill,<br>
+          Algorithm AS 113:
+          A transfer for non-hierarchichal classification,<br>
+          Applied Statistics,<br>
+          Volume 26, Number 2, 1977, pages 206-210.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "asa113.f90">asa113.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "asa113.sh">asa113.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 28 August 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

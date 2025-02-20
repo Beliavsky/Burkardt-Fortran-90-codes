@@ -1,0 +1,59 @@
+ 6 September 2021  10:35:37.664 PM
+ 
+cg_test():
+  FORTRAN90 version
+  Test cg().
+
+R8GE_CG_TEST
+  R8GE_CG applies CG to a full storage matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.304463E-15
+  Norm of error ||x1-x2|| =   0.747342E-15
+
+R83_CG_TEST
+  R83_CG applies CG to an R83 matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.141261E-14
+  Norm of error ||x1-x2|| =   0.605714E-15
+
+R83S_CG_TEST
+  R83S_CG applies CG to an R83S matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.100074E-14
+  Norm of error ||x1-x2|| =   0.154985E-14
+
+R83T_CG_TEST
+  R83T_CG applies CG to an R83T matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.435435E-14
+  Norm of error ||x1-x2|| =   0.173600E-14
+
+R8PBU_CG_TEST
+  R8PBU_CG applies CG to an R8PBU matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.131077E-14
+  Norm of error ||x1-x2|| =   0.232870E-14
+
+R8SD_CG_TEST
+  R8SD_CG applies CG to an R8SD matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.742813E-14
+  Norm of error ||x1-x2|| =   0.212897E-14
+
+R8SP_CG_TEST
+  R8SP_CG applies CG to an R8SP matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.639319E-14
+  Norm of error ||x1-x2|| =   0.297377E-14
+ 
+cg_test():
+  Normal end of execution.
+ 
+ 6 September 2021  10:35:37.664 PM

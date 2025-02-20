@@ -1,0 +1,60 @@
+25 June 2024  10:57:02.810 AM
+
+matrix_chain_dynamic_test():
+  Fortran90 version
+  Test matrix_chain_dynamic().
+
+  Number of matrices =  4
+  Matrix dimensions   40   20   30   10   30
+  Number of possible orderings is 5
+  Minimal cost is    26000
+
+  Number of matrices =  4
+  Matrix dimensions    1    2    3    4    3
+  Number of possible orderings is 5
+  Minimal cost is       30
+
+  Number of matrices =  2
+  Matrix dimensions   10   20   30
+  Number of possible orderings is 1
+  Minimal cost is     6000
+
+  Number of matrices =  3
+  Matrix dimensions   10   30    5   60
+  Number of possible orderings is 2
+  Minimal cost is     4500
+
+  Number of matrices =  1
+  Matrix dimensions   10   20
+  Number of possible orderings is 1
+  Minimal cost is        0
+
+  Number of matrices =  4
+  Matrix dimensions   40   20    0   10   30
+  Number of possible orderings is 5
+  Minimal cost is        0
+
+  Number of matrices =  4
+  Matrix dimensions    1  100    1  100    1
+  Number of possible orderings is 5
+  Minimal cost is      300
+
+  Number of matrices =  4
+  Matrix dimensions  100   50    1   50  100
+  Number of possible orderings is 5
+  Minimal cost is   510000
+
+  Number of matrices =  4
+  Matrix dimensions    1   50  100   50    1
+  Number of possible orderings is 5
+  Minimal cost is    10050
+
+  Number of matrices =  5
+  Matrix dimensions    4   10    3   12   20    7
+  Number of possible orderings is14
+  Minimal cost is     1640
+
+matrix_chain_dynamic_test():
+  Normal end of execution.
+
+25 June 2024  10:57:02.810 AM

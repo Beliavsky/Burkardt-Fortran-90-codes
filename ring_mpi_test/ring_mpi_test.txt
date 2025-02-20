@@ -1,0 +1,33 @@
+28 March 2023   9:34:51.100 AM
+28 March 2023   9:34:51.100 AM
+28 March 2023   9:34:51.100 AM
+28 March 2023   9:34:51.100 AM
+28 March 2023   9:34:51.100 AM
+28 March 2023   9:34:51.101 AM
+28 March 2023   9:34:51.101 AM
+28 March 2023   9:34:51.101 AM
+ 
+ring_mpi():
+  FORTRAN90/MPI version
+  Measure time required to transmit data around
+  a ring of processes
+ 
+  The number of processes is        8
+ 
+  Timings based on     10 experiments
+  N double precision values were sent
+  in a ring transmission starting and ending at process 0
+  and using a total of      8 processes.
+ 
+         N           T min           T ave           T max
+ 
+       100    0.100136E-04    0.542402E-04    0.441313E-03
+      1000    0.367165E-04    0.676870E-04    0.220299E-03
+     10000    0.200033E-03    0.394464E-03    0.201797E-02
+    100000    0.117803E-02    0.196364E-02    0.606322E-02
+   1000000    0.865626E-02    0.122941E-01    0.369546E-01
+ 
+RING_MPI():
+  Normal end of execution.
+ 
+28 March 2023   9:34:51.596 AM

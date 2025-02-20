@@ -1,0 +1,27 @@
+30 November 2023   8:25:03.105 PM
+
+bdf2_test():
+  Fortran90 version
+  Test bdf2().
+
+predator_prey_bdf2_test()
+
+  A pair of ordinary differential equations for a population
+  of predators and prey are solved using bdf2().
+
+  The exact solution shows periodic behavior, with a fixed
+  period and amplitude.
+ 
+  predator_prey_bdf2_test: data stored in "predator_prey_data.txt".
+  predator_prey_bdf2_test: plot commands stored in "predator_prey_commands.txt".
+
+stiff_bdf2_test():
+  Solve stiff ODE using bdf2()
+ 
+  plot2: data stored in "stiff_data1.txt" and "stiff_data2.txt".
+  plot2: plot commands stored in "stiff_commands.txt".
+
+bdf2_test():
+  Normal end of execution.
+
+30 November 2023   8:25:03.106 PM

@@ -1,0 +1,141 @@
+25 March 2023   4:51:10.690 PM
+ 
+HELLO_OPENMP
+  FORTRAN90/OpenMP version
+  The number of processors available =       16
+  The number of threads available    =        1
+ 
+  OUTSIDE the parallel region.
+ 
+  HELLO from process        0
+ 
+  Going INSIDE the parallel region:
+ 
+  HELLO from process        0
+ 
+  Back OUTSIDE the parallel region.
+ 
+  Elapsed wall clock time =   0.312540E-04
+ 
+HELLO_OPENMP
+  Normal end of execution.
+
+25 March 2023   4:51:10.691 PM
+25 March 2023   4:51:10.692 PM
+ 
+HELLO_OPENMP
+  FORTRAN90/OpenMP version
+  The number of processors available =       16
+  The number of threads available    =        2
+ 
+  OUTSIDE the parallel region.
+ 
+  HELLO from process        0
+ 
+  Going INSIDE the parallel region:
+ 
+  HELLO from process        0
+  HELLO from process        1
+ 
+  Back OUTSIDE the parallel region.
+ 
+  Elapsed wall clock time =   0.178386E-03
+ 
+HELLO_OPENMP
+  Normal end of execution.
+
+25 March 2023   4:51:10.693 PM
+25 March 2023   4:51:10.694 PM
+ 
+HELLO_OPENMP
+  FORTRAN90/OpenMP version
+  The number of processors available =       16
+  The number of threads available    =        4
+ 
+  OUTSIDE the parallel region.
+ 
+  HELLO from process        0
+ 
+  Going INSIDE the parallel region:
+ 
+  HELLO from process        0
+  HELLO from process        3
+  HELLO from process        2
+  HELLO from process        1
+ 
+  Back OUTSIDE the parallel region.
+ 
+  Elapsed wall clock time =   0.270736E-03
+ 
+HELLO_OPENMP
+  Normal end of execution.
+
+25 March 2023   4:51:10.695 PM
+25 March 2023   4:51:10.696 PM
+ 
+HELLO_OPENMP
+  FORTRAN90/OpenMP version
+  The number of processors available =       16
+  The number of threads available    =        8
+ 
+  OUTSIDE the parallel region.
+ 
+  HELLO from process        0
+ 
+  Going INSIDE the parallel region:
+ 
+  HELLO from process        0
+  HELLO from process        1
+  HELLO from process        6
+  HELLO from process        5
+  HELLO from process        3
+  HELLO from process        4
+  HELLO from process        2
+  HELLO from process        7
+ 
+  Back OUTSIDE the parallel region.
+ 
+  Elapsed wall clock time =   0.558231E-03
+ 
+HELLO_OPENMP
+  Normal end of execution.
+
+25 March 2023   4:51:10.697 PM
+25 March 2023   4:51:10.699 PM
+ 
+HELLO_OPENMP
+  FORTRAN90/OpenMP version
+  The number of processors available =       16
+  The number of threads available    =       16
+ 
+  OUTSIDE the parallel region.
+ 
+  HELLO from process        0
+ 
+  Going INSIDE the parallel region:
+ 
+  HELLO from process        0
+  HELLO from process       10
+  HELLO from process       12
+  HELLO from process       11
+  HELLO from process        1
+  HELLO from process        5
+  HELLO from process       14
+  HELLO from process        2
+  HELLO from process        6
+  HELLO from process        7
+  HELLO from process        8
+  HELLO from process        9
+  HELLO from process        3
+  HELLO from process        4
+  HELLO from process       15
+  HELLO from process       13
+ 
+  Back OUTSIDE the parallel region.
+ 
+  Elapsed wall clock time =   0.906091E-03
+ 
+HELLO_OPENMP
+  Normal end of execution.
+
+25 March 2023   4:51:10.700 PM

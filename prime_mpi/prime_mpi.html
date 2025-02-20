@@ -1,0 +1,202 @@
+<html>
+
+  <head>
+    <title>
+      prime_mpi
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      prime_mpi
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>prime_mpi</b>,
+      a FORTRAN90 code which
+      counts the number of primes between 1 and N,
+      using MPI to carry out the calculation in parallel.
+    </p>
+
+    <p>
+      The algorithm is completely naive.  For each integer I, it simply checks
+      whether any smaller J evenly divides it.  The total amount of work
+      for a given N is thus roughly proportional to 1/2*N^2.
+    </p>
+
+    <p>
+      This program is mainly a starting point for investigations into
+      parallelization.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>prime_mpi</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/prime_mpi/prime_mpi.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/prime_mpi/prime_mpi.html">a C++ version</a> and
+      <a href = "prime_mpi.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/prime_mpi/prime_mpi.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../communicator_mpi/communicator_mpi.html">
+      COMMUNICATOR_MPI</a>,
+      a FORTRAN90 code which
+      creates new communicators involving a subset of initial
+      set of MPI processes in the default communicator MPI_COMM_WORLD.
+    </p>
+
+    <p>
+      <a href = "../heat_mpi/heat_mpi.html">
+      HEAT_MPI</a>,
+      a FORTRAN90 code which
+      solves the 1D Time Dependent Heat Equation using MPI.
+    </p>
+
+    <p>
+      <a href = "../hello_mpi/hello_mpi.html">
+      HELLO_MPI</a>,
+      a FORTRAN90 code which
+      prints out "Hello, world!" using the MPI parallel programming environment.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mpi_test/mpi_test.html">
+      mpi_test</a>,
+      FORTRAN90 examples which
+      illustrate the use of the MPI application code interface
+      for carrying out parallel computations in a distributed memory environment.
+    </p>
+
+    <p>
+      <a href = "../prime_mpi_test/prime_mpi_test.html">
+      prime_mpi_test</a>
+    </p>
+
+    <p>
+      <a href = "../prime_openmp/prime_openmp.html">
+      PRIME_OPENMP</a>,
+      a FORTRAN90 code which
+      counts the number of primes between 1 and N, using OpenMP for parallel execution.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prime_serial/prime_serial.html">
+      PRIME_SERIAL</a>,
+      a FORTRAN90 code which
+      counts the number of primes between 1 and N,
+      intended as a starting point for the creation of a parallel version.
+    </p>
+
+    <p>
+      <a href = "../quad_mpi/quad_mpi.html">
+      QUAD_MPI</a>,
+      a FORTRAN90 code which
+      approximates an integral using a quadrature rule, and carries out the
+      computation in parallel using MPI.
+    </p>
+
+    <p>
+      <a href = "../random_mpi/random_mpi.html">
+      RANDOM_MPI</a>,
+      a FORTRAN90 code which
+      demonstrates one way to generate the same sequence of random numbers
+      for both sequential execution and parallel execution under MPI.
+    </p>
+
+    <p>
+      <a href = "../ring_mpi/ring_mpi.html">
+      RING_MPI</a>,
+      a FORTRAN90 code which
+      uses the MPI parallel programming environment, and measures the time
+      necessary to copy a set of data around a ring of processes.
+    </p>
+
+    <p>
+      <a href = "../satisfy_mpi/satisfy_mpi.html">
+      SATISFY_MPI</a>,
+      a FORTRAN90 code which
+      demonstrates, for a particular circuit, an exhaustive search
+      for solutions of the circuit satisfiability problem, using MPI to
+      carry out the calculation in parallel.
+    </p>
+
+    <p>
+      <a href = "../search_mpi/search_mpi.html">
+      SEARCH_MPI</a>,
+      a FORTRAN90 code which
+      searches integers between A and B for a value J such that F(J) = C,
+      using MPI for parallel execution.
+    </p>
+
+    <p>
+      <a href = "../wave_mpi/wave_mpi.html">
+      WAVE_MPI</a>,
+      a FORTRAN90 code which
+      uses finite differences and MPI to estimate a solution to the
+      wave equation.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Eratosthenes,<br>
+          A Method For Finding Prime Numbers,<br>
+          Papyrus 487.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "prime_mpi.f90">prime_mpi.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "prime_mpi.sh">prime_mpi.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 19 August 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

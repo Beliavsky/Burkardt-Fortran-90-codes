@@ -1,0 +1,100 @@
+ 
+quad_openmp():
+  FORTRAN90 version
+  Use OpenMP for parallel execution.
+  Estimate the integral of f(x) from A to B.
+  f(x) = 50 / ( pi * ( 2500 * x * x + 1 ) ).
+ 
+  A        =    0.00000    
+  B        =    10.0000    
+  N        = 10000000
+  Exact    =   0.499363    
+ 
+  Estimate =   0.499371    
+  Error    =   0.790784E-05
+  Time     =   0.186368    
+ 
+quad_openmp():
+  Normal end of execution.
+ 
+25 March 2023   9:31:25.428 AM
+ 
+quad_openmp():
+  FORTRAN90 version
+  Use OpenMP for parallel execution.
+  Estimate the integral of f(x) from A to B.
+  f(x) = 50 / ( pi * ( 2500 * x * x + 1 ) ).
+ 
+  A        =    0.00000    
+  B        =    10.0000    
+  N        = 10000000
+  Exact    =   0.499363    
+ 
+  Estimate =   0.499371    
+  Error    =   0.790784E-05
+  Time     =   0.897896E-01
+ 
+quad_openmp():
+  Normal end of execution.
+ 
+25 March 2023   9:31:25.519 AM
+ 
+quad_openmp():
+  FORTRAN90 version
+  Use OpenMP for parallel execution.
+  Estimate the integral of f(x) from A to B.
+  f(x) = 50 / ( pi * ( 2500 * x * x + 1 ) ).
+ 
+  A        =    0.00000    
+  B        =    10.0000    
+  N        = 10000000
+  Exact    =   0.499363    
+ 
+  Estimate =   0.499371    
+  Error    =   0.790784E-05
+  Time     =   0.452827E-01
+ 
+quad_openmp():
+  Normal end of execution.
+ 
+25 March 2023   9:31:25.566 AM
+ 
+quad_openmp():
+  FORTRAN90 version
+  Use OpenMP for parallel execution.
+  Estimate the integral of f(x) from A to B.
+  f(x) = 50 / ( pi * ( 2500 * x * x + 1 ) ).
+ 
+  A        =    0.00000    
+  B        =    10.0000    
+  N        = 10000000
+  Exact    =   0.499363    
+ 
+  Estimate =   0.499371    
+  Error    =   0.790784E-05
+  Time     =   0.255038E-01
+ 
+quad_openmp():
+  Normal end of execution.
+ 
+25 March 2023   9:31:25.593 AM
+ 
+quad_openmp():
+  FORTRAN90 version
+  Use OpenMP for parallel execution.
+  Estimate the integral of f(x) from A to B.
+  f(x) = 50 / ( pi * ( 2500 * x * x + 1 ) ).
+ 
+  A        =    0.00000    
+  B        =    10.0000    
+  N        = 10000000
+  Exact    =   0.499363    
+ 
+  Estimate =   0.499371    
+  Error    =   0.790784E-05
+  Time     =   0.188335E-01
+ 
+quad_openmp():
+  Normal end of execution.
+ 
+25 March 2023   9:31:25.614 AM

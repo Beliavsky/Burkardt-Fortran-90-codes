@@ -1,0 +1,15 @@
+27 November 2022   6:44:51.313 PM
+
+DUEL_SIMULATION:
+  FORTRAN90 version
+Enter number of duels to run:
+Enter player A's accuracy between 0.0 and 1.0:
+Enter player B's accuracy between 0.0 and 1.0:
+
+  Player A wins with probability   0.439000    
+  Player B wins with probability   0.561000    
+
+duel_simulation()gg:
+  Normal end of execution.
+
+27 November 2022   6:44:51.314 PM

@@ -1,0 +1,165 @@
+<html>
+
+  <head>
+    <title>
+      stochastic_heat2d_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align="center">
+      stochastic_heat2d_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>stochastic_heat2d_test</b>, 
+      a Fortran90 code which 
+      calls stochastic_heat2d(), which
+      solves the steady state heat equation in a 2D
+      rectangular region with a stochastic heat diffusivity, 
+      using the finite difference method (FDM), and stochastic model
+      from Babuska, Nobile and Tempone, using GNUPLOT to illustrate
+      the results.
+    </p>
+
+    <h3 align="center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+
+    <h3 align="center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../stochastic_heat2d/stochastic_heat2d.html">
+      stochastic_heat2d</a>,
+      a Fortran90 code which 
+      solves the steady state heat equation in a 2D
+      rectangular region with a stochastic heat diffusivity, 
+      using the finite difference method (FDM), and stochastic model
+      from Babuska, Nobile and Tempone, using GNUPLOT to illustrate
+      the results.
+    </p>
+
+    <h3 align="center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "stochastic_heat2d_test.f90">stochastic_heat2d_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "stochastic_heat2d_test.sh">stochastic_heat2d_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "stochastic_heat2d_test.txt">stochastic_heat2d_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stochastic_heat2d/solution_data.txt">solution_data.txt</a>
+          graphics data for an image of the solution corresponding to an example selection of OMEGA.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stochastic_heat2d/solution_commands.txt">solution_commands.txt</a>
+          GNUPLOT commands to create an image of the solution corresponding to an example selection of OMEGA.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stochastic_heat2d/solution.png">solution.png</a>
+          an image of the solution corresponding to an example selection of OMEGA.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stochastic_heat2d/umean_data.txt">umean_data.txt</a>
+          graphics data to create an image of mean temperature as a function of OMEGA(1) and OMEGA(2).
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stochastic_heat2d/umean_commands.txt">umean_commands.txt</a>
+          GNUPLOT commands to create an image of mean temperature as a function of OMEGA(1) and OMEGA(2).
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/stochastic_heat2d/umean.png">umean.png</a>
+          an image of mean temperature as a function of OMEGA(1) and OMEGA(2).
+        </li>
+      </ul>
+    <p></p>
+
+    <h3 align="center">
+      List of Routines:
+    </h3>
+
+    <p>
+      </p><ul>
+        <li>
+          <b>DIFFUSIVITY_2D_BNT</b> evaluates a 2D stochastic diffusivity function.
+        </li>
+        <li>
+          <b>GET_UNIT</b> returns a free Fortran unit number.
+        </li>
+        <li>
+          <b>INTERIOR</b> sets up the matrix and right hand side at interior nodes.
+        </li>
+        <li>
+          <b>R8_UNIFORM_01</b> returns a unit pseudorandom R8.
+        </li>
+        <li>
+          <b>R8MAT_FS</b> factors and solves a system with one right hand side.
+        </li>
+        <li>
+          <b>R8VEC_LINSPACE</b> creates a vector of linearly spaced values.
+        </li>
+        <li>
+          <b>R8VEC_MESH_2D</b> creates a 2D mesh from X and Y vectors.
+        </li>
+        <li>
+          <b>R8VEC_NORMAL_01</b> returns a unit pseudonormal R8VEC.
+        </li>
+        <li>
+          <b>R8VEC_PRINT</b> prints an R8VEC.
+        </li>
+        <li>
+          <b>R8VEC_UNIFORM_01</b> returns a unit pseudorandom R8VEC.
+        </li>
+        <li>
+          <b>STOCHASTIC_HEAT2D</b> solves the steady 2D heat equation.
+        </li>
+        <li>
+          <b>TIMESTAMP</b> prints the current YMDHMS date as a time stamp.
+        </li>
+      </ul>
+    <p></p>
+
+    <p>
+      You can go up one level to <a href = "../f_src.html">
+      the Fortran90 source codes</a>.
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 25 August 2013.
+    </i>
+
+    <!-- John Burkardt -->
+
+  
+
+  
+
+
+</body><!-- Initial HTML skeleton created by HTMLINDEX. --></html>

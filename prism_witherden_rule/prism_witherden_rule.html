@@ -1,0 +1,161 @@
+<html>
+
+  <head>
+    <title>
+      prism_witherden_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      prism_witherden_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>prism_witherden_rule</b>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for a prism with
+      triangular base, with exactness up to total degree 10.
+    </p>
+
+    <p>
+      The data is given for the unit prism:
+      with vertices (1,0,0), (0,1,0), (0,0,0), (1,0,1), (0,1,1), (0,0,1).
+    </p>
+
+    <p>
+      Suppose we are given a triangular prism P with vertices
+        (1,0,0), (0,1,0), (0,0,0), (1,0,1), (0,1,1), (0,0,1).
+      We call a rule with n points, returning coordinates
+      x, y, z, and weights w.  Then the integral I of f(x,y,z) over P is
+      approximated by Q as follows:
+<pre>
+        Q = volume(P) * sum ( 1 <= i <= n ) w(i) * f(x(i),y(i),z(i))
+</pre>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>prism_witherden_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/prism_witherden_rule/prism_witherden_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/prism_witherden_rule/prism_witherden_rule.html">a C++ version</a> and
+      <a href = "prism_witherden_rule.html">a Fortran90 version</a> and
+     <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/prism_witherden_rule/prism_witherden_rule.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/prism_witherden_rule/prism_witherden_rule.html">an Octave version</a>and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/prism_witherden_rule/prism_witherden_rule.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../prism_witherden_rule_test/prism_witherden_rule_test.html">
+      prism_witherden_rule_test</a>
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Freddie Witherden, Peter Vincent,<br>
+          On the identification of symmetric quadrature rules for finite element methods,<br>
+          Computers and Mathematics with Applications,<br>
+          Volume 69, pages 1232-1241, 2015.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/prism_unit_volume.m">prism_unit_volume.m</a>,
+          returns the volume of a unit prism.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule_order.m">rule_order.m</a>,
+          returns the number of points in rules of order 0 through 10.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule00.m">rule00.m</a>,
+          returns the rule of degree 0.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule01.m">rule01.m</a>,
+          returns the rule of degree 1.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule02.m">rule02.m</a>,
+          returns the rule of degree 2.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule03.m">rule03.m</a>,
+          returns the rule of degree 3.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule04.m">rule04.m</a>,
+          returns the rule of degree 4.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule05.m">rule05.m</a>,
+          returns the rule of degree 5.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule06.m">rule06.m</a>,
+          returns the rule of degree 6.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule07.m">rule07.m</a>,
+          returns the rule of degree 7.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule08.m">rule08.m</a>,
+          returns the rule of degree 8.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule09.m">rule09.m</a>,
+          returns the rule of degree 9.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/prism_witherden_rule/rule10.m">rule10.m</a>,
+          returns the rule of degree 10.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 27 April 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

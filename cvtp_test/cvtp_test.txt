@@ -1,0 +1,30 @@
+ 8 September 2021   4:43:36.703 PM
+ 
+CVTP_TEST()
+  FORTRAN90 version
+  Test CVTP().
+ 
+CVTP_MODULAR_TEST
+  CVTP can compute a periodic Centroidal Voronoi Tessellation
+  We set MODULAR to TRUE to do this.
+ 
+  Spatial dimension M =                   2
+  Number of generators =                400
+  MODULAR arithmetic option =  T
+  Number of sample points =    100000
+  Number of sample steps =         50
+ 
+CVTP_NONMODULAR_TEST
+  CVTP can compute a periodic Centroidal Voronoi Tessellation.
+  But here, we turn modularity OFF.
+ 
+  Spatial dimension M =                   2
+  Number of generators =                400
+  MODULAR arithmetic option =  F
+  Number of sample points =    100000
+  Number of sample steps =         50
+ 
+CVTP_TEST
+  Normal end of execution.
+ 
+ 8 September 2021   4:44:40.610 PM

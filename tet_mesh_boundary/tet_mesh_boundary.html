@@ -1,0 +1,246 @@
+<html>
+
+  <head>
+    <title>
+      TET_MESH_BOUNDARY
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      TET_MESH_BOUNDARY
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>TET_MESH_BOUNDARY</b>,
+      a Fortran90 code which
+      reads information defining
+      a tetrahedral mesh of points in 3D, and determines the triangular
+      faces that form the boundary of the mesh; it writes out files containing
+      the nodes and elements defining this triangulated surface.
+    </p>
+
+    <p>
+      The tet mesh is defined by a <i>node file</i> containing
+      the coordinates of nodes, and an <i>element file</i> containing
+      sets of 4 or 10 node indices.  
+    </p>
+
+    <p>
+      Each tetrahedron has 4 triangular faces.  Most of these faces
+      will be shared by a neighbor tetrahedron, but some are not.
+      It is precisely those faces that are not shared by a neighbor 
+      that constitute the boundary faces of the mesh.
+    </p>
+
+    <p>
+      The program identifies the triangular faces that form the boundary,
+      and writes two files, a "boundary_node" file that lists the coordinates
+      of the boundary nodes, and a "boundary_element" file that lists the 
+      (renumbered) indices of the boundary nodes used to form the boundary
+      faces.  This pair of files defines a triangulated 3D surface, or 
+      "TRI_SURFACE", and can be plotted, for instance, by 
+      <b>tri_surface_display</b> or <b>tri_surface_display_open_gl</b>.
+    </p>
+
+    <p>
+      The program also writes out a "boundary node mask" file, which
+      reports the value 1 for each boundary node, and 0 for interior nodes.
+      A boundary node is a node that occurs on a boundary face.  This file
+      is of use to the <b>fem_to_mesh</b> program.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>tet_mesh_boundary</b> <i>prefix</i>
+      </blockquote>
+      where <i>prefix</i> is the common file prefix:
+      <ul>
+        <li>
+          <i>prefix</i><b>_nodes.txt</b>, the node coordinates;
+        </li>
+        <li>
+          <i>prefix</i><b>_elements.txt</b>, the element definitions;
+        </li>
+        <li>
+          <i>prefix</i><b>_boundary_node_mask.txt</b>, is 0 for each interior node,
+          1 for each boundary node;
+        </li>
+        <li>
+          <i>prefix</i><b>_boundary_nodes.txt</b>, the boundary node coordinates;
+        </li>
+        <li>
+          <i>prefix</i><b>_boundary_elements.txt</b>, the boundary element definitions;
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>tet_mesh_boundary</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/tet_mesh_boundary/tet_mesh_boundary.html">a C++ version</a> and
+      <a href = "tet_mesh_boundary.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/tet_mesh_boundary/tet_mesh_boundary.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/tet_mesh_boundary/tet_mesh_boundary.html">a Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Programs:
+    </h3>
+
+    <p>
+      <a href = "../tet_mesh_boundary_test/tet_mesh_boundary_test.html">
+      tet_mesh_boundary_test</a>
+    </p>
+
+    <p>
+      <a href = "../tet_mesh/tet_mesh.html">
+      tet_mesh</a>,
+      a Fortran90 library which
+      is useful for work with tet meshes.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/tet_mesh_display/tet_mesh_display.html">
+      tet_mesh_display</a>,
+      a MATLAB program which
+      can read in the
+      node and tetra files defining a tet mesh and display a wireframe
+      image.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/tet_mesh_display_opengl/tet_mesh_display_opengl.html">
+      tet_mesh_display_opengl</a>,
+      a C++ program which
+      reads a tet mesh and displays the
+      nodes and edges using OpenGL.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tet_mesh_order4/tet_mesh_order4.html">
+      tet_mesh_order4</a>,
+      a directory which
+      contains a description and
+      examples of a tet mesh using order 4 elements.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tet_mesh_order10/tet_mesh_order10.html">
+      tet_mesh_order10</a>,
+      a directory which
+      contains a description and
+      examples of a tet mesh using order 10 elements.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tet_mesh_tet_neighbors/tet_mesh_tet_neighbors.html">
+      tet_mesh_tet_neighbors</a>,
+      a data directory which
+      contains a description
+      and examples of the format for storing information about neighboring
+      tetrahedrons in a tetrahedral mesh.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tri_surface/tri_surface.html">
+      tri_surface</a>,
+      a data directory which
+      contains examples of TRI_SURFACE files,
+      a 3D surface described by a collection of triangles.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/tri_surface_display/tri_surface_display.html">
+      tri_surface_display</a>,
+      a MATLAB program which
+      displays the 3D graphics information
+      in a TRI_SURFACE file;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/tri_surface_display_opengl/tri_surface_display_opengl.html">
+      tri_surface_display_opengl</A>,
+      a C++ program which
+      displays the 3D graphics information in a TRI_SURFACE file using OpenGL.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Herbert Edelsbrunner,<br>
+          Geometry and Topology for Mesh Generation,<br>
+          Cambridge, 2001,<br>
+          ISBN: 0-521-79309-2,<br>
+          LC: QA377.E36.
+        </li>
+        <li>
+          Barry Joe,<br>
+          GEOMPACK - a software package for the generation of meshes
+          using geometric algorithms,<br>
+          Advances in Engineering Software,<br>
+          Volume 13, 1991, pages 325-331.
+        </li>
+        <li>
+          Per-Olof Persson, Gilbert Strang,<br>
+          A Simple Mesh Generator in MATLAB,<br>
+          SIAM Review,<br>
+          Volume 46, Number 2, June 2004, pages 329-345.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source code
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "tet_mesh_boundary.f90">tet_mesh_boundary.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "tet_mesh_boundary.sh">tet_mesh_boundary.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 17 January 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

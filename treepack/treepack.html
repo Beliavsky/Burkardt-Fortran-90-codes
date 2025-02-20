@@ -1,0 +1,243 @@
+<html>
+
+  <head>
+    <title>
+      treepack
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      treepack
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>treepack</b>,
+      a FORTRAN90 code which
+      defines, analyzes, and manipulates trees,
+      a simple kind of graph with no circuits.
+      Special cases include rooted and binary trees.
+      Representations include adjacency, arc, Pruefer code,
+      and parent.
+      Operations include center, diameter, eccentricity, enumeration,
+      generation one at a time, random selection, traversal.
+    </p>
+
+    <p>
+      A graph is a collection of objects or "nodes", such that any (unordered) pair of
+      nodes is connected or not connected.  If a pair of nodes <b>i</b> and <b>j</b>
+      are connected, we say there is an "edge" between them, and we may describe
+      the edge as <b>(i,j)</b>.  A graph can be represented by a drawing
+      of dots with lines connecting some of the dots.
+    </p>
+
+    <p>
+      A tree is a minimally connected graph; more precisely, it is a graph
+      with two additional properties:
+      <ul>
+        <li>
+          it is <i>connected</i>, that is, given any two pair of nodes <b>i</b>
+          and <b>j</b>, there is a sequence of edges <b>(na,nb),(nb,nc),...(nx,ny),(ny,nz)</b>
+          such that <b>na=i</b> and <b>nz=j</b>;
+        </li>
+        <li>
+          if any edge is removed from the graph, it is no longer connected.
+        </li>
+      </ul>
+      Note that a tree using <b>N</b> nodes will have exactly <b>N-1</b> edges.
+    </p>
+
+    <p>
+      There are several ways to represent a graph on the computer.
+    </p>
+
+    <p>
+      For the <b>TREE_ARC</b> representation, we simply store a list of the edges
+      of the tree, that is, pairs of nodes.
+    </p>
+
+    <p>
+      For the <b>TREE_PRUEFER</b> representation, a tree of <b>N</b> nodes 
+      is represented by a sequence of <b>N-2</b> integers known as the
+      Pruefer code.
+    </p>
+
+    <p>
+      For the <b>TREE_PARENT</b> representation, a tree of <b>N</b> nodes 
+      is represented by a list of nodes PARENT, such that, for I = 1 to N - 1,
+      the I-th edge of the tree connects node I to node PARENT(I).
+    </p>
+
+    <p>
+      For the <b>TREE_ROOTED</b> representation, a tree is assumed to have the additional
+      property that one node has been designated as the "root".
+    </p>
+
+    <p>
+      For the <b>TREE_RB</b> representation, a tree is assumed to have the additional
+      properties that one node has been designated as the "root", and that every node 
+      has exactly 1 or 2 edges.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>treepack</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/treepack/treepack.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/treepack/treepack.html">a C++ version</a> and
+      <a href = "treepack.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/treepack/treepack.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../combo/combo.html">
+      combo</a>,
+      a FORTRAN90 code which
+      includes routines for ranking, unranking, enumerating and 
+      randomly selecting balanced sequences, cycles, graphs, Gray codes, 
+      subsets, partitions, permutations, restricted growth functions, 
+      Pruefer codes and trees.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/graph_representation/graph_representation.html">
+      graph_representation</a>,
+      a data directory which
+      contains examples of ways of representing abstract
+      mathematical graphs
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/grf/grf.html">
+      grf</a>,
+      a data directory which
+      contains a description of the GRF format and some examples.
+    </p>
+
+    <p>
+      <a href = "../grf_io/grf_io.html">
+      grf_io</a>,
+      a FORTRAN90 code which
+      reads and writes GRF files.
+    </p>
+
+    <p>
+      <a href = "../grf_to_eps/grf_to_eps.html">
+      grf_to_eps</a>,
+      a FORTRAN90 code which
+      can make an Encapsulated PostScript (EPS) image of a
+      GRF file.
+    </p>
+
+    <p>
+      <a href = "../subset/subset.html">
+      subset</a>,
+      a FORTRAN90 code which
+      generates, ranks and unranks various combinatorial objects.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/table_graph_code/table_graph_code.html">
+      table_graph_code</a>,
+      a FORTRAN90 code which
+      reads a TABLE file describing a graph, and computes its graph code.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Alan Gibbons,<br>
+          Algorithmic Graph Theory,<br>
+          Cambridge University Press, 1985,<br>
+          ISBN: 0-5212-8881-9,<br>
+          LC: QA166.G53.
+        </li>
+        <li>
+          Hang Tong Lau,<br>
+          Combinatorial Heuristic Algorithms with FORTRAN,<br>
+          Springer, 1986,<br>
+          ISBN: 3540171614,<br>
+          LC: QA402.5.L37.
+        </li>
+        <li>
+          Albert Nijenhuis, Herbert Wilf,<br>
+          Combinatorial Algorithms for Computers and Calculators,<br>
+          Second Edition,<br>
+          Academic Press, 1978,<br>
+          ISBN: 0-12-519260-6,<br>
+          LC: QA164.N54.
+        </li>
+        <li>
+          Robert Sedgewick,<br>
+          Algorithms in C,<br>
+          Addison-Wesley, 1990,<br>
+          ISBN: 0-201-51425-7,<br>
+          LC: QA76.73.C15S43.
+        </li>
+        <li>
+          Dennis Stanton, Dennis White,<br>
+          Constructive Combinatorics,<br>
+          Springer, 1986,<br>
+          ISBN: 0387963472,<br>
+          LC: QA164.S79.
+        </li>
+        <li>
+          Krishnaiyan Thulasiraman, M Swamy,<br>
+          Graphs: Theory and Algorithms,<br>
+          John Wiley, 1992,<br>
+          ISBN: 0471513563,<br>
+          LC: QA166.T58.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "treepack.f90">treepack.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "treepack.sh">treepack.sh</a>, 
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 06 March 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

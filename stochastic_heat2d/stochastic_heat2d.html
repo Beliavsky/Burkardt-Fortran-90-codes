@@ -1,0 +1,197 @@
+<html>
+
+  <head>
+    <title>
+      stochastic_heat2d
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align="center">
+      stochastic_heat2d
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>stochastic_heat2d</b>, 
+      a Fortran90 code which 
+      solves the steady state heat equation in a 2D
+      rectangular region with a stochastic heat diffusivity, 
+      using the finite difference method (FDM), and stochastic model
+      from Babuska, Nobile and Tempone, using GNUPLOT to illustrate
+      the results.
+    </p>
+
+    <p>
+      The physical region, and the boundary conditions, are suggested
+      by this diagram:
+      </p><pre>                   U = 0, Y = 1.0
+             +-------------------+
+             |          ...      |
+             |         .:*:.     |
+    U = 0    |          :::      | U = 0
+    X = 0.0  |                   | X = 1.0
+             |                   |
+             +-------------------+
+                   U = 0, Y = 0.0
+      </pre>
+    <p></p>
+
+    <p>
+      A heat source is applied, which is concentrated at the point
+      X = 0.6, Y = 0.8, whose center is suggested by the "*" in the diagram.
+    </p>
+
+    <p>
+      The region is covered with a grid of NX by NY nodes, and an NX by NY
+      array U is used to record the temperature.  The correspondence between
+      array indices and locations in the region is suggested by giving the
+      indices of the four corners:
+      </p><pre>                  I = NY
+             +------------------+
+             |                  |
+      J = 1  |                  |  J = NX
+             |                  |
+             +------------------+
+                  I = 1
+      </pre>
+    <p></p>
+
+    <p>
+      The form of the steady heat equation is
+      <pre>
+        - d/dx K(x,y) du/dx - d/dy K(x,y) du/dy = F(x,y)
+      </pre>
+      where K(x,y) is the heat conductivity, and F(x,y) is a
+      heat source term.  For this code, the heat conductivity
+      function is assumed to be a function of four stochastic parameters
+      OMEGA(1) through OMEGA(4); the form of the functional dependence
+      is described in a paper by Babusk, Nobile and Tempone.
+    </p>
+
+    <p>
+      By using a simple finite difference approximation, this single equation
+      can be replaced by NX * NY linear equations in NX * NY variables; 
+      each equation is associated with one of the nodes in the mesh.  Nodes
+      long the boundary generate boundary condition equations, while interior
+      nodes generate equations that approximate the steady heat equation.
+    </p>
+
+    <p>
+      Choosing a particular set of values for OMEGA produces a single "realization"
+      of the temperature field.  However, an interesting question is to observe
+      the influence of the OMEGA's on the solution U.  As an example, the code
+      fixes the values of OMEGA(3) and OMEGA(4), evaluates the solution U over
+      a grid of values for OMEGA(1) and OMEGA(2), and plots the mean of the solution.
+    </p>
+
+    <h3 align="center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align="center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>stochastic_heat2d</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/stochastic_heat2d/stochastic_heat2d.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/stochastic_heat2d/stochastic_heat2d.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/stochastic_heat2d/stochastic_heat2d.html">a Fortran77 version</a> and
+      <a href = "stochastic_heat2d.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/stochastic_heat2d/stochastic_heat2d.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/stochastic_heat2d/stochastic_heat2d.html">an Octave version</a>.
+    </p>
+
+    <h3 align="center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../stochastic_heat2d_test/stochastic_heat2d_test.html">
+      stochastic_heat2d_test</a>
+    </p>
+
+    <p>
+      <a href = "../fem1d_heat_steady/fem1d_heat_steady.html">
+      fem1d_heat_steady</a>,
+      a Fortran90 code which
+      uses the finite element method to solve the 1D Time Independent
+      Heat Equations.
+    </p>
+
+    <p>
+      <a href = "../fem2d_heat/fem2d_heat.html">
+      fem2d_heat</a>, 
+      a Fortran90 code which
+      solves the 2D time dependent heat equation on the unit square.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gnuplot_test/gnuplot_test.html">
+      gnuplot_test</a>,
+      a Fortran90 code which 
+      illustrates how a code can write 
+      data and command files so that gnuplot can create plots of the code results.
+    </p>
+
+    <p>
+      <a href = "../heated_plate/heated_plate.html">
+      heated_plate</a>,
+      a Fortran90 code which 
+      solves the steady state heat equation in a 2D
+      rectangular region, and is intended as
+      a starting point for a parallel version.
+    </p>
+
+    <h3 align="center">
+      Reference:
+    </h3>
+
+    <p>
+      </p><ol>
+        <li>
+          Ivo Babuska, Fabio Nobile, Raul Tempone,<br>
+          A Stochastic Collocation Method for Elliptic Partial Differential Equations 
+          with Random Input Data,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 45, Number 3, 2007, pages 1005-1034.
+        </li>
+      </ol>
+    <p></p>
+
+    <h3 align="center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "stochastic_heat2d.f90">stochastic_heat2d.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "stochastic_heat2d.sh">stochastic_heat2d.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 08 July 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

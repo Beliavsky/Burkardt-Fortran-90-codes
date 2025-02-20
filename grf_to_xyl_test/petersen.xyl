@@ -1,0 +1,37 @@
+#  petersen.xyl
+#  created by xy_io::xyl_header_write.f90
+#
+#  Number of points =           10
+#  Number of lines =            30
+#  Number of line items =       60
+#
+         1         6
+         1         5
+         1         4
+         2         7
+         2         3
+         2         5
+         3        10
+         3         4
+         3         2
+         4         8
+         4         1
+         4         3
+         5         9
+         5         1
+         5         2
+         6        10
+         6         7
+         6         1
+         7         8
+         7         6
+         7         2
+         8         7
+         8         9
+         8         4
+         9         8
+         9        10
+         9         5
+        10         9
+        10         6
+        10         3

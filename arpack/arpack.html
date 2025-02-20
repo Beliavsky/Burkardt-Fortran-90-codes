@@ -1,0 +1,192 @@
+<html>
+
+  <head>
+    <title>
+      arpack
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      arpack
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>arpack</b>,
+      a Fortran90 code which
+      is a numerical software library for solving large scale eigenvalue 
+      problems.  The package is designed to compute a few eigenvalues and 
+      corresponding eigenvectors of large sparse or structured matrices, 
+      using the Implicitly Restarted Arnoldi Method (IRAM) or, in the case 
+      of symmetric matrices, the corresponding variant of the Lanczos 
+      algorithm.  It is used by many popular numerical computing environments 
+      such as SciPy, Mathematica, GNU Octave and MATLAB to provide this 
+      functionality.
+    </p>
+
+    <p>
+      The code supports single and double precision, real or complex
+      arithmetic.  The matrices involved can be symmetric or nonsymmetric.
+      The user can request just a few eigenvalues, or all of them.  There
+      are special routines for banded matrices.
+    </p>
+
+    <p>
+      Because the package uses reverse communication, the user is
+      free to store the matrix in any way suitable.  The code
+      will never require direct access to the matrix, only to
+      the value of certain matrix-vector products such as <b>A*x</b>
+      or <b>A'*x</b>.
+    </p>
+
+    <p>
+      The code requires access to the lapack() and blas() libraries.
+    </p>
+
+    <p>
+      There is an ARPACK home page at:
+      <a href = "https://www.caam.rice.edu/software/ARPACK/index.html">
+                 https://www.caam.rice.edu/software/ARPACK/index.html</a>.
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>arpack</b> is available in
+      <a href = "arpack.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../arpack_test/arpack_test.html">
+      arpack_test</a>
+    </p>
+
+    <p>
+      <a href = "../eispack/eispack.html">
+      eispack</a>,
+      a Fortran90 code which
+      contains eigenvalue routines, since replaced
+      by LAPACK.
+    </p>
+
+    <p>
+      <a href = "../jacobi_eigenvalue/jacobi_eigenvalue.html">
+      jacobi_eigenvalue</a>,
+      a Fortran90 code which
+      implements the Jacobi iteration for the iterative determination
+      of the eigenvalues and eigenvectors of a real symmetric matrix.
+    </p>
+
+    <p>
+      <a href = "../lapack_test/lapack_test.html">
+      lapack_test</a>,
+      a Fortran90 code which
+      demonstrates the use of the lapack() linear algebra library.
+    </p>
+
+    <p>
+      <a href = "../test_eigen/test_eigen.html">
+      test_eigen</a>,
+      a Fortran90 code which
+      defines various eigenvalue
+      test cases.
+    </p>
+
+    <p>
+      <a href = "../test_matrix/test_matrix.html">
+      test_matrix</a>,
+      a Fortran90 code which
+      defines test matrices, some of
+      which have known eigenvalues and eigenvectors.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Richard Lehoucq, Danny Sorensen, Chao Yang.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Richard Lehoucq, Danny Sorensen, Chao Yang,<br>
+          ARPACK User's Guide:<br>
+          Solution of Large Scale Eigenvalue Problems with
+          Implicitly Restarted Arnoldi Methods
+        </li>
+        <li>
+          Danny Sorensen,<br>
+          Implicitly Restarted Arnoldi/Lanczos Methods for
+          Large Scale Eigenvalue Calculations,<br>
+          Department of Computational and Applied Mathematics,<br>
+          Rice University,<br>
+          TR-96-40
+        </li>
+        <li>
+          Information about the use of the ARPACK execution
+          trace facilities available through "debug.h" is given in
+          <a href = "arpack_debug.txt">arpack_debug.txt</a>
+        </li>
+        <li>
+          Information about the use of the ARPACK operation count
+          and timing statistics available through "stat.h" is given in
+          <a href = "arpack_stat.txt">arpack_stat.txt</a>
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "arpack.f90">arpack.f90</a>, the source code
+          for the single precision real version.
+        </li>
+        <li>
+          <a href = "debug.h">debug.h</a>, an INCLUDE file needed for debugging.
+        </li>
+        <li>
+          <a href = "stat.h">stat.h</a>, an INCLUDE file needed for program
+          performance statistics.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/arpack/blas.f90">blas.f90</a>, the source code for
+          all the single precision BLAS routines needed by ARPACK.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/arpack/lapack.f90">lapack.f90</a>, the source code
+          for all the single precision LAPACK routines needed by ARPACK.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 13 July 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

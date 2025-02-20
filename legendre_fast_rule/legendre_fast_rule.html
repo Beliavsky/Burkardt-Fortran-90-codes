@@ -1,0 +1,292 @@
+<html>
+
+  <head>
+    <title>
+      legendre_fast_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      legendre_fast_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>legendre_fast_rule</b>,
+      a FORTRAN90 code which 
+      implements a fast algorithm for the computation of the points and weights
+      of the Gauss-Legendre quadrature rule.
+    </p>
+
+    <p>
+      The standard algorithm for computing the N points and weights of such a rule is
+      by Golub and Welsch.  It sets up and solves an eigenvalue problem, whose
+      solution requires work of order N*N.
+    </p>
+
+    <p>
+      By contrast, the fast algorithm, by Glaser, Liu and Rokhlin, can compute
+      the same information expending work of order N.  For quadrature problems 
+      requiring high accuracy, where N might be 100 or more, the fast algorithm 
+      provides a significant improvement in speed.
+    </p>
+
+    <p>
+      The Gauss-Legendre quadrature rule is designed for the interval [-1,+1].
+    </p>
+
+    <p>
+      The Gauss-Legendre quadrature assumes that the integrand has the form:
+      <pre>
+        Integral ( -1 &lt;= x &lt;= +1 ) f(x) dx
+      </pre>
+    </p>
+
+    <p>
+      The <i>standard Gauss-Legendre quadrature rule </i> is used as follows:
+      <pre>
+        Integral ( -1 &lt;= x &lt;= +1 ) f(x) dx
+      </pre>
+      is to be approximated by
+      <pre>
+        Sum ( 1 &lt;= i &lt;= order ) w(i) * f(x(i)) 
+      </pre>
+    </p>
+    <p>
+      This program allows the user to request that the rule be transformed
+      from the standard interval [-1,+1] to the interval [a,b].
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>legendre_fast_rule</b> <i>n</i> <i>a</i> <i>b</i>
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>n</i> is the order (number of points);
+        </li>
+        <li>
+          <i>a</i> is the left endpoint (often -1.0 or 0.0);
+        </li>
+        <li>
+          <i>b</i> is the right endpoint (usually 1.0).
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>legendre_fast_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/legendre_fast_rule/legendre_fast_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/legendre_fast_rule/legendre_fast_rule.html">a C++ version</a> and
+      <a href = "legendre_fast_rule.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/legendre_fast_rule/legendre_fast_rule.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../legendre_fast_rule_test/legendre_fast_rule_test.html">
+      legendre_fast_rule_test</a>
+    </p>
+
+    <p>
+      <a href = "../chebyshev1_rule/chebyshev1_rule.html">
+      chebyshev1_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Chebyshev type 1 quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../chebyshev2_rule/chebyshev2_rule.html">
+      chebyshev2_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Chebyshev type 2 quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../clenshaw_curtis_rule/clenshaw_curtis_rule.html">
+      clenshaw_curtis_rule</a>,
+      a FORTRAN90 code which
+      defines a Clenshaw Curtis quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../gegenbauer_rule/gegenbauer_rule.html">
+      gegenbauer_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Gegenbauer quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../gen_hermite_rule/gen_hermite_rule.html">
+      gen_hermite_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a generalized Gauss-Hermite quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../gen_laguerre_rule/gen_laguerre_rule.html">
+      gen_laguerre_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a generalized Gauss-Laguerre quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../hermite_rule/hermite_rule.html">
+      hermite_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Hermite quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../intlib/intlib.html">
+      intlib</a>,
+      a FORTRAN90 code which
+      contains routines for numerical estimation of integrals in 1D.
+    </p>
+
+    <p>
+      <a href = "../jacobi_rule/jacobi_rule.html">
+      jacobi_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Jacobi quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../laguerre_rule/laguerre_rule.html">
+      laguerre_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Laguerre quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../legendre_rule/legendre_rule.html">
+      legendre_rule</a>,
+      a FORTRAN90 code which
+      can compute and print a Gauss-Legendre quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../patterson_rule/patterson_rule.html">
+      patterson_rule</a>,
+      a FORTRAN90 code which 
+      computes a Gauss-Patterson quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../product_rule/product_rule.html">
+      product_rule</a>, 
+      a FORTRAN90 code which
+      constructs a product rule
+      from 1D factor rules.
+    </p>
+
+    <p>
+      <a href = "../quadpack/quadpack.html">
+      quadpack</a>, 
+      a FORTRAN90 code which
+      contains routines for 
+      numerical estimation of integrals in 1D.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules/quadrature_rules.html">
+      quadrature_rules</a>, 
+      a dataset directory which
+      contains sets of files that define quadrature
+      rules over various 1D intervals or multidimensional hypercubes.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_legendre/quadrature_rules_legendre.html">
+      quadrature_rules_legendre</a>, 
+      a dataset directory which
+      contains triples of files defining standard Gauss-Legendre
+      quadrature rules.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrule/quadrule.html">
+      quadrule</a>, 
+      a FORTRAN90 code which
+      defines 1-dimensional quadrature rules.
+    </p>
+
+    <p>
+      <a href = "../test_int/test_int.html">
+      test_int</a>, 
+      a FORTRAN90 code which
+      contains
+      number of functions that may be used as test integrands for
+      quadrature rules in 1D.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Andreas Glaser, Xiangtao Liu, Vladimir Rokhlin,<br>
+          A fast algorithm for the calculation of the roots of special functions,<br>
+          SIAM Journal on Scientific Computing,<br>
+          Volume 29, Number 4, pages 1420-1438, 2007.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "legendre_fast_rule.f90">legendre_fast_rule.f90</a>, 
+          the source code.
+        </li>
+        <li>
+          <a href = "legendre_fast_rule.sh">legendre_fast_rule.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 26 July 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

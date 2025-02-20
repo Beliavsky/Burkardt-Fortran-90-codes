@@ -1,0 +1,1864 @@
+23 February 2023   3:49:17.129 PM
+
+EISPACK_TEST
+  FORTRAN90 version.
+  Test the EISPACK library.
+
+BALANC_TEST
+  BALANC balances a real general matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1     110.           12.           13.            0.           15.      
+    2       0.           22.            0.            0.            0.      
+    3     310.           32.           33.            0.           35.      
+    4       0.            0.           43.           44.            0.      
+    5     510.            0.           53.            0.           55.      
+
+  LOW =    2
+  IGH =    4
+
+  Scaling vector SCALE:
+
+         1     4.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4    0.62500000E-01
+         5     2.0000000    
+
+  The balanced matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1      44.            0.           43.            0.            0.      
+    2       0.           55.           53.         31.8750          0.      
+    3       0.           35.           33.         19.3750         32.      
+    4       0.          240.          208.          110.          192.      
+    5       0.            0.            0.            0.           22.      
+
+BANDV_TEST
+  BANDV computes the eigenvectors
+  of a real symmetric band matrix.
+  Matrix order =        5
+  Half bandwidth + 1 =        2
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.288675      0.500000     -0.577350      0.500000     -0.288675    
+    2  -0.500000      0.500000     -0.512790E-15 -0.500000      0.500000    
+    3  -0.577350     -0.133227E-14  0.577350     -0.178742E-14 -0.577350    
+    4  -0.500000     -0.500000     -0.102558E-14  0.500000      0.500000    
+    5  -0.288675     -0.500000     -0.577350     -0.500000     -0.288675    
+
+  The residual (A-Lambda*I)*X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1   0.174860E-14      0.        0.666134E-15  0.111022E-14  0.666134E-15
+    2   0.555112E-15  0.111022E-14  0.122125E-14  0.333067E-14  0.888178E-15
+    3  -0.199840E-14  0.111022E-14  0.133227E-14  0.112129E-14  0.133227E-14
+    4   0.169309E-14  0.444089E-15  0.127400E-14  0.888178E-15  0.444089E-15
+    5   0.167921E-14  0.111022E-14  0.133227E-14      0.        0.666134E-15
+
+BISECT_TEST
+  BISECT computes some eigenvalues
+  of a real symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+BQR_TEST
+  BQR computes some eigenvalues
+  of a real symmetric band matrix.
+  Matrix order =        5
+  Half bandwidth+1 =        2
+
+  The compressed matrix A:
+
+  Col          1             2      
+  Row
+
+    1       0.            2.      
+    2      -1.            2.      
+    3      -1.            2.      
+    4      -1.            2.      
+    5      -1.            2.      
+
+  Eigenvalues:
+
+   1    0.267949    
+   2     1.00000    
+   3     2.00000    
+   4     3.00000    
+   5     3.73205    
+
+CBAL_TEST
+  CBAL balances a complex general matrix.
+  Matrix order =        5
+
+  The matrix Ar:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1     110.           12.           13.            0.           15.      
+    2       0.           22.            0.            0.            0.      
+    3     310.           32.           33.            0.           35.      
+    4       0.            0.           43.           44.            0.      
+    5     510.            0.           53.            0.           55.      
+
+  The matrix Ar:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1    110.500       12.5000       13.5000          0.         15.5000    
+    2       0.         22.5000          0.            0.            0.      
+    3    310.500       32.5000       33.5000          0.         35.5000    
+    4       0.            0.         43.5000       44.5000          0.      
+    5    510.500          0.         53.5000          0.         55.5000    
+
+  LOW =    2
+  IGH =    4
+
+  Scaling vector SCALE:
+
+         1     4.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4    0.62500000E-01
+         5     2.0000000    
+
+  The balanced matrix AR:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1      44.            0.           43.            0.            0.      
+    2       0.           55.           53.         31.8750          0.      
+    3       0.           35.           33.         19.3750         32.      
+    4       0.          240.          208.          110.          192.      
+    5       0.            0.            0.            0.           22.      
+
+  The balanced matrix Ai:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1    44.5000          0.         43.5000          0.            0.      
+    2       0.         55.5000       53.5000       31.9062          0.      
+    3       0.         35.5000       33.5000       19.4062       32.5000    
+    4       0.          248.          216.         110.500        200.      
+    5       0.            0.            0.            0.         22.5000    
+
+CG_LR_TEST
+  CG_LR computes the eigenvalues and eigenvectors of 
+  a complex general matrix,
+  using elementary transformations.
+  Matrix order =        4
+
+WHAT THE FUCK AR:
+
+  Col          1             2             3             4      
+  Row
+
+    1       3.            1.            0.            0.      
+    2       1.            3.            0.            0.      
+    3       0.            0.            1.            1.      
+    4       0.            0.            1.            1.      
+
+WHAT THE FUCK AI:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            0.            0.            2.      
+    2       0.            0.           -2.            0.      
+    3       0.            2.            0.            0.      
+    4      -2.            0.            0.            0.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1      4.828427      0.000000
+       2      4.000000      0.000000
+       3     -0.000000      0.000000
+       4     -0.828427      0.000000
+
+CG_LR_TEST
+  CG_LR computes the eigenvalues and eigenvectors of 
+  a complex general matrix,
+  using elementary transformations.
+  Matrix order =        4
+
+WHAT THE FUCK AR:
+
+  Col          1             2             3             4      
+  Row
+
+    1       3.            1.            0.            0.      
+    2       1.            3.            0.            0.      
+    3       0.            0.            1.            1.      
+    4       0.            0.            1.            1.      
+
+WHAT THE FUCK AI:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            0.            0.            2.      
+    2       0.            0.           -2.            0.      
+    3       0.            2.            0.            0.      
+    4      -2.            0.            0.            0.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1      4.828427      0.000000
+       2      4.000000      0.000000
+       3     -0.000000      0.000000
+       4     -0.828427      0.000000
+
+  Eigenvector        1
+
+   1.00000       0.00000    
+ -0.436130       0.00000    
+   0.00000     -0.744309    
+   0.00000      0.136143    
+
+  Eigenvector        2
+
+   1.00000       0.00000    
+  0.436130       0.00000    
+   0.00000      0.744309    
+   0.00000      0.136143    
+
+  Eigenvector        3
+
+   0.00000      0.414214    
+   0.00000      0.436130    
+  0.744309       0.00000    
+  0.328679       0.00000    
+
+  Eigenvector        4
+
+   0.00000     -0.414214    
+   0.00000      0.436130    
+  0.744309       0.00000    
+ -0.328679       0.00000    
+
+CG_QR_TEST
+  CG_QR computes the eigenvalues and eigenvectors of 
+  a complex general matrix,
+  using unitary transformations.
+  Matrix order =        4
+
+  Real and imaginary parts of eigenvalues:
+
+       1      4.828427      0.000000
+       2      4.000000      0.000000
+       3     -0.000000      0.000000
+       4     -0.828427      0.000000
+
+CG_QR_TEST
+  CG_QR computes the eigenvalues and eigenvectors of 
+  a complex general matrix,
+  using unitary transformations.
+  Matrix order =        4
+
+  Real and imaginary parts of eigenvalues:
+
+       1      4.828427      0.000000
+       2      4.000000      0.000000
+       3     -0.000000      0.000000
+       4     -0.828427      0.000000
+
+  Eigenvector        1
+
+  0.653281       0.00000    
+  0.500000       0.00000    
+ -0.500000       0.00000    
+  0.270598       0.00000    
+
+  Eigenvector        2
+
+  0.653281       0.00000    
+ -0.500000       0.00000    
+  0.500000       0.00000    
+  0.270598       0.00000    
+
+  Eigenvector        3
+
+   0.00000      0.270598    
+   0.00000     -0.500000    
+   0.00000     -0.500000    
+   0.00000     -0.653281    
+
+  Eigenvector        4
+
+   0.00000     -0.270598    
+   0.00000     -0.500000    
+   0.00000     -0.500000    
+   0.00000      0.653281    
+
+CH_TEST
+  CH computes the eigenvalues and eigenvectors of
+  a complex hermitian matrix.
+  Matrix order =        4
+
+  The eigenvalues Lambda:
+
+         1   -0.82842712    
+         2    0.17634623E-14
+         3     4.0000000    
+         4     4.8284271    
+
+CH_TEST
+  CH computes the eigenvalues and eigenvectors of
+  a complex hermitian matrix.
+  Matrix order =        4
+
+  The eigenvalues Lambda:
+
+         1   -0.82842712    
+         2    0.13322676E-14
+         3     4.0000000    
+         4     4.8284271    
+
+  Eigenvector        1
+
+   0.00000      0.270598    
+   0.00000      0.500000    
+   0.00000      0.500000    
+   0.00000      0.653281    
+
+  Eigenvector        2
+
+   0.00000      0.270598    
+   0.00000     -0.500000    
+   0.00000     -0.500000    
+   0.00000      0.653281    
+
+  Eigenvector        3
+
+  0.653281       0.00000    
+ -0.500000       0.00000    
+  0.500000       0.00000    
+ -0.270598       0.00000    
+
+  Eigenvector        4
+
+ -0.653281       0.00000    
+ -0.500000       0.00000    
+  0.500000      -0.00000    
+  0.270598      -0.00000    
+
+CH3_TEST
+  CH3 computes the eigenvalues and eigenvectors of
+  a complex hermitian matrix.
+  Matrix order =        4
+
+  Compressed matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       3.            0.            0.            2.      
+    2       1.            3.           -2.            0.      
+    3       0.            0.            1.            0.      
+    4       0.            0.            1.            1.      
+
+  The eigenvalues Lambda:
+
+         1   -0.82842712    
+         2    0.17634623E-14
+         3     4.0000000    
+         4     4.8284271    
+
+CH3_TEST
+  CH3 computes the eigenvalues and eigenvectors of
+  a complex hermitian matrix.
+  Matrix order =        4
+
+  Compressed matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       3.            0.            0.            2.      
+    2       1.            3.           -2.            0.      
+    3       0.            0.            1.            0.      
+    4       0.            0.            1.            1.      
+
+  The eigenvalues Lambda:
+
+         1   -0.82842712    
+         2    0.13322676E-14
+         3     4.0000000    
+         4     4.8284271    
+
+  Eigenvector        1
+
+   0.00000     -0.270598    
+   0.00000     -0.500000    
+   0.00000     -0.500000    
+   0.00000     -0.653281    
+
+  Eigenvector        2
+
+   0.00000     -0.270598    
+   0.00000      0.500000    
+   0.00000      0.500000    
+   0.00000     -0.653281    
+
+  Eigenvector        3
+
+  0.653281       0.00000    
+ -0.500000       0.00000    
+  0.500000       0.00000    
+ -0.270598       0.00000    
+
+  Eigenvector        4
+
+ -0.653281       0.00000    
+ -0.500000       0.00000    
+  0.500000      -0.00000    
+  0.270598      -0.00000    
+
+CINVIT_TEST
+  CINVIT computes the eigenvectors of 
+  a complex Hessenberg matrix.
+  Matrix order =        4
+
+  Matrix Real Part Ar:
+
+  Col          1             2             3             4      
+  Row
+
+    1       4.            7.            7.            7.      
+    2       9.            8.            8.            2.      
+    3       0.            8.            7.            7.      
+    4       0.            0.            4.            0.      
+
+  Matrix Imag Part Ai:
+
+  Col          1             2             3             4      
+  Row
+
+    1       8.            6.           10.           10.      
+    2       9.            1.           10.            5.      
+    3       0.            3.            2.            8.      
+    4       0.            0.           10.            1.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1     20.260257     16.645759
+       2      0.568541      6.826204
+       3      3.324431     -2.742027
+       4     -5.153229     -8.729936
+
+  Eigenvector        1
+
+  0.952157      0.250710    
+   1.00000       0.00000    
+ -0.330070     -0.222298    
+  0.335491     -0.680030E-01
+
+  Eigenvector        2
+
+   1.00000       0.00000    
+  0.503206     -0.824242    
+   1.00000       0.00000    
+ -0.768179      0.105140E-01
+
+  Eigenvector        3
+
+ -0.501509      0.172182    
+  0.215017     -0.275480    
+ -0.257418     -0.309094    
+  -1.00000       0.00000    
+
+  Eigenvector        4
+
+  0.224707      0.460156E-01
+ -0.244894      0.613996    
+ -0.866321      0.203311    
+  -1.00000     -0.106965    
+
+IMTQLV_TEST
+  IMTQLV computes the eigenvalues of a real symmetric
+  tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+INVIT_TEST
+  INVIT computes the eigenvectors of 
+  a real Hessenberg matrix.
+  Matrix order =        5
+
+  Matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       9.            4.            1.            3.            2.      
+    2       4.            3.            1.            7.            1.      
+    3       0.            3.            1.            2.            4.      
+    4       0.            0.            5.            5.            1.      
+    5       0.            0.            0.            1.            2.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1     11.942140      0.000000
+       2     -0.484651      3.050400
+       3     -0.484651     -3.050400
+       4      7.232090      0.000000
+       5      1.795072      0.000000
+
+  Eigenvector:
+
+       1      0.576743      0.000000
+       2      1.000000      0.000000
+       3     -0.108856      0.000000
+       4     -0.079555      0.000000
+       5      0.008002      0.000000
+
+  Eigenvector:
+
+       1     -0.092926     -0.066023
+       2      1.000000      0.000000
+       3      0.023740      0.323168
+       4      0.118671     -0.231110
+       5      0.064595     -0.013712
+
+  Eigenvector:
+
+       1     -0.092926      0.066023
+       2      1.000000     -0.000000
+       3      0.023740     -0.323168
+       4      0.118671      0.231110
+       5      0.064595      0.013712
+
+  Eigenvector:
+
+       1      1.000000      0.000000
+       2      0.111558      0.000000
+       3      0.206404      0.000000
+       4      0.505654      0.000000
+       5     -0.096645      0.000000
+
+  Eigenvector:
+
+       1     -0.134922      0.000000
+       2      1.000000      0.000000
+       3     -0.018834      0.000000
+       4     -0.056226      0.000000
+       5     -0.274369      0.000000
+
+  Residuals (A*x-Lambda*x) for eigenvalue        1
+
+   1.97163       0.00000    
+  -7.29291       0.00000    
+   4.06401       0.00000    
+  0.160036E-01   0.00000    
+ -0.159110       0.00000    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        2
+
+   3.42618     -0.740324    
+   4.03198      -4.62280    
+   4.51676     -0.109692    
+  0.129191     -0.274230E-01
+  0.237343     -0.462220    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        3
+
+   3.42618      0.740324    
+   4.03198       4.62280    
+   4.51676      0.109692    
+  0.129191      0.274230E-01
+  0.237343      0.462220    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        4
+
+   3.74422       0.00000    
+   7.17721       0.00000    
+ -0.326924       0.00000    
+ -0.193289       0.00000    
+   1.01131       0.00000    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        5
+
+   2.29164       0.00000    
+ -0.215472E-01   0.00000    
+   1.80504       0.00000    
+ -0.548739       0.00000    
+ -0.112452       0.00000    
+
+MINFIT_TEST
+  MINFIT solves an overdetermined linear system
+  using least squares methods.
+  Matrix rows =        5
+  Matrix columns =        2
+
+  The matrix A:
+
+  Col          1             2      
+  Row
+
+    1       1.            1.      
+    2    2.05000         -1.      
+    3    3.06000          1.      
+    4   -1.02000          2.      
+    5    4.08000         -1.      
+
+  The right hand side B:
+
+  Col          1      
+  Row
+
+    1    1.98000    
+    2   0.950000    
+    3    3.98000    
+    4   0.920000    
+    5    2.90000    
+
+  The singular values:
+
+         1     5.7385075    
+         2     2.7059992    
+
+  The least squares solution X:
+
+         1    0.96310140    
+         2    0.98854334    
+
+  The residual A * X - B:
+
+         1   -0.28355256E-01
+         2    0.35814526E-01
+         3   -0.44366372E-01
+         4    0.74723261E-01
+         5    0.40910368E-01
+
+RG_ELM_TEST
+  RG_ELM computes the eigenvalues and eigenvectors of
+  a real general matrix, using elementary transformations.
+  Matrix order =        3
+
+  The matrix A:
+
+  Col          1             2             3      
+  Row
+
+    1      33.           16.           72.      
+    2     -24.          -10.          -57.      
+    3      -8.           -4.          -17.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1       3       0
+       2       1       0
+       3       2       0
+
+RG_ELM_TEST
+  RG_ELM computes the eigenvalues and eigenvectors of
+  a real general matrix, using elementary transformations.
+  Matrix order =        3
+
+  The matrix A:
+
+  Col          1             2             3      
+  Row
+
+    1      33.           16.           72.      
+    2     -24.          -10.          -57.      
+    3      -8.           -4.          -17.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1       3       0
+       2       1       0
+       3       2       0
+
+  Eigenvector:
+
+       1      1.000000      0.000000
+       2     -0.750000      0.000000
+       3     -0.250000      0.000000
+
+  Eigenvector:
+
+       1     -1.000000      0.000000
+       2      0.800000      0.000000
+       3      0.266667      0.000000
+
+  Eigenvector:
+
+       1      1.000000      0.000000
+       2     -0.812500      0.000000
+       3     -0.250000      0.000000
+
+  Residuals (A*x-Lambda*x) for eigenvalue        1
+
+   0.00000       0.00000    
+  0.444089E-15   0.00000    
+   0.00000       0.00000    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        2
+
+   0.00000       0.00000    
+  0.666134E-15   0.00000    
+ -0.555112E-16   0.00000    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        3
+
+ -0.355271E-14   0.00000    
+  0.355271E-14   0.00000    
+  0.999201E-15   0.00000    
+
+RG_ORT_TEST
+  RG_ORT computes the eigenvalues and eigenvectors of
+  a real general matrix, using orthogonal transformations.
+  Matrix order =        3
+
+  The matrix A:
+
+  Col          1             2             3      
+  Row
+
+    1      33.           16.           72.      
+    2     -24.          -10.          -57.      
+    3      -8.           -4.          -17.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1      3.000000      0.000000
+       2      1.000000      0.000000
+       3      2.000000      0.000000
+
+RG_ORT_TEST
+  RG_ORT computes the eigenvalues and eigenvectors of
+  a real general matrix, using orthogonal transformations.
+  Matrix order =        3
+
+  The matrix A:
+
+  Col          1             2             3      
+  Row
+
+    1      33.           16.           72.      
+    2     -24.          -10.          -57.      
+    3      -8.           -4.          -17.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1      3.000000      0.000000
+       2      1.000000      0.000000
+       3      2.000000      0.000000
+
+  Eigenvector:
+
+       1      1.000000      0.000000
+       2     -0.750000      0.000000
+       3     -0.250000      0.000000
+
+  Eigenvector:
+
+       1      1.000000      0.000000
+       2     -0.800000      0.000000
+       3     -0.266667      0.000000
+
+  Eigenvector:
+
+       1      1.000000      0.000000
+       2     -0.812500      0.000000
+       3     -0.250000      0.000000
+
+  Residuals (A*x-Lambda*x) for eigenvalue        1
+
+  0.710543E-14   0.00000    
+ -0.106581E-13   0.00000    
+ -0.366374E-14   0.00000    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        2
+
+  0.106581E-13   0.00000    
+ -0.138778E-13   0.00000    
+ -0.460743E-14   0.00000    
+
+  Residuals (A*x-Lambda*x) for eigenvalue        3
+
+  0.124345E-13   0.00000    
+ -0.153211E-13   0.00000    
+ -0.505151E-14   0.00000    
+
+RGG_TEST:
+  RGG for real generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    A*x = LAMBDA * B * x
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1      -7.            7.            6.            6.      
+    2     -10.            8.           10.            8.      
+    3      -8.            3.           10.           11.      
+    4      -4.            0.            4.           12.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.            1.            0.            0.      
+    2       1.            2.            1.            0.      
+    3       0.            1.            2.            1.      
+    4       0.            0.            1.            2.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1      2.000000      0.000000
+       2      1.000000      0.000000
+       3      4.000000      0.000000
+       4      3.000000      0.000000
+
+RGG_TEST:
+  RGG for real generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    A*x = LAMBDA * B * x
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1      -7.            7.            6.            6.      
+    2     -10.            8.           10.            8.      
+    3      -8.            3.           10.           11.      
+    4      -4.            0.            4.           12.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.            1.            0.            0.      
+    2       1.            2.            1.            0.      
+    3       0.            1.            2.            1.      
+    4       0.            0.            1.            2.      
+
+  Real and imaginary parts of eigenvalues:
+
+       1      2.000000      0.000000
+       2      1.000000      0.000000
+       3      4.000000      0.000000
+       4      3.000000      0.000000
+
+  Eigenvector        1
+
+   1.00000    
+   1.00000    
+  -1.00000    
+   1.00000    
+
+  Eigenvector        2
+
+   1.00000    
+  0.750000    
+  -1.00000    
+   1.00000    
+
+  Eigenvector        3
+
+  0.666667    
+  0.500000    
+  -1.00000    
+   1.00000    
+
+  Eigenvector        4
+
+  0.333333    
+  0.250000    
+  -1.00000    
+  0.500000    
+
+  Residuals (A*x-(Alfr+Alfi*I)*B*x) for eigenvalue        1
+
+  0.199840E-14
+  0.222045E-15
+ -0.888178E-15
+  0.666134E-15
+
+  Residuals (A*x-(Alfr+Alfi*I)*B*x) for eigenvalue        2
+
+  0.277556E-14
+  0.210942E-14
+  0.333067E-15
+  0.122125E-14
+
+  Residuals (A*x-(Alfr+Alfi*I)*B*x) for eigenvalue        3
+
+ -0.488498E-14
+ -0.133227E-14
+   0.00000    
+ -0.355271E-14
+
+  Residuals (A*x-(Alfr+Alfi*I)*B*x) for eigenvalue        4
+
+  0.577316E-14
+  0.133227E-14
+  0.888178E-15
+  0.222045E-14
+
+RS_TEST
+  RS computes the eigenvalues and eigenvectors
+  of a real symmetric matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+RS_TEST
+  RS computes the eigenvalues and eigenvectors
+  of a real symmetric matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+  The eigenvector matrix:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.707107     -0.971445E-16  0.316228      0.632456    
+    2  -0.707107     -0.277556E-16  0.316228      0.632456    
+    3       0.        0.707107     -0.632456      0.316228    
+    4       0.       -0.707107     -0.632456      0.316228    
+
+  The residual (A-Lambda*I)*X:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.       -0.360822E-15 -0.444089E-15      0.      
+    2       0.       -0.499600E-15  0.222045E-15      0.      
+    3       0.        0.888178E-15 -0.222045E-14 -0.888178E-15
+    4       0.       -0.888178E-15      0.            0.      
+
+RSB_TEST
+  RSB computes the eigenvalues and eigenvectors
+  of a real symmetric band matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+RSB_TEST
+  RSB computes the eigenvalues and eigenvectors
+  of a real symmetric band matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.288675     -0.500000     -0.577350     -0.500000      0.288675    
+    2  -0.500000     -0.500000     -0.414673E-16  0.500000     -0.500000    
+    3  -0.577350          0.        0.577350      0.222045E-15  0.577350    
+    4  -0.500000      0.500000     -0.553180E-16 -0.500000     -0.500000    
+    5  -0.288675      0.500000     -0.577350      0.500000      0.288675    
+
+  The residual (A-Lambda*I)*X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1   0.416334E-16      0.       -0.222045E-15      0.       -0.222045E-15
+    2   0.113798E-14      0.        0.111022E-15 -0.222045E-15  0.444089E-15
+    3   0.832667E-16 -0.111022E-15  0.222045E-15 -0.555112E-16      0.      
+    4   0.105471E-14      0.       -0.111409E-15 -0.444089E-15  0.444089E-15
+    5   0.277556E-15      0.       -0.222045E-15      0.        0.222045E-15
+
+RSG_TEST:
+  RSG for real symmetric generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    A*x = LAMBDA * B * x
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            1.            2.            3.      
+    2       1.            0.            1.            2.      
+    3       2.            1.            0.            1.      
+    4       3.            2.            1.            0.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.           -1.            0.            0.      
+    2      -1.            2.           -1.            0.      
+    3       0.           -1.            2.           -1.      
+    4       0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    -2.4357817    
+         2   -0.52079729    
+         3   -0.16421833    
+         4     11.520797    
+
+RSG_TEST:
+  RSG for real symmetric generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    A*x = LAMBDA * B * x
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            1.            2.            3.      
+    2       1.            0.            1.            2.      
+    3       2.            1.            0.            1.      
+    4       3.            2.            1.            0.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.           -1.            0.            0.      
+    2      -1.            2.           -1.            0.      
+    3       0.           -1.            2.           -1.      
+    4       0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    -2.4357817    
+         2   -0.52079729    
+         3   -0.16421833    
+         4     11.520797    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.526940      0.251292     -0.149448      0.660948    
+    2   0.287038     -0.409656      0.342942      0.912240    
+    3  -0.287038     -0.409656     -0.342942      0.912240    
+    4  -0.526940      0.251292      0.149448      0.660948    
+
+  Residuals (A*x-(w*I)*B*x) for eigenvalue        1
+
+ -0.222045E-15
+  0.111022E-15
+  0.133227E-14
+ -0.133227E-14
+
+  Residuals (A*x-(w*I)*B*x) for eigenvalue        2
+
+  0.222045E-15
+ -0.721645E-15
+ -0.693889E-15
+  0.183187E-14
+
+  Residuals (A*x-(w*I)*B*x) for eigenvalue        3
+
+  0.929812E-15
+ -0.256739E-15
+  0.534295E-15
+  0.107553E-14
+
+  Residuals (A*x-(w*I)*B*x) for eigenvalue        4
+
+  0.355271E-14
+ -0.177636E-14
+ -0.177636E-14
+  0.355271E-14
+
+RSGAB_TEST:
+  RSGAB for real symmetric generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    A*B*X = LAMBDA * X
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            1.            2.            3.      
+    2       1.            0.            1.            2.      
+    3       2.            1.            0.            1.      
+    4       3.            2.            1.            0.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.           -1.            0.            0.      
+    2      -1.            2.           -1.            0.      
+    3       0.           -1.            2.           -1.      
+    4       0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    -5.0000000    
+         2    -2.0000000    
+         3    -2.0000000    
+         4     3.0000000    
+
+RSGAB_TEST:
+  RSGAB for real symmetric generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    A*B*X = LAMBDA * X
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            1.            2.            3.      
+    2       1.            0.            1.            2.      
+    3       2.            1.            0.            1.      
+    4       3.            2.            1.            0.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.           -1.            0.            0.      
+    2      -1.            2.           -1.            0.      
+    3       0.           -1.            2.           -1.      
+    4       0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    -5.0000000    
+         2    -2.0000000    
+         3    -2.0000000    
+         4     3.0000000    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.547723     -0.171729E-16  0.314018E-15  0.707107    
+    2   0.182574      0.325082E-01  0.815849      0.707107    
+    3  -0.182574     -0.690292      0.436078      0.707107    
+    4  -0.547723     -0.138588E-15  0.644493E-16  0.707107    
+
+  The residual matrix (A*B-Lambda*I)*X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.310862E-14 -0.478435E-15  0.405992E-15      0.      
+    2   0.199840E-14 -0.444089E-15  0.222045E-15      0.      
+    3   0.122125E-14 -0.111022E-14  0.888178E-15      0.      
+    4  -0.444089E-15 -0.277177E-15  0.101708E-14  0.888178E-15
+
+RSGBA_TEST:
+  RSGBA for real symmetric generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    B*A*X = LAMBDA * X
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            1.            2.            3.      
+    2       1.            0.            1.            2.      
+    3       2.            1.            0.            1.      
+    4       3.            2.            1.            0.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.           -1.            0.            0.      
+    2      -1.            2.           -1.            0.      
+    3       0.           -1.            2.           -1.      
+    4       0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    -5.0000000    
+         2    -2.0000000    
+         3    -2.0000000    
+         4     3.0000000    
+
+RSGBA_TEST:
+  RSGBA for real symmetric generalized problem.
+  Find scalars LAMBDA and vectors X so that
+    B*A*X = LAMBDA * X
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.            1.            2.            3.      
+    2       1.            0.            1.            2.      
+    3       2.            1.            0.            1.      
+    4       3.            2.            1.            0.      
+
+  The matrix B:
+
+  Col          1             2             3             4      
+  Row
+
+    1       2.           -1.            0.            0.      
+    2      -1.            2.           -1.            0.      
+    3       0.           -1.            2.           -1.      
+    4       0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    -5.0000000    
+         2    -2.0000000    
+         3    -2.0000000    
+         4     3.0000000    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.912871     -0.325082E-01 -0.815849      0.707107    
+    2  -0.222045E-15  0.755308       1.19562     -0.166533E-15
+    3   0.388578E-15  -1.41309      0.563058E-01 -0.277556E-16
+    4  -0.912871      0.690292     -0.436078      0.707107    
+
+  The residual matrix (B*A-Lambda*I)*X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.532907E-14 -0.291434E-15 -0.222045E-15 -0.888178E-15
+    2  -0.888178E-15  0.666134E-15 -0.888178E-15  0.499600E-15
+    3   0.127676E-14 -0.177636E-14  0.388578E-15  0.832667E-16
+    4  -0.266454E-14  0.666134E-15 -0.222045E-15 -0.444089E-15
+
+RSM_TEST
+  RSM computes some eigenvalues and eigenvectors
+  of a real symmetric matrix.
+  Matrix order =        4
+  Number of eigenvectors desired =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.707107     -0.222045E-15  0.316228      0.632456    
+    2  -0.707107     -0.555112E-16  0.316228      0.632456    
+    3       0.        0.707107     -0.632456      0.316228    
+    4       0.       -0.707107     -0.632456      0.316228    
+
+  The residual (A-Lambda*I)*X:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.       -0.333067E-15 -0.222045E-14 -0.266454E-14
+    2       0.       -0.555112E-15 -0.155431E-14 -0.266454E-14
+    3       0.        0.133227E-14 -0.310862E-14  0.177636E-14
+    4       0.        0.666134E-15  0.133227E-14  0.177636E-14
+
+RSP_TEST
+  RSP computes the eigenvalues and eigenvectors
+  of a real symmetric packed matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+RSP_TEST
+  RSP computes the eigenvalues and eigenvectors
+  of a real symmetric packed matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.707107      0.555112E-16  0.316228      0.632456    
+    2  -0.707107      0.111022E-15  0.316228      0.632456    
+    3       0.        0.707107     -0.632456      0.316228    
+    4       0.       -0.707107     -0.632456      0.316228    
+
+  The residual matrix (A-Lambda*I)*X:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.        0.777156E-15 -0.177636E-14 -0.888178E-15
+    2       0.        0.777156E-15 -0.666134E-15      0.      
+    3       0.        0.133227E-14 -0.177636E-14 -0.444089E-15
+    4       0.       -0.444089E-15 -0.888178E-15      0.      
+
+RSPP_TEST
+  RSPP finds some eigenvalues and eigenvectors of
+  a real symmetric packed matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+RSPP_TEST
+  RSPP finds some eigenvalues and eigenvectors of
+  a real symmetric packed matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1       5.            4.            1.            1.      
+    2       4.            5.            1.            1.      
+    3       1.            1.            4.            2.      
+    4       1.            1.            2.            4.      
+
+  The eigenvalues Lambda:
+
+         1     1.0000000    
+         2     2.0000000    
+         3     5.0000000    
+         4     10.000000    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.707107     -0.555112E-16  0.316228     -0.632456    
+    2  -0.707107      0.111022E-15  0.316228     -0.632456    
+    3       0.        0.707107     -0.632456     -0.316228    
+    4       0.       -0.707107     -0.632456     -0.316228    
+
+  The residual matrix (A-Lambda*I)*X:
+
+  Col          1             2             3             4      
+  Row
+
+    1       0.        0.555112E-15 -0.355271E-14  0.888178E-15
+    2       0.        0.444089E-15 -0.244249E-14      0.      
+    3       0.        0.133227E-14 -0.310862E-14  0.444089E-15
+    4       0.            0.        0.222045E-14      0.      
+
+RST_TEST
+  RST computes the eigenvalues and eigenvectors
+  of a real symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+RST_TEST
+  RST computes the eigenvalues and eigenvectors
+  of a real symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.288675      0.500000     -0.577350     -0.500000     -0.288675    
+    2  -0.500000      0.500000      0.346252E-15  0.500000      0.500000    
+    3  -0.577350     -0.226647E-15  0.577350     -0.489055E-15 -0.577350    
+    4  -0.500000     -0.500000     -0.150268E-15 -0.500000      0.500000    
+    5  -0.288675     -0.500000     -0.577350      0.500000     -0.288675    
+
+  The residual matrix (A-Lambda*I)*X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.555112E-15      0.       -0.444089E-15 -0.222045E-15      0.      
+    2       0.       -0.222045E-15 -0.333067E-15      0.        0.222045E-15
+    3  -0.360822E-15 -0.601132E-16 -0.222045E-15 -0.660569E-16      0.      
+    4  -0.832667E-16  0.166533E-15 -0.325319E-16      0.            0.      
+    5  -0.180411E-15  0.444089E-15  0.222045E-15 -0.222045E-15  0.444089E-15
+
+RT_TEST
+  RT computes the eigenvalues and eigenvectors
+  of a real sign-symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+RT_TEST
+  RT computes the eigenvalues and eigenvectors
+  of a real sign-symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+  The eigenvector matrix X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.288675      0.500000     -0.577350     -0.500000     -0.288675    
+    2  -0.500000      0.500000      0.346252E-15  0.500000      0.500000    
+    3  -0.577350     -0.226647E-15  0.577350     -0.489055E-15 -0.577350    
+    4  -0.500000     -0.500000     -0.150268E-15 -0.500000      0.500000    
+    5  -0.288675     -0.500000     -0.577350      0.500000     -0.288675    
+
+  The residual matrix (A-Lambda*I)*X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.555112E-15      0.       -0.444089E-15 -0.222045E-15      0.      
+    2       0.       -0.222045E-15 -0.333067E-15      0.        0.222045E-15
+    3  -0.360822E-15 -0.601132E-16 -0.222045E-15 -0.660569E-16      0.      
+    4  -0.832667E-16  0.166533E-15 -0.325319E-16      0.            0.      
+    5  -0.180411E-15  0.444089E-15  0.222045E-15 -0.222045E-15  0.444089E-15
+
+STURM_SEQUENCE_TEST
+  STURM_SEQUENCE considers a (P,Q) submatrix of a
+  symmetric tridiagonal submatrix.
+  It counts the number of eigenvalues less than X1.
+  Matrix order =        5
+
+     P     Q      X1      Count
+
+     1     5     4.50000         5
+     1     5     3.50000         4
+     1     5     2.50000         3
+     1     5     1.50000         2
+     1     5    0.500000         1
+     1     5   -0.500000         0
+
+SVD_TEST
+  SVD computes the singular value decomposition
+  of a real general matrix.
+  Matrix order =        4
+
+  The matrix A:
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.990000      0.200000E-02  0.600000E-02  0.200000E-02
+    2   0.200000E-02  0.990000      0.200000E-02  0.600000E-02
+    3   0.600000E-02  0.200000E-02  0.990000      0.200000E-02
+    4   0.200000E-02  0.600000E-02  0.200000E-02  0.990000    
+
+  The singular values S
+
+         1     1.0000000    
+         2    0.98400000    
+         3    0.99200000    
+         4    0.98400000    
+
+  The U matrix:
+
+  Col          1             2             3             4      
+  Row
+
+    1  -0.500000     -0.707107      0.500000     -0.219026E-18
+    2  -0.500000      0.104916E-13 -0.500000      0.707107    
+    3  -0.500000      0.707107      0.500000      0.194289E-14
+    4  -0.500000      0.124623E-13 -0.500000     -0.707107    
+
+  The V matrix:
+
+  Col          1             2             3             4      
+  Row
+
+    1  -0.500000     -0.707107      0.500000         -0.      
+    2  -0.500000      0.104916E-13 -0.500000      0.707107    
+    3  -0.500000      0.707107      0.500000      0.194289E-14
+    4  -0.500000      0.125178E-13 -0.500000     -0.707107    
+
+  The product U * S * Transpose(V):
+
+  Col          1             2             3             4      
+  Row
+
+    1   0.990000      0.200000E-02  0.600000E-02  0.200000E-02
+    2   0.200000E-02  0.990000      0.200000E-02  0.600000E-02
+    3   0.600000E-02  0.200000E-02  0.990000      0.200000E-02
+    4   0.200000E-02  0.600000E-02  0.200000E-02  0.990000    
+
+TQL1_TEST
+  TQL1 computes the eigenvalues
+  of a real symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+TRIDIB_TEST
+  TRIDIB computes some eigenvalues
+  of a real symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+TSTURM_TEST
+  TSTURM computes some eigenvalues and eigenvectors
+  of a real symmetric tridiagonal matrix.
+  Matrix order =        5
+
+  The matrix A:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+
+  The eigenvalues Lambda:
+
+         1    0.26794919    
+         2     1.0000000    
+         3     2.0000000    
+         4     3.0000000    
+         5     3.7320508    
+
+  The eigenvector matrix Z:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.288675     -0.500000      0.577350     -0.500000      0.288675    
+    2  -0.500000     -0.500000      0.410232E-14  0.500000     -0.500000    
+    3  -0.577350      0.125782E-14 -0.577350      0.595808E-15  0.577350    
+    4  -0.500000      0.500000     -0.205116E-14 -0.500000     -0.500000    
+    5  -0.288675      0.500000      0.577350      0.500000      0.288675    
+
+  The residual matrix (A-Lambda*I)*X:
+
+  Col          1             2             3             4             5      
+  Row
+
+    1  -0.142941E-14 -0.832667E-15 -0.444089E-14  0.222045E-15 -0.666134E-15
+    2  -0.638378E-15 -0.832667E-15 -0.155431E-14 -0.222045E-15 -0.111022E-14
+    3   0.305311E-15 -0.796095E-15 -0.155431E-14 -0.318252E-15 -0.177636E-14
+    4  -0.152656E-14 -0.999201E-15 -0.155982E-14 -0.444089E-15 -0.444089E-15
+    5   0.131839E-14  0.111022E-15  0.155431E-14  0.444089E-15  0.666134E-15
+
+EISPACK_TEST
+  Normal end of execution.
+
+23 February 2023   3:49:17.133 PM

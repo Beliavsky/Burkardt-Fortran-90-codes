@@ -1,0 +1,197 @@
+<html>
+
+  <head>
+    <title>
+      PLOT_POINTS
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      PLOT_POINTS
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>PLOT_POINTS</b>,
+      a FORTRAN90 code which
+      reads data in the XY file format
+      and creates an Encapsulated PostScript file.
+    </p>
+
+    <p>
+      In fact, <b>PLOT_POINTS</b> can read data in the more general
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/table/table.html">
+      TABLE file format</a>, allowing the user to select the two coordinates
+      that will play the role of <b>X</b> and <b>Y</b>.
+    </p>
+
+    <p>
+      Plots you can make include:
+      <ul>
+        <li>
+          a dot plot of the points,
+        </li>
+        <li>
+          the line formed by connecting consecutive points
+          (great for displaying Brownian motion), 
+        </li>
+        <li>
+          the Delaunay triangulation of the points, 
+        </li>
+        <li>
+          the Voronoi diagram,
+        </li>
+        <li>
+          the triangulated Voronoi polygons.
+        </li>
+        <li>
+          a balloon plot of the points, in which each point is
+          surrounded by a maximal circle that does not intersect
+          the others.  (assumes the points lie in [0,1] x [0,1]).
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      You can specify the input file, add one box or circle, specify
+      the kind of plot to be made, and a few other options, by entering
+      commands interactively.  The set of commands can be gotten
+      via the "HELP" command.  The full list is:
+      <table border = 1>
+        <tr><th>command          </th><th>Meaning</th></tr>
+        <tr><td>BALLOON          </td><td>a "balloon" plot of points.</td></tr>
+        <tr><td>DASH             </td><td>dash plot of connected points.</td></tr>
+        <tr><td>DOT              </td><td>dot plot of points.</td></tr>
+        <tr><td>DEL              </td><td>Delaunay triangulation plot</td></tr>
+        <tr><td>KM               </td><td>K-Means plot.</td></tr>
+        <tr><td>TH               </td><td>thin the points.</td></tr>
+        <tr><td>TV               </td><td>triangulated Voronoi diagram.</td></tr>
+        <tr><td>VOR              </td><td>Voronoi diagram plot.</td></tr>
+        <hr>
+        <tr><td>Q                </td><td>quit.</td></tr>
+        <tr><td>READ filename    </td><td>read another input file.</td></tr>
+        <tr><td>OUTPUT filename  </td><td>name the next output file.</td></tr>
+        <tr><td>BOX x1 y1 x2 y2  </td><td>draw a single box in the plot.</td></tr>
+        <tr><td>NOBOX            </td><td>do not draw a box in the plot.</td></tr>
+        <tr><td>CIRCLE x y r     </td><td>draw a single circle in the plot.</td></tr>
+        <tr><td>NOCIRCLE         </td><td>do not draw a circle in the plot.</td></tr>
+        <tr><td>MARKER_SIZE = n  </td><td>Specify marker size.</td></tr>
+        <tr><td>SHADOW           </td><td>mark X and Y axes for each point.</td></tr>
+        <tr><td>TITLE            </td><td>enter a title for the next plot.</td></tr>
+        <tr><td>X = n            </td><td>specify data index to use as X.</td></tr>
+        <tr><td>Y = n            </td><td>specify data index to use as Y.</td></tr>
+        <tr><td># comment        </td><td>make a comment.</td></tr>
+      </table>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>PLOT_POINTS</b> is available in 
+      <a href = "plot_points.html">a FORTRAN90 version</a> 
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../plot_points_test/plot_points_test.html">
+      plot_points_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/box_plot/box_plot.html">
+      BOX_PLOT</a>,
+      a MATLAB program which 
+      can color in specified entries of
+      a checkerboard, corresponding to pairs of integer data.
+    </p>
+
+    <p>
+      <a href = "../ps_write/ps_write.html">
+      PS_WRITE</a>,
+      a FORTRAN90 library which
+      is used by PLOT_POINTS.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xy_display/xy_display.html">
+      XY_DISPLAY</a>,
+      a MATLAB program which
+      can read a file of coordinates of points, and display an image of the
+      points in a MATLAB graphics window.
+    </p>
+
+    <p> 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xy_display_opengl/xy_display_opengl.html">
+      XY_DISPLAY_OPENGL</a>,
+      a C++ program which
+      can read a file containing 2D point coordinates, and display
+      an image of those points using Open GL.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Barry Joe,<br>
+          GEOMPACK - a software package for the generation of meshes
+          using geometric algorithms, <br>
+          Advances in Engineering Software,<br>
+          Volume 13, pages 325-331, 1991.
+        </li>
+        <li>
+          Henry McGilton, Mary Campione,<br>
+          PostScript by Example,<br>
+          Addison-Wesley,<br>
+          ISBN: 0-201-63228-4
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "plot_points.f90">plot_points.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "plot_points.sh">plot_points.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 01 April 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

@@ -1,0 +1,235 @@
+25 March 2023  11:01:48.263 AM
+ 
+PRIME_NUMBER_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Number of processors available =       16
+  Number of threads =                     1
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         1         0  0.910900E-05
+         2         1  0.154600E-05
+         4         2  0.121800E-05
+         8         4  0.133600E-05
+        16         6  0.144200E-05
+        32        11  0.235500E-05
+        64        18  0.498000E-05
+       128        31  0.128940E-04
+       256        54  0.365790E-04
+       512        97  0.120806E-03
+      1024       172  0.453091E-03
+      2048       309  0.144494E-02
+      4096       564  0.511467E-02
+      8192      1028  0.133639E-01
+     16384      1900  0.477793E-01
+     32768      3512  0.150246    
+     65536      6542  0.561673    
+    131072     12251   2.10630    
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         5         3  0.240900E-05
+        50        15  0.270600E-05
+       500        95  0.827310E-04
+      5000       669  0.432632E-02
+     50000      5133  0.333420    
+    500000     41538   27.1868    
+ 
+PRIME_NUMBER_OPENMP():
+  Normal end of execution.
+25 March 2023  11:02:18.674 AM
+25 March 2023  11:02:18.676 AM
+ 
+PRIME_NUMBER_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Number of processors available =       16
+  Number of threads =                     2
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         1         0  0.136299E-03
+         2         1  0.238200E-05
+         4         2  0.135601E-05
+         8         4  0.131501E-05
+        16         6  0.149900E-05
+        32        11  0.202600E-05
+        64        18  0.285399E-05
+       128        31  0.588200E-05
+       256        54  0.159530E-04
+       512        97  0.512680E-04
+      1024       172  0.169624E-03
+      2048       309  0.594338E-03
+      4096       564  0.219122E-02
+      8192      1028  0.791682E-02
+     16384      1900  0.295335E-01
+     32768      3512  0.108530    
+     65536      6542  0.406587    
+    131072     12251   1.53221    
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         5         3  0.271600E-05
+        50        15  0.253600E-05
+       500        95  0.481770E-04
+      5000       669  0.314005E-02
+     50000      5133  0.243237    
+    500000     41538   19.9524    
+ 
+PRIME_NUMBER_OPENMP():
+  Normal end of execution.
+25 March 2023  11:02:40.963 AM
+25 March 2023  11:02:40.965 AM
+ 
+PRIME_NUMBER_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Number of processors available =       16
+  Number of threads =                     4
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         1         0  0.170055E-03
+         2         1  0.214800E-05
+         4         2  0.249000E-05
+         8         4  0.222700E-05
+        16         6  0.227700E-05
+        32        11  0.261600E-05
+        64        18  0.277900E-05
+       128        31  0.432900E-05
+       256        54  0.909200E-05
+       512        97  0.302470E-04
+      1024       172  0.965580E-04
+      2048       309  0.359852E-03
+      4096       564  0.125293E-02
+      8192      1028  0.449801E-02
+     16384      1900  0.170158E-01
+     32768      3512  0.621563E-01
+     65536      6542  0.234081    
+    131072     12251  0.883265    
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         5         3  0.327700E-05
+        50        15  0.339400E-05
+       500        95  0.294910E-04
+      5000       669  0.178911E-02
+     50000      5133  0.139860    
+    500000     41538   11.5309    
+ 
+PRIME_NUMBER_OPENMP():
+  Normal end of execution.
+25 March 2023  11:02:53.841 AM
+25 March 2023  11:02:53.842 AM
+ 
+PRIME_NUMBER_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Number of processors available =       16
+  Number of threads =                     8
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         1         0  0.226787E-03
+         2         1  0.357599E-05
+         4         2  0.303501E-05
+         8         4  0.302300E-05
+        16         6  0.307500E-05
+        32        11  0.304700E-05
+        64        18  0.316700E-05
+       128        31  0.432000E-05
+       256        54  0.754300E-05
+       512        97  0.195950E-04
+      1024       172  0.647420E-04
+      2048       309  0.214816E-03
+      4096       564  0.840751E-03
+      8192      1028  0.322270E-02
+     16384      1900  0.128215E-01
+     32768      3512  0.457470E-01
+     65536      6542  0.145472    
+    131072     12251  0.472751    
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         5         3  0.474900E-05
+        50        15  0.471300E-05
+       500        95  0.203050E-04
+      5000       669  0.118285E-02
+     50000      5133  0.796825E-01
+    500000     41538   6.13570    
+ 
+PRIME_NUMBER_OPENMP():
+  Normal end of execution.
+25 March 2023  11:03:00.741 AM
+25 March 2023  11:03:00.743 AM
+ 
+PRIME_NUMBER_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Number of processors available =       16
+  Number of threads =                    16
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         1         0  0.312423E-03
+         2         1  0.536900E-05
+         4         2  0.459801E-05
+         8         4  0.537700E-05
+        16         6  0.432500E-05
+        32        11  0.447400E-05
+        64        18  0.494300E-05
+       128        31  0.534700E-05
+       256        54  0.750800E-05
+       512        97  0.135380E-04
+      1024       172  0.391990E-04
+      2048       309  0.120037E-03
+      4096       564  0.447635E-03
+      8192      1028  0.152455E-02
+     16384      1900  0.585439E-02
+     32768      3512  0.218310E-01
+     65536      6542  0.886604E-01
+    131072     12251  0.291180    
+ 
+PRIME_NUMBER_SWEEP_OPENMP():
+  Call PRIME_NUMBER() to count the primes from 1 to N.
+ 
+         N        Pi          Time
+ 
+         5         3  0.584100E-05
+        50        15  0.513900E-05
+       500        95  0.276260E-04
+      5000       669  0.111859E-02
+     50000      5133  0.675966E-01
+    500000     41538   3.63019    
+ 
+PRIME_NUMBER_OPENMP():
+  Normal end of execution.
+25 March 2023  11:03:04.852 AM

@@ -1,0 +1,200 @@
+17 September 2021  11:54:32.383 PM
+
+TOEPLITZ_CHOLESKY_TEST:
+  FORTRAN90 version
+  Test the TOEPLITZ_CHOLESKY library.
+
+T_CHOLESKY_LOWER_TEST
+  T_CHOLESKY_LOWER produces the lower Cholesky
+  factor L of a positive definite symmetric
+  Toeplitz matrix T, so that T=L*L'.
+  The first row of T is input..
+ 
+  First row of Toeplitz matrix T:
+ 
+         1:    1.0000000    
+         2:   0.50000000    
+         3:  -0.37500000    
+ 
+  Computed lower Cholesky factor L:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.            0.            0.      
+    2:  0.500000      0.866025          0.      
+    3: -0.375000      0.793857      0.478714    
+ 
+  Product LL':
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+
+TOEP_CHOLESKY_LOWER_TEST
+  TOEP_CHOLESKY_LOWER produces the lower Cholesky
+  factor L of a positive definite symmetric
+  Toeplitz matrix T, so that T=L*L'.
+  T is input in a compressed (2,N) array.
+ 
+  Compressed Toeplitz matrix G:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:      0.        0.500000     -0.375000    
+ 
+  Computed lower Cholesky factor L:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.            0.            0.      
+    2:  0.500000      0.866025          0.      
+    3: -0.375000      0.793857      0.478714    
+ 
+  Product LL':
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+
+TOEPLITZ_CHOLESKY_LOWER_TEST
+  TOEPLITZ_CHOLESKY_LOWER produces the lower Cholesky
+  factor L of a positive definite symmetric
+  Toeplitz matrix T, so that T=L*L'.
+  T is input as an NxN array.
+ 
+  Toeplitz matrix A:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+ 
+  Computed lower Cholesky factor L:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.            0.            0.      
+    2:  0.500000      0.866025          0.      
+    3: -0.375000      0.793857      0.478714    
+ 
+  Product LL':
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+
+T_CHOLESKY_UPPER_TEST
+  T_CHOLESKY_UPPER produces the upper Cholesky
+  factor R of a positive definite symmetric
+  Toeplitz matrix T, so that T=R'*R.
+  The first row of T is input.
+ 
+  First row of Toeplitz matrix T:
+ 
+         1:    1.0000000    
+         2:   0.50000000    
+         3:  -0.37500000    
+ 
+  Computed upper Cholesky factor R:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:      0.        0.866025      0.793857    
+    3:      0.            0.        0.478714    
+ 
+  Product R'R:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+
+TOEP_CHOLESKY_UPPER_TEST
+  TOEP_CHOLESKY_UPPER produces the upper Cholesky
+  factor R of a positive definite symmetric
+  Toeplitz matrix T, so that T=R'*R.
+  T is input in a compressed (2,N) array.
+ 
+  Compressed Toeplitz matrix G:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:      0.        0.500000     -0.375000    
+ 
+  Computed upper Cholesky factor R:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:      0.        0.866025      0.793857    
+    3:      0.            0.        0.478714    
+ 
+  Product R'R:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+
+TOEPLITZ_CHOLESKY_UPPER_TEST
+  TOEPLITZ_CHOLESKY_UPPER produces the upper Cholesky
+  factor R of a positive definite symmetric
+  Toeplitz matrix T, so that T=R'*R.
+  T is input as an NxN array.
+ 
+  Toeplitz matrix A:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+ 
+  Computed upper Cholesky factor R:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:      0.        0.866025      0.793857    
+    3:      0.            0.        0.478714    
+ 
+  Product R'R:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:      1.        0.500000     -0.375000    
+    2:  0.500000          1.        0.500000    
+    3: -0.375000      0.500000          1.      
+
+TOEPLITZ_CHOLESKY_TEST:
+  Normal end of execution.
+
+17 September 2021  11:54:32.383 PM

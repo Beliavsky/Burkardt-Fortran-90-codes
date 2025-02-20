@@ -1,0 +1,234 @@
+<html>
+
+  <head>
+    <title>
+      reformat
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align="center">
+      reformat
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>reformat</b>,
+      a FORTRAN90 code which
+      reads an ASCII text file,
+      and writes a copy, with the property that every line (except
+      perhaps the last one) has the same number of values on it.
+    </p>
+
+    <p>
+      This code was "inspired" by a situation in which the data in
+      a file was not arranged as expected.
+    </p>
+
+    <p>
+      It was assumed that there were 4 items in every line.
+    </p>
+
+    <p>
+      But in fact, a free format had been used, and the system "felt free"
+      to write 3 values per line, resulting in a ragged file of lines
+     of alternating lengths of 3 and 1.
+    </p>
+
+    <p>
+      One can easily imagine other cases where 11 values would be written
+      as 3/3/3/2.
+    </p>
+
+    <p>
+      And if the system had used another limit for the number of values
+      per line, we would find that L values had been written as
+      M/M/M/M/N instead.
+    </p>
+
+    <p>
+      The purpose of this code is allow for the repair of these
+      "mistakes" in the simplest case.  Thus, we imagine the command
+      </p><pre><code>
+        reformat ragged.txt smooth.txt 4
+      </code></pre>
+      would read data from the file "ragged.txt", and write it out 4 words
+      at a time.
+    <p></p>
+
+    <p>
+      In my experience, it has always been the case that several lines
+      of the ragged file always exactly equaled one line of the smooth
+      file.  But it is easy to imagine more complicated situations.
+    </p>
+
+    <p>
+      The reasonable thing to do, I think, is to interpret the command
+      as an attempt to get ALL the information in the ragged file into
+      the smooth file, using the fixed limit.
+    </p>
+
+    <p>
+      This decision means the code can also be used to take a
+      file of four words per line and turn it into one of 3 words per line.
+    </p>
+
+    <p>
+      This version of the code is only able to deal with files that
+      contain nothing but real numbers.  For a version that works with
+      abstract 'words', see reword().
+    </p>
+
+    <h3 align="center">
+      Usage:
+    </h3>
+
+    <p>
+      </p><blockquote>
+        <b>reformat</b> <i>input</i> <i>output</i> <i>length</i>
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>input</i> is the file to read;
+        </li>
+        <li>
+          <i>output</i> is the file to create;
+        </li>
+        <li>
+          <i>length</i> is the number of values on each line of the output file.
+        </li>
+      </ul>
+    <p></p>
+
+    <h3 align="center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align="center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>reformat</b> is available in
+      <a href="https://people.math.sc.edu/Burkardt/f_src/reformat/reformat.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align="center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../reformat_test/reformat_test.html">
+      CRRM</a>,
+      a C++ code which
+      reads a text file and writes a copy which has no carriage returns.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/crrm/crrm.html">
+      CRRM</a>,
+      a C++ code which
+      reads a text file and writes a copy which has no carriage returns.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/deblank/deblank.html">
+      DEBLANK</a>,
+      a C++ code which
+      reads a text file and writes a copy which has no blank lines.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/decomment/decomment.html">
+      DECOMMENT</a>,
+      a C++ code which
+      makes a copy of a text file which contains no "comment" lines
+      (that begin with "#").
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/file_transpose/file_transpose.html">
+      FILE_TRANSPOSE</a>,
+      a FORTRAN90 code which
+      makes a "transposed" copy of a file, in which the I-th "word" of the J-th line
+      becomes the J-th word of the I-th line.
+    </p>
+
+    <p>
+      <a href = "../filum/filum.html">
+      FILUM</a>,
+      a FORTRAN90 library which
+      performs various operations on files.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/reword/reword.html">
+      REWORD</a>,
+      a C++ code which
+      reads a text file and writes a copy which has a fixed number
+      of "words" per line.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/table_columns/table_columns.html">
+      TABLE_COLUMNS</a>,
+      a FORTRAN90 code which
+      will extract the data in certain columns of a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/uncontrol/uncontrol.html">
+      UNCONTROL</a>,
+      a C++ code which
+      makes a copy of a text file which contains no control characters.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/wrap/wrap.html">
+      WRAP</a>,
+      a C++ code which
+      makes a copy of a text file
+      in which no line is longer than a user-specified wrap length.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/wrap2/wrap2.html">
+      WRAP2</a>,
+      a C++ code which
+      wraps long lines in a text file, but which
+      wraps some lines "early", so as to avoid breaking words.
+    </p>
+
+    <h3 align="center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "reformat.f90">reformat.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "reformat.sh">reformat.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 12 December 2005.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

@@ -1,0 +1,174 @@
+<html>
+
+  <head>
+    <title>
+      praxis
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      praxis
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>praxis</b>,
+      a FORTRAN90 code which 
+      minimizes a scalar function of a vector argument,
+      without needing derivative information,
+      by Richard Brent.
+    </p>
+
+    <p>
+      The code seeks an M-dimensional point X which minimizes a
+      given scalar function F(X).  The code is a refinement 
+      of Powell's method of conjugate search directions.  The user
+      does not need to supply the partial derivatives of the function
+      F(X).  In fact, the function F(X) need not be
+      smoothly differentiable.  
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>praxis</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/praxis/praxis.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/praxis/praxis.html">a C++ version</a> and
+      <a href = "praxis.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/praxis/praxis.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/praxis/praxis.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/brent/brent.html">
+      brent</a>,
+      a FORTRAN90 code which
+      contains Richard Brent's routines for finding the zero, local minimizer,
+      or global minimizer of a scalar function of a scalar argument, without
+      the use of derivative information.
+    </p>
+
+    <p>
+      <a href = "../bvls/bvls.html">
+      BVLS</a>,
+      a FORTRAN90 code which
+      applies least squares methods to solve a linear system for which
+      lower and upper constraints may have been placed on every variable.
+    </p>
+
+    <p>
+      <a href = "../compass_search/compass_search.html">
+      COMPASS_SEARCH</a>,
+      a FORTRAN90 code which 
+      seeks the minimizer of a scalar function of several variables
+      using compass search, a direct search algorithm that does not use derivatives.
+    </p>
+
+    <p>
+      <a href = "../praxis_test/praxis_test.html">
+      praxis_test</a>
+    </p>
+
+    <p>
+      <a href = "../test_opt/test_opt.html">
+      TEST_OPT</a>,
+      a FORTRAN90 code which 
+      defines test problems
+      requiring the minimization of a scalar function of several variables.
+    </p>
+
+    <p>
+      <a href = "../test_opt_con/test_opt_con.html">
+      TEST_OPT_CON</a>,
+      a FORTRAN90 code which
+      defines test problems for the minimization of a scalar function
+      of several variables, with the search constrained to lie within a 
+      specified hyper-rectangle.
+    </p>
+
+    <p>
+      <a href = "../test_optimization/test_optimization.html">
+      TEST_OPTIMIZATION</a>,
+      a FORTRAN90 code which
+      defines test problems for the minimization of a scalar function
+      of several variables, as described by Molga and Smutnicki.
+    </p>
+
+    <p>
+      <a href = "../toms611/toms611.html">
+      TOMS611</a>,
+      a FORTRAN90 code which
+      seeks the minimizer of a scalar functional
+      of multiple variables.
+    </p>
+
+    <h3 align = "center">
+      Author:
+    </h3>
+
+    <p>
+      Original FORTRAN77 version by Richard Brent.
+      FORTRAN90 translation by John Burkardt.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          Richard Brent,<br>
+          Algorithms for Minimization without Derivatives,<br>
+          Dover, 2002,<br>
+          ISBN: 0-486-41998-3,<br>
+          LC: QA402.5.B74.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "praxis.f90">praxis.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "praxis.sh">praxis.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 06 December 2019.
+    </i>
+
+    <!-- John Burkardt -->
+ 
+  </body>
+
+</html>

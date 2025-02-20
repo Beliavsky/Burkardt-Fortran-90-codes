@@ -1,0 +1,596 @@
+11 April 2023   8:56:48.851 AM
+ 
+r8ccs_test():
+  FORTRAN90 version:
+  Test r8ccs().
+ 
+r8ccs_DIF2_TEST
+  r8ccs_DIF2 sets the second difference as an r8ccs matrix;
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       13
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    2.00000      -1.00000          0.            0.            0.      
+    2   -1.00000       2.00000      -1.00000          0.            0.      
+    3       0.        -1.00000       2.00000      -1.00000          0.      
+    4       0.            0.        -1.00000       2.00000      -1.00000    
+    5       0.            0.            0.        -1.00000       2.00000    
+ 
+r8ccs_GET_TEST
+  r8ccs_GET gets an entry of a matrix in the r8ccs format.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The COLPTR vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROWIND vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The  r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+  r8ccs_GET retrieves 10 entries.
+ 
+         I         J         K      VALUE
+ 
+         2         2         5    0.415307    
+         1         5        10    0.633966    
+         1         5        10    0.633966    
+         1         1         1    0.218418    
+         2         5        11    0.617272E-01
+         2         2         5    0.415307    
+         2         1         2    0.956318    
+         1         1         1    0.218418    
+         2         5        11    0.617272E-01
+         2         5        11    0.617272E-01
+ 
+r8ccs_IJK_TEST
+  r8ccs_IJK gets K from (I,J)
+  for a matrix in the r8ccs format,
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The COLPTR vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROWIND vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The initial r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+  r8ccs_IJK locates some (I,J) entries.
+ 
+         I         J         K
+ 
+         3         4        -1
+         4         1         3
+         5         2        -1
+         1         1         1
+         5         5        12
+         1         1         1
+         2         5        11
+         1         2         4
+         5         2        -1
+         4         3        -1
+         5         3         7
+         5         3         7
+         1         4        -1
+         2         1         2
+         3         2        -1
+         4         2        -1
+         2         4        -1
+         1         2         4
+         5         5        12
+         1         4        -1
+ 
+r8ccs_INC_TEST
+  r8ccs_INC increments entries in an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The COLPTR vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROWIND vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The initial r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+  r8ccs_INC increments 10 entries at random.
+ 
+         I         J         K       NEW_VALUE
+ 
+         2         2         5     21.4153    
+         1         5        10     22.6340    
+         1         5        10     45.6340    
+         1         1         1     24.2184    
+         2         5        11     25.0617    
+         2         2         5     47.4153    
+         2         1         2     27.9563    
+         1         1         1     52.2184    
+         2         5        11     54.0617    
+         2         5        11     84.0617    
+ 
+  The final r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    52.2184      0.561695          0.            0.         45.6340    
+    2    27.9563       47.4153          0.            0.         84.0617    
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+r8ccs_INDICATOR_TEST
+  r8ccs_INDICATOR sets an indicator r8ccs matrix;
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The r8ccs indicator matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000          0.            0.         15.0000    
+    2    21.0000       22.0000          0.            0.         25.0000    
+    3       0.            0.         33.0000          0.            0.      
+    4    41.0000          0.            0.         44.0000          0.      
+    5       0.            0.         53.0000       54.0000       55.0000    
+ 
+r8ccs_KIJ_TEST
+  r8ccs_KIJ gets (I,J) from K
+  for a matrix in the r8ccs format.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The COLPTR vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROWIND vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The initial r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+  r8ccs_KIJ locates some K entries.
+ 
+         K         I         J
+ 
+         5         2         2
+        10         1         5
+        10         1         5
+         1         1         1
+        11         2         5
+         5         2         2
+         2         2         1
+         1         1         1
+        11         2         5
+        11         2         5
+         2         2         1
+         1         1         1
+         4         1         2
+        11         2         5
+         2         2         1
+         5         2         2
+        10         1         5
+         4         1         2
+         9         5         4
+         7         5         3
+ 
+r8ccs_MTV_TEST
+  r8ccs_MTV compute b=A'*x, where A is an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  x:
+ 
+       1   2.00000    
+       2   0.00000    
+       3   0.00000    
+       4   0.00000    
+       5  -3.00000    
+ 
+  b=A'*x:
+ 
+       1  0.436837    
+       2   1.12339    
+       3 -0.772733    
+       4 -0.131487    
+       5 -0.806855E-01
+ 
+r8ccs_MV_TEST
+  r8ccs_MV computes b=A*x, where A is an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  x:
+ 
+       1   1.00000    
+       2   0.00000    
+       3   0.00000    
+       4   0.00000    
+       5  -1.00000    
+ 
+  b=A*x:
+ 
+       1 -0.415547    
+       2  0.894590    
+       3   0.00000    
+       4  0.829509    
+       5 -0.449539    
+ 
+r8ccs_PRINT_TEST
+  r8ccs_PRINT prints an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+r8ccs_PRINT_SOME_TEST
+  r8ccs_PRINT_SOME prints some of an r8ccs matrix.
+ 
+  Matrix rows M     =       10
+  Matrix columns N  =       10
+  Nonzeros NZ_NUM   =       28
+ 
+  Rows 2-6, Cols 5-8:
+ 
+  Col:        5             6             7             8       
+  Row
+  ---
+    2       0.            0.            0.            0.      
+    3       0.            0.            0.            0.      
+    4    405.000          0.            0.            0.      
+    5    505.000       506.000          0.            0.      
+    6    605.000       606.000       607.000          0.      
+ 
+r8ccs_RANDOM_TEST
+  r8ccs_RANDOM randomizes an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+r8ccs_READ_TEST
+  r8ccs_READ reads an r8ccs matrix from 3 files.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+  Index base (0/1)  =        1
+ 
+  The COL vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROW vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000          0.            0.         15.0000    
+    2    21.0000       22.0000          0.            0.         25.0000    
+    3       0.            0.         33.0000          0.            0.      
+    4    41.0000          0.            0.         44.0000          0.      
+    5       0.            0.         53.0000       54.0000       55.0000    
+ 
+r8ccs_SET_TEST
+  r8ccs_SET sets entries in an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The COLPTR vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROWIND vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The initial r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.218418      0.561695          0.            0.        0.633966    
+    2   0.956318      0.415307          0.            0.        0.617272E-01
+    3       0.            0.        0.661187E-01      0.            0.      
+    4   0.829509          0.            0.        0.109957          0.      
+    5       0.            0.        0.257578      0.438290E-01  0.449539    
+ 
+  r8ccs_SET sets 10 entries at random.
+ 
+         I         J         K      NEW_VALUE
+ 
+         2         2         5     101.000    
+         1         5        10     102.000    
+         1         5        10     103.000    
+         1         1         1     104.000    
+         2         5        11     105.000    
+         2         2         5     106.000    
+         2         1         2     107.000    
+         1         1         1     108.000    
+         2         5        11     109.000    
+         2         5        11     110.000    
+ 
+r8ccs_TO_R8GE_TEST
+  r8ccs_TO_R8GE converts a matrix from r8ccs to R8GE format.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000          0.            0.         15.0000    
+    2    21.0000       22.0000          0.            0.         25.0000    
+    3       0.            0.         33.0000          0.            0.      
+    4    41.0000          0.            0.         44.0000          0.      
+    5       0.            0.         53.0000       54.0000       55.0000    
+ 
+  The R8GE matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000       0.00000       0.00000       15.0000    
+    2    21.0000       22.0000       0.00000       0.00000       25.0000    
+    3    0.00000       0.00000       33.0000       0.00000       0.00000    
+    4    41.0000       0.00000       0.00000       44.0000       0.00000    
+    5    0.00000       0.00000       53.0000       54.0000       55.0000    
+ 
+r8ccs_WRITE_TEST
+  r8ccs_WRITE writes an r8ccs matrix to 3 files.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The COL vector:
+ 
+         1:             1
+         2:             4
+         3:             6
+         4:             8
+         5:            10
+         6:            13
+ 
+  The ROW vector:
+ 
+         1:             1
+         2:             2
+         3:             4
+         4:             1
+         5:             2
+         6:             3
+         7:             5
+         8:             4
+         9:             5
+        10:             1
+        11:             2
+        12:             5
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000          0.            0.         15.0000    
+    2    21.0000       22.0000          0.            0.         25.0000    
+    3       0.            0.         33.0000          0.            0.      
+    4    41.0000          0.            0.         44.0000          0.      
+    5       0.            0.         53.0000       54.0000       55.0000    
+ 
+r8ccs_ZEROS_TEST
+  r8ccs_ZEROS zeros an r8ccs matrix.
+ 
+  Matrix rows M     =        5
+  Matrix columns N  =        5
+  Nonzeros NZ_NUM   =       12
+ 
+  The r8ccs matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1    0.00000       0.00000          0.            0.         0.00000    
+    2    0.00000       0.00000          0.            0.         0.00000    
+    3       0.            0.         0.00000          0.            0.      
+    4    0.00000          0.            0.         0.00000          0.      
+    5       0.            0.         0.00000       0.00000       0.00000    
+ 
+r8ccs_test():
+  Normal end of execution.
+ 
+11 April 2023   8:56:48.853 AM

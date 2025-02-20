@@ -1,0 +1,157 @@
+<html>
+
+  <head>
+    <title>
+      stripack_bench
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      stripack_bench
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>stripack_bench</b>,
+      a Fortran90 code which
+      times the execution of stripack()'s Delaunay triangulation 
+      procedure over the surface of a sphere, for a random set
+      of N nodes.
+    </p>
+
+    <p>
+      The code was run with a sequence of increasing values of N,
+      with these results:
+      <pre>
+            N  real time
+               (seconds)
+    ---------  ---------
+           12      0.000
+           42      0.001
+          162      0.001
+          642      0.009
+        2,562      0.065
+       10,242      0.449
+       40,962      6.804
+      163,842    110.139
+      655,362  1,927.82
+    2,631,442  (gave up)
+   10,485,762  (gave up)
+      </pre>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>stripack_bench</b> is available in
+      <a href = "stripack_bench.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../stripack_bench_test/stripack_bench_test.html">
+      stripack_bench_test</a>
+    </p>
+
+    <p>
+      <a href = "../sphere_delaunay/sphere_delaunay.html">
+      sphere_delaunay</a>, 
+      a Fortran90 code which
+      computes the Delaunay triangulation of points on a sphere.
+    </p>
+
+    <p>
+      <a href = "../stripack/stripack.html">
+      stripack</a>,
+      a Fortran90 code which
+      computes the Delaunay triangulation or Voronoi diagram of points
+      on a unit sphere,
+      by Robert Renka.
+    </p>
+
+    <p>
+      <a href = "../stripack_delaunay/stripack_delaunay.html">
+      stripack_delaunay</a>,
+      a Fortran90 code which
+      reads a set of points on the unit sphere, computes the Delaunay triangulation,
+      and writes it to a file.
+    </p>
+
+    <p>
+      <a href = "../stripack_voronoi/stripack_voronoi.html">
+      stripack_voronoi</a>,
+      a Fortran90 code which
+      reads a set of points on the unit sphere, computes the Voronoi diagram,
+      and writes it to a file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/triangle_bench/triangle_bench.html">
+      triangle_bench</a>,
+      a C code which
+      times the execution of the triangle() code on a sequence of
+      sets of randomly generated nodes in the unit square.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Robert Renka,<br>
+          Algorithm 772: <br>
+          STRIPACK:
+          Delaunay Triangulation and Voronoi Diagram on the Surface 
+          of a Sphere,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 23, Number 3, September 1997, pages 416-434.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "stripack_bench.f90">stripack_bench.f90</a>,
+          the source code
+        </li>
+        <li>
+          <a href = "stripack_bench.sh">stripack_bench.sh</a>,
+          compiles the source code
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

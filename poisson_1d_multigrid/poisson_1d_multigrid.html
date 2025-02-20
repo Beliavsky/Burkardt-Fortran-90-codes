@@ -1,0 +1,169 @@
+<html>
+
+  <head>
+    <title>
+      poisson_1d_multigrid
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      poisson_1d_multigrid
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>poisson_1d_multigrid</b>,
+      a Fortran90 code which
+      applies a multigrid method to solve the linear system associated
+      with a discretized version of the 1D Poisson equation.
+    </p>
+
+    <p>
+      The 1D Poisson equation is assumed to have the form
+      <pre>
+        -u''(x) = f(x), for a < x < b
+         u(a) = ua, u(b) = ub
+      </pre>
+    </p>
+
+    <p>
+      Let K be a small positive integer called the mesh index, and let
+      N = 2^K be the corresponding number of uniform subintervals into which
+      [A,B] is divided.  Assigning a value U(I) to each of the N+1 equally
+      spaced nodes with coordinate X(I), we approximate the equation by
+      <pre>
+        -U(i-1) + 2 U(i) - U(i+1)
+        -------------------------   = f( X(i) ), 1 < I < N+1
+                  h^2
+
+        U(1) = ua, U(N+1) = ub.
+      </pre>
+    </p>
+
+    <p>
+      It remains to solve the linear system for the desired values of U.
+      This could be done directly, or iteratively.  An iterative method
+      such as Jacobi, Gauss-Seidel or SOR might be suitable, but experience
+      shows that the convergence rate of these iterative methods decreases
+      drastically as the value of K is increased - that is, as a more
+      refined and accurate answer is sought.
+    </p>
+
+    <p>
+      The multigrid method defines a nested set of grids, and corresponding
+      solutions, to the problem, and applies an iterative linear solver.
+      By transfering information from one grid to a finer or coarser one,
+      a more rapid convergence behavior can be encouraged.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>poisson_1d_multigrid</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/poisson_1d_multigrid/poisson_1d_multigrid.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/poisson_1d_multigrid/poisson_1d_multigrid.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/poisson_1d_multigrid/poisson_1d_multigrid.html">a Fortran77 version</a> and
+      <a href = "poisson_1d_multigrid.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/poisson_1d_multigrid/poisson_1d_multigrid.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/poisson_1d_multigrid/poisson_1d_multigrid.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/python_src/poisson_1d_multigrid/poisson_1d_multigrid.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../poisson_1d_multigrid_test/poisson_1d_multigrid_test.html">
+      poisson_1d_multigrid_test</a>
+    </p>
+
+    <p>
+      <a href = "../cyclic_reduction/cyclic_reduction.html">
+      cyclic_reduction</a>,
+      a Fortran90 code which
+      solves a tridiagonal linear system using cyclic reduction.
+    </p>
+
+    <p>
+      <a href = "../fd1d_bvp/fd1d_bvp.html">
+      fd1d_bvp</a>,
+      a Fortran90 code which
+      applies the finite difference method
+      to a two point boundary value problem in one spatial dimension.
+    </p>
+
+    <p>
+      <a href = "../mgmres/mgmres.html">
+      mgmres</a>,
+      a Fortran90 code which
+      applies the restarted GMRES algorithm to solve a sparse linear system,
+      by Lili Ju.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          William Briggs, Van Emden Henson, Steve McCormick,<br>
+          A Multigrid Tutorial,<br>
+          SIAM, 2000,<br>
+          ISBN13: 978-0-898714-62-3,<br>
+          LC: QA377.B75.
+        </li>
+        <li>
+          William Hager,<br>
+          Applied Numerical Linear Algebra,<br>
+          Prentice-Hall, 1988,<br>
+          ISBN13: 978-0130412942,<br>
+          LC: QA184.H33.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "poisson_1d_multigrid.f90">poisson_1d_multigrid.f90</a>, 
+          the source code.
+        </li>
+        <li>
+          <a href = "poisson_1d_multigrid.sh">poisson_1d_multigrid.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 05 August 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

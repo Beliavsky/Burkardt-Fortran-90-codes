@@ -1,0 +1,157 @@
+<html>
+
+  <head>
+    <title>
+      polynomial_conversion
+    </title>
+  </head>
+
+  <body bgcolor="#eeeeee" link="#cc0000" alink="#ff3300" vlink="#000055">
+
+    <h1 align = "center">
+      polynomial_conversion
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>polynomial_conversion</b>,
+      a Fortran90 code which
+      converts representations of a polynomial between monomial, Bernstein,
+      Chebyshev, Gegenbauer, Hermite, Laguerre and Legendre forms.
+    </p>
+
+    <p>
+      The monomial or power sum representation of a polynomial of degree n
+      involves a vector a of coefficients, and has the form:
+      <pre>
+        p(x) = a(0) + a(1) * x + a(2) * x^2 + ... + a(n) * x^n
+      </pre>
+      A Chebyshev representation, for instance, will use a different
+      vector c of coefficients, and Chebyshev basis functions T(x) so that
+      <pre>
+        p(x) = c(0) T0(x) + c(1) * T1(x) + c(2) * T2(x) + ... + c(n) * Tn(x)
+      </pre>
+    </p>
+
+    <p>
+      It is the task of this software to take the coefficients for one
+      representation, and determine the corresponding coefficients in
+      another specified representation.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>polynomial_conversion</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/polynomial_conversion/polynomial_conversion.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/polynomial_conversion/polynomial_conversion.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/polynomial_conversion/polynomial_conversion.html">a Fortran77 version</a> and
+      <a href = "polynomial_conversion.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/polynomial_conversion/polynomial_conversion.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/polynomial_conversion/polynomial_conversion.html">a Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/polynomial_conversion/polynomial_conversion.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../polynomial_conversion_test/polynomial_conversion_test.html">
+      polynomial_conversion_test</a>
+    </p>
+
+    <p>
+      <a href = "../bernstein_polynomial/bernstein_polynomial.html">
+      bernstein_polynomial</a>,
+      a Fortran90 code which
+      evaluates the Bernstein polynomials, 
+      useful for uniform approximation of functions;
+    </p>
+
+    <p>
+      <a href = "../chebyshev_polynomial/chebyshev_polynomial.html">
+      chebyshev_polynomial</a>,
+      a Fortran90 code which
+      considers the Chebyshev polynomials T(i,x), U(i,x), V(i,x) and W(i,x).
+      Functions are provided to evaluate the polynomials, determine their zeros, 
+      produce their polynomial coefficients, produce related quadrature rules,
+      project other functions onto these polynomial bases, and integrate
+      double and triple products of the polynomials.
+    </p>
+
+    <p>
+      <a href = "../hermite_polynomial/hermite_polynomial.html">
+      hermite_polynomial</a>,
+      a Fortran90 code which
+      evaluates the physicist's Hermite polynomial, 
+      the probabilist's Hermite polynomial,
+      the Hermite function, and related functions.
+    </p>
+
+    <p>
+      <a href = "../laguerre_polynomial/laguerre_polynomial.html">
+      laguerre_polynomial</a>,
+      a Fortran90 code which
+      evaluates the Laguerre polynomial, the generalized Laguerre polynomial,
+      and the Laguerre function.
+    </p>
+
+    <p>
+      <a href = "../legendre_polynomial/legendre_polynomial.html">
+      legendre_polynomial</a>,
+      a Fortran90 code which
+      evaluates the Legendre polynomial and associated functions.
+    </p>
+
+    <p>
+      <a href = "../test_matrix/test_matrix.html">
+      test_matrix</a>,
+      a Fortran90 code which
+      defines test matrices for which the condition number, determinant,
+      eigenvalues, eigenvectors, inverse, null vectors, P*L*U factorization
+      or linear system solution are known.  Examples include the 
+      Fibonacci, Hilbert, Redheffer, Vandermonde, Wathen and Wilkinson 
+      matrices.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "polynomial_conversion.f90">polynomial_conversion.f90</a>,
+          the source code;
+        </li>
+        <li>
+          <a href = "polynomial_conversion.sh">polynomial_conversion.sh</a>,
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 18 February 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+

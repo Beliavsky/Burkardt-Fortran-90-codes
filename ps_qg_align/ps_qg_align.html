@@ -1,0 +1,173 @@
+<html>
+
+  <head>
+    <title>
+      ps_qg_align
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      ps_qg_align
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>ps_qg_align</b>
+      a Fortran90 code which
+      implements some of the string
+      matching algorithms described in the reference <b>[Chao]</b>.
+    </p>
+
+    <p>
+      These
+      algorithms carry out the computation in <I>linear space</I>, and
+      compute not just the optimal alignment score, but also the corresponding
+      optimal alignment.
+    </p>
+
+    <p>
+      The <I>quasiglobal</I> matching considered here is similar to the
+      global matching scheme, except that no penalty is applied for the
+      very first gap (a deletion or insertion, but not both), and the very
+      last one.  This simple alteration in the global alignment scheme
+      facilitates the search for repeated patterns.
+    </p>
+
+    <p>
+      Routines that use quadratic space are included as well, so the algorithms
+      can be compared for storage, speed, and correctness.
+    </p>
+
+    <p>
+      The names of the scoring and path routines include information
+      about whether they use a forward, backward, or recursive algorithm,
+      whether they compute the score or the path, and whether they use
+      linear or quadratic space.  Thus, the routine
+      <b>PS_QG_FSQ</b> uses the forward algorithm to compute the score,
+      with quadratic space requirements.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>ps_qg_align</b> is available in
+      <a href = "ps_qg_align.html">a Fortran90 version</a>.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../ps_qg_align_test/ps_qg_align_test.html">
+      ps_qg_align_test</a>
+    </p>
+
+    <p>
+      <a href = "../ps_gg_align/ps_gg_align.html">
+      ps_gg_align</a>,
+      a Fortran90 code which
+      implements a profile/sequence global alignment using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ps_lg_align/ps_lg_align.html">
+      ps_lg_align</a>,
+      a Fortran90 code which
+      implements a profile/sequence local alignment using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ss_gd_align/ss_gd_align.html">
+      ss_gd_align</a>,
+      a Fortran90 code which
+      globally aligns two sequences using a distance matrix.
+    </p>
+
+    <p>
+      <a href = "../ss_gg_align/ss_gg_align.html">
+      ss_gg_align</a>,
+      a Fortran90 code which
+      globally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ss_lg_align/ss_lg_align.html">
+      ss_lg_align</a>,
+      a Fortran90 code which
+      locally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <p>
+      <a href = "../ss_qg_align/ss_qg_align.html">
+      ss_qg_align</a>,
+      a Fortran90 code which
+      quasi-globally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Kun-Mao Chao, Ross Hardison, Webb Miller,<br>
+          Recent Developments in Linear-Space Alignment Methods: A Survey,<br>
+          Journal of Computational Biology, <br>
+          Volume 1, Number 4, 1994, pages 271-291.
+        </li>
+        <li>
+          Eugene Myers, Webb Miller,<br>
+          Optimal Alignments in Linear Space,<br>
+          CABIOS, volume 4, number 1, 1988, pages 11-17.
+        </li>
+        <li>
+          Michael Waterman, <br>
+          Introduction to Computational Biology,<br>
+          Chapman and Hall, 1995.
+        </li>
+      </ol>
+    </p>
+
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "ps_qg_align.f90">ps_qg_align.f90</a>, the source code
+        </li>
+        <li>
+         <a href = "ps_qg_align.sh">ps_qg_align.sh</a>,
+         compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 24 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

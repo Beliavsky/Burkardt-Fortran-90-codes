@@ -1,0 +1,188 @@
+<html>
+
+  <head>
+    <title>
+      ss_lg_align
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      ss_lg_align
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>ss_lg_align</b>,
+      a FORTRAN90 code which
+      implements some of the string
+      matching algorithms described by Chao.
+    </p>
+
+    <p>
+      These algorithms look for optimal local alignments of two strings
+      using linear space.  (Compare the global alignment routines in
+      <a href = "../ss_gg_align/ss_gg_align.html">SS_GG_ALIGN</a>.)
+    </p>
+
+    <p>
+      It's important to be able to compute alignments using "linear space",
+      that is, just a few vectors whose length <b>N</b> is equal to that
+      of a typical string.  A quadratic algorithm would require a two
+      dimensional array of total dimension <b>N*N</b>.  Realistic alignment
+      problems can involve strings of <b>N</b>=100,000 elements or more,
+      so a quadratic algorithm would be expensive or impossible to use.
+    </p>
+
+    <p>
+      The "matching" being considered does not actually require that every
+      element of string <b>A</b> match an identical element of string <b>B</b>.
+      Instead, the matching algorithm is essentially looking for the highest
+      scoring way of associating a portion of one string with a portion of the
+      other, allowing the operations of "mutation" (change one letter to
+      another), "deletion" (drop a string of consecutive letters) and
+      "insertion (insert a string of consecutive letters).  Thus, at the same
+      time, we are measuring a sort of evolutionary distance between two
+      strings and a formal "editing distance" between them.
+    </p>
+
+    <p>
+      This set of routines assumes that an insertion or deletion of length
+      <b>K</b> is penalized using an "affine gap penalty formula" of the form:
+      <blockquote>
+        Penalty = Gap_Open + K * Gap_Extend
+      </blockquote>
+      This choice of penalty function has a major effect on the form
+      of the matching algorithms, particularly in the linear space case.
+    </p>
+
+    <p>
+      The score for the actual best matching is determined without explicitly
+      constructing the best matching.  It is a matter of some
+      difficulty to recover the matching corresponding to the best score.
+      This is particularly true if the algorithm is a linear space one, which
+      discards a great deal of intermediate information.  However, it is
+      possible to set up a recursive algorithm which determines the best
+      alignment, using only linear space.
+    </p>
+
+    <p>
+      Routines that use quadratic space are included as well, so the algorithms
+      can be compared for storage, speed, and correctness.
+    </p>
+
+    <p>
+      The names of the scoring and path routines include information
+      about whether they use a forward, backward, or recursive algorithm,
+      whether they compute the score or the path, and whether they use
+      linear or quadratic space.  Thus, the routine
+      <b>SS_LG_FSQ</b> uses the forward algorithm to compute the score,
+      with quadratic space requirements.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>ss_lg_align</b> is available in
+      <a href = "ss_lg_align.html">a FORTRAN90 version</a>.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../ss_lg_align_test/ss_lg_align_test.html">
+      ss_lg_align_test</a>
+    </p>
+
+    <p>
+      <a href = "../ss_gd_align/ss_gd_align.html">
+      SS_GD_ALIGN</a>,
+      a FORTRAN90 library which
+      globally aligns two sequences using a distance matrix.
+    </p>
+
+    <p>
+      <a href = "../ss_gg_align/ss_gg_align.html">
+      SS_GG_ALIGN</a>,
+      a FORTRAN90 library which
+      globally aligns two sequences using an affine gap penalty
+    </p>
+
+    <p>
+      <a href = "../ss_qg_align/ss_qg_align.html">
+      SS_QG_ALIGN</a>,
+      a FORTRAN90 library which
+      quasi-globally aligns two sequences using an affine gap penalty.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Kun-Mao Chao, Ross Hardison, Webb Miller,<br>
+          Recent Developments in Linear-Space Alignment Methods: A Survey,<br>
+          Journal of Computational Biology, <br>
+          Volume 1, Number 4, 1994, pages 271-291.
+        </li>
+        <li>
+          Eugene Myers, Webb Miller,<br>
+          Optimal Alignments in Linear Space,<br>
+          CABIOS,<br>
+          Volume 4, number 1, 1988, pages 11-17.
+        </li>
+        <li>
+          Michael Waterman,<br>
+          Introduction to Computational Biology,<br>
+          Chapman and Hall, 1995,<br>
+          ISBN: 0412993910,<br>
+          LC: QH438.4.M33.W38.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "ss_lg_align.f90">ss_lg_align.f90</a>, the source code;
+        </li>
+       <li>
+          <a href = "ss_lg_align.sh">ss_lg_align.sh</a>,
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 02 April 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

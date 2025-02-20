@@ -1,0 +1,53 @@
+07 December 2023  10:58:48.753 AM
+
+polynomial_root_bound_test():
+  Fortran90 version
+  Test polynomial_root_bound()
+
+polynomial1_test():
+  Bound the roots of a specific polynomial:
+    12z^5 + 2z^2 + 23i.
+
+  Polynomial coefficients are:
+   0     0.00000         23.0000    
+   1     0.00000         0.00000    
+   2     2.00000         0.00000    
+   3     0.00000         0.00000    
+   4     0.00000         0.00000    
+   5     12.0000         0.00000    
+Convergence after  41 iterations
+
+  Root magnitude bound is    1.16465    
+
+  Polynomial roots and norms are:
+   1    -1.10402       -0.336863         1.15427    
+   2   -0.661521        0.897014         1.11456    
+   3    0.257088E-01    -1.13896         1.13925    
+   4    0.677409        0.945866         1.16342    
+   5     1.06242       -0.367055         1.12404    
+
+polynomial2_test():
+  Bound the roots of a random polynomial:
+
+  Polynomial roots and norms are:
+   1     2.30024        0.783118         2.42989    
+   2    0.339900       -0.450115        0.564035    
+   3     1.67741         1.30138         2.12304    
+   4     1.01960         1.61835         1.91276    
+   5    0.370321       -0.257811        0.451225    
+
+  Polynomial coefficients are:
+   0    -2.24537        -1.12477    
+   1     6.77491         8.49843    
+   2    -8.52717        -14.3994    
+   3     9.70179         11.7075    
+   4    -5.70747        -2.99493    
+   5     1.00000         0.00000    
+Convergence after  47 iterations
+
+  Root magnitude bound is    8.48754    
+
+polynomial_root_bound_test():
+  Normal end of execution.
+
+07 December 2023  10:58:48.753 AM

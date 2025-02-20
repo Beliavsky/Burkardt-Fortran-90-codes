@@ -1,0 +1,603 @@
+01 April 2024   3:32:19.651 PM
+
+lapack_test():
+  Fortran90 version
+  Test lapack():
+ 
+dgbtrf_test():
+  dgbtrf() factors a general band matrix.
+  dgbtrs() solves a factored system.
+  For a double precision real matrix (D)
+  in general band storage mode (GB):
+ 
+  Bandwidth is        3
+ 
+ 
+  Partial solution (all should be 1)
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4     1.0000000    
+         5     1.0000000    
+ 
+DGECON_TEST
+  DGECON computes the condition number 
+  of a factored matrix
+  DGETRF computes the LU factorization;
+  For a double precision real matrix (D)
+  in general storage mode (GE):
+ 
+  The matrix A:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1       1.            2.            3.      
+    2       4.            5.            6.      
+    3       7.            8.            0.      
+ 
+ 
+  Matrix reciprocal condition number =   0.240000E-01
+ 
+dgeev_test():
+  (D): for a double precision real matrix,
+  (GE): in general storage mode,
+  (EV): compute eigenvalues and eigenvectors.
+ 
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1       0.         2.44949          0.            0.            0.      
+    2    2.44949          0.         3.16228          0.            0.      
+    3       0.         3.16228          0.         3.46410          0.      
+    4       0.            0.         3.46410          0.         3.46410    
+    5       0.            0.            0.         3.46410          0.      
+    6       0.            0.            0.            0.         3.16228    
+    7       0.            0.            0.            0.            0.      
+ 
+  Col          6             7      
+  Row
+ 
+    1       0.            0.      
+    2       0.            0.      
+    3       0.            0.      
+    4       0.            0.      
+    5    3.16228          0.      
+    6       0.         2.44949    
+    7    2.44949          0.      
+ 
+ 
+  The eigenvalues:
+ 
+     1    -6.00000         0.00000    
+     2    -4.00000         0.00000    
+     3     6.00000         0.00000    
+     4    -2.00000         0.00000    
+     5    0.501558E-15     0.00000    
+     6     4.00000         0.00000    
+     7     2.00000         0.00000    
+ 
+DGEQRF_TEST
+  DGEQRF computes the QR factorization:
+    A = Q * R
+  DORGQR computes the explicit form of the Q factor.
+  For a double precision real matrix (D)
+  in general storage mode (GE):
+ 
+  In this case, our M x N matrix A has more rows
+  than columns:
+ 
+  M =        8
+  N =        6
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1   0.391828      0.340558      0.475848      0.972474      0.144144    
+    2   0.443793      0.604494      0.689401      0.170271      0.142146    
+    3   0.761145      0.608842      0.490633      0.413926      0.562266    
+    4   0.226983      0.885325      0.848926      0.521575      0.534588    
+    5   0.523376E-01  0.714437      0.470004      0.540682      0.663186    
+    6   0.478858      0.522160      0.144355      0.654488      0.167217    
+    7   0.148963      0.616216      0.165155      0.784319      0.203608    
+    8   0.981706      0.244430      0.321000      0.239347      0.794047    
+ 
+  Col          6      
+  Row
+ 
+    1   0.919394    
+    2   0.329841    
+    3   0.787452    
+    4   0.223923    
+    5   0.459557    
+    6   0.749200    
+    7   0.380256E-01
+    8   0.831432E-01
+ 
+ 
+  The Q factor:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1  -0.264211     -0.322043E-01  0.343026      0.885661      0.775359E-01
+    2  -0.299251     -0.211237      0.388628     -0.316890      0.559538    
+    3  -0.513243     -0.204533E-01 -0.814967E-01 -0.206980      0.401638E-01
+    4  -0.153055     -0.568288      0.387415     -0.120395     -0.101797    
+    5  -0.352914E-01 -0.538680     -0.546525E-01 -0.332544E-01 -0.591917    
+    6  -0.322896     -0.124001     -0.540339      0.807346E-01  0.342944    
+    7  -0.100446     -0.401071     -0.528731      0.204964      0.850742E-01
+    8  -0.661968      0.405662      0.772608E-02 -0.906336E-01 -0.440131    
+ 
+  Col          6      
+  Row
+ 
+    1  -0.122779    
+    2   0.919690E-01
+    3  -0.448872    
+    4   0.252270    
+    5  -0.367957    
+    6  -0.298115    
+    7   0.590115    
+    8   0.372613    
+ 
+ 
+  The R factor:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1   -1.48301      -1.13638      -1.00605      -1.06780      -1.07451    
+    2       0.        -1.25182     -0.860525     -0.962042     -0.487496    
+    3       0.            0.        0.531520     -0.227952      0.378538E-01
+    4       0.            0.            0.        0.832780     -0.136910    
+    5       0.            0.            0.            0.       -0.608492    
+    6       0.            0.            0.            0.            0.      
+ 
+  Col          6      
+  Row
+ 
+    1   -1.09703    
+    2  -0.564621    
+    3   0.167368E-01
+    4   0.565264    
+    5   0.216232    
+    6  -0.718549    
+ 
+ 
+  The product Q * R:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1   0.391828      0.340558      0.475848      0.972474      0.144144    
+    2   0.443793      0.604494      0.689401      0.170271      0.142146    
+    3   0.761145      0.608842      0.490633      0.413926      0.562266    
+    4   0.226983      0.885325      0.848926      0.521575      0.534588    
+    5   0.523376E-01  0.714437      0.470004      0.540682      0.663186    
+    6   0.478858      0.522160      0.144355      0.654488      0.167217    
+    7   0.148963      0.616216      0.165155      0.784319      0.203608    
+    8   0.981706      0.244430      0.321000      0.239347      0.794047    
+ 
+  Col          6      
+  Row
+ 
+    1   0.919394    
+    2   0.329841    
+    3   0.787452    
+    4   0.223923    
+    5   0.459557    
+    6   0.749200    
+    7   0.380256E-01
+    8   0.831432E-01
+ 
+ 
+DGESVD_TEST
+  For a double precision real matrix (D)
+  in general storage mode (GE):
+ 
+  DGESVD computes the singular value decomposition:
+    A = U * S * V'
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4      
+  Row
+ 
+    1   0.599326      0.379090      0.379716E-01  0.633839    
+    2   0.131470E-02  0.139011      0.910218      0.754150    
+    3   0.653481      0.341367      0.624103      0.687155    
+    4   0.555371      0.107817      0.267413      0.268591E-01
+    5   0.136071      0.318970      0.635173      0.844164    
+    6   0.153154      0.223947      0.172557E-01  0.151707    
+ 
+ 
+  Singular values
+ 
+         1     2.1137771    
+         2    0.86489025    
+         3    0.47247009    
+         4    0.11884566    
+ 
+  Left singular vectors U:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1  -0.369855     -0.556961     -0.521993      0.378800     -0.281881    
+    2  -0.505597      0.596940      0.184384      0.136032     -0.564628    
+    3  -0.547736     -0.255029      0.268598      0.365047E-01  0.149149    
+    4  -0.190631     -0.402551      0.697286     -0.109917      0.714264E-01
+    5  -0.508951      0.275016     -0.311812     -0.217233      0.659500    
+    6  -0.110421     -0.175318     -0.194795     -0.881704     -0.373431    
+ 
+  Col          6      
+  Row
+ 
+    1  -0.239955    
+    2  -0.129336    
+    3   0.734318    
+    4  -0.546096    
+    5  -0.293218    
+    6   0.476798E-01
+ 
+ 
+  Right singular vectors V':
+ 
+  Col          1             2             3             4      
+  Row
+ 
+    1  -0.365364     -0.286261     -0.564036     -0.682955    
+    2  -0.823997     -0.242987      0.493753      0.134888    
+    3   0.376558     -0.314229      0.636420     -0.595344    
+    4   0.213874     -0.871936     -0.181774      0.401178    
+ 
+ 
+  The product U * S * V':
+ 
+  Col          1             2             3             4      
+  Row
+ 
+    1   0.599326      0.379090      0.379716E-01  0.633839    
+    2   0.131470E-02  0.139011      0.910218      0.754150    
+    3   0.653481      0.341367      0.624103      0.687155    
+    4   0.555371      0.107817      0.267413      0.268591E-01
+    5   0.136071      0.318970      0.635173      0.844164    
+    6   0.153154      0.223947      0.172557E-01  0.151707    
+ 
+ 
+DGETRF_TEST
+  DGETRF factors a general matrix;
+  DGETRS solves a linear system;
+  For a double precision real matrix (D)
+  in general storage mode (GE):
+ 
+  Partial solution (all should be 1)
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4     1.0000000    
+         5     1.0000000    
+ 
+DGETRI_TEST
+  DGETRI computes the inverse
+  of a double precision real matrix (D)
+  in general storage mode (GE):
+ 
+  The matrix A:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1       1.            2.            3.      
+    2       4.            5.            6.      
+    3       7.            8.            0.      
+ 
+ 
+  The inverse matrix:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1   -1.77778      0.888889     -0.111111    
+    2    1.55556     -0.777778      0.222222    
+    3  -0.111111      0.222222     -0.111111    
+ 
+ 
+DGTSV_TEST
+  DGTSV factors and solves a linear system
+  with a general tridiagonal matrix
+  for a double precision real matrix (D)
+  in general tridiagonal storage mode (GT).
+ 
+  The system is of order N =      100
+ 
+ 
+  Partial solution (Should be 1,2,3...)
+ 
+         1     1.0000000    
+         2     2.0000000    
+         3     3.0000000    
+         4     4.0000000    
+         5     5.0000000    
+ 
+DORMGQR_TEST
+  DORMQR can compute Q' * b.
+  after DGEQRF computes the QR factorization:
+    A = Q * R
+  storing a double precision real matrix (D)
+  in general storage mode (GE).
+ 
+  We use these routines to carry out a QR
+  solve of an M by N linear system A * x = b.
+ 
+  In this case, our M x N matrix A has more rows
+  than columns:
+ 
+  M =        8
+  N =        6
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1   0.367182      0.120200      0.977304      0.171287      0.298418    
+    2   0.271710      0.159432      0.652859      0.678429      0.598389    
+    3   0.732196      0.998275      0.763428      0.231808      0.713332E-01
+    4   0.471319      0.108050      0.931650      0.703068      0.643022    
+    5   0.632423      0.517553      0.497101      0.310382      0.947618    
+    6   0.520375      0.296702      0.992978      0.644721      0.176780    
+    7   0.615981      0.995747      0.725140      0.580584      0.970351    
+    8   0.148918      0.363825      0.401269      0.959101      0.414081    
+ 
+  Col          6      
+  Row
+ 
+    1   0.281489    
+    2   0.218770E-01
+    3   0.511087    
+    4   0.961081    
+    5   0.472838    
+    6   0.413199    
+    7   0.605409    
+    8   0.690960    
+ 
+ 
+  The solution X:
+ 
+         1     1.0000000    
+         2     2.0000000    
+         3     3.0000000    
+         4     4.0000000    
+         5     5.0000000    
+         6     6.0000000    
+ 
+DPBTRF_TEST
+  DPBTRF computes
+    the lower Cholesky factor A = L*L' or
+    the upper Cholesky factor A = U'*U;
+  For a double precision real matrix (D)
+  in positive definite band storage mode (PB):
+ 
+  The lower Cholesky factor L:
+ 
+  1.414214  0.000000  0.000000  0.000000  0.000000
+ -0.707107  1.224745  0.000000  0.000000  0.000000
+  0.000000 -0.816497  1.154701  0.000000  0.000000
+  0.000000  0.000000 -0.866025  1.118034  0.000000
+  0.000000  0.000000  0.000000 -0.894427  1.095445
+ 
+DPBTRS_TEST
+  DPBTRS solves linear systems
+  for a positive definite symmetric band matrix,
+  stored as a double precision real matrix (D)
+  in positive definite band storage mode (PB):
+ 
+  Partial solution (all should be 1)
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4     1.0000000    
+         5     1.0000000    
+ 
+DPOTRF_TEST
+  DPOTRF computes the Cholesky factorization R'*R
+  for a double precision real matrix (D)
+  in positive definite storage mode (PO).
+ 
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+ 
+ 
+  The Cholesky factor R:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1    1.41421     -0.707107          0.            0.            0.      
+    2       0.         1.22474     -0.816497          0.            0.      
+    3       0.            0.         1.15470     -0.866025          0.      
+    4       0.            0.            0.         1.11803     -0.894427    
+    5       0.            0.            0.            0.         1.09545    
+ 
+ 
+  The product R' * R
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1    2.00000         -1.            0.            0.            0.      
+    2      -1.         2.00000         -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.         2.00000         -1.      
+    5       0.            0.            0.           -1.         2.00000    
+ 
+ 
+DPOTRI_TEST
+  DPOTRI computes the inverse
+  for a double precision real matrix (D)
+  in positive definite storage mode (PO).
+ 
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+ 
+ 
+  The Cholesky factor R:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1    1.41421     -0.707107          0.            0.            0.      
+    2       0.         1.22474     -0.816497          0.            0.      
+    3       0.            0.         1.15470     -0.866025          0.      
+    4       0.            0.            0.         1.11803     -0.894427    
+    5       0.            0.            0.            0.         1.09545    
+ 
+ 
+  The product R' * R
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1    2.00000         -1.            0.            0.            0.      
+    2      -1.         2.00000         -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.         2.00000         -1.      
+    5       0.            0.            0.           -1.         2.00000    
+ 
+ 
+  The inverse matrix B:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1   0.833333      0.666667      0.500000      0.333333      0.166667    
+    2   0.666667       1.33333       1.00000      0.666667      0.333333    
+    3   0.500000       1.00000       1.50000          1.        0.500000    
+    4   0.333333      0.666667          1.         1.33333      0.666667    
+    5   0.166667      0.333333      0.500000      0.666667      0.833333    
+ 
+ 
+  The product B * A
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1    1.00000      0.444089E-15      0.       -0.111022E-15      0.      
+    2  -0.444089E-15   1.00000          0.        0.555112E-16 -0.111022E-15
+    3  -0.444089E-15  0.444089E-15   1.00000     -0.444089E-15      0.      
+    4  -0.444089E-15  0.666134E-15      0.         1.00000          0.      
+    5  -0.166533E-15  0.222045E-15      0.       -0.222045E-15      1.      
+ 
+ 
+DSBGVX_TEST
+  DSBGVX solves the generalized eigenvalue problem
+    A * X = LAMBDA * B * X
+  for a symmetric banded NxN matrix A, and a symmetric
+  banded positive definite NxN matrix B,
+ 
+ 
+  Computed eigenvalues
+ 
+         1     1.0581164    
+ 
+  Computed eigenvalues
+ 
+         1     4.7709121    
+ 
+dsyev_test()
+  dsyev() computes eigenvalues and eigenvectors
+  For a double precision real matrix (D)
+  in symmetric storage mode (SY).
+ 
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1       0.         2.44949          0.            0.            0.      
+    2    2.44949          0.         3.16228          0.            0.      
+    3       0.         3.16228          0.         3.46410          0.      
+    4       0.            0.         3.46410          0.         3.46410    
+    5       0.            0.            0.         3.46410          0.      
+    6       0.            0.            0.            0.         3.16228    
+    7       0.            0.            0.            0.            0.      
+ 
+  Col          6             7      
+  Row
+ 
+    1       0.            0.      
+    2       0.            0.      
+    3       0.            0.      
+    4       0.            0.      
+    5    3.16228          0.      
+    6       0.         2.44949    
+    7    2.44949          0.      
+ 
+ 
+  The eigenvalues:
+ 
+         1    -6.0000000    
+         2    -4.0000000    
+         3    -2.0000000    
+         4   -0.19194523E-15
+         5     2.0000000    
+         6     4.0000000    
+         7     6.0000000    
+ 
+  The eigenvector matrix:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1   0.125000      0.306186      0.484123     -0.559017      0.484123    
+    2  -0.306186     -0.500000     -0.395285      0.132008E-15  0.395285    
+    3   0.484123      0.395285     -0.125000      0.433013     -0.125000    
+    4  -0.559017      0.117123E-15  0.433013     -0.350963E-16 -0.433013    
+    5   0.484123     -0.395285     -0.125000     -0.433013     -0.125000    
+    6  -0.306186      0.500000     -0.395285      0.252279E-15  0.395285    
+    7   0.125000     -0.306186      0.484123      0.559017      0.484123    
+ 
+  Col          6             7      
+  Row
+ 
+    1  -0.306186      0.125000    
+    2  -0.500000      0.306186    
+    3  -0.395285      0.484123    
+    4  -0.225514E-15  0.559017    
+    5   0.395285      0.484123    
+    6   0.500000      0.306186    
+    7   0.306186      0.125000    
+ 
+ 
+lapack_test():
+  Normal end of execution.
+01 April 2024   3:32:19.654 PM

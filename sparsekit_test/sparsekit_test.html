@@ -1,0 +1,665 @@
+<html>
+
+  <head>
+    <title>
+      sparsekit_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      sparsekit_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>sparsekit_test</b>,
+      a Fortran90 code which
+      calls sparsekit(), which
+      carries out a number of
+      operations on sparse matrices, particularly conversion between
+      various sparse formats.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../sparsekit/sparsekit.html">
+      sparsekit</a>,
+      a Fortran90 code which
+      carries out a number of
+      operations on sparse matrices, particularly conversion between
+      various sparse formats.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "sparsekit_test.sh">sparsekit_test.sh</a>, 
+          runs all the tests.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 1:
+      <ul>
+        <li>
+          <a href = "sparsekit_test01.f90">sparsekit_test01.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test01.txt">sparsekit_test01.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 2:
+      <ul>
+        <li>
+          <a href = "sparsekit_test02.f90">sparsekit_test02.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test02.txt">sparsekit_test02.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 3:
+      <ul>
+        <li>
+          <a href = "sparsekit_test03.f90">sparsekit_test03.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test03.txt">sparsekit_test03.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 4 takes a banded matrix of order 16, stored
+      as a dense matrix, converts it to CSR format and sorted CSR
+      format.
+      <ul>
+        <li>
+          <a href = "sparsekit_test04.f90">sparsekit_test04.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test04.txt">sparsekit_test04.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 5:
+      <ul>
+        <li>
+          <a href = "sparsekit_test05.f90">sparsekit_test05.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test05.txt">sparsekit_test05.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 6:
+      <ul>
+        <li>
+          <a href = "sparsekit_test06.f90">sparsekit_test06.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test06.txt">sparsekit_test06.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 7:
+      <ul>
+        <li>
+          <a href = "sparsekit_test07.f90">sparsekit_test07.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test07.txt">sparsekit_test07.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 8 generates three sample matrices from the
+      Zlatev set, and writes them to Harwell-Boeing format files:
+      <ul>
+        <li>
+          <a href = "sparsekit_test08.f90">sparsekit_test08.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test08.txt">sparsekit_test08.txt</a>,
+          the output file.
+        </li>
+        <li>
+          <a href = "zlatev1_hb.txt">zlatev1_hb.txt</a>,
+          Zlatev sample matrix 1.
+        </li>
+        <li>
+          <a href = "zlatev2_hb.txt">zlatev2_hb.txt</a>,
+          Zlatev sample matrix 2.
+        </li>
+        <li>
+          <a href = "zlatev3_hb.txt">zlatev3_hb.txt</a>,
+          Zlatev sample matrix 3.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 9:
+      <ul>
+        <li>
+          <a href = "sparsekit_test09.f90">sparsekit_test09.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test09.txt">sparsekit_test09.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 10:
+      <ul>
+        <li>
+          <a href = "sparsekit_test10.f90">sparsekit_test10.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test10.txt">sparsekit_test10.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 11:
+      <ul>
+        <li>
+          <a href = "sparsekit_test11.f90">sparsekit_test11.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test11.txt">sparsekit_test11.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 12:
+      <ul>
+        <li>
+          <a href = "sparsekit_test12.f90">sparsekit_test12.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test12.txt">sparsekit_test12.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 13:
+      <ul>
+        <li>
+          <a href = "sparsekit_test13.f90">sparsekit_test13.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test13.txt">sparsekit_test13.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Sample problem 14 generates a sample CSR matrix and
+      converts it to an NCF (nonsymmetric coordinate format)
+      used by NSPCG.
+      <ul>
+        <li>
+          <a href = "sparsekit_test14.f90">sparsekit_test14.f90</a>,
+          a sample calling program.
+        </li>
+        <li>
+          <a href = "sparsekit_test14.txt">sparsekit_test14.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      List of Routines:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <b>AMASK</b> extracts a sparse matrix from a masked input matrix.
+        </li>
+        <li>
+          <b>AMUB</b> performs the matrix by matrix product C = A * B.
+        </li>
+        <li>
+          <b>AMUBDG</b> gets the number of nonzero elements in each row of A*B.
+        </li>
+        <li>
+          <b>AMUDIA</b> performs the matrix by matrix product B = A * Diag  (in place)
+        </li>
+        <li>
+          <b>AMUX</b> multiplies a CSR matrix A times a vector.
+        </li>
+        <li>
+          <b>AMUXD</b> multiplies a DIA matrix times a vector.
+        </li>
+        <li>
+          <b>AMUXE</b> multiplies an ELL matrix times a vector.
+        </li>
+        <li>
+          <b>AMUXJ</b> multiplies a JAD matrix times a vector.
+        </li>
+        <li>
+          <b>APLB</b> performs the CSR matrix sum  C = A + B.
+        </li>
+        <li>
+          <b>APLB1</b> performs the matrix sum  C = A+B for matrices in sorted CSR format.
+        </li>
+        <li>
+          <b>APLBDG</b> gets the number of nonzero elements in each row of A+B and the total
+        </li>
+        <li>
+          <b>APLDIA</b> adds a diagonal matrix to a general sparse matrix:  B = A + Diag
+        </li>
+        <li>
+          <b>APLSB</b> performs the matrix linear combination  C = A+s*B
+        </li>
+        <li>
+          <b>APLSB1</b> performs the operation C = A+s B for matrices in sorted CSR format.
+        </li>
+        <li>
+          <b>APLSBT</b> performs the matrix sum  C = A + B'.
+        </li>
+        <li>
+          <b>APLSCA</b> adds a scalar to the diagonal entries of a sparse matrix A :=A + s I
+        </li>
+        <li>
+          <b>APMBT</b> performs the matrix sum  C = A + B' or C = A - B'.
+        </li>
+        <li>
+          <b>ASSMB1</b> ???
+        </li>
+        <li>
+          <b>ASSMBO</b> ???
+        </li>
+        <li>
+          <b>ATMUX</b> computes A' * x for a CSR matrix A.
+        </li>
+        <li>
+          <b>BLKCHK</b> checks whether the input matrix is a block
+        </li>
+        <li>
+          <b>BLKFND</b> attemptps to determine whether or not  the input
+        </li>
+        <li>
+          <b>BNDCSR</b> converts Banded Linpack format to Compressed Sparse Row format.
+        </li>
+        <li>
+          <b>BOUND</b> counts the number of boundary points and
+        </li>
+        <li>
+          <b>BSORT2</b> simple bubble sort for getting the ncut largest
+        </li>
+        <li>
+          <b>BSRCSR</b> converts Block Sparse Row     to Compressed Sparse Row.
+        </li>
+        <li>
+          <b>BSTEN</b> calculates the correct block-stencil values for
+        </li>
+        <li>
+          <b>CHECKREF</b> returns the expected the new number of nodes and
+        </li>
+        <li>
+          <b>CHKELMT</b> checks the labeling within each element and reorders
+        </li>
+        <li>
+          <b>CNRMS</b> gets the norms of each column of A. (choice of three norms)
+        </li>
+        <li>
+          <b>COICSR</b> converts COO to CSR in place.
+        </li>
+        <li>
+          <b>COOCSR</b> converts COO to CSR.
+        </li>
+        <li>
+          <b>COOELL</b> converts coordinate format to ellpack format.
+        </li>
+        <li>
+          <b>COPMAT</b> copies the matrix a, ja, ia, into the matrix ao, jao, iao.
+        </li>
+        <li>
+          <b>CPERM</b> permutes the columns of a matrix.
+        </li>
+        <li>
+          <b>CSCAL</b> scales the columns of A such that their norms are one on return
+        </li>
+        <li>
+          <b>CSORT</b> sorts the elements of  a matrix (stored in Compressed
+        </li>
+        <li>
+          <b>CSRBND</b> converts Compressed Sparse Row  to  Banded (Linpack ) format.
+        </li>
+        <li>
+          <b>CSRBSR</b> converts Compressed Sparse Row  to    Block Sparse Row
+        </li>
+        <li>
+          <b>CSRCOO</b> converts Compressed Sparse Row      to      Coordinate
+        </li>
+        <li>
+          <b>CSRCSC</b> converts Compressed Sparse Row     to      Compressed Sparse Column
+        </li>
+        <li>
+          <b>CSRDIA</b> converts Compressed sparse row     to    diagonal format
+        </li>
+        <li>
+          <b>CSRDNS</b> converts Compressed Sparse Row    to    Dense
+        </li>
+        <li>
+          <b>CSRELL</b> converts Compressed Sparse Row          to    Ellpack - Itpack format
+        </li>
+        <li>
+          <b>CSRJAD</b> converts Compressed Sparse Row  to   JAgged Diagonal storage.
+        </li>
+        <li>
+          <b>CSRLNK</b> converts Compressed Sparse Row         to    Linked storage format.
+        </li>
+        <li>
+          <b>CSRMSR</b> converts Compressed Sparse Row   to      Modified - Sparse Row
+        </li>
+        <li>
+          <b>CSRSSK</b> converts Compressed Sparse Row         to     Symmetric Skyline Format
+        </li>
+        <li>
+          <b>CSRSSR</b> converts Compressed Sparse Row     to     Symmetric Sparse Row
+        </li>
+        <li>
+          <b>DCN</b> generates sparse square matrices of type D(N,C).
+        </li>
+        <li>
+          <b>DCSORT</b> computes a permutation which, when applied to the
+        </li>
+        <li>
+          <b>DIACSR</b> converts diagonal format     to     compressed sparse row
+        </li>
+        <li>
+          <b>DIAMUA</b> performs the matrix by matrix product B = Diag * A  (in place)
+        </li>
+        <li>
+          <b>DIAPOS</b> returns the positions of the diagonal elements of a
+        </li>
+        <li>
+          <b>DINFO1</b> computes and prints matrix statistics.
+        </li>
+        <li>
+          <b>DIRIC</b> takes into account the boundary conditions
+        </li>
+        <li>
+          <b>DLAUNY</b> is a simple, nonoptimal Delaunay triangulation code.
+        </li>
+        <li>
+          <b>DNSCSR</b> converts Dense            to    Compressed Row Sparse
+        </li>
+        <li>
+          <b>DPERM</b> permutes the rows and columns of a matrix stored in CSR
+        </li>
+        <li>
+          <b>DSCALDG</b> scales rows by diag where diag is either given (job=0)
+        </li>
+        <li>
+          <b>DUMP</b> writes the matrix in a file, one row at a time in a nice readable
+        </li>
+        <li>
+          <b>DVPERM</b> performs an in-place permutation of a real vector x
+        </li>
+        <li>
+          <b>ECN</b> generates sparse (square) matrices of the type E(N,C).
+        </li>
+        <li>
+          <b>ELLCSR</b> converts Ellpack-Itpack to Compressed Sparse Row.
+        </li>
+        <li>
+          <b>ESTIF3</b> constructs the element stiffness matrix using 3-node triangular elements
+        </li>
+        <li>
+          <b>EXPHES</b> computes the Arnoldi basis and the corresponding
+        </li>
+        <li>
+          <b>EXPPRO</b> computes an approximation to the vector
+        </li>
+        <li>
+          <b>EXPPROD</b> computes an approximation to the vector
+        </li>
+        <li>
+          <b>EXTBDG</b> extracts the main diagonal blocks of a
+        </li>
+        <li>
+          <b>FILTER</b> removes any elements whose absolute value
+        </li>
+        <li>
+          <b>GEN57BL</b> computes the sparse matrix in compressed
+        </li>
+        <li>
+          <b>GEN57PT</b> computes the sparse matrix in compressed
+        </li>
+        <li>
+          <b>GENFEA</b> generates finite element matrices for heat
+        </li>
+        <li>
+          <b>GENFEU</b> generates finite element matrices for heat
+        </li>
+        <li>
+          <b>GETBWD</b> gets the bandwidth of lower part and upper part of A.
+        </li>
+        <li>
+          <b>GETDIA</b> extracts a given diagonal from a matrix stored in CSR
+        </li>
+        <li>
+          <b>GETELM</b> returns the element a(i,j) of a matrix A,
+        </li>
+        <li>
+          <b>GETL</b> extracts the lower triangular part of a matrix
+        </li>
+        <li>
+          <b>GETSTEN</b> calculates the correct stencil values for
+        </li>
+        <li>
+          <b>GETU</b> extracts the upper triangular part of a matrix
+        </li>
+        <li>
+          <b>GRADI3</b> constructs the first derivative of the shape functions.
+        </li>
+        <li>
+          <b>HES</b> computes exp ( H dt) * y    (1)
+        </li>
+        <li>
+          <b>HSOURC</b> generates the load vector f in assembled form from the
+        </li>
+        <li>
+          <b>ILU0</b> is an ILU(0) preconditioner.
+        </li>
+        <li>
+          <b>ILUT</b> is an ILUT preconditioner.
+        </li>
+        <li>
+          <b>INFDIA</b> obtains information on the diagonals of A.
+        </li>
+        <li>
+          <b>IVPERM</b> performs an in-place permutation of an integer vector
+        </li>
+        <li>
+          <b>JADSCR</b> converts Jagged Diagonal Storage   to     Compressed Sparse Row
+        </li>
+        <li>
+          <b>LDSOL</b> solves L x = y    L = triangular. MSR format
+        </li>
+        <li>
+          <b>LDSOLC</b> solves     L x = y ;    L = nonunit Low. Triang. MSC format
+        </li>
+        <li>
+          <b>LDSOLL</b> solves L x = y    L = triangular. Uses LEVEL SCHEDULING/MSR format
+        </li>
+        <li>
+          <b>LEVELS</b> gets the level structure of a lower triangular matrix
+        </li>
+        <li>
+          <b>LNKCSR</b> converts linked list storage format   to      Compressed Sparse Row  format.
+        </li>
+        <li>
+          <b>LSOL</b> solves    L x = y ; L = lower unit triang. /  CSR format
+        </li>
+        <li>
+          <b>LSOLC</b> solves     L x = y ;    where L = unit lower trang. CSC format
+        </li>
+        <li>
+          <b>LUSOL0</b> performs a forward followed by a backward solve
+        </li>
+        <li>
+          <b>MARKGEN</b> is a matrix generator for a markov model of a random walk on a triang. grid
+        </li>
+        <li>
+          <b>MATRF2</b> generates sparse (rectangular or square) matrices.
+        </li>
+        <li>
+          <b>MGSR</b> is a modified gram - schmidt  with  partial  reortho.
+        </li>
+        <li>
+          <b>MILU0</b> is a simple milu(0) preconditioner. ***                *
+        </li>
+        <li>
+          <b>MSRCSR</b> converts Modified - Sparse Row  to   Compressed Sparse Row
+        </li>
+        <li>
+          <b>PGMRES</b> is an ILUT - Preconditioned GMRES solver.
+        </li>
+        <li>
+          <b>PLTMT</b> creates a 'pic' file for plotting the pattern of
+        </li>
+        <li>
+          <b>PLTMTPS</b> creates a 'PS' file for plotting the pattern of
+        </li>
+        <li>
+          <b>PRTMT</b> writes a matrix in Harwell-Boeing format into a file.
+        </li>
+        <li>
+          <b>READMT</b> reads  a boeing/harwell matrix. handles right hand
+        </li>
+        <li>
+          <b>REFALL</b> refines a finite element grid using triangular elements.
+        </li>
+        <li>
+          <b>RETMX</b> returns in dd(*) the max absolute value of elements in row *.
+        </li>
+        <li>
+          <b>RNRMS</b> gets the norms of each row of A. (choice of three norms)
+        </li>
+        <li>
+          <b>RPERM</b> permutes the rows of a matrix in CSR format.
+        </li>
+        <li>
+          <b>RSCAL</b> scales the rows of A such that their norms are one on return
+        </li>
+        <li>
+          <b>SSKSSR</b> converts Symmetric Skyline Format  to  Symmetric Sparse Row format.
+        </li>
+        <li>
+          <b>SSRCSR</b> converts Symmetric Sparse Row   to    (regular) Compressed Sparse Row
+        </li>
+        <li>
+          <b>SUBMAT</b> extracts the submatrix A(i1:i2,j1:j2) and puts the result in
+        </li>
+        <li>
+          <b>TRANSP</b> carries out in-place transposition routine.
+        </li>
+        <li>
+          <b>UDSOL</b> solves   U x = y  ;   U = upper triangular in MSR format
+        </li>
+        <li>
+          <b>UDSOLC</b> Solves     U x = y ;    U = nonunit Up. Triang. MSC format
+        </li>
+        <li>
+          <b>UNASSBL</b> ???
+        </li>
+        <li>
+          <b>USOL</b> solves   U x = y    U = unit upper triangular.
+        </li>
+        <li>
+          <b>USOLC</b> solves U x = y ;    where U = unit upper trang. CSC format
+        </li>
+        <li>
+          <b>SAXPY</b> CONSTANT TIMES A VECTOR PLUS A VECTOR.
+        </li>
+        <li>
+          <b>SDOT</b> FORMS THE DOT PRODUCT OF TWO VECTORS.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      You can go up one level to <a href = "../f_src.html">
+      the Fortran90 source codes</a>.
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 30 August 2005.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,19 @@
+15 September 2021   3:23:19.941 PM
+
+solve_test():
+  FORTRAN90 version
+  Test solve().
+
+test01():
+  r8mat_fs() solves a linear system with Gauss elimination.
+
+  Computed solution of linear system:
+
+   1.00000    
+   2.00000    
+   3.00000    
+
+solve_test():
+  Normal end of execution.
+
+15 September 2021   3:23:19.941 PM

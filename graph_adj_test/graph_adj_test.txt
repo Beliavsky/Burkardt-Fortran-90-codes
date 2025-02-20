@@ -1,0 +1,870 @@
+12 March 2023   9:25:52.877 AM
+ 
+graph_adj_test():
+  FORTRAN90 version
+  graph_adj() implements graph algorithms.
+ 
+graph_adj_bipartite_random_test():
+  graph_adj_bipartite_random_() returns a random 
+  bipartite graph;
+ 
+  Number of nodes in set 1 is        4
+  Number of nodes in set 2 is        6
+ 
+  The graph:
+ 
+    1  0000001101
+    2  0001110000
+    3  0000001100
+    4  0100000100
+    5  0100000000
+    6  0100001001
+    7  1010010010
+    8  1011000010
+    9  0000001101
+   10  1000010010
+  Total number of edges is         14
+  Counted number of edges is       14
+ 
+graph_adj_breadth_first_test()
+  graph_adj_breadth_first() sets up a breadth-first
+  traversal of a graph.
+ 
+ 
+  The graph:
+ 
+    1  0111111100000
+    2  1000110100000
+    3  1001001000000
+    4  1010000000000
+    5  1100000000000
+    6  1100000000000
+    7  1010000000000
+    8  1100000000000
+    9  0000000001001
+   10  0000000010111
+   11  0000000001010
+   12  0000000001100
+   13  0000000011000
+ 
+  I, dad(i), deep(i), order(i)
+ 
+       1       0       1       1
+       2       1       2       2
+       3       1       2       3
+       4       1       2       4
+       5       1       2       5
+       6       1       2       6
+       7       1       2       7
+       8       1       2       8
+       9       0       3       9
+      10       9       4      10
+      11      10       5      12
+      12      10       5      13
+      13       9       4      11
+ 
+graph_adj_block_test():
+  graph_adj_block() finds the blocks in a graph.
+ 
+ 
+  Number of blocks =        3
+ 
+  I, DAD(I), ORDER(I)
+ 
+       1         0        -1
+       2         1         2
+       3         4         5
+       4         1        -4
+       5         4         6
+       6         2         3
+ 
+  The graph:
+ 
+    1  010331
+    2  100001
+    3  000200
+    4  302030
+    5  300300
+    6  110000
+ 
+graph_adj_color_next_test():
+  graph_adj_color_next() produces colorings of a graph
+ 
+  The number of colors available is        3
+ 
+  The graph:
+ 
+    1  0101
+    2  1010
+    3  0101
+    4  1010
+ 
+  Possible node colorings:
+ 
+   1   3   2   3
+   1   3   1   3
+   1   3   1   2
+   1   2   3   2
+   1   2   1   3
+   1   2   1   2
+ 
+graph_adj_complement_test():
+  graph_adj_complement() finds the complement 
+  of a graph;
+ 
+  The adjacency matrix for G:
+ 
+    1  10011000
+    2  01000000
+    3  00100011
+    4  10011000
+    5  10011100
+    6  00001100
+    7  00100010
+    8  00100001
+ 
+  Adjacency matrix for the complement of G:
+ 
+    1  01100111
+    2  10111111
+    3  11011100
+    4  01100111
+    5  01100011
+    6  11110011
+    7  11011101
+    8  11011110
+ 
+graph_adj_connect_random_test():
+  graph_adj_connect_random() returns a random connected graph;
+ 
+  Number of nodes is        6
+  Number of edges is        8
+ 
+  The graph:
+ 
+    1  000100
+    2  000100
+    3  000001
+    4  110001
+    5  000001
+    6  001110
+ 
+graph_adj_cycle_test():
+  graph_adj_cycle() searches for cycles in a graph.
+ 
+  The graph:
+ 
+    1  0010001001
+    2  0000100001
+    3  1000010010
+    4  0000001100
+    5  0100000000
+    6  0010000010
+    7  1001000000
+    8  0001000001
+    9  0010010000
+   10  1100000100
+ 
+  Node, Dad, Order
+ 
+       1         0         1
+       2        10         9
+       3         1         2
+       4         7         6
+       5         2        10
+       6         3         3
+       7         1         5
+       8         4         7
+       9         6         4
+      10         8         8
+ 
+  Adjacency matrix with cycles marked.
+ 
+  0  0 -2  0  0  0 -2  0  0 -1
+  0  0  0  0 -2  0  0  0  0 -2
+ -2  0  0  0  0 -2  0  0 -1  0
+  0  0  0  0  0  0 -2 -2  0  0
+  0 -2  0  0  0  0  0  0  0  0
+  0  0 -2  0  0  0  0  0 -2  0
+ -2  0  0 -2  0  0  0  0  0  0
+  0  0  0 -2  0  0  0  0  0 -2
+  0  0 -1  0  0 -2  0  0  0  0
+ -1 -2  0  0  0  0  0 -2  0  0
+ 
+graph_adj_degree_test():
+  graph_adj_degree() computes the degree of the nodes;
+ 
+  The graph:
+ 
+    1  0010001001
+    2  0000100001
+    3  1000010010
+    4  0000001100
+    5  0100000000
+    6  0010000010
+    7  1001000000
+    8  0001000001
+    9  0010010000
+   10  1100000100
+ 
+  Node degrees:
+ 
+       1         3
+       2         2
+       3         3
+       4         2
+       5         1
+       6         2
+       7         2
+       8         2
+       9         2
+      10         3
+ 
+graph_adj_degree_max_test():
+  graph_adj_degree_max() computes the maximum
+  degree of the nodes;
+ 
+  The graph:
+ 
+    1  0010001001
+    2  0000100001
+    3  1000010010
+    4  0000001100
+    5  0100000000
+    6  0010000010
+    7  1001000000
+    8  0001000001
+    9  0010010000
+   10  1100000100
+ 
+  Maximum node degree is        3
+ 
+ 
+graph_adj_degree_sequence_test():
+  graph_adj_degree_sequence() computes the degree sequence;
+ 
+  The graph:
+ 
+    1  0010001001
+    2  0000100001
+    3  1000010010
+    4  0000001100
+    5  0100000000
+    6  0010000010
+    7  1001000000
+    8  0001000001
+    9  0010010000
+   10  1100000100
+ 
+  Degree sequence:
+ 
+       1         3
+       2         3
+       3         3
+       4         2
+       5         2
+       6         2
+       7         2
+       8         2
+       9         2
+      10         1
+ 
+graph_adj_depth_first_test():
+  graph_adj_depth_first() does depth first search of graph.
+ 
+  The graph:
+ 
+    1  0110011000000
+    2  0000000000000
+    3  0000000000000
+    4  0000000000000
+    5  0001001000000
+    6  0000100000000
+    7  0000000000000
+    8  0000000010000
+    9  0000000000000
+   10  0000000000111
+   11  0000000000000
+   12  0000000000001
+   13  0000000000000
+ 
+  Node, Dad, Order
+ 
+       1         0         1
+       2         1         2
+       3         1         3
+       4         5         6
+       5         6         5
+       6         1         4
+       7         5         7
+       8         0         8
+       9         8         9
+      10         0        10
+      11        10        11
+      12        10        12
+      13        12        13
+ 
+graph_adj_depth_first_2_test():
+  graph_adj_depth_first_2() sets up depth-first traversal
+  of a graph described by an adjacency matrix.
+ 
+ 
+  The graph:
+ 
+    1  0111111100000
+    2  1000110100000
+    3  1001001000000
+    4  1010000000000
+    5  1100000000000
+    6  1100000000000
+    7  1010000000000
+    8  1100000000000
+    9  0000000001001
+   10  0000000010111
+   11  0000000001010
+   12  0000000001100
+   13  0000000011000
+ 
+  I, DAD(I), ORDER(I)
+ 
+       1         0         1
+       2         1         2
+       3         1         6
+       4         3         7
+       5         2         3
+       6         2         4
+       7         3         8
+       8         2         5
+       9         0         9
+      10         9        10
+      11        10        11
+      12        11        12
+      13        10        13
+
+graph_adj_edge_count_test():
+  graph_adj_edge_count() counts the edges in a graph.
+ 
+  Adjacency matrix:
+ 
+    1  0001000
+    2  0000100
+    3  0000100
+    4  1000111
+    5  0111000
+    6  0001000
+    7  0001000
+
+  Number of edges is   6
+
+graph_adj_edge_select_test():
+  graph_adj_edge_select() selects an edge from
+  a graph defined by an adjacency matrix.
+ 
+  Adjacency matrix for bush example
+ 
+    1  0001000
+    2  0000100
+    3  0000100
+    4  1000111
+    5  0111000
+    6  0001000
+    7  0001000
+
+  An edge of this graph extends from
+  node  1 to node  4
+ 
+graph_adj_edges_random_test():
+  graph_adj_edges_random() returns a random graph
+  with a specified number of edges.
+ 
+  Number of edges requested =       10
+ 
+  The graph:
+ 
+    1  011011
+    2  101001
+    3  110111
+    4  001000
+    5  101001
+    6  111010
+ 
+graph_adj_eigen_test():
+  graph_adj_eigen() computes the eigenvalues of a graph.
+ 
+  The graph:
+ 
+    1  0010001001
+    2  0000100001
+    3  1000010010
+    4  0000001100
+    5  0100000000
+    6  0010000010
+    7  1001000000
+    8  0001000001
+    9  0010010000
+   10  1100000100
+ 
+  The eigenvalues:
+ 
+       1  -2.11644    
+       2  -1.72209    
+       3  -1.15483    
+       4  -1.00000    
+       5 -0.702785    
+       6  0.429094    
+       7  0.673286    
+       8   1.26660    
+       9   1.91496    
+      10   2.41221    
+ 
+TEST036
+  GRAPH_ADJ_HAM_NEXT produces Hamilton circuits;
+ 
+ 
+  The graph:
+ 
+    1  01000001000000000001
+    2  10100000000000100000
+    3  01010010000000000000
+    4  00101000000001000000
+    5  00010100000100000000
+    6  00001010010000000000
+    7  00100101000000000000
+    8  10000010100000000000
+    9  00000001010000000010
+   10  00000100101000000000
+   11  00000000010100000100
+   12  00001000001010000000
+   13  00000000000101001000
+   14  00010000000010100000
+   15  01000000000001010000
+   16  00000000000000101001
+   17  00000000000010010100
+   18  00000000001000001010
+   19  00000000100000000101
+   20  10000000000000010010
+ 
+  Circuits:
+ 
+  1    1 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2
+  2    1 20 19 18 17 16 15  2  3  7  6  5  4 14 13 12 11 10  9  8
+  3    1 20 19 18 11 12 13 17 16 15 14  4  5  6 10  9  8  7  3  2
+  4    1 20 19 18 11 12  5  6 10  9  8  7  3  4 14 13 17 16 15  2
+  5    1 20 19 18 11 12  5  4 14 13 17 16 15  2  3  7  6 10  9  8
+  6    1 20 19 18 11 10  9  8  7  6  5 12 13 17 16 15 14  4  3  2
+  7    1 20 19  9 10 11 18 17 16 15  2  3  4 14 13 12  5  6  7  8
+  8    1 20 19  9 10  6  5  4 14 13 12 11 18 17 16 15  2  3  7  8
+  9    1 20 19  9  8  7  6 10 11 18 17 16 15 14 13 12  5  4  3  2
+ 10    1 20 19  9  8  7  3  4 14 13 12  5  6 10 11 18 17 16 15  2
+ 11    1 20 16 17 18 19  9 10 11 12 13 14 15  2  3  4  5  6  7  8
+ 12    1 20 16 17 18 19  9  8  7  3  4  5  6 10 11 12 13 14 15  2
+ 13    1 20 16 17 13 14 15  2  3  4  5 12 11 18 19  9 10  6  7  8
+ 14    1 20 16 17 13 12 11 18 19  9 10  6  5  4 14 15  2  3  7  8
+ 15    1 20 16 17 13 12  5  6 10 11 18 19  9  8  7  3  4 14 15  2
+ 16    1 20 16 17 13 12  5  4 14 15  2  3  7  6 10 11 18 19  9  8
+ 17    1 20 16 15 14 13 17 18 19  9  8  7  6 10 11 12  5  4  3  2
+ 18    1 20 16 15 14  4  5  6 10 11 12 13 17 18 19  9  8  7  3  2
+ 19    1 20 16 15  2  3  7  6 10 11 12  5  4 14 13 17 18 19  9  8
+ 20    1 20 16 15  2  3  4 14 13 17 18 19  9 10 11 12  5  6  7  8
+ 21    1  8  9 19 20 16 17 18 11 10  6  7  3  4  5 12 13 14 15  2
+ 22    1  8  9 19 20 16 15 14  4  5 12 13 17 18 11 10  6  7  3  2
+ 23    1  8  9 10 11 18 19 20 16 17 13 12  5  6  7  3  4 14 15  2
+ 24    1  8  9 10 11 12 13 17 18 19 20 16 15 14  4  5  6  7  3  2
+ 25    1  8  9 10 11 12  5  6  7  3  4 14 13 17 18 19 20 16 15  2
+ 26    1  8  9 10  6  7  3  4  5 12 11 18 19 20 16 17 13 14 15  2
+ 27    1  8  7  6 10  9 19 20 16 15 14 13 17 18 11 12  5  4  3  2
+ 28    1  8  7  6  5 12 13 17 18 11 10  9 19 20 16 15 14  4  3  2
+ 29    1  8  7  3  4 14 13 17 18 11 12  5  6 10  9 19 20 16 15  2
+ 30    1  8  7  3  4  5  6 10  9 19 20 16 17 18 11 12 13 14 15  2
+ 
+TEST0365
+  GRAPH_ADJ_HAM_NEXT produces Hamilton circuits;
+ 
+ 
+  The graph:
+ 
+    1  010101000
+    2  101000100
+    3  010101000
+    4  101000100
+    5  000001101
+    6  101010010
+    7  010110000
+    8  000001001
+    9  000010010
+ 
+  Circuits:
+ 
+    1    1  6  8  9  5  7  4  3  2
+    2    1  6  8  9  5  7  2  3  4
+    3    1  4  7  5  9  8  6  3  2
+    4    1  4  3  6  8  9  5  7  2
+ 
+graph_adj_ham_next_brute_test():
+  graph_adj_ham_next_brute() seeks circuits
+  in a graph which visit every node.
+  A brute force algorithm is used.
+ 
+  The graph:
+ 
+    1  010101000
+    2  101000100
+    3  010101000
+    4  101000100
+    5  000001101
+    6  101010010
+    7  010110000
+    8  000001001
+    9  000010010
+ 
+  Circuits:
+ 
+    1    1  2  3  4  7  5  9  8  6
+    2    1  2  3  6  8  9  5  7  4
+    3    1  2  7  5  9  8  6  3  4
+    4    1  4  3  2  7  5  9  8  6
+ 
+  No more circuits were found.
+ 
+graph_adj_is_bipartite_test()
+  graph_adj_is_bipartite() reports if a graph is bipartite.
+ 
+ 
+  The graph:
+ 
+    1  0000110000
+    2  0001000000
+    3  0000110011
+    4  0100000111
+    5  1010001000
+    6  1010001000
+    7  0000110010
+    8  0001000000
+    9  0011001000
+   10  0011000000
+ 
+  The graph IS bipartite.
+ 
+graph_adj_is_edge_connected_test():
+  graph_adj_is_edge_connected() reports if a
+  graph is edgewise connected;
+ 
+  Number of nodes is        6
+  Number of edges is        8
+ 
+  The graph:
+ 
+    1  010101
+    2  101000
+    3  010000
+    4  100000
+    5  000001
+    6  100010
+ 
+  The graph IS edgewise connected.
+ 
+graph_adj_is_node_connected_test():
+  graph_adj_is_node_connected() reports if a
+  graph is node connected;
+ 
+  Number of nodes is        6
+  Number of edges is        8
+ 
+  The graph:
+ 
+    1  010000
+    2  101011
+    3  010100
+    4  001000
+    5  010000
+    6  010000
+  The graph IS nodewise connected.
+ 
+graph_adj_is_tree_test():
+  GRAPH_ADJ_IS_TREE reports if a graph is a tree.
+ 
+  Number of nodes is        6
+  Number of edges is        5
+ 
+  The graph:
+ 
+    1  000010
+    2  001010
+    3  010100
+    4  001001
+    5  110000
+    6  000100
+  The graph IS a tree.
+ 
+graph_adj_random_test():
+  graph_adj_random() returns a random graph, for which
+  edges are generated with a given probability.
+ 
+  Here, we show the effect of increasing connectivity
+  on the singularity of the adjacency matrix.
+ 
+  Probability of edge generation =   0.250000    
+  Number of edges generated =       51
+  Maximum number of edges =      190
+  Generated / Maximum =   0.268421    
+ 
+  The graph:
+ 
+    1  00000010000100000010
+    2  00010000010000010000
+    3  00001000000101100000
+    4  01000010010100011000
+    5  00100010010010000000
+    6  00000001100000001100
+    7  10011001000010000110
+    8  00000110001000000001
+    9  00000100000000110010
+   10  01011000001010111001
+   11  00000001010110000100
+   12  10110000001000001000
+   13  00001010011001101000
+   14  00100000000010101010
+   15  00100000110011011000
+   16  01010000110000100000
+   17  00010100010111100100
+   18  00000110001000001010
+   19  10000010100001000100
+   20  00000001010000000000
+ 
+  The eigenvalues:
+ 
+       1  -3.31739    
+       2  -2.89281    
+       3  -2.74386    
+       4  -2.45783    
+       5  -2.04589    
+       6  -1.69190    
+       7  -1.56143    
+       8 -0.849800    
+       9 -0.655436    
+      10 -0.168960    
+      11  0.556912E-02
+      12  0.413404    
+      13  0.519529    
+      14  0.974668    
+      15   1.58227    
+      16   1.82769    
+      17   2.07008    
+      18   2.35123    
+      19   2.90449    
+      20   5.73636    
+ 
+  Probability of edge generation =   0.400000    
+  Number of edges generated =       73
+  Maximum number of edges =      190
+  Generated / Maximum =   0.384211    
+ 
+  The graph:
+ 
+    1  01100000110110001000
+    2  10101000011100100101
+    3  11011011010110010100
+    4  00100010000010011000
+    5  01100000010110001111
+    6  00000010100000011001
+    7  00110100101111100000
+    8  00100000010100100000
+    9  10000110011101001000
+   10  11101001100000010110
+   11  01000010100110011110
+   12  11101011101000101000
+   13  10111010001000000010
+   14  00000010100000110000
+   15  01000011000101000001
+   16  00110100011001001100
+   17  10011100101100010000
+   18  01101000011000010011
+   19  00001000011010000100
+   20  01001100000000100100
+ 
+  The eigenvalues:
+ 
+       1  -3.76277    
+       2  -3.50190    
+       3  -2.69084    
+       4  -2.55625    
+       5  -2.16602    
+       6  -2.09480    
+       7  -1.55771    
+       8  -1.35208    
+       9 -0.994899    
+      10 -0.489809    
+      11 -0.622820E-01
+      12  0.330050    
+      13  0.568856    
+      14   1.17570    
+      15   1.54682    
+      16   1.78702    
+      17   2.06593    
+      18   2.53811    
+      19   3.34845    
+      20   7.86843    
+ 
+  Probability of edge generation =   0.650000    
+  Number of edges generated =      127
+  Maximum number of edges =      190
+  Generated / Maximum =   0.668421    
+ 
+  The graph:
+ 
+    1  01100101111101111101
+    2  10101001111101010111
+    3  11001011010101001001
+    4  00001101011011101111
+    5  01110111101011110110
+    6  10011011011101010100
+    7  00101101111111111111
+    8  11111110100101100111
+    9  11001011010001101100
+   10  11110110101111111111
+   11  11011110010111101011
+   12  11100111011011101101
+   13  00011010011100000111
+   14  11111111111100101100
+   15  10011011111101001100
+   16  11001110010000001011
+   17  10110010111101110111
+   18  11011111110111101000
+   19  01011011011010011000
+   20  11110011011110011000
+ 
+  The eigenvalues:
+ 
+       1  -4.20360    
+       2  -3.64615    
+       3  -3.41969    
+       4  -3.26011    
+       5  -2.07325    
+       6  -1.93452    
+       7  -1.34504    
+       8  -1.14285    
+       9 -0.915164    
+      10 -0.578027    
+      11 -0.295516    
+      12  0.124765    
+      13  0.349478    
+      14  0.501075    
+      15  0.917391    
+      16   1.15625    
+      17   1.65839    
+      18   2.36585    
+      19   2.69842    
+      20   13.0423    
+ 
+graph_adj_reduce_test():
+  graph_adj_reduce() finds the transitive reduction
+  of a graph.
+ 
+  The adjacency matrix for G:
+ 
+    1  10011000
+    2  01000000
+    3  00100011
+    4  10011000
+    5  10011100
+    6  00001100
+    7  00100010
+    8  00100001
+ 
+  Adjacency matrix for the transitive reduction of G:
+ 
+    1  00011000
+    2  00000000
+    3  00000011
+    4  10000000
+    5  10000100
+    6  00001000
+    7  00100000
+    8  00100000
+ 
+graph_adj_span_tree_test():
+  graph_adj_span_tree() constructs a spanning tree of a graph.
+ 
+  The graph:
+ 
+    1  0111111100000
+    2  1000110100000
+    3  1001001000000
+    4  1010000000000
+    5  1100000000000
+    6  1100000000000
+    7  1010000000000
+    8  1100000010000
+    9  0000000101001
+   10  0000000010111
+   11  0000000001010
+   12  0000000001100
+   13  0000000011000
+ 
+  The spanning tree:
+ 
+       1           1       2
+       2           1       3
+       3           1       4
+       4           1       5
+       5           1       6
+       6           1       7
+       7           1       8
+       8           8       9
+       9           9      10
+      10           9      13
+      11          10      11
+      12          10      12
+ 
+graph_adj_span_tree_enum_test():
+  graph_adj_span_tree_enum() enumerates the spanning trees
+  of a graph.
+ 
+  The graph:
+ 
+    1  0111111100000
+    2  1000110100000
+    3  1001001000000
+    4  1010000000000
+    5  1100000000000
+    6  1100000000000
+    7  1010000000000
+    8  1100000010000
+    9  0000000101001
+   10  0000000010111
+   11  0000000001010
+   12  0000000001100
+   13  0000000011000
+ 
+  Total number of spanning trees is     1440
+ 
+graph_adj_transitive_closure_test():
+  graph_adj_transitive_closure() finds the transitive closure 
+  of a graph;
+ 
+  The adjacency matrix for G:
+ 
+    1  10011000
+    2  01000000
+    3  00100011
+    4  10011000
+    5  10011100
+    6  00001100
+    7  00100010
+    8  00100001
+ 
+  Adjacency matrix for the transitive closure of G:
+ 
+    1  10011100
+    2  01000000
+    3  00100011
+    4  10011100
+    5  10011100
+    6  10011100
+    7  00100011
+    8  00100011
+ 
+graph_adj_test():
+  Normal end of execution.
+ 
+12 March 2023   9:25:52.880 AM

@@ -1,0 +1,167 @@
+<html>
+
+  <head>
+    <title>
+      burgers_exact
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      burgers_exact
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>burgers_exact</b>,
+      a Fortran90 code which
+      evaluates exact solutions of the time-dependent 1D viscous Burgers equation.
+    </p>
+
+    <p>
+      The form of the Burgers equation considered here is:
+      <pre>
+        du       du        d^2 u
+        -- + u * -- = nu * -----
+        dt       dx        dx^2
+      </pre>
+      for -1.0 < x < +1.0, and 0.0 < t.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>burgers_exact</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/burgers_exact/burgers_exact.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/burgers_exact/burgers_exact.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/burgers_exact/burgers_exact.html">a Fortran77 version</a> and
+      <a href = "burgers_exact.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/burgers_exact/burgers_exact.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/burgers_exact/burgers_exact.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/burgers_exact/burgers_exact.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../burgers_exact_test/burgers_exact_test.html">
+      burgers_exact_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/burgers/burgers.html">
+      burgers</a>,
+      a dataset directory which
+      contains 40 solutions of the Burgers equation in one space dimension and time,
+      at equally spaced times from 0 to 1, with values
+      at 41 equally spaced nodes in [0,1];
+    </p>
+
+    <p>
+      <a href = "../fd1d_burgers_lax/fd1d_burgers_lax.html">
+      fd1d_burgers_lax</a>,
+      a Fortran90 code which
+      applies the finite difference method and the Lax-Wendroff method
+      to solve the non-viscous Burgers equation
+      in one spatial dimension and time.
+    </p>
+
+    <p>
+      <a href = "../fd1d_burgers_leap/fd1d_burgers_leap.html">
+      fd1d_burgers_leap</a>,
+      a Fortran90 code which
+      applies the finite difference method and the leapfrog approach
+      to solve the non-viscous Burgers equation in one spatial dimension and time.
+    </p>
+
+    <p>
+      <a href = "../navier_stokes_2d_exact/navier_stokes_2d_exact.html">
+      navier_stokes_2d_exact</a>,
+      a Fortran90 code which
+      evaluates an exact solution to the incompressible time-dependent
+      Navier-Stokes equations (NSE) over an arbitrary domain in 2D.
+    </p>
+
+    <p>
+      <a href = "../navier_stokes_3d_exact/navier_stokes_3d_exact.html">
+      navier_stokes_3d_exact</a>,
+      a Fortran90 code which
+      evaluates an exact solution to the incompressible time-dependent
+      Navier-Stokes equations (NSE) over an arbitrary domain in 3D.
+    </p>
+
+    <p>
+      <a href = "../spiral_exact/spiral_exact.html">
+      spiral_exact</a>,
+      a Fortran90 code which
+      computes a 2D velocity vector field that is an exact solution
+      of the continuity equation.
+    </p>
+
+    <p>
+      <a href = "../stokes_2d_exact/stokes_2d_exact.html">
+      stokes_2d_exact</a>,
+      a Fortran90 code which
+      evaluates exact solutions to the incompressible steady
+      Stokes equations over the unit square in 2D.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Claude Basdevant, Michel Deville, Pierre Haldenwang, J Lacroix, 
+          J Ouazzani, Roger Peyret, Paolo Orlandi, Anthony Patera,<br>
+          Spectral and finite difference solutions of the Burgers equation,<br>
+          Computers and Fluids,<br>
+          Volume 14, Number 1, 1986, pages 23-41.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "burgers_exact.f90">burgers_exact.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "burgers_exact.sh">burgers_exact.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 03 September 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

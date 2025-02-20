@@ -1,0 +1,185 @@
+<html>
+
+  <head>
+    <title>
+      midpoint_adaptive
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      midpoint_adaptive
+    </h1>
+
+    <p>
+      <b>midpoint_adaptive</b>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) midpoint method, relying on fsolve()
+      to solve the implicit equation, and using an adaptive timestep.
+      Plots of the solution and timestep history are created using gnuplot().
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>midpoint_adaptive</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/midpoint_adaptive/midpoint_adaptive.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/midpoint_adaptive/midpoint_adaptive.html">a C++ version</a> and
+      <a href = "midpoint_adaptive.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/midpoint_adaptive/midpoint_adaptive.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/midpoint_adaptive/midpoint_adaptive.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/midpoint_adaptive/midpoint_adaptive.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and codes:
+    </h3>
+
+    <p>
+      <a href = "../midpoint_adaptive_test/midpoint_adaptive_test.html">
+      midpoint_adaptive_test</a>
+    </p>
+
+    <p>
+      <a href = "../backward_euler/backward_euler.html">
+      backward_euler</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) backward Euler method, using fsolve() to solve
+      the implicit equation, and using a fixed time step.
+    </p>
+
+    <p>
+      <a href = "../bdf2/bdf2.html">
+      bdf2</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using BDF2, the (implicit) backward difference formula 
+      of order 2, using fsolve() to solve the implicit equation.
+    </p>
+
+    <p>
+      <a href = "../euler/euler.html">
+      euler</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the forward Euler method, and using a fixed time step.
+    </p>
+
+    <p>
+      <a href = "../midpoint/midpoint.html">
+      midpoint</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) midpoint method, relying on fsolve() to solve
+      the implicit equation, and using a fixed time step.
+    </p>
+
+    <p>
+      <a href = "../midpoint_explicit/midpoint_explicit.html">
+      midpoint_explicit</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (explicit) midpoint method, also called the
+      modified Euler method, and using a fixed time step.
+    </p>
+
+    <p>
+      <a href = "../midpoint_fixed/midpoint_fixed.html">
+      midpoint_fixed</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) midpoint method, using a simple fixed-point
+      iteration to solve the implicit equation, and using a fixed time step.
+    </p>
+
+    <p>
+      <a href = "../rk4/rk4.html">
+      rk4</a>,
+      a Fortran90 code which
+      applies the fourth order Runge-Kutta (RK) algorithm to estimate the
+      solution of an ordinary differential equation (ODE).
+    </p>
+
+    <p>
+      <a href = "../rkf45/rkf45.html">
+      rkf45</a>, 
+      a Fortran90 code which
+      implements the Runge-Kutta-Fehlberg ODE solver.
+    </p>
+
+    <p>
+      <a href = "../trapezoidal/trapezoidal.html">
+      trapezoidal</a>,
+      a Fortran90 code which
+      solves one or more ordinary differential equations (ODE)
+      using the (implicit) trapezoidal method, and using a fixed time step.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          William Milne,<br>
+          Numerical Integration of Ordinary Differential Equations,<br>
+          American Mathematical Monthly,<br>
+          Volume 33, number 9, pages 455–460, 1926.
+        </li>
+        <li>
+          Ernst Hairer, Syvert Norsett, Gerhard Wanner,<br> 
+          Solving ordinary differential equations, I. Nonstiff problems,<br>
+          Springer Series in Computational Mathematics, Number 8,<br> 
+          Springer-Verlag, Berlin, 1987.
+        </li>
+        <li>
+          Catalin Trenchea, John Burkardt,<br>
+          Refactorization of the midpoint rule,<br>
+          Applied Mathematics Letters,<br>
+          Volume 107, September 2020.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "midpoint_adaptive.f90">midpoint_adaptive.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "midpoint_adaptive.sh">midpoint_adaptive.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 28 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

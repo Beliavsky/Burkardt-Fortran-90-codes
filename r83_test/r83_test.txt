@@ -1,0 +1,528 @@
+14 September 2021  10:27:45.465 AM
+ 
+R83_TEST
+  FORTRAN90 version:
+  Test the LINPLUS library.
+
+R83_CG_TEST
+  R83_CG applies CG to an R83 matrix.
+ 
+  Number of variables N =   10
+  Norm of residual ||Ax-b|| =   0.730135E-15
+  Norm of error ||x1-x2|| =   0.108496E-14
+ 
+R83_CR_FA_TEST
+  R83_CR_FA factors an R83 matrix for cyclic reduction.
+  Linear systems can then be solved by R83_CR_SL.
+ 
+  Matrix order N =       10
+  The matrix is NOT symmetric.
+ 
+  The matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    4.00000       2.00000                                              
+    2    1.00000       8.00000       3.00000                                
+    3                  2.00000       12.0000       4.00000                  
+    4                                3.00000       16.0000       5.00000    
+    5                                              4.00000       20.0000    
+    6                                                            5.00000    
+ 
+  Col:       6             7             8             9            10       
+  Row
+  ---
+    5    6.00000                                                            
+    6    24.0000       7.00000                                              
+    7    6.00000       28.0000       8.00000                                
+    8                  7.00000       32.0000       9.00000                  
+    9                                8.00000       36.0000       10.0000    
+   10                                              9.00000       40.0000    
+ 
+  Solution:
+ 
+       1   1.00000    
+       2   2.00000    
+       3   3.00000    
+       4   4.00000    
+       5   5.00000    
+       6   6.00000    
+       7   7.00000    
+       8   8.00000    
+       9   9.00000    
+      10   10.0000    
+ 
+R83_CR_SL_TEST
+  R83_CR_SL solves a linear system by cyclic reduction
+  after the R83 matrix has been factored by R83_CR_FA.
+ 
+  Matrix order N =       10
+  The matrix is NOT symmetric.
+ 
+  The matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    4.00000       2.00000                                              
+    2    1.00000       8.00000       3.00000                                
+    3                  2.00000       12.0000       4.00000                  
+    4                                3.00000       16.0000       5.00000    
+    5                                              4.00000       20.0000    
+    6                                                            5.00000    
+ 
+  Col:       6             7             8             9            10       
+  Row
+  ---
+    5    6.00000                                                            
+    6    24.0000       7.00000                                              
+    7    6.00000       28.0000       8.00000                                
+    8                  7.00000       32.0000       9.00000                  
+    9                                8.00000       36.0000       10.0000    
+   10                                              9.00000       40.0000    
+ 
+  Solution:
+ 
+       1   1.00000    
+       2   2.00000    
+       3   3.00000    
+       4   4.00000    
+       5   5.00000    
+       6   6.00000    
+       7   7.00000    
+       8   8.00000    
+       9   9.00000    
+      10   10.0000    
+ 
+R83_CR_SLS_TEST
+  R83_CR_SLS solves linear systems by cyclic reduction
+  after the R83 matrix has been factored by R83_CR_FA.
+ 
+  Matrix order N =        5
+  Demonstrate multiple system solution method.
+ 
+  Input matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    2.00000      -1.00000                                              
+    2   -1.00000       2.00000      -1.00000                                
+    3                 -1.00000       2.00000      -1.00000                  
+    4                               -1.00000       2.00000      -1.00000    
+    5                                             -1.00000       2.00000    
+ 
+  Solutions:
+ 
+  Col:        1             2       
+  Row
+  ---
+    1    1.00000       1.00000    
+    2    2.00000       1.00000    
+    3    3.00000       1.00000    
+    4    4.00000       1.00000    
+    5    5.00000       1.00000    
+
+R83_DIF2_TEST
+  R83_DIF2 sets an R83 matrix to the second difference.
+  We check three cases, M<N, M=N, M>N.
+ 
+  Second difference in R83 format:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    2.00000      -1.00000                                              
+    2   -1.00000       2.00000      -1.00000                                
+    3                 -1.00000       2.00000      -1.00000                  
+ 
+  Second difference in R83 format:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    2.00000      -1.00000                                              
+    2   -1.00000       2.00000      -1.00000                                
+    3                 -1.00000       2.00000      -1.00000                  
+    4                               -1.00000       2.00000      -1.00000    
+    5                                             -1.00000       2.00000    
+ 
+  Second difference in R83 format:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    2.00000      -1.00000                  
+    2   -1.00000       2.00000      -1.00000    
+    3                 -1.00000       2.00000    
+    4                               -1.00000    
+ 
+R83_GS_SL_TEST
+  R83_GS_SL solves a linear system using
+  Gauss-Seidel iteration, with R83 matrix storage.
+ 
+  Matrix order N =            10
+  Iterations per call =       25
+ 
+  Current solution estimate:
+ 
+       1  0.634606    
+       2   1.32650    
+       3   2.09566    
+       4   2.95451    
+       5   3.90741    
+       6   4.95088    
+       7   6.07442    
+       8   7.26190    
+       9   8.49330    
+      10   9.74665    
+ 
+  Current solution estimate:
+ 
+       1  0.953567    
+       2   1.91450    
+       3   2.88533    
+       4   3.86757    
+       5   4.86173    
+       6   5.86733    
+       7   6.88302    
+       8   7.90675    
+       9   8.93599    
+      10   9.96800    
+ 
+  Current solution estimate:
+ 
+       1  0.994126    
+       2   1.98918    
+       3   2.98549    
+       4   3.98325    
+       5   4.98251    
+       6   5.98322    
+       7   6.98520    
+       8   7.98820    
+       9   8.99190    
+      10   9.99595    
+ 
+R83_INDICATOR_TEST
+  R83_INDICATOR sets up an R83 indicator matrix.
+  We check three cases, M<N, M=N, M>N.
+ 
+  The R83 indicator matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000                                              
+    2    21.0000       22.0000       23.0000                                
+    3                  32.0000       33.0000       34.0000                  
+ 
+  The R83 indicator matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    11.0000       12.0000                                              
+    2    21.0000       22.0000       23.0000                                
+    3                  32.0000       33.0000       34.0000                  
+    4                                43.0000       44.0000       45.0000    
+    5                                              54.0000       55.0000    
+ 
+  The R83 indicator matrix:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    11.0000       12.0000                  
+    2    21.0000       22.0000       23.0000    
+    3                  32.0000       33.0000    
+    4                                43.0000    
+ 
+R83_JAC_SL_TEST
+  R83_JAC_SL solves a linear system using
+  Jacobi iteration using R83 matrix storage.
+ 
+  Matrix order N =            10
+  Iterations per call =       25
+ 
+  Current solution estimate:
+ 
+       1  0.315171    
+       2  0.727797    
+       3   1.14042    
+       4   1.82758    
+       5   2.51474    
+       6   3.59047    
+       7   4.66620    
+       8   6.12820    
+       9   7.59020    
+      10   9.29510    
+ 
+  Current solution estimate:
+ 
+       1  0.757545    
+       2   1.51509    
+       3   2.34936    
+       4   3.18363    
+       5   4.14729    
+       6   5.11094    
+       7   6.21581    
+       8   7.32068    
+       9   8.53366    
+      10   9.74665    
+ 
+  Current solution estimate:
+ 
+       1  0.910021    
+       2   1.83432    
+       3   2.75863    
+       4   3.72124    
+       5   4.68386    
+       6   5.69666    
+       7   6.70946    
+       8   7.76839    
+       9   8.82731    
+      10   9.91366    
+
+R83_MTV_TEST
+  R83_MTV computes b=A'*x, where A is an R83 matrix.
+  We check three cases, M<N, M=N, M>N.
+ 
+  Product comparison:
+ 
+     1     2.37028         2.37028    
+     2     3.69883         3.69883    
+     3     2.90256         2.90256    
+     4    0.978074        0.978074    
+     5     0.00000         0.00000    
+ 
+  Product comparison:
+ 
+     1     2.33450         2.33450    
+     2     1.60752         1.60752    
+     3     2.87146         2.87146    
+     4     9.03278         9.03278    
+     5    0.136211        0.136211    
+ 
+  Product comparison:
+ 
+     1    0.949731        0.949731    
+     2     2.39285         2.39285    
+     3     4.11019         4.11019    
+
+R83_MV_TEST
+  R83_MV computes b=A*x, where A is an R83 matrix.
+  We check three cases, M<N, M=N, M>N.
+ 
+  Product comparison:
+ 
+     1     1.01061         1.01061    
+     2     4.79070         4.79070    
+     3     3.91156         3.91156    
+ 
+  Product comparison:
+ 
+     1     1.37193         1.37193    
+     2     3.80617         3.80617    
+     3     4.57736         4.57736    
+     4     6.40641         6.40641    
+     5     3.51213         3.51213    
+ 
+  Product comparison:
+ 
+     1     1.36358         1.36358    
+     2     1.42694         1.42694    
+     3     1.75994         1.75994    
+     4    0.372587        0.372587    
+     5     0.00000         0.00000    
+ 
+R83_PRINT_TEST
+  R83_PRINT prints an R83 matrix.
+ 
+  The R83 matrix:
+ 
+  Col:       1             2             3             4       
+  Row
+  ---
+    1    11.0000       12.0000                                
+    2    21.0000       22.0000       23.0000                  
+    3                  32.0000       33.0000       34.0000    
+    4                                43.0000       44.0000    
+    5                                              54.0000    
+ 
+R83_PRINT_SOME_TEST
+  R83_PRINT_SOME prints some of an R83 matrix.
+ 
+  Rows 2-5, Cols 2-4:
+ 
+  Col:       2             3             4       
+  Row
+  ---
+    2    22.0000       23.0000                  
+    3    32.0000       33.0000       34.0000    
+    4                  43.0000       44.0000    
+    5                                54.0000    
+ 
+R83_RANDOM_TEST
+  R83_RANDOM randomizes an R83 matrix.
+  We check three cases, M<N, M=N, M>N.
+ 
+  The random R83 matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1   0.515986E-01  0.343229                                              
+    2   0.757701      0.188975      0.506485                                
+    3                 0.955382      0.584682      0.109036                  
+ 
+  The random R83 matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1   0.143925      0.919399                                              
+    2   0.624100      0.376668E-03  0.221215                                
+    3                 0.684898      0.933628      0.815521                  
+    4                               0.539488      0.693349      0.303873    
+    5                                             0.150894      0.171976    
+ 
+  The random R83 matrix:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1   0.674413      0.337383                  
+    2   0.396441      0.934547E-01  0.368101    
+    3                 0.771927      0.753894    
+    4                               0.774770    
+
+R83_RES_TEST
+  R83_RES computes b-A*x, where A is an R83 matrix.
+  We check three cases, M<N, M=N, M>N.
+ 
+  Residual A*x-b:
+ 
+       1   0.00000    
+       2   0.00000    
+       3   0.00000    
+ 
+  Residual A*x-b:
+ 
+       1   0.00000    
+       2   0.00000    
+       3   0.00000    
+       4   0.00000    
+       5   0.00000    
+ 
+  Residual A*x-b:
+ 
+       1   0.00000    
+       2   0.00000    
+       3   0.00000    
+       4   0.00000    
+       5   0.00000    
+
+R83_TO_R8GE_TEST
+  R83_TO_R8GE converse an R83 matrix to R8GE format.
+  We check three cases, M<N, M=N, M>N.
+ 
+  R83 matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1   0.379338E-02  0.255425                                              
+    2   0.802075      0.999905      0.674956                                
+    3                 0.887809      0.724549      0.877694                  
+ 
+  R8GE matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.379338E-02  0.255425       0.00000       0.00000       0.00000    
+    2   0.802075      0.999905      0.674956       0.00000       0.00000    
+    3    0.00000      0.887809      0.724549      0.877694       0.00000    
+ 
+  R83 matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1   0.278121      0.251990                                              
+    2   0.586723      0.322029      0.220570                                
+    3                 0.856808      0.157299      0.299804                  
+    4                               0.185577      0.366121      0.552181    
+    5                                             0.620496      0.597416E-01
+ 
+  R8GE matrix:
+ 
+  Col:        1             2             3             4             5       
+  Row
+  ---
+    1   0.278121      0.251990       0.00000       0.00000       0.00000    
+    2   0.586723      0.322029      0.220570       0.00000       0.00000    
+    3    0.00000      0.856808      0.157299      0.299804       0.00000    
+    4    0.00000       0.00000      0.185577      0.366121      0.552181    
+    5    0.00000       0.00000       0.00000      0.620496      0.597416E-01
+ 
+  R83 matrix:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1   0.633178      0.149986                  
+    2   0.798319      0.388278      0.973745    
+    3                 0.473323      0.119870    
+    4                               0.862926    
+ 
+  R8GE matrix:
+ 
+  Col:        1             2             3       
+  Row
+  ---
+    1   0.633178      0.149986       0.00000    
+    2   0.798319      0.388278      0.973745    
+    3    0.00000      0.473323      0.119870    
+    4    0.00000       0.00000      0.862926    
+    5    0.00000       0.00000       0.00000    
+ 
+R83_ZEROS_TEST
+  R83_ZEROS zeros an R83 matrix.
+  We check three cases, M<N, M=N, M>N.
+ 
+  The R83 zero matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    0.00000       0.00000                                              
+    2    0.00000       0.00000       0.00000                                
+    3                  0.00000       0.00000       0.00000                  
+ 
+  The R83 zero matrix:
+ 
+  Col:       1             2             3             4             5       
+  Row
+  ---
+    1    0.00000       0.00000                                              
+    2    0.00000       0.00000       0.00000                                
+    3                  0.00000       0.00000       0.00000                  
+    4                                0.00000       0.00000       0.00000    
+    5                                              0.00000       0.00000    
+ 
+  The R83 zero matrix:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    0.00000       0.00000                  
+    2    0.00000       0.00000       0.00000    
+    3                  0.00000       0.00000    
+    4                                0.00000    
+ 
+R83_TEST
+  Normal end of execution.
+ 
+14 September 2021  10:27:45.466 AM

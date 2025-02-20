@@ -1,0 +1,234 @@
+<html>
+
+  <head>
+    <title>
+      toms179
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      toms179
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>toms179</b>,
+      a FORTRAN90 code which
+      implements ACM TOMS algorithm 179, for evaluating the modified
+      Beta function.
+    </p>
+
+    <p>
+      The original algorithm was published in the Algol language.
+      Shortly therafter, a distinct FORTRAN77 algorithm was published
+      as a "remark" to the original algorithm.  A few modifications to
+      the FORTRAN77 program were proposed in a subsequent "remark".
+    </p>
+
+    <p>
+      The text of many ACM TOMS algorithms is available online
+      through ACM:
+              <a href = "http://calgo.acm.org">
+                         http://calgo.acm.org/</a> 
+      or NETLIB:
+      <a href = "http://www.netlib.org/toms/index.html">
+      http://www.netlib.org/toms/index.html</a>.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        call <b>mdbeta</b> ( <i>x</i>, <i>p</i>, <i>q</i>, <i>prob</i>, <i>ier</i> )
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>x</i> is the point of evaluation;
+        </li>
+        <li>
+          <i>p</i> and <i>q</i> are parameters;
+        </li>
+        <li>
+          <i>prob</i>, (output), is the computed probability;
+        </li>
+        <li>
+          <i>ier</i>, (output), is an error flag.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>toms179</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/toms179/toms179.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/toms179/toms179.html">a C++ version</a> and
+      <a href = "toms179.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/toms179/toms179.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/toms179/toms179.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../asa063/asa063.html">
+      ASA063</a>,
+      a FORTRAN90 code which
+      evaluates the incomplete Beta function.
+    </p>
+
+    <p>
+      <a href = "../asa109/asa109.html">
+      ASA109</a>,
+      a FORTRAN90 code which
+      inverts the incomplete Beta function.
+    </p>
+
+    <p>
+      <a href = "../asa226/asa226.html">
+      ASA226</a>,
+      a FORTRAN90 code which
+      evaluates the CDF of the noncentral Beta distribution.
+    </p>
+
+    <p>
+      <a href = "../asa310/asa310.html">
+      ASA310</a>,
+      a FORTRAN90 code which
+      computes the CDF of the noncentral Beta distribution.
+    </p>
+
+    <p>
+      <a href = "../beta_nc/beta_nc.html">
+      BETA_NC</a>,
+      a FORTRAN90 code which
+      evaluates the CDF of the noncentral Beta distribution.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/dcdflib/dcdflib.html">
+      DCDFLIB</a>,
+      a FORTRAN90 code which
+      contains routines which evaluate a number of probability density
+      functions, including one based on the Beta function.
+    </p>
+
+    <p>
+      <a href = "../prob/prob.html">
+      PROB</a>,
+      a FORTRAN90 code which
+      contains routines which evaluate a number of probability density
+      functions, including one based on the Beta function.
+    </p>
+
+    <p>
+      <a href = "../test_values/test_values.html">
+      TEST_VALUES</a>,
+      a FORTRAN90 code which
+      contains routines which return sample values of various functions,
+      including the modified beta function, and the logarithm of the
+      gamma function.
+    </p>
+
+    <p>
+      <a href = "../toms708/toms708.html">
+      TOMS708</a>,
+      a FORTRAN90 code which
+      evaluates the incomplete beta function.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Nancy Bosten, EL Battiste,<br>
+          Remark on Algorithm 179:
+          Incomplete Beta Ratio,<br>
+          Communications of the ACM,<br>
+          Volume 17, Number 3, March 1974, pages 156-157.
+        </li>
+        <li>
+          William Cody, Kenneth Hillstrom,<br>
+          Chebyshev Approximations for the Natural Logarithm of the
+          Gamma Function,<br>
+          Mathematics of Computation,<br>
+          Volume 21, Number 98, April 1967, pages 198-203.
+        </li>
+        <li>
+          John Hart, Ward Cheney, Charles Lawson, Hans Maehly,
+          Charles Mesztenyi, John Rice, Henry Thacher,
+          Christoph Witzgall,<br>
+          Computer Approximations,<br>
+          Wiley, 1968,<br>
+          LC: QA297.C64.
+        </li>
+        <li>
+          Oliver Ludwig,<br>
+          Algorithm 179:
+          Incomplete Beta Ratio,<br>
+          Communications of the ACM,<br>
+          Volume 6, Number 6, June 1963, page 314.
+        </li>
+        <li>
+          Malcolm Pike, Jennie SooHoo,<br>
+          Remark on Algorithm 179:
+          Incomplete Beta Ratio,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 2, Number 2, June 1976, pages 207-208.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "toms179.f90">toms179.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "toms179.sh">toms179.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 12 March 2021.
+
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

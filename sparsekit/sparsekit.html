@@ -1,0 +1,275 @@
+<html>
+
+  <head>
+    <title>
+      sparsekit
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      sparsekit
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>sparsekit</b>,
+      a Fortran90 code which
+      carries out a number of
+      operations on sparse matrices, particularly conversion between
+      various sparse formats.
+    </p>
+
+    <p>
+      sparsekit() can manipulate sparse matrices in a variety of formats,
+      and can convert from one to another.  For example, a matrix can be
+      converted from the generalized diagonal format used by ELLPACK() and
+      ITPACK() to the format used by the Harwell-Boeing Sparse Matrix
+      Collection or into LINPACK() banded format.
+    </p>
+
+    <p>
+      Utilities available include converting data structures, printing simple
+      statistics on a matrix, plotting a matrix profile, performing basic
+      linear algebra operations (similar to the BLAS for dense matrix),
+      and so on.
+    </p>
+
+    <p>
+      Matrix formats that are recognized include:
+      <ul>
+        <li>
+          <b>BND</b>, the LINPACK() format for general banded matrices.
+        </li>
+        <li>
+          <b>BSR</b>, block row sparse format.
+        </li>
+        <li>
+          <b>COO</b>, coordinate format.
+        </li>
+        <li>
+          <b>CSC</b>, compressed sparse column format.
+        </li>
+        <li>
+          <b>CSR</b>, compressed sparse row format.
+        </li>
+        <li>
+          <b>DIA</b>, the diagonal sparse matrix format (NOT a diagonal matrix!).
+        </li>
+        <li>
+          <b>DIAG</b>, a diagonal matrix, stored as a vector.
+        </li>
+        <li>
+          <b>DNS</b>, dense storage, also called full storage.
+        </li>
+        <li>
+          <b>ELL</b>, the format used by ELLPACK() and ITPACK().
+        </li>
+        <li>
+          <b>HB</b>, Harwell-Boeing format.  (Actually, CSR format plus auxilliary data)
+        </li>
+        <li>
+          <b>JAD</b>, the jagged diagonal format.
+        </li>
+        <li>
+          <b>LNK</b>, linked storage format.
+        </li>
+        <li>
+          <b>MSC</b>, modified sparse column format.
+        </li>
+        <li>
+          <b>MSR</b>, modified sparse row format.
+        </li>
+        <li>
+          <b>SSK</b>, Symmetric skyline format.
+        </li>
+        <li>
+          <b>SSR</b>, Symmetric sparse row format.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>sparsekit</b> is available in
+      <a href = "sparsekit.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../sparsekit_test/sparsekit_test.html">
+      sparsekit_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/dlap/dlap.html">
+      dlap</a>,
+      a Fortran90 code which
+      solves sparse linear systems.
+    </p>
+
+    <p>
+      <a href = "../hb_io/hb_io.html">
+      hb_io</a>,
+      a Fortran90 code which
+      reads and writes sparse linear
+      systems stored in the Harwell-Boeing Sparse Matrix format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/hb_to_st/hb_to_st.html">
+      hb_to_st</a>,
+      a Fortran77 code which
+      converts the sparse matrix information stored in a Harwell-Boeing
+      file into a sparse triplet file.
+    </p>
+
+    <p>
+      <a href = "../mgmres/mgmres.html">
+      MGMRES</a>,
+      a Fortran90 code which
+      applies the restarted GMRES algorithm
+      to solve a sparse linear system.
+    </p>
+
+    <p>
+      <a href = "../mm_io/mm_io.html">
+      mm_io</a>,
+      a Fortran90 code which
+      reads and writes sparse linear
+      systems stored in the Matrix Market format.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/sparse_ccs/sparse_ccs.html">
+      sparse_ccs</a>,
+      a data directory which
+      contains a description and examples of the CCs format,
+      ("compressed column sparse") for storing a sparse matrix,
+      including a way to write the matrix as a set of three files.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/sparse_crs/sparse_crs.html">
+      sparse_crs</a>,
+      a data directory which
+      contains a description and examples of the CRS format,
+      ("compressed row sparse") for storing a sparse matrix,
+      including a way to write the matrix as a set of three files.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/sparsepak/sparsepak.html">
+      sparsepak</a>,
+      a Fortran90 code which
+      reorders and solves sparse linear systems.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Efstratios Gallopoulos, Youcef Saad,<br>
+          Efficient solution of parabolic equations by Krylov
+          approximation methods,<br>
+          RIACS Technical Report, 90-14.
+        </li>
+        <li>
+          Noborou Kikuchi,<br>
+          Finite element methods in mechanics,<br>
+          Cambridge University Press, 1986.
+        </li>
+        <li>
+          David Kincaid, Thomas Oppe, John Respess, David Young,<br>
+          ITPACKV 2C User's Guide,<br>
+          Technical Report CNA-191.<br>
+          Center for Numerical Analysis,<br>
+          University of Texas at Austin, 1984.
+        </li>
+        <li>
+          Donald Knuth,<br>
+          The Art of Computer Programming,<br>
+          Volume 3: Sorting and Searching,<br>
+          Addison-Wesley, 1973.
+        </li>
+        <li>
+          Ole Osterby, Zahari Zlatev,<br>
+          Direct Methods for Sparse Matrices,<br>
+          Springer-Verlag 1983.
+        </li>
+        <li>
+          Youcef Saad,<br>
+          Sparsekit: a basic tool kit for sparse matrix computations,<br>
+          Technical Report, Computer Science Department,<br>
+          University of Minnesota, June 1994.
+        </li>
+        <li>
+          Youcef Saad,<br>
+          Analysis of some Krylov subspace approximations to the
+          matrix exponential operator,<br>
+          RIACS Technical Report, 90-14.
+        </li>
+        <li>
+          Yousef Saad,<br>
+          Iterative Methods for Sparse Linear Systems,<br>
+          Second Edition,<br>
+          SIAM, 2003,<br>
+          ISBN: 0898715342.
+        </li>
+        <li>
+          Zahari Zlatev, Kjeld Schaumburg, Jerzy Wasniewski,<br>
+          A testing Scheme for Subroutines Solving Large Linear Problems,<br>
+          Computers and Chemistry,<br>
+          Volume 5, Number 2-3, pages 91-100, 1981.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "sparsekit.f90">sparsekit.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "sparsekit.sh">sparsekit.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 19 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

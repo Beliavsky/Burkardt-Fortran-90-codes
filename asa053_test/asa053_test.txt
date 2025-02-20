@@ -1,0 +1,68 @@
+13 August 2022   7:55:15.881 AM
+
+asa053_test():
+  FORTRAN90 version
+  Test asa053().
+
+test01()
+  wshrt() generates a single Wishart deviate.
+
+  The number of variables is    3
+  The number of degrees of freedom is    1
+ 
+  The upper Cholesky factor:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    3.00000       2.00000       1.00000    
+    2    0.00000       4.00000       2.00000    
+    3    0.00000       0.00000       5.00000    
+ 
+  The sample matrix:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    48.4501       34.7145       56.8405    
+    2    34.7145       43.4727       25.0288    
+    3    56.8405       25.0288       136.228    
+
+test02():
+  wshrt() generates many Wishart samples.
+  Compare to D' * D * np / n.
+
+  The number of variables is    3
+  The number of degrees of freedom is    2
+ 
+  The upper Cholesky factor:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    3.00000       2.00000       1.00000    
+    2    0.00000       4.00000       2.00000    
+    3    0.00000       0.00000       5.00000    
+ 
+  The averaged matrix:
+ 
+  Col:       1             2             3       
+  Row
+  ---
+    1    13.4808       8.96503       4.52303    
+    2    8.96503       30.0336       15.0681    
+    3    4.52303       15.0681       44.9898    
+ 
+  Expected result:
+ 
+  Col          1             2             3      
+  Row
+ 
+    1:   13.5000          9.         4.50000    
+    2:      9.           30.           15.      
+    3:   4.50000         15.           45.      
+
+asa053_test():
+  Normal end of execution.
+
+13 August 2022   7:55:15.923 AM

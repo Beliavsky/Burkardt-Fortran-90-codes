@@ -1,0 +1,97 @@
+11 July 2023   9:08:01.692 PM
+
+tetrahedron_witherden_rule_test():
+  Fortran90 version
+  Test tetrahedron_witherden_rule().
+
+tetrahedron_witherden_rule_test01():
+  Quadrature rule for the tetrahedron,
+  given in barycentric coordinates.
+  Precision p =  5
+
+  Number of nodes N =  14
+
+     I      W          A           B           C           D
+
+     1    0.112688    0.310886    0.310886    0.067342    0.310886
+     2    0.112688    0.310886    0.067342    0.310886    0.310886
+     3    0.112688    0.067342    0.310886    0.310886    0.310886
+     4    0.112688    0.310886    0.310886    0.310886    0.067342
+     5    0.073493    0.092735    0.092735    0.721794    0.092735
+     6    0.073493    0.092735    0.721794    0.092735    0.092735
+     7    0.073493    0.721794    0.092735    0.092735    0.092735
+     8    0.073493    0.092735    0.092735    0.092735    0.721794
+     9    0.042546    0.045504    0.454496    0.454496    0.045504
+    10    0.042546    0.454496    0.045504    0.454496    0.045504
+    11    0.042546    0.045504    0.045504    0.454496    0.454496
+    12    0.042546    0.045504    0.454496    0.045504    0.454496
+    13    0.042546    0.454496    0.045504    0.045504    0.454496
+    14    0.042546    0.454496    0.454496    0.045504    0.045504
+
+  Weight Sum =    1.00000    
+
+tetrahedron_witherden_rule_test02():
+  Test the precision of a quadrature rule for the unit tetrahedron,
+
+  Number of nodes N =  14
+
+  Stated precision of rule    =  5
+  Number of quadrature points =  14
+
+  Degree  Maximum error
+
+   0     0.000000000000000    
+   1    0.6938893903907228E-17
+   2    0.3469446951953614E-17
+   3    0.1734723475976807E-17
+   4    0.1734723475976807E-17
+   5    0.8673617379884035E-18
+   6    0.1361833211602648E-04
+   7    0.3762506581633752E-04
+
+tetrahedron_witherden_rule_test03():
+  Test the precision of quadrature rules for the unit tetrahedron,
+  Check rules of precision p =  0 through 10
+  for error in approximating integrals of monomials.
+
+              maximum                   maximum
+   p          absolute                  relative
+              error                     error
+
+   0     0.000000000000000         0.000000000000000    
+   1     0.000000000000000         0.000000000000000    
+   2    0.3469446951953614E-17    0.2081668171172169E-15
+   3    0.1734723475976807E-17    0.2081668171172169E-15
+   4    0.6938893903907228E-17    0.5464378949326943E-15
+   5    0.6938893903907228E-17    0.5464378949326943E-15
+   6    0.8326672684688674E-16    0.6245004513516506E-15
+   7    0.1387778780781446E-15    0.9221139476989215E-15
+   8    0.8326672684688674E-16    0.9367506770274760E-15
+   9    0.2775557561562891E-16    0.8326672684688674E-15
+  10    0.1110223024625157E-15    0.1502704211064909E-14
+
+tetrahedron_witherden_rule_test04():
+  Integrate 1/sqrt(r) over the reference tetrahedron.
+  Witherden rule #9 fails because a quadrature point is
+  very near the singularity at the origin.
+  Exact integral value is   0.2400589101620030    
+  Volume of tetrahedron is   0.1666666666666667    
+
+   P    N     Q     |Q-Exact]
+
+   0    1    0.2532785618838642        0.1321965172186121E-01
+   1    1    0.2532785618838642        0.1321965172186121E-01
+   2    4    0.2442781387638714        0.4219228601868463E-02
+   3    8    0.2422436873187426        0.2184777156739648E-02
+   4   14    0.2414426895710490        0.1383779409046021E-02
+   5   14    0.2414426895710490        0.1383779409046021E-02
+   6   24    0.2403540555991645        0.2951454371615259E-03
+   7   35    0.2396527439280942        0.4061662339087946E-03
+   8   46    0.2404524584761409        0.3935483141379037E-03
+   9   59    0.5672984490527836        0.3272395388907806    
+  10   81    0.2399650072174329        0.9390294457004011E-04
+
+tetrahedron_witherden_rule_test()
+  Normal end of execution.
+
+11 July 2023   9:08:01.694 PM

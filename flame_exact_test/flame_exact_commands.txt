@@ -1,0 +1,17 @@
+# flame_exact_commands.txt
+#
+# Usage:
+#  gnuplot < flame_exact_commands.txt
+#
+set term png
+set output "flame_exact.png"
+set xlabel "<-- t -->"
+set ylabel "<-- y(t) -->"
+set title "flame_exact:"
+set grid
+set style data lines
+plot "flame_exact_data.txt" using 1:2  with lines lw 3,\
+     "flame_exact_data.txt" using 1:3 with lines lw 3,\
+     "flame_exact_data.txt" using 1:4 with lines lw 3,\
+     "flame_exact_data.txt" using 1:5 with lines lw 3
+quit

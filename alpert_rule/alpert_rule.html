@@ -1,0 +1,181 @@
+<html>
+
+  <head>
+    <title>
+      alpert_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      alpert_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>alpert_rule</b>,
+      a FORTRAN90 code which
+      defines Alpert quadrature rules of a number
+      of orders of accuracy for functions that are regular, log singular,
+      or power singular.
+    </p>
+
+    <p>
+      The rules defined here assume that the integral is to be taken over the
+      interval [0,1].  The interval is divided into N+1 intervals.  The leftmost
+      and rightmost intervals are handled in a special way, depending on whether
+      a particular kind of singularity is expected.
+    </p>
+
+    <p>
+      A singularity may exist at the left endpoint, x = 0.  The cases are:
+      <ul>
+        <li>
+          <i>regular</i>, no singularity;
+          the regular Alpert rule is used in both end intervals.
+        </li>
+        <li>
+          <i>power</i>, the integrand has the form g(x)=x^(-1/2)*phi(x)+psi(x);
+          the power singular Alpert rule is used in the leftmost interval.
+        </li>
+        <li>
+          <i>log</i>, the integrand has the form g(x)=phi(x)*log(x)+psi(x);
+          the log singular Alpert rule is used in the leftmost interval.
+        </li>
+      </ul>
+    </p>  
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>alpert_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/alpert_rule/alpert_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/alpert_rule/alpert_rule.html">a C++ version</a> and
+      <a href = "alpert_rule.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/alpert_rule/alpert_rule.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/alpert_rule/alpert_rule.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../alpert_rule_test/alpert_rule_test.html">
+      alpert_rule_test</a>
+    </p>
+
+    <p>
+      <a href = "../line_fekete_rule/line_fekete_rule.html">
+      line_fekete_rule</a>,
+      a FORTRAN90 code which
+      returns the points and weights of a Fekete quadrature rule
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../line_felippa_rule/line_felippa_rule.html">
+      line_felippa_rule</a>,
+      a FORTRAN90 code which
+      returns the points and weights of a Felippa quadrature rule
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../line_ncc_rule/line_ncc_rule.html">
+      line_ncc_rule</a>,
+      a FORTRAN90 code which
+      computes a Newton Cotes Closed (NCC) quadrature rule for the line,
+      that is, for an interval of the form [A,B], using equally spaced points
+      which include the endpoints.
+    </p>
+
+    <p>
+      <a href = "../line_nco_rule/line_nco_rule.html">
+      line_nco_rule</a>,
+      a FORTRAN90 code which
+      computes a Newton Cotes Open (NCO) quadrature rule,
+      using equally spaced points,
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../quadrature_weights_vandermonde/quadrature_weights_vandermonde.html">
+      quadrature_weights_vandermonde</a>,
+      a FORTRAN90 code which
+      computes the weights of a quadrature rule using the Vandermonde
+      matrix, assuming that the points have been specified.
+    </p>
+
+    <p>
+      <a href = "../triangle_fekete_rule/triangle_fekete_rule.html">
+      triangle_fekete_rule</a>,
+      a FORTRAN90 code which
+      defines Fekete rules for quadrature or interpolation over a triangle.
+    </p>
+
+    <p>
+      <a href = "../vandermonde/vandermonde.html">
+      vandermonde</a>,
+      a FORTRAN90 code which 
+      carries out certain operations associated
+      with the Vandermonde matrix.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Bradley Alpert,<br>
+          Hybrid Gauss-Trapezoidal Quadrature Rules,<br>
+          SIAM Journal on Scientific Computing, <br>
+          Volume 20, Number 5, pages 1551-1584, 1999.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "alpert_rule.f90">alpert_rule.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "alpert_rule.sh">alpert_rule.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 25 August 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

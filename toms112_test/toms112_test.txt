@@ -1,0 +1,29 @@
+ 8 April 2023   8:50:08.144 AM
+ 
+toms112_test():
+  FORTRAN90 version
+  Test TOMS112().
+ 
+POINT_IN_POLYGON_TEST
+  POINT_IN_POLYGON determines if 
+  a point is in a polygon.
+ 
+  The polygon vertices:
+ 
+     1     0.00000         0.00000    
+     2     1.00000         0.00000    
+     3     2.00000         1.00000    
+     4     1.00000         2.00000    
+     5     0.00000         2.00000    
+ 
+          P          Inside
+ 
+     1.00000       1.00000        T
+     3.00000       4.00000        F
+     0.00000       2.00000        T
+    0.500000     -0.250000        F
+ 
+TOMS112_TEST():
+  Normal end of execution.
+ 
+ 8 April 2023   8:50:08.144 AM

@@ -1,0 +1,29 @@
+08 July 2024   5:01:59.404 PM
+ 
+stochastic_rk_test():
+  Fortran90 version
+  test stochastic_rk().
+ 
+test01():
+  rk1_ti_step() uses a first order RK method
+  for a problem whose right hand side does not
+  depend explicitly on time.
+ 
+         I           T             X
+ 
+         0        0.000000     0.00000    
+         1        0.100000    0.319836    
+         2        0.200000    0.158737    
+         3        0.300000   -0.173654    
+         4        0.400000    0.266588    
+         5        0.500000    0.500184    
+         6        0.600000    0.545325    
+         7        0.700000    0.519556    
+         8        0.800000    0.983022    
+         9        0.900000     1.20950    
+        10        1.000000     1.04593    
+ 
+stochastic_rk_test():
+  Normal end of execution.
+ 
+08 July 2024   5:01:59.404 PM

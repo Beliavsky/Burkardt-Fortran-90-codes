@@ -1,0 +1,168 @@
+<html>
+
+  <head>
+    <title>
+      neighbors_to_metis_graph
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      neighbors_to_metis_graph
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>neighbors_to_metis_graph</b>,
+      a Fortran90 code which
+      reads a file describing
+      the graph-theoretic adjacency structure of the
+      elements in a mesh of triangles or tetrahedrons and writes out a file
+      for input to the mesh partitioning program metis().
+    </p>
+
+    <p>
+      Since we know we are dealing with a triangle or tet mesh, each "node" of
+      the adjacency graph has 3 or 4 potential edges.  If a potential
+      edge is not used (in other words, if a face is a boundary face),
+      then by convention we write out a "-1" for the neighbor value.
+      Otherwise, the adjacency information lists the index of the
+      element that is a neighbor on that face of the
+      element
+    </p>
+
+    <p>
+      Converting to a metis() GRAPH format is trivial.  We include
+      an initial line that lists the number of "nodes" (elements)
+      and "edges" (interfaces between pairs of elements), followed by,
+      for each node (element), a list of the adjacent nodes (a list
+      of the adjacent elements, omitting the "-1" values).  A cross-eyed
+      schoolboy sitting on a tack would be able to carry out this task!
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <dl>
+        <dt>
+          <b>neighbors_to_metis_graph</b> <i>neighbor_file</i>
+        </dt>
+        <dd>
+          reads the data in <i>neighbor_file</i>, rearranges it to
+          suit metis(), and writes out the modified data to
+          <i>metis_graph_file</i>
+        </dd>
+      </dl>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>neighbors_to_metis_graph</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/neighbors_to_metis_graph/neighbors_to_metis_graph.html">a C++ version</a> and
+      <a href = "neighbors_to_metis_graph.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/neighbors_to_metis_graph/neighbors_to_metis_graph.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/neighbors_to_metis_graph/neighbors_to_metis_graph.html">an Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Programs:
+    </h3>
+
+    <p>
+      <a href = "../neighbors_to_metis_graph_test/neighbors_to_metis_graph_test.html">
+      neighbors_to_metis_graph_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/metis/metis.html">
+      metis</a>,
+      a C code which
+      partitions the nodes of a graph or the elements of a mesh, for division among
+      a number of parallel processes, or to reorder the variables in a sparse
+      matrix to minimize fillin;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/metis_graph/metis_graph.html">
+      metis_graph</a>,
+      a data directory which
+      contains examples of GRAPH files,
+      to be read by metis(),
+      which can partition a graph;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/tet_mesh_tet_neighbors/tet_mesh_tet_neighbors.html">
+      tet_mesh_tet_neighbors</a>,
+      a Fortran90 code which
+      reads information about a tet mesh and writes out a list of the
+      tetrahedrons that are adjacent to a given tetrahedron;
+    </p>
+
+    <p>
+      <a href = "../triangulation_triangle_neighbors/triangulation_triangle_neighbors.html">
+      triangulation_triangle_neighbors</a>,
+      a Fortran90 code which
+      reads data defining a triangulation, determines the neighboring
+      triangles of each triangle, and writes that information to a file.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          George Karypis, Vipin Kumar,<br>
+          METIS, a Software Package for Partitioning Unstructured Graphs
+          and Computing Fill-Reduced Orderings of Sparse Matrices;
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "neighbors_to_metis_graph.f90">neighbors_to_metis_graph.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "neighbors_to_metis_graph.sh">neighbors_to_metis_graph.sh</a>,
+          the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 22 September 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,100 @@
+25 March 2023  12:56:17.181 PM
+ 
+MULTITASK_OPENMP():
+  FORTRAN90/OpenMP version
+  Demonstrate how OpenMP can "multitask" by using the
+  SECTIONS directive to carry out several tasks in parallel.
+ 
+  Number of primes computed was  20000
+  Last prime was       224737
+  Number of sines computed was  20000
+  Last sine computed was    12731.8    
+ 
+  Elapsed time =    12.3746    
+  Task 1 time =    5.86468    
+  Task 2 time =    6.50995    
+ 
+MULTITASK_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023  12:56:29.555 PM
+25 March 2023  12:56:29.557 PM
+ 
+MULTITASK_OPENMP():
+  FORTRAN90/OpenMP version
+  Demonstrate how OpenMP can "multitask" by using the
+  SECTIONS directive to carry out several tasks in parallel.
+ 
+  Number of primes computed was  20000
+  Last prime was       224737
+  Number of sines computed was  20000
+  Last sine computed was    12731.8    
+ 
+  Elapsed time =    6.51895    
+  Task 1 time =    5.90269    
+  Task 2 time =    6.51877    
+ 
+MULTITASK_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023  12:56:36.076 PM
+25 March 2023  12:56:36.078 PM
+ 
+MULTITASK_OPENMP():
+  FORTRAN90/OpenMP version
+  Demonstrate how OpenMP can "multitask" by using the
+  SECTIONS directive to carry out several tasks in parallel.
+ 
+  Number of primes computed was  20000
+  Last prime was       224737
+  Number of sines computed was  20000
+  Last sine computed was    12731.8    
+ 
+  Elapsed time =    6.50754    
+  Task 1 time =    5.86674    
+  Task 2 time =    6.50719    
+ 
+MULTITASK_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023  12:56:42.586 PM
+25 March 2023  12:56:42.588 PM
+ 
+MULTITASK_OPENMP():
+  FORTRAN90/OpenMP version
+  Demonstrate how OpenMP can "multitask" by using the
+  SECTIONS directive to carry out several tasks in parallel.
+ 
+  Number of primes computed was  20000
+  Last prime was       224737
+  Number of sines computed was  20000
+  Last sine computed was    12731.8    
+ 
+  Elapsed time =    6.50937    
+  Task 1 time =    5.95623    
+  Task 2 time =    6.50898    
+ 
+MULTITASK_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023  12:56:49.097 PM
+25 March 2023  12:56:49.099 PM
+ 
+MULTITASK_OPENMP():
+  FORTRAN90/OpenMP version
+  Demonstrate how OpenMP can "multitask" by using the
+  SECTIONS directive to carry out several tasks in parallel.
+ 
+  Number of primes computed was  20000
+  Last prime was       224737
+  Number of sines computed was  20000
+  Last sine computed was    12731.8    
+ 
+  Elapsed time =    6.51953    
+  Task 1 time =    5.89190    
+  Task 2 time =    6.50936    
+ 
+MULTITASK_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023  12:56:55.619 PM

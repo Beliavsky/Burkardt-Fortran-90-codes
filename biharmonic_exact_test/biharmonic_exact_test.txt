@@ -1,0 +1,31 @@
+02 August 2024   3:42:48.372 PM
+
+biharmonic_exact_test():
+  Fortran90 version
+  Test biharmonic_exact().
+
+  Exact solution 1 residual at random points:
+   1      0.6269      0.6730   -0.186265E-08
+   2      0.1684      0.1209   -0.436557E-10
+   3      0.4507      0.7080     0.00000    
+   4      0.7890      0.7286   -0.372529E-08
+   5      0.0044      0.6862     0.00000    
+
+  Exact solution 2 residual at random points:
+   1      0.6269      0.6730   -0.186265E-08
+   2      0.1684      0.1209   -0.582077E-10
+   3      0.4507      0.7080     0.00000    
+   4      0.7890      0.7286    0.186265E-08
+   5      0.0044      0.6862     0.00000    
+
+  Exact solution 3 residual at random points:
+   1      0.6269      0.6730   -0.416334E-16
+   2      0.1684      0.1209   -0.138778E-16
+   3      0.4507      0.7080   -0.555112E-16
+   4      0.7890      0.7286    0.208167E-16
+   5      0.0044      0.6862   -0.138778E-16
+
+biharmonic_exact_test()
+  Normal end of execution.
+
+02 August 2024   3:42:48.372 PM

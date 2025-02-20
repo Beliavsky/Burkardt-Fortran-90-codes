@@ -1,0 +1,381 @@
+<html>
+
+  <head>
+    <title>
+      slatec
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      slatec
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>slatec</b>,
+      a FORTRAN90 code which
+      collects standard numerical libraries,
+      including blas(), bvsup(), dassl(), depac(), drive(), 
+      eispack(), fftpack(), fishpack(), fnlib(), linpack(), machine(),
+      minpack(), mp(), pchip(), pppack(), quadpack(), slap(), sos(), splp(),
+      and xerror().
+    </p>
+
+    <p>
+      The original, correct version of SLATEC is as
+      a FORTRAN77 library.  This library is available through NETLIB:
+      <a href = "http://www.netlib.org/slatec/index.html">
+      http://www.netlib.org/slatec/index.html</a>.
+    </p>
+
+    <p>
+      What you are seeing here is a version of the library that I
+      have lightly edited; a few changes have been made so that it
+      will compile as a FORTRAN90 code.  However, this version is
+      not an official version, it is not supported by anybody, and
+      if you have any doubts about its accuracy, you should refer
+      to the original, correct FORTRAN77 version!
+    </p>
+
+    <p>
+      The huge size of slatec() is both a plus (it has
+      everything) and a minus (there's so much here I can't find
+      what I'm looking for!)  Since slatec() is built, in large part,
+      from a number of smaller, specialized libraries, I would
+      strongly recommend that if your interests lie entirely within
+      one of those libraries, you try to find a copy of that library!
+    </p>
+
+    <p>
+      Another issue to keep in mind is the extraordinary complexity
+      of some of the routines.  It is not unusual for a single routine
+      in slatec() to call, directly or indirectly, thirty
+      or forty routines.  In part, this is a testimony to the modularity
+      of the routines; however, it can make debugging a nightmare.
+    </p>
+
+    <p>
+      <b>slatec()</b> includes
+      all or some of the following libraries:
+      <ul>
+        <li>
+          BLAS, basic linear algebra subprograms;
+        </li>
+        <li>
+          BVSUP, two point boundary value problems solved by superposition;
+        </li>
+        <li>
+          DASSL, for the solution of differential/algebraic systems;
+        </li>
+        <li>
+          DEPAC, for the solution of systems of differential equations;
+        </li>
+        <li>
+          DRIVE, for the solution of double precision or
+          single precision systems of ordinary differential equations;
+        </li>
+        <li>
+          EISPACK, for the computation of eigenvalues and eigenvectors;
+        </li>
+        <li>
+          FFTPACK, for fast Fourier transforms;
+        </li>
+        <li>
+          FISHPACK, for solution of the Poisson equation;
+        </li>
+        <li>
+          FNLIB, the Fullerton special function library;
+        </li>
+        <li>
+          LINPACK, for solving systems of linear equations;
+        </li>
+        <li>
+          MACHINE, for "looking up" machine arithmetic constants;
+        </li>
+        <li>
+          MINPACK, for minimization (SNLS1, SNSQ);
+        </li>
+        <li>
+          MP, for Brent's multiple-precision arithmetic package;
+        </li>
+        <li>
+          PCHIP, for piecewise cubic Hermite interpolation;
+        </li>
+        <li>
+          PPPACK, for piecewise cubic polynomial interpolation;
+        </li>
+        <li>
+          QUADPACK, for quadrature over finite or infinite 1D intervals;
+        </li>
+        <li>
+          SLAP, for the solution of double precision or single
+          precision sparse systems of linear equations;
+        </li>
+        <li>
+          SOS, for square systems of nonlinear equations;
+        </li>
+        <li>
+          SPLP, for linear programming problems;
+        </li>
+        <li>
+          XERROR, for error handling.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>slatec</b> is available in
+      <a href = "slatec.html">a FORTRAN90 version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../slatec_test/slatec_test.html">
+      slatec_test</a>
+    </p>
+
+    <p>
+      <a href = "../eispack/eispack.html">
+      eispack</a>,
+      a FORTRAN90 code which
+      carries out eigenvalue computations;
+    </p>
+
+    <p>
+      <a href = "../fftpack5/fftpack5.html">
+      fftpack5</a>,
+      a FORTRAN90 code which
+      implements the Fast Fourier Transform (FFT)
+      by Paul Swarztrauber and Dick Valent;
+    </p>
+
+    <p>
+      <a href = "../fn/fn.html">
+      fn</a>,
+      a FORTRAN90 code which
+      evaluates elementary and special functions using Chebyshev polynomials,
+      including Airy, Bessel I, Bessel J, Bessel K, Bessel Y, beta, 
+      confluent hypergeometric, cosine integral, Dawson's integral, 
+      digamma (psi), error, exponential integral, gamma, hyperbolic cosine
+      integral, hyperbolic sine integral, incomplete gamma, log gamma, 
+      logarithmic integral, Pochhammer, psi, sine integral, Spence;
+      by Wayne Fullerton.
+    </p>
+
+    <p>
+      <a href = "../machine/machine.html">
+      machine</a>,
+      a FORTRAN90 code which
+      contains integer,
+      single precision real
+      and double precision real machine constants.
+    </p>
+
+    <p>
+      <a href = "../minpack/minpack.html">
+      minpack</a>,
+      a FORTRAN90 code which
+      solves systems of nonlinear equations, or the least squares minimization of the
+      residual of a set of linear or nonlinear equations.
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      nms</a>,
+      a FORTRAN90 code which
+      includes a wide variety of numerical software, including
+      solvers for linear systems of equations, interpolation of data,
+      numerical quadrature, linear least squares data fitting,
+      the solution of nonlinear equations, ordinary differential equations,
+      optimization and nonlinear least squares, simulation and random numbers,
+      trigonometric approximation and Fast Fourier Transforms.
+    </p>
+
+    <p>
+      <a href = "../pppack/pppack.html">
+      pppack</a>,
+      a FORTRAN90 code which
+      contains cubic spline and general
+      piecewise polynomial interpolation routines.
+    </p>
+
+   <p>
+      <a href = "../slap/slap.html">
+      slap</a>,
+      a FORTRAN90 code which
+      carries out the iterative solution of  sparse linear systems,
+      by Anne Greenbaum and Mark Seager.
+    </p>
+
+    <p>
+      <a href = "../xerror/xerror.html">
+      xerror</a>,
+      a FORTRAN90 code which
+      reports and handles errors detected during program execution.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Richard Brent,<br>
+          A FORTRAN Multiple-Precision Arithmetic Package,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 4, Number 1, March 1978, pages 71-81.
+        </li>
+        <li>
+          Richard Brent,<br>
+          Algorithm 524:
+          MP: A FORTRAN Multiple-Precision Arithmetic Package,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 4, Number 1, March 1978, pages 57-70.
+        </li>
+        <li>
+          Bill Buzbee,<br>
+          The SLATEC Common Math Library,<br>
+          in Sources and Development of Mathematical Software,<br>
+          edited by Wayne Cowell,<br>
+          Prentice-Hall, 1984,<br>
+          ISBN: 0-13-823501-5,<br>
+          LC: QA76.95.S68.
+        </li>
+        <li>
+          Carl deBoor,<br>
+          A Practical Guide to Splines,<br>
+          Springer, 2001,<br>
+          ISBN: 0387953663,<br>
+          LC: QA1.A647.v27.
+        </li>
+        <li>
+          Jack Dongarra, Jim Bunch, Cleve Moler, Pete Stewart,<br>
+          LINPACK User's Guide,<br>
+          SIAM, 1979,<br>
+          ISBN13: 978-0-898711-72-1.
+        </li>
+        <li>
+          Kirby Fong, Thomas Jefferson, Tokihiko Suyehiro, Lee Walton, <br>
+          Guide to the SLATEC Common Mathematical Library, <br>
+          April 10, 1990.
+        </li>
+        <li>
+          Phyllis Fox, Andrew Hall, Norman Schryer,<br>
+          Algorithm 528:</br>
+          Framework for a Portable Library,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 4, Number 2, June 1978, page 176-188.
+        </li>
+        <li>
+          Fred Fritsch, Ralph Carlson,<br>
+          Monotone Piecewise Cubic Interpolation,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 17, Number 2, April 1980, pages 238-246.
+        </li>
+        <li>
+          Charles Gear,<br>
+          Numerical Initial Value Problems in Ordinary Differential
+          Equations,<br>
+          Prentice-Hall, 1971,<br>
+          ISBN: 0136266061,<br>
+          LC: QA372.G4.
+        </li>
+        <li>
+          Ron Jones, David Kahaner,<br>
+          XERROR, The SLATEC Error Handling Package,<br>
+          Technical Report SAND82-0800,<br>
+          Sandia Laboratories, 1982.
+        </li>
+        <li>
+          David Kahaner, Cleve Moler, Steven Nash,<br>
+          Numerical Methods and Software,<br>
+          Prentice Hall, 1989,<br>
+          ISBN: 0-13-627258-4,<br>
+          LC: TA345.K34.
+        </li>
+        <li>
+          Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,<br>
+          Algorithm 539:
+          Basic Linear Algebra Subprograms for Fortran Usage,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 5, Number 3, September 1979, pages 308-323.
+        </li>
+        <li>
+          Jorge More, Burton Garbow, Kenneth Hillstrom,<br>
+          User Guide for MINPACK-1,<br>
+          Technical Report ANL-80-74,<br>
+          Argonne National Laboratory, 1980.
+        </li>
+        <li>
+          Robert Piessens, Elise deDoncker-Kapenga,
+          Christian Ueberhuber, David Kahaner,<br>
+          QUADPACK: A Subroutine Package for Automatic Integration,<br>
+          Springer, 1983,<br>
+          ISBN: 3540125531,<br>
+          LC: QA299.3.Q36.
+        </li>
+        <li>
+          Mark Seager,<br>
+          A SLAP for the Masses,<br>
+          Technical Report UCRL-100267,<br>
+          Lawrence Livermore National Laboratory, December 1988.
+        </li>
+        <li>
+          Paul Swarztrauber,<br>
+          Vectorizing the FFT's,<br>
+          in Parallel Computations,<br>
+          edited by Garry Rodrigue,<br>
+          Academic Press, 1982,<br>
+          ISBN: 0125921012,<br>
+          LC: QA76.6.P348.
+        </li>
+        <li>
+          James Wilkinson, Christian Reinsch,<br>
+          Handbook for Automatic Computation,<br>
+          Volume II, Linear Algebra, Part 2,<br>
+          Springer, 1971,<br>
+          ISBN: 0387054146,<br>
+          LC: QA251.W67.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "slatec.f90">slatec.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "slatec.sh">slatec.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 18 February 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

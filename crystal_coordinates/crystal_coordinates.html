@@ -1,0 +1,251 @@
+<html>
+
+  <head>
+    <title>
+      crystal_coordinates
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      crystal_coordinates
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>crystal_coordinates</b>,
+      a Fortran90 code which
+      generates the coordinates of a set of 4 * NX * NY * NZ
+      points in a rectangular block of NX * NY * NZ cells, with
+      face-centered cubic (FCC) symmetry.
+    </p>
+
+    <p>
+      The user is allowed to specify the width of a cell, and the
+      maximum magnitude of a random displacement of each point.
+    </p>
+
+    <p>
+      The coordinate data is written to a file that can be used
+      for visualization, or more likely as the initial condition for
+      the coordinates of molecules in a molecular dynamics simulation.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <dl>
+        <dt>
+          <b>crystal_coordinates</b>
+        </dt>
+        <dd>
+          begins the program.
+        </dd>
+      </dl>
+    </p>
+
+    <p>
+      Inputs:
+      <dl>
+        <dt>
+          <b>a</b>
+        </dt>
+        <dd>
+          the lattice spacing, or cell width, in Angstroms.
+        </dd>
+        <dt>
+          <b>nx</b>
+        </dt>
+        <dd>
+          the number of cells in the X direction.
+        </dd>
+        <dt>
+          <b>ny</b>
+        </dt>
+        <dd>
+          the number of cells in the Y direction.
+        </dd>
+        <dt>
+          <b>nz</b>
+        </dt>
+        <dd>
+          the number of cells in the Z direction.
+        </dd>
+        <dt>
+          <b>displac</b>
+        </dt>
+        <dd>
+          the maximum magnitude of a random displacement applied to
+          every node coordinate.
+        </dd>
+        <dt>
+          <b>file_name</b>
+        </dt>
+        <dd>
+          the name of the file into which the coordinate data is to be stored.
+        </dd>
+      </dl>
+    </p>
+
+    <p>
+      The output file has a single initial line of the form
+      <pre>
+        % F <i>n</i> <i>x-width</i> <i>y-width</i> <i>z-width</i>
+      </pre>
+      where
+      <dl>
+        <dt>
+          <b>n</b>
+        </dt>
+        <dd>
+          is the number of points.
+        </dd>
+        <dt>
+          <b>x-width, y-width, z-width</b>
+        </dt>
+        <dd>
+          are the total widths of the slab in the X, Y and Z directions.
+        </dd>
+       </dl>
+       followed by <i>n</i> lines, each containing the (X,Y,Z) coordinates
+       of a point.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>crystal_coordinates</b> is available in
+      <a href = "crystal_coordinates.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Programs:
+    </h3>
+
+    <p>
+      <a href = "../crystal_coordinates_test/crystal_coordinates_test.html">
+      crystal_coordinates_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/md1/md1.html">
+      md1</a>,
+      a Fortran90 code which
+      is a molecular dynamics simulation program.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/md2/md2.html">
+      md2</a>,
+      a Fortran90 code which
+      is a molecular dynamics simulation program.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/md3/md3.html">
+      md3</a>,
+      a Fortran90 code which
+      is a molecular dynamics simulation program.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/md3glue/md3glue.html">
+      md3glue</a>,
+      a Fortran90 code which
+      is a molecular dynamics simulation program.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/mdbnch/mdbnch.html">
+      mdbnch</a>,
+      a Fortran77 code which
+      carries out a molecular dynamics benchmark.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/xyz_display/xyz_display.html">
+      xyz_display</a>,
+      a MATLAB code which
+      reads XYZ information defining points in 3D, and displays
+      an image in the MATLAB graphics window.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/xyz_display_opengl/xyz_display_opengl.html">
+      xyz_display_opengl</a>,
+      a C++ code which
+      reads XYZ information defining points in 3D, and displays
+      an image using OpenGL.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Matthew Allen, DJ Tildesley,<br>
+          Computer Simulation of Liquids,<br>
+          Oxford University Press, 1987,<br>
+          ISBN: 0198556454,<br>
+          LC: QC145.2.
+        </li>
+        <li>
+          Furio Ercolessi,<br>
+          A Molecular Dynamics Primer
+        </li>
+        <li>
+          Dennis Rapaport,<br>
+          The Art of Molecular Dynamics Simulation,<br>
+          Cambridge University Press, 2004,<br>
+          ISBN: 0521825687.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "crystal_coordinates.f90">crystal_coordinates.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "crystal_coordinates.sh">crystal_coordinates.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 June 2024.
+
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

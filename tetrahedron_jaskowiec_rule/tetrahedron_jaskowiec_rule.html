@@ -1,0 +1,200 @@
+<html>
+
+  <head>
+    <title>
+      tetrahedron_jaskowiec_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      tetrahedron_jaskowiec_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>tetrahedron_jaskowiec_rule</b>,
+      a Fortran90 code which
+      returns quadrature rules, with exactness up to total degree 20,
+      over the interior of a tetrahedron in 3D,
+      by Jan Jaskowiec, Natarajan Sukumar.
+    </p>
+
+    <p>
+      The quadrature rules are described in terms of barycentric coordinates
+      (a,b,c,d), with weights w that sum to 1.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>tetrahedron_jaskowiec_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/tetrahedron_jaskowiec_rule/tetrahedron_jaskowiec_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/tetrahedron_jaskowiec_rule/tetrahedron_jaskowiec_rule.html">a C++ version</a> and
+      <a href = "tetrahedron_jaskowiec_rule.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/tetrahedron_jaskowiec_rule/tetrahedron_jaskowiec_rule.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/tetrahedron_jaskowiec_rule/tetrahedron_jaskowiec_rule.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/tetrahedron_jaskowiec_rule/tetrahedron_jaskowiec_rule.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../tetrahedron_jaskowiec_rule_test/tetrahedron_jaskowiec_rule_test.html">
+      tetrahedron_jaskowiec_rule_test</a>
+    </p>
+
+    <p>
+      <a href = "../simplex_gm_rule/simplex_gm_rule.html">
+      simplex_gm_rule</a>,
+      a Fortran90 code which
+      defines Grundmann-Moeller quadrature rules 
+      over the interior of a triangle in 2d, a tetrahedron in 3d, or
+      over the interior of the simplex in m dimensions.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_arbq_rule/tetrahedron_arbq_rule.html">
+      tetrahedron_arbq_rule</a>,
+      a Fortran90 code which
+      returns quadrature rules, 
+      with exactness up to total degree 15,
+      over the interior of a tetrahedron in 3d,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_felippa_rule/tetrahedron_felippa_rule.html">
+      tetrahedron_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule for approximating integrals
+      over the interior of a tetrahedron in 3d.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_integrals/tetrahedron_integrals.html">
+      tetrahedron_integrals</a>,
+      a Fortran90 code which
+      returns the exact value of the integral of any monomial
+      over the interior of the unit tetrahedron in 3d.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_keast_rule/tetrahedron_keast_rule.html">
+      tetrahedron_keast_rule</a>,
+      a Fortran90 code which
+      returns a Keast quadrature rule, with exactness between 0 and 8,
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_monte_carlo/tetrahedron_monte_carlo.html">
+      tetrahedron_monte_carlo</a>,
+      a Fortran90 code which
+      uses the Monte Carlo method to estimate the integral of a function
+      over the interior of the unit tetrahedron in 3d.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_ncc_rule/tetrahedron_ncc_rule.html">
+      tetrahedron_ncc_rule</a>,
+      a Fortran90 code which
+      defines Newton-Cotes Closed (NCC) quadrature rules 
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_nco_rule/tetrahedron_nco_rule.html">
+      tetrahedron_nco_rule</a>,
+      a Fortran90 code which
+      defines Newton-Cotes Open (NCO) quadrature rules
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_witherden_rule/tetrahedron_witherden_rule.html">
+      tetrahedron_witherden_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for the tetrahedron,
+      with exactness up to total degree 10.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Jan Jaskowiec, Natarajan Sukumar,<br>
+          High order cubature rules for tetrahedra and pyramids,<br>
+          International Journal of Numerical Methods in Engineering,<br>
+          Volume 121, Number 11, pages 2418-2436, 15 June 2020.
+        </li>
+        <li>
+          Jan Jaskowiec, Natarajan Sukumar,<br>
+          High order symmetric cubature rules for tetrahedra and pyramids,<br>
+          International Journal of Numerical Methods in Engineering,<br>
+          Volume 122, Number 1, pages 148-171, 24 August 2020.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "tetrahedron_jaskowiec_rule.f90">tetrahedron_jaskowiec_rule.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "tetrahedron_jaskowiec_rule.sh">tetrahedron_jaskowiec_rule.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "tetrahedron_jaskowiec_rule_to_f90.m">
+          tetrahedron_jaskowiec_rule_to_c.m</a>,
+          a MATLAB script which reads a data file describing one of
+          the rules (with 128 digits) and writes a Fortran90 function
+          to return points and weights.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 12 April 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

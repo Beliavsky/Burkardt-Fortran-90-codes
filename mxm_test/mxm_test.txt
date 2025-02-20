@@ -1,0 +1,27 @@
+14 January 2025   1:19:22.102 PM
+ 
+MXM:
+  FORTRAN90 version
+  Compute matrix-matrix product A = B * C
+ 
+  Matrix B is    500 by   1000
+  Matrix C is   1000 by    400
+  Matrix A will be    500 by    400
+ 
+  Number of floating point operations =    400000000
+  Estimated CPU time is   0.15     seconds.
+ 
+  Method     Cpu Seconds       MegaFlopS
+  ------  --------------  --------------
+  IJK       0.792569         504.688    
+  IKJ       0.834540         479.306    
+  JIK        1.07440         372.302    
+  JKI       0.724071         552.432    
+  KIJ       0.842329         474.874    
+  KJI       0.747795         534.906    
+  MATMUL    0.235740E-01     16967.8    
+ 
+MXM:
+  Normal end of execution.
+ 
+14 January 2025   1:19:27.155 PM

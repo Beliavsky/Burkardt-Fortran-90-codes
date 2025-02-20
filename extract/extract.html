@@ -1,0 +1,160 @@
+<html>
+
+  <head>
+    <title>
+      extract
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      extract
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>extract</b>,
+      a Fortran90 code which 
+      pulls a copy of a Fortran 
+      block data, function, module, program or subroutine from a big file, 
+      and saves the copy in a little file.  
+    </p>
+
+    <p>
+      I've found the code useful, 
+      as an alternative to printing out a huge library of routines, or using 
+      an editor to extract the seven routines I need from a collection of 200.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <blockquote>
+        <b>extract</b> <i>module</i> <i>file.f</i>
+      </blockquote>
+      where
+      <ul>
+        <li>
+          <i>module</i> is the name of the desired module;
+        </li>
+        <li>
+          <i>file.f</i> is the file to be searched.
+        </li>
+      </ul>
+      If the module is found, it is written to a file named <i>module.f</i>.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>extract</b> is available in 
+      <a href = "extract.html">a Fortran90 version</a> 
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../extract_test/extract_test.html">
+      extract_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/catalog/catalog.html">
+      catalog</a>,
+      a C++ code which
+      reads a C, C++, Fortran77 or Fortran90 program and prints every line 
+      that begins with a special index tag.  If the program has been marked
+      up expecting this convention, it is a handy way of making a table
+      of contents of a program file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/f77_cleanup/f77_cleanup.html">
+      f77_cleanup</a>,
+      a Fortran90 code which
+      makes a copy of a Fortran77 file in which some minor cleanups have
+      been made.
+    </p>
+
+    <p>
+      <a href = "../fixcon/fixcon.html">
+      fixcon</a>,
+      a Fortran90 code which
+      reads a Fortran file using Fortran77 continuation statements,
+      and makes a copy that uses Fortran90 continuation instead.
+    </p>
+
+    <p>
+      <a href = "../f90split/f90split.html">
+      f90split</a>,
+      a Fortran90 code which
+      reads a Fortran file and creates individual files for every
+      subroutine or function in the file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/htmlindex/htmlindex.html">
+      htmlindex</a>,
+      a C++ code which
+      reads a Fortran program and writes a skeleton HTML page describing it,
+      assuming that each subroutine includes a '!!' or 'cc' description line.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/include_files/include_files.html">
+      include_files</a>,
+      a Fortran90 code which
+      reads a Fortran program with INCLUDE statements, and makes a copy
+      with the indicated files included.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/module_mark/module_mark.html">
+      module_mark</a>,
+      a Fortran90 code which 
+      replaces bare "END" statements by "END (module name)" statements
+      in a Fortran90 file.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "extract.f90">extract.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "extract.sh">extract.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 17 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

@@ -1,0 +1,222 @@
+<html>
+
+  <head>
+    <title>
+      fixcon
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align="center">
+      fixcon
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>fixcon</b>,
+      a Fortran90 code which
+      converts the line continuation scheme used in a Fortran77
+      file to that used in Fortran90 files.
+    </p>
+
+    <p>
+      In Fortran77, if a line
+      is not a comment line, then a nonblank character (actually, the character
+      can't be '0' either) in column six indicates that the current line is a
+      continuation of the previous one.  (Complications include what happens
+      when the previous line is a comment, and how you deal with the joy
+      of TAB characters).  For example, the following would be a legally
+      continued line in Fortran 77 (assuming that the dollar sign is
+      actually in column 6):
+      </p><pre>            x = 1 + 2 + 3 + 4
+           $  + 5 + 6
+      </pre>
+    <p></p>
+
+    <p>
+      In Fortran90, a line can extend to the next line by having an
+      ampersand as its last character.  Thus, the Fortran90 version
+      of the same line looks like this:
+      </p><pre>            x = 1 + 2 + 3 + 4 &amp;
+              + 5 + 6
+      </pre>
+    <p></p>
+
+    <p>
+      <b>FIXCON</b> reads a file that uses the Fortran77 convention, and writes
+      a copy that uses the F90 convention.  If you've ever tried to do this
+      by hand on a substantial file, it might be worth your while to try
+      this program instead.
+    </p>
+
+    <p>
+      With nose firmly squeezed shut, the program has been modified to
+      try to deal with the evil of TAB characters.  The program's treatment
+      is simply to replace each TAB by six blanks.
+    </p>
+
+    <p>
+      Two other small fixes are applied.
+      <ul>
+        <li>
+          First, the code will only read the first 72 columns of input.
+          Fortran77 allows you to put any junk you want beyond column
+          72, but it will not be seen by the compiler).
+        </li>
+        <li>
+          Secondly, all lines that look like comment lines (beginning
+          with a <b>C</b> or <b>c</b> or <b>D</b> or <b>d</b> or <b>*</b>)
+          are modified to use the Fortran90 comment convention of
+          beginning with an exclamation mark.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align="center">
+      Usage:
+    </h3>
+
+    <p>
+      </p><blockquote>
+         <b>fixcon</b> <i>file.f file.f90</i>
+      </blockquote>
+      <dl>
+        <dt>
+          file.f
+        </dt>
+        <dd>
+          The input file, which uses the Fortran77 convention.
+        </dd>
+        <dt>
+          file.f90
+        </dt>
+        <dd>
+          The output file, which uses the Fortran90 convention.
+        </dd>
+      </dl>
+    <p></p>
+
+    <h3 align="center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align="center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>fixcon</b> is available in 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/f_src/fixcon/fixcon.html">a Fortran90 version</a> 
+    </p>
+
+    <h3 align="center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../fixcon_test/fixcon_test.html">
+      fixcon_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/catalog/catalog.html">
+      catalog</a>,
+      a C++ code which
+      reads a C, C++, Fortran77 or Fortran90 program and prints every line 
+      that begins with a special index tag.  If the program has been marked
+      up expecting this convention, it is a handy way of making a table
+      of contents of a program file.
+    </p>
+
+    <p>
+      <a href = "../extract/extract.html">
+      extract</a>,
+      a Fortran90 code which
+      extracts one routine from a Fortran77 or Fortran90 file;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/f77_cleanup/f77_cleanup.html">
+      f77_cleanup</a>,
+      a Fortran90 code which
+      makes a copy of a Fortran77 file in which some minor cleanups have
+      been made.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/f77split/f77split.html">
+      f77split</a>,
+      a C code which
+      splits a file containing
+      multiple Fortran77 routines into separate files;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/f90split/f90split.html">
+      f90split</a>,
+      a C code which
+      splits a file containing multiple Fortran90 routines into separate files;
+    </p>
+
+    <p>
+      <a href = "../f90split/f90split.html">
+      f90split</a>,
+      a Fortran90 code which
+      reads a Fortran file and creates individual files for every
+      subroutine or function in the file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/include_files/include_files.html">
+      include_files</a>,
+      a Fortran90 code which
+      reads a Fortran file with INCLUDE statements, and makes a copy in which the
+      indicated files have been included;
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/module_mark/module_mark.html">
+      module_mark</a>,
+      a Fortran90 code which
+      replaces bare "END" statements by "END (module name)" statements
+      in a Fortran90 file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/recomment/recomment.html">
+      recomment</a>,
+      a C++ code which
+      converts C style comments to C++ style.
+    </p>
+
+    <h3 align="center">
+      Source code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "fixcon.f90">fixcon.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "fixcon.sh">fixcon.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 June 2024.
+    </i>
+
+  </body>
+
+</html>

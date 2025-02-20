@@ -1,0 +1,14 @@
+# lotka_phase_commands.txt
+#
+# Usage:
+#  gnuplot < lotka_phase_commands.txt
+#
+set term png
+set output "lotka_phase.png"
+set xlabel "Y(1)"
+set ylabel "Y(2)"
+set title "MAD phase plane"
+set grid
+set style data lines
+plot "lotka_phase_data.txt" using 2:3 lw 3 linecolor rgb "blue"
+quit

@@ -1,0 +1,231 @@
+<html>
+
+  <head>
+    <title>
+      test_matrix
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      test_matrix
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>test_matrix</b>,
+      a Fortran90 code which
+      defines test matrices for which the condition number, determinant,
+      eigenvalues, eigenvectors, inverse, null vectors, P*L*U factorization
+      or linear system solution are known.  Examples include the 
+      Fibonacci, Hilbert, Redheffer, Vandermonde, Wathen and Wilkinson 
+      matrices.
+    </p>
+
+    <p> 
+      A wide range of matrix 
+      dimensions, forms and properties are available.  These matrices may be 
+      useful in testing an algorithm for correctness on a variety of problems.
+    </p>
+
+    <p>
+      Some matrices can be rectangular, with the user specifying
+      the number of rows and columns.  Almost all the matrices can be
+      made of arbitrary size, with the user specifying the dimension.
+    </p>
+
+    <p>
+      Different matrix zero structures are available, including diagonal,
+      bidiagonal, tridiagonal, pentadiagonal, banded, upper and lower
+      triangular, and Hessenberg.
+    </p>
+
+    <p>
+      Different matrix symmetry patterns are available, including
+      symmetric, antisymmetric, persymmetric, circulant, Toeplitz, and
+      Hankel.
+    </p>
+
+    <p>
+      Some matrices come from a MATLAB M file collection developed by 
+      Nicholas Higham, Department of Mathematics, University of Manchester.
+    </p>
+
+    <p>
+      An earlier version of the collection is available, again as MATLAB 
+      M files, in ACM TOMS Algorithm 694, in the TOMS directory of
+      <a href = "https://www.netlib.org/">the NETLIB web site</a>.
+    </p>
+
+    <p>
+      Some matrices are available at
+      <a href = "https://math.nist.gov/">
+                 https://math.nist.gov</a>,
+      the Matrix Market web site.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>test_matrix</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/test_matrix/test_matrix.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/test_matrix/test_matrix.html">a C++ version</a> and
+      <a href = "test_matrix.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/test_matrix/test_matrix.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/test_matrix/test_matrix.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/test_matrix/test_matrix.html">a Python version.</a>
+    </p>
+ 
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../test_matrix_test/test_matrix_test.html">
+      test_matrix_test</a>
+    </p>
+
+    <p>
+      <a href = "../arpack/arpack.html">
+      arpack</a>, 
+      a Fortran90 code which
+      computes eigenvalues for large matrices;
+    </p>
+
+    <p>
+      <a href = "../cg/cg.html">
+      cg</a>,
+      a Fortran90 code which
+      implements a simple version of the conjugate gradient (CG) method
+      for solving a system of linear equations of the form A*x=b, 
+      suitable for situations in which the matrix A is positive definite
+      (only real, positive eigenvalues) and symmetric.
+    </p>
+
+    <p>
+      <a href = "../condition/condition.html">
+      condition</a>,
+      a Fortran90 code which
+      implements methods of computing or estimating the condition number 
+      of a matrix.
+    </p>
+
+    <p>
+      <a href = "../eispack/eispack.html">
+      eispack</a>,
+      a Fortran90 code which
+      carries out eigenvalue computations;
+      superseded by LAPACK;
+    </p>
+
+    <p>
+      <a href = "../jacobi_eigenvalue/jacobi_eigenvalue.html">
+      jacobi_eigenvalue</a>,
+      a Fortran90 code which
+      implements the Jacobi iteration for the iterative determination
+      of the eigenvalues and eigenvectors of a real symmetric matrix.
+    </p>
+
+    <p>
+      <a href = "../levenshtein_matrix/levenshtein_matrix.html">
+      levenshtein_matrix</a>,
+      a Fortran90 code which
+      returns the Levenshtein distance matrix defined by two strings.
+    </p>
+
+    <p>
+      <a href = "../linpack_d/linpack_d.html">
+      linpack_d</a>,
+      a Fortran90 code which
+      factors and solves systems of linear equations 
+      using double precision real arithmetic.
+    </p>
+
+    <p>
+      <a href = "../linpack_z/linpack_z.html">
+      linpack_z</a>,
+      a Fortran90 code which
+      factors and solves systems of linear equations 
+      using double precision complex arithmetic.
+    </p>
+
+    <p>
+      <a href = "../polynomial_conversion/polynomial_conversion.html">
+      polynomial_conversion</a>,
+      a Fortran90 code which
+      converts representations of a polynomial between monomial, Bernstein,
+      Chebyshev, Hermite, Lagrange, Laguerre and other forms.
+    </p>
+
+    <p>
+      <a href = "../test_eigen/test_eigen.html">
+      test_eigen</a>,
+      a Fortran90 code which
+      implements test matrices for eigenvalue analysis. 
+    </p>
+
+    <p>
+      <a href = "../test_matrix_exponential/test_matrix_exponential.html">
+      test_matrix_exponential</a>,
+      a Fortran90 code which
+      defines a set of test cases for computing the matrix exponential.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/wathen_matrix/wathen_matrix.html">
+      wathen_matrix</a>,
+      a Fortran90 code which
+      compares storage schemes (full, banded, sparse triplet) and 
+      solution strategies (Linpack full, Linpack banded, conjugate gradient) 
+      for linear systems involving the Wathen matrix, which can arise when 
+      solving a problem using the finite element method (FEM).
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/wishart_matrix/wishart_matrix.html">
+      wishart_matrix</a>,
+      a Fortran90 code which
+      produces sample matrices from the Wishart or Bartlett distributions,
+      useful for sampling random covariance matrices.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "test_matrix.f90">test_matrix.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "test_matrix.sh">test_matrix.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 23 March 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,94 @@
+28 December 2022  10:42:00.272 PM
+ 
+is_prime_test():
+  FORTRAN90 version
+  Test is_prime().
+ 
+is_prime1_test():
+  is_prime1(n) is true if n is a prime:
+ 
+         n      is_prime(n)     is_prime1(n)
+ 
+           1  false  false
+           2  true   true 
+          12  false  false
+           3  true   true 
+          91  false  false
+          53  true   true 
+         437  false  false
+         311  true   true 
+        1333  false  false
+         719  true   true 
+       16483  false  false
+        7919  true   true 
+      223609  false  false
+       81799  true   true 
+      873599  false  false
+      800573  true   true 
+     5693761  false  false
+     7559173  true   true 
+    90166053  false  false
+    69600977  true   true 
+     6110601  false  false
+   145253029  true   true 
+ 
+is_prime2_test():
+  is_prime2(n) is true if n is a prime:
+ 
+         n      is_prime(n)     is_prime2(n)
+ 
+           1  false  false
+           2  true   true 
+          12  false  false
+           3  true   true 
+          91  false  false
+          53  true   true 
+         437  false  false
+         311  true   true 
+        1333  false  false
+         719  true   true 
+       16483  false  false
+        7919  true   true 
+      223609  false  false
+       81799  true   true 
+      873599  false  false
+      800573  true   true 
+     5693761  false  false
+     7559173  true   true 
+    90166053  false  false
+    69600977  true   true 
+     6110601  false  false
+   145253029  true   true 
+ 
+is_prime3_test():
+  is_prime3(n) is true if n is a prime:
+ 
+         n      is_prime(n)     is_prime3(n)
+ 
+           1  false  false
+           2  true   true 
+          12  false  false
+           3  true   true 
+          91  false  false
+          53  true   true 
+         437  false  false
+         311  true   true 
+        1333  false  false
+         719  true   true 
+       16483  false  false
+        7919  true   true 
+      223609  false  false
+       81799  true   true 
+      873599  false  false
+      800573  true   true 
+     5693761  false  false
+     7559173  true   true 
+    90166053  false  false
+    69600977  true   true 
+     6110601  false  false
+   145253029  true   true 
+ 
+is_prime_test():
+  Normal end of execution.
+ 
+28 December 2022  10:42:00.850 PM

@@ -1,0 +1,27 @@
+13 November 2024   9:57:47.744 AM
+
+rk1_implicit_test():
+  Fortran90 version
+  Test rk1_implicit().
+
+predator_prey_test()
+
+  A pair of ordinary differential equations for a population
+  of predators and prey are solved using rk1_implicit().
+
+  The exact solution shows periodic behavior, with a fixed
+  period and amplitude.
+ 
+  predator_prey_test: data stored in "predator_prey_data.txt".
+  predator_prey_test: plot commands stored in "predator_prey_commands.txt".
+
+stiff_test():
+  Solve stiff ODE using rk1_implicit()
+ 
+  plot2: data stored in "stiff_data1.txt" and "stiff_data2.txt".
+  plot2: plot commands stored in "stiff_commands.txt".
+
+rk1_implicit_test():
+  Normal end of execution.
+
+13 November 2024   9:57:47.748 AM

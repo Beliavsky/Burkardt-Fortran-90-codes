@@ -1,0 +1,600 @@
+<html>
+
+  <head>
+    <title>
+      f90_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      f90_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>f90_rule</b>,
+      a Fortran90 code which
+      computes a quadrature rule which
+      estimates the integral of a function f(x), which might be defined over 
+      a one dimensional region (a line) or more complex shapes such as, 
+      a circle, a triangle, a quadrilateral, a polygon, or a higher dimensional
+      region, and which might include an associated weight function w(x).
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>f90_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/c_rule/c_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/cpp_rule/cpp_rule.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/f77_rule/f77_rule.html">a Fortran77 version</a> and
+      <a href = "f90_rule.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/python_rule/python_rule.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../alpert_rule/alpert_rule.html">
+      alpert_rule</a>,
+      a Fortran90 code which
+      sets up an Alpert quadrature rule for functions which are 
+      regular, log(x) singular, or 1/sqrt(x) singular.
+    </p>
+
+    <p>
+      <a href = "../annulus_rule/annulus_rule.html">
+      annulus_rule</a>,
+      a Fortran90 code which
+      computes a quadrature rule for estimating integrals of a function 
+      over the interior of a circular annulus in 2D.
+    </p>
+
+    <p>
+      <a href = "../ccn_rule/ccn_rule.html">
+      ccn_rule</a>,
+      a Fortran90 code which
+      defines a Clenshaw Curtis Nested (CCN) quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../chebyshev1_rule/chebyshev1_rule.html">
+      chebyshev1_rule</a>,
+      a Fortran90 code which
+      computes a Gauss-Chebyshev type 1 quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../chebyshev2_rule/chebyshev2_rule.html">
+      chebyshev2_rule</a>,
+      a Fortran90 code which
+      computes a Gauss-Chebyshev type 2 quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../circle_rule/circle_rule.html">
+      circle_rule</a>,
+      a Fortran90 code which
+      computes a quadrature rule for the unit circle in 2D, 
+      to approximate integrals of f(x,y) over the 
+      circumference of the circle of radius 1 and center (0,0).
+    </p>
+
+    <p>
+      <a href = "../clenshaw_curtis_rule/clenshaw_curtis_rule.html">
+      clenshaw_curtis_rule</a>,
+      a Fortran90 code which
+      defines a Clenshaw Curtis quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../cube_arbq_rule/cube_arbq_rule.html">
+      cube_arbq_rule</a>,
+      a Fortran90 code which
+      returns quadrature rules, 
+      with exactness up to total degree 15,
+      over the interior of the symmetric cube in 3D,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "../cube_felippa_rule/cube_felippa_rule.html">
+      cube_felippa_rule</a>,
+      a Fortran90 code which
+      returns the points and weights of a Felippa quadrature rule
+      over the interior of a cube in 3D.
+    </p>
+
+    <p>
+      <a href = "../disk_rule/disk_rule.html">
+      disk_rule</a>,
+      a Fortran90 code which
+      computes a quadrature rule
+      over the interior of a disk of radius R centered at the origin.
+    </p>
+
+    <p>
+      <a href = "../disk01_rule/disk01_rule.html">
+      disk01_rule</a>,
+      a Fortran90 code which
+      computes quadrature rules 
+      over the interior of the unit disk in 2D, with radius 1 and center (0,0).
+    </p>
+
+    <p>
+      <a href = "../filon_rule/filon_rule.html">
+      filon_rule</a>,
+      a Fortran90 code which
+      uses Filon's method to approximate integrals including an
+      oscillatory factor of sin(k*x) or cos(k*x).
+    </p>
+
+    <p>
+      <a href = "../gegenbauer_rule/gegenbauer_rule.html">
+      gegenbauer_rule</a>,
+      a Fortran90 code which
+      computes a Gauss-Gegenbauer quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../gen_hermite_rule/gen_hermite_rule.html">
+      gen_hermite_rule</a>,
+      a Fortran90 code which
+      returns a generalized Gauss-Hermite quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../gen_laguerre_rule/gen_laguerre_rule.html">
+      gen_laguerre_rule</a>,
+      a Fortran90 code which
+      returns a generalized Gauss-Laguerre quadrature rule.
+    </p>
+
+    <p>
+      <a href = "../gl_fast_rule/gl_fast_rule.html">
+      gl_fast_rule</a>,
+      a Fortran90 code which
+      carries out the rapid computation of the K-th value and weight of 
+      an N-point Gauss-Legendre quadrature rule,
+      by Ignace Bogaert.
+    </p>
+
+    <p>
+      <a href = "../hermite_rule/hermite_rule.html">
+      hermite_rule</a>,
+      a Fortran90 code which
+      returns a Gauss-Hermite quadrature rule
+      for estimating the integral of a function with density exp(-x^2)
+      over the interval (-oo,+oo).
+    </p>
+
+    <p>
+      <a href = "../hexahedron_jaskowiec_rule/hexahedron_jaskowiec_rule.html">
+      hexahedron_jaskowiec_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Jaskowiec quadrature rule for the hexahedron,
+      with exactness up to total degree 21.
+    </p>
+
+    <p>
+      <a href = "../hexahedron_witherden_rule/hexahedron_witherden_rule.html">
+      hexahedron_witherden_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for the hexahedron,
+      with exactness up to total degree 11.
+    </p>
+
+    <p>
+      <a href = "../jacobi_rule/jacobi_rule.html">
+      jacobi_rule</a>,
+      a Fortran90 code which
+      returns a Gauss-Jacobi quadrature rule.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/kronrod_rule/kronrod_rule.html">
+      kronrod_rule</a>,
+      a Fortran90 code which
+      computes a Gauss and Gauss-Kronrod pair of quadrature rules
+      of arbitrary order,
+      by Robert Piessens, Maria Branders.
+    </p>
+
+    <p>
+      <a href = "../laguerre_rule/laguerre_rule.html">
+      laguerre_rule</a>,
+      a Fortran90 code which
+      returns a Gauss-Laguerre quadrature rule
+      for estimating the integral of a function with density exp(-x) 
+      over the interval [0,+oo).
+    </p>
+
+    <p>
+      <a href = "../lattice_rule/lattice_rule.html">
+      lattice_rule</a>,
+      a Fortran90 code which
+      approximates M-dimensional integrals using lattice rules.
+    </p>
+
+    <p>
+      <a href = "../legendre_fast_rule/legendre_fast_rule.html">
+      legendre_fast_rule</a>,
+      a Fortran90 code which
+      uses a fast algorithm to compute a Gauss-Legendre quadrature rule
+      for estimating the integral of a function with density rho(x)=1
+      over the interval [-1,+1].
+    </p>
+
+    <p>
+      <a href = "../legendre_rule/legendre_rule.html">
+      legendre_rule</a>,
+      a Fortran90 code which
+      returns a Gauss-Legendre quadrature rule
+      for estimating the integral of a function with density rho(x)=1
+      over the interval [-1,+1].
+    </p>
+
+    <p>
+      <a href = "../line_fekete_rule/line_fekete_rule.html">
+      line_fekete_rule</a>,
+      a Fortran90 code which
+      estimates the location of N Fekete points, for polynomial
+      interpolation or quadrature,
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../line_felippa_rule/line_felippa_rule.html">
+      line_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../line_ncc_rule/line_ncc_rule.html">
+      line_ncc_rule</a>,
+      a Fortran90 code which
+      computes a Newton Cotes Closed (NCC) quadrature rule,
+      using equally spaced points,
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../line_nco_rule/line_nco_rule.html">
+      line_nco_rule</a>,
+      a Fortran90 code which
+      computes a Newton Cotes Open (NCO) quadrature rule,
+      using equally spaced points,
+      over the interior of a line segment in 1D.
+    </p>
+
+    <p>
+      <a href = "../patterson_rule/patterson_rule.html">
+      patterson_rule</a>,
+      a Fortran90 code which
+      returns a Gauss-Patterson quadrature rule 
+      of order 1, 3, 7, 15, 31, 63, 127, 255 or 511.
+    </p>
+
+    <p>
+      <a href = "../power_rule/power_rule.html">
+      power_rule</a>,
+      a Fortran90 code which
+      constructs a power rule, that is, a product quadrature rule 
+      from identical 1D factor rules.
+    </p>
+
+    <p>
+      <a href = "../prism_jaskowiec_rule/prism_jaskowiec_rule.html">
+      prism_jaskowiec_rule</a>,
+      a Fortran90 code which
+      returns symmetric quadrature rules, with exactness up to total 
+      degree 20, over the interior of a prism with triangular base,
+      by Jan Jaskowiec, Natarajan Sukumar.
+    </p>
+
+    <p>
+      <a href = "../prism_witherden_rule/prism_witherden_rule.html">
+      prism_witherden_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for a prism with
+      triangular base, with exactness up to total degree 10.
+    </p>
+
+    <p>
+      <a href = "../product_rule/product_rule.html">
+      product_rule</a>,
+      a Fortran90 code which
+      constructs a product quadrature rule from distinct 1D factor rules.
+    </p>
+
+    <p>
+      <a href = "../pyramid_felippa_rule/pyramid_felippa_rule.html">
+      pyramid_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule for approximating integrals
+      over the interior of a pyramid in 3D.
+    </p>
+
+    <p>
+      <a href = "../pyramid_jaskowiec_rule/pyramid_jaskowiec_rule.html">
+      pyramid_jaskowiec_rule</a>,
+      a Fortran90 code which
+      returns symmetric quadrature rules, with exactness up to total degree 20,
+      over the interior of a pyramid in 3D,
+      by Jan Jaskowiec, Natarajan Sukumar.
+    </p>
+
+    <p>
+      <a href = "../pyramid_rule/pyramid_rule.html">
+      pyramid_rule</a>,
+      a Fortran90 code which
+      computes a conical product quadrature rule
+      over the interior of the unit pyramid in 3D;
+    </p>
+
+    <p>
+      <a href = "../pyramid_witherden_rule/pyramid_witherden_rule.html">
+      pyramid_witherden_rule</a>,
+      a Fortran90 code which
+      returns a Witherden quadrature rule, with exactness up to total 
+      degree 10, over the interior of a pyramid.
+    </p>
+
+    <p>
+      <a href = "../quad_rule/quad_rule.html">
+      quad_rule</a>, 
+      a Fortran90 code which
+      defines 1-dimensional quadrature rules.
+    </p>
+
+    <p>
+      <a href = "../quadrilateral_witherden_rule/quadrilateral_witherden_rule.html">
+      quadrilateral_witherden_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for the quadrilateral,
+      with exactness up to total degree 21.
+    </p>
+
+    <p>
+      <a href = "../simplex_gm_rule/simplex_gm_rule.html">
+      simplex_gm_rule</a>,
+      a Fortran90 code which
+      defines Grundmann-Moeller quadrature rules 
+      over the interior of a triangle in 2D, a tetrahedron in 3D,
+      or a simplex in M dimensions.
+    </p>
+
+    <p>
+      <a href = "../sphere_lebedev_rule/sphere_lebedev_rule.html">
+      sphere_lebedev_rule</a>,
+      a Fortran90 code which
+      computes Lebedev quadrature rules
+      on the surface of the unit sphere in 3D.
+    </p>
+
+    <p>
+      <a href = "../square_arbq_rule/square_arbq_rule.html">
+      square_arbq_rule</a>,
+      a Fortran90 code which
+      returns quadrature rules, 
+      with exactness up to total degree 20,
+      over the interior of the symmetric square in 2D,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "../square_felippa_rule/square_felippa_rule.html">
+      square_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule
+      over the interior of a square in 2D.
+    </p>
+
+    <p>
+      <a href = "../square_minimal_rule/square_minimal_rule.html">
+      square_minimal_rule</a>,
+      a Fortran90 code which
+      returns almost minimal quadrature rules, 
+      with exactness up to total degree 55,
+      over the interior of the symmetric square in 2D,
+      by Mattia Festa and Alvise Sommariva.
+    </p>
+
+    <p>
+      <a href = "../square_symq_rule/square_symq_rule.html">
+      square_symq_rule</a>,
+      a Fortran90 code which
+      returns symmetric quadrature rules, 
+      with exactness up to total degree 20,
+      over the interior of the square in 2D,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_arbq_rule/tetrahedron_arbq_rule.html">
+      tetrahedron_arbq_rule</a>,
+      a Fortran90 code which
+      returns quadrature rules, 
+      with exactness up to total degree 15,
+      over the interior of a tetrahedron in 3D,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_felippa_rule/tetrahedron_felippa_rule.html">
+      tetrahedron_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule for approximating integrals
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_jaskowiec_rule/tetrahedron_jaskowiec_rule.html">
+      tetrahedron_jaskowiec_rule</a>,
+      a Fortran90 code which
+      returns quadrature rules, with exactness up to total degree 20,
+      over the interior of a tetrahedron in 3D,
+      by Jan Jaskowiec, Natarajan Sukumar.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_keast_rule/tetrahedron_keast_rule.html">
+      tetrahedron_keast_rule</a>,
+      a Fortran90 code which
+      defines a Keast quadrature rule, with exactness degrees 0 through 8,
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_ncc_rule/tetrahedron_ncc_rule.html">
+      tetrahedron_ncc_rule</a>,
+      a Fortran90 code which
+      defines Newton-Cotes closed (NCC) quadrature rules
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_nco_rule/tetrahedron_nco_rule.html">
+      tetrahedron_nco_rule</a>,
+      a Fortran90 code which
+      defines Newton-Cotes open (NCO) quadrature rules
+      over the interior of a tetrahedron in 3D.
+    </p>
+
+    <p>
+      <a href = "../tetrahedron_witherden_rule/tetrahedron_witherden_rule.html">
+      tetrahedron_witherden_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for the tetrahedron,
+      with exactness up to total degree 10.
+    </p>
+
+    <p>
+      <a href = "../triangle_dunavant_rule/triangle_dunavant_rule.html">
+      triangle_dunavant_rule</a>,
+      a Fortran90 code which
+      defines Dunavant rules for quadrature
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_fekete_rule/triangle_fekete_rule.html">
+      triangle_fekete_rule</a>,
+      a Fortran90 code which
+      defines a Fekete rule for interpolation or quadrature 
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_felippa_rule/triangle_felippa_rule.html">
+      triangle_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule for approximating integrals
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_lyness_rule/triangle_lyness_rule.html">
+      triangle_lyness_rule</a>,
+      a Fortran90 code which
+      returns a Lyness-Jespersen quadrature rule
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_ncc_rule/triangle_ncc_rule.html">
+      triangle_ncc_rule</a>,
+      a Fortran90 code which
+      defines a Newton-Cotes Closed (NCC) quadrature rule
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_nco_rule/triangle_nco_rule.html">
+      triangle_nco_rule</a>,
+      a Fortran90 code which
+      defines a Newton-Cotes Open (NCO) quadrature rule
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_symq_rule/triangle_symq_rule.html">
+      triangle_symq_rule</a>,
+      a Fortran90 code which
+      returns symmetric quadrature rules, with precision up to 50,
+      over the interior of a triangle in 2D,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "../triangle_twb_rule/triangle_twb_rule.html">
+      triangle_twb_rule</a>,
+      a Fortran90 code which
+      generates a quadrature rule 
+      over the interior of a triangle in 2D, 
+      determined by Taylor, Wingate, and Bos.
+    </p>
+
+    <p>
+      <a href = "../triangle_wandzura_rule/triangle_wandzura_rule.html">
+      triangle_wandzura_rule</a>,
+      a Fortran90 code which
+      defines a Wandzura rule for quadrature
+      over the interior of a triangle in 2D.
+    </p>
+
+    <p>
+      <a href = "../triangle_witherden_rule/triangle_witherden_rule.html">
+      triangle_witherden_rule</a>,
+      a Fortran90 code which
+      returns a symmetric Witherden quadrature rule for the triangle,
+      with exactness up to total degree 20.
+    </p>
+
+    <p>
+      <a href = "../truncated_normal_rule/truncated_normal_rule.html">
+      truncated_normal_rule</a>,
+      a Fortran90 code which 
+      computes a quadrature rule for a normal probability density function
+      (PDF), also called a Gaussian distribution, that has been
+      truncated to [A,+oo), (-oo,B] or [A,B].
+    </p>
+
+    <p>
+      <a href = "../wedge_felippa_rule/wedge_felippa_rule.html">
+      wedge_felippa_rule</a>,
+      a Fortran90 code which
+      returns a Felippa quadrature rule for approximating integrals
+      over the interior of the unit wedge in 3D.
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 30 July 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

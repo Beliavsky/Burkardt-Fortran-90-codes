@@ -1,0 +1,265 @@
+<html>
+
+  <head>
+    <title>
+      multitask_mpi
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      multitask_mpi
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>multitask_mpi</b>,
+      a FORTRAN90 code which
+      demonstrates how to multitask, that is, to execute several unrelated
+      and distinct tasks simultaneously, using MPI for parallel execution.
+    </p>
+
+    <p>
+      In this example, there is a "master" process, identified as process 0,
+      and two worker processes, 1 and 2.  Process 0 does nothing but choose the
+      input for the worker processes, transmit it, and wait for the computed
+      results to be returned.  The programs executed by process 1 and by process 2
+      are quite different.
+    </p>
+
+    <p>
+      While the typical MPI model has all the worker processes executing the
+      same program, this example shows that that is not necessary.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>MULTITASK_MPI</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/multitask_mpi/multitask_mpi.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/multitask_mpi/multitask_mpi.html">a C++ version</a> and
+      <a href = "multitask_mpi.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../multitask_mpi_test/multitask_mpi_test.html">
+      multitask_mpi_test</a>
+    </p>
+
+    <p>
+      <a href = "../communicator_mpi/communicator_mpi.html">
+      COMMUNICATOR_MPI</a>,
+      a FORTRAN90 program which
+      creates new communicators involving a subset of initial
+      set of MPI processes in the default communicator MPI_COMM_WORLD.
+    </p>
+
+    <p>
+      <a href = "../heat_mpi/heat_mpi.html">
+      HEAT_MPI</a>,
+      a FORTRAN90 program which 
+      solves the 1D Time Dependent Heat Equation using MPI.
+    </p>
+
+    <p>
+      <a href = "../hello_mpi/hello_mpi.html">
+      HELLO_MPI</a>,
+      a FORTRAN90 program which 
+      prints out "Hello, world!" using the MPI parallel programming environment. 
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/examples/moab/moab.html">
+      MOAB</a>,
+      examples which
+      illustrate the use of the MOAB job scheduler for a computer cluster.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mpi/mpi.html">
+      MPI</a>,
+      FORTRAN90 programs which
+      illustrate the use of the MPI application program interface
+      for carrying out parallel computatioins in a distributed memory environment.
+    </p>
+
+    <p>
+      <a href = "../multitask_openmp/multitask_openmp.html">
+      MULTITASK_OPENMP</a>,
+      a FORTRAN90 program which
+      demonstrates how to "multitask", that is, to execute several unrelated
+      and distinct tasks simultaneously, using OpenMP for parallel execution.
+    </p>
+
+    <p>
+      <a href = "../prime_mpi/prime_mpi.html">
+      PRIME_MPI</a>,
+      a FORTRAN90 program which
+      counts the number of primes between 1 and N, using MPI for parallel execution.
+    </p>
+
+    <p>
+      <a href = "../quad_mpi/quad_mpi.html">
+      QUAD_MPI</a>,
+      a FORTRAN90 program which
+      approximates an integral using a quadrature rule, and carries out the
+      computation in parallel using MPI.
+    </p>
+
+    <p>
+      <a href = "../random_mpi/random_mpi.html">
+      RANDOM_MPI</a>,
+      a FORTRAN90 program which
+      demonstrates one way to generate the same sequence of random numbers
+      for both sequential execution and parallel execution under MPI.
+    </p>
+
+    <p>
+      <a href = "../ring_mpi/ring_mpi.html">
+      RING_MPI</a>,
+      a FORTRAN90 program which
+      uses the MPI parallel programming environment, and measures the time
+      necessary to copy a set of data around a ring of processes.
+    </p>
+
+    <p>
+      <a href = "../satisfy_mpi/satisfy_mpi.html">
+      SATISFY_MPI</a>, 
+      a FORTRAN90 program which 
+      demonstrates, for a particular circuit, an exhaustive search
+      for solutions of the circuit satisfiability problem, using MPI to
+      carry out the calculation in parallel.
+    </p>
+
+    <p>
+      <a href = "../search_mpi/search_mpi.html">
+      SEARCH_MPI</a>,
+      a FORTRAN90 program which
+      searches integers between A and B for a value J such that F(J) = C,
+      using MPI for parallel execution.
+    </p>
+
+    <p>
+      <a href = "../wave_mpi/wave_mpi.html">
+      WAVE_MPI</a>,
+      a FORTRAN90 program which
+      uses finite differences and MPI to estimate a solution to the
+      wave equation.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          William Gropp, Steven Huss-Lederman, Andrew Lumsdaine, Ewing Lusk,
+          Bill Nitzberg, 
+          William Saphir, Marc Snir,<br>
+          MPI: The Complete Reference,<br>
+          Volume II: The MPI-2 Extensions,<br>
+          Second Edition,<br>
+          MIT Press, 1998.
+        </li>
+        <li>
+          William Gropp, Ewing Lusk, Anthony Skjellum,<br>
+          Using MPI: Portable Parallel Programming with the
+          Message-Passing Interface,<br>
+          Second Edition,<br>
+          MIT Press, 1999,<br>
+          ISBN: 0262571323.
+        </li>
+        <li>
+          William Gropp, Ewing Lusk, Rajiv Thakur,<br>
+          Using MPI-2: Advanced Features of the Message-Passing
+          Interface,<br>
+          Second Edition,<br>
+          MIT Press, 1999,<br>
+          ISBN: 0262571331.
+        </li>
+        <li>
+          Stan Openshaw, Ian Turton,<br>
+          High Performance Computing and the Art of Parallel Programming: 
+          an Introduction for Geographers, Social Scientists, and
+          Engineers,<br>
+          Routledge, 2000,<br>
+          ISBN: 0415156920.
+        </li>
+        <li>
+          Peter Pacheco,<br>
+          Parallel Programming with MPI,<br>
+          Morgan Kaufman, 1996,<br>
+          ISBN: 1558603395,<br>
+          LC: QA76.642.P3.
+        </li>
+        <li>
+          Marc Snir, Steve Otto, Steven Huss-Lederman, David Walker, 
+          Jack Dongarra,<br>
+          MPI: The Complete Reference,<br>
+          Volume I: The MPI Core,<br>
+          Second Edition,<br>
+          MIT Press, 1998,<br>
+          ISBN: 0-262-69216-3,<br>
+          LC: QA76.642.M65.
+        </li>
+        <li>
+          The Message Passing Interface Forum,<br>
+          MPI: A Message Passing Interface Standard,<br>
+          1995
+        </li>
+        <li>
+          The Message Passing Interface Forum,<br>
+          MPI-2: Extensions to the Message Passing Interface,<br>
+          1997.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "multitask_mpi.f90">multitask_mpi.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "multitask_mpi.sh">multitask_mpi.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 25 March 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

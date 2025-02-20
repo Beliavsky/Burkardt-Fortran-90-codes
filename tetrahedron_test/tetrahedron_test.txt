@@ -1,0 +1,568 @@
+04 May 2022   8:53:43.253 PM
+
+tetrahedron_test():
+  FORTRAN90 version
+  Test tetrahedron().
+
+tetrahedron_barycentric_test():
+  tetrahedron_barycentric() converts Cartesian to
+  barycentric coordinates.
+
+  We are computing the barycentric coordinates just to
+  verify that the points are inside the tetrahedron.
+ 
+  Tetrahedron vertices
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    1.00000       4.00000       3.00000    
+    2    2.00000       4.00000       3.00000    
+    3    1.00000       6.00000       3.00000    
+    4    1.00000       4.00000       4.00000    
+
+      P                           Barycentric:
+
+    1.0678  4.8214  3.0576      0.4639  0.0678  0.4107  0.0576
+    1.3499  4.4305  3.3842      0.0506  0.3499  0.2153  0.3842
+    1.0817  5.3438  3.1421      0.1043  0.0817  0.6719  0.1421
+    1.4993  4.3160  3.0403      0.3024  0.4993  0.1580  0.0403
+    1.2273  4.4099  3.1495      0.4182  0.2273  0.2050  0.1495
+    1.1114  5.0013  3.0469      0.3410  0.1114  0.5007  0.0469
+    1.6597  4.1485  3.1123      0.1537  0.6597  0.0743  0.1123
+    1.0634  4.3796  3.7355      0.0113  0.0634  0.1898  0.7355
+    1.1633  4.6551  3.4459      0.0633  0.1633  0.3275  0.4459
+    1.0704  4.1277  3.6483      0.2175  0.0704  0.0638  0.6483
+
+tetrahedron_centroid_test():
+  tetrahedron_centroid() computes the centroid
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000      0.942809     -0.333333    
+    2  -0.816496     -0.816496     -0.333333    
+    3   0.816496     -0.816496     -0.333333    
+    4    0.00000       0.00000       1.00000    
+ 
+  Centroid:
+ 
+         1     0.0000000    
+         2   -0.17254575    
+         3    0.25000000E-06
+
+tetrahedron_contains_point_test():
+  tetrahedron_contains_point() finds if a point 
+  is inside of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000      0.942809     -0.333333    
+    2  -0.816496     -0.816496     -0.333333    
+    3   0.816496     -0.816496     -0.333333    
+    4    0.00000       0.00000       1.00000    
+
+  P     Inside_Tetra?
+
+    0.816496E-01 -0.244949      0.600000      T
+    -1.46969      -3.02194     -0.200000      F
+   -0.898146      0.672598     -0.200000      F
+
+tetrahedron_circumsphere_test():
+  tetrahedron_circumsphere() computes the circumsphere
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+ 
+  Circumsphere center:
+ 
+         1    0.11102230E-15
+         2     0.0000000    
+         3    0.20412415    
+
+  Circumsphere radius is   0.612372    
+
+tetrahedron_edge_length_test():
+  tetrahedron_edge_length() computes the edge lengths
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+ 
+  Edge lengths:
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4     1.0000000    
+         5     1.0000000    
+         6     1.0000000    
+
+tetrahedron_insphere_test():
+  tetrahedron_insphere() computes the insphere
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+ 
+  Insphere center:
+ 
+         1   -0.32049378E-16
+         2     0.0000000    
+         3    0.20412415    
+
+  Insphere radius is   0.204124    
+
+tetrahedron_lattice_layer_point_next_test():
+  tetrahedron_lattice_layer_point_next() returns the next
+  point in a tetrahedron lattice layer defined by:
+
+    C(4) - 1 < X(1)/C(1) + X(2)/C(2) +X(3)/C(3) <= C(4).
+
+  N =    3
+  C =            2     3     4
+
+  Layer    0
+
+     1           0     0     0
+  No more.
+
+  Layer    1
+
+     1           1     0     0
+     2           2     0     0
+     3           0     1     0
+     4           1     1     0
+     5           0     2     0
+     6           0     3     0
+     7           0     0     1
+     8           1     0     1
+     9           0     1     1
+    10           0     2     1
+    11           0     0     2
+    12           1     0     2
+    13           0     1     2
+    14           0     0     3
+    15           0     0     4
+  No more.
+
+  Layer    2
+
+     1           3     0     0
+     2           4     0     0
+     3           2     1     0
+     4           3     1     0
+     5           1     2     0
+     6           2     2     0
+     7           1     3     0
+     8           2     3     0
+     9           0     4     0
+    10           1     4     0
+    11           0     5     0
+    12           0     6     0
+    13           2     0     1
+    14           3     0     1
+    15           1     1     1
+    16           2     1     1
+    17           1     2     1
+    18           2     2     1
+    19           0     3     1
+    20           1     3     1
+    21           0     4     1
+    22           0     5     1
+    23           2     0     2
+    24           3     0     2
+    25           1     1     2
+    26           2     1     2
+    27           0     2     2
+    28           1     2     2
+    29           0     3     2
+    30           1     3     2
+    31           0     4     2
+    32           1     0     3
+    33           2     0     3
+    34           0     1     3
+    35           1     1     3
+    36           0     2     3
+    37           1     2     3
+    38           0     3     3
+    39           1     0     4
+    40           2     0     4
+    41           0     1     4
+    42           1     1     4
+    43           0     2     4
+    44           0     3     4
+    45           0     0     5
+    46           1     0     5
+    47           0     1     5
+    48           0     2     5
+    49           0     0     6
+    50           1     0     6
+    51           0     1     6
+    52           0     0     7
+    53           0     0     8
+  No more.
+
+tetrahedron_lattice_point_next():
+  tetrahedron_lattice_point_next() returns the next lattice
+  point in a tetrahedron defined by:
+
+    0 <= X(1)/C(1) + X(2)/C(2) + X(3)/C(3) <= C(4).
+
+  N =    3
+  C =            4     3     2     1
+
+     1           0     0     0
+     2           1     0     0
+     3           2     0     0
+     4           0     1     0
+     5           1     1     0
+  No more.
+
+tetrahedron_quality1_test():
+  tetrahedron_quality1() computes quality measure #1
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+  Tetrahedron quality is    1.00000    
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.408248    
+  Tetrahedron quality is   0.732051    
+
+tetrahedron_quality2_test():
+  tetrahedron_quality2() computes quality measure #2
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+  Tetrahedron quality is    1.00000    
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.408248    
+  Tetrahedron quality is   0.732051    
+
+tetrahedron_quality3_test():
+  tetrahedron_quality3() computes quality measure #3
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+  Tetrahedron quality is    1.00000    
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.408248    
+  Tetrahedron quality is   0.839947    
+
+tetrahedron_quality4_test():
+  tetrahedron_quality4() computes quality measure #4
+  of a tetrahedron.
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.816497    
+  Tetrahedron quality is    1.00000    
+ 
+  Tetrahedron vertices:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1   0.577350       0.00000       0.00000    
+    2  -0.288675      0.500000       0.00000    
+    3  -0.288675     -0.500000       0.00000    
+    4    0.00000       0.00000      0.408248    
+  Tetrahedron quality is   0.621320    
+
+tetrahedron_rhombic_shape_test():
+  tetrahedron_rhombic_size() returns dimension information;
+  tetrahedron_rhombic_shape() returns face and order information.
+  shape_print() prints this information.
+
+  Number of vertices =       10
+  Number of edges =           6
+  Number of faces =           4
+  Maximum face order =        6
+ 
+shape_print():
+  Information about a polytope.
+ 
+  The number of vertices is       10
+ 
+  Vertices:
+ 
+     Index          X               Y               Z
+ 
+         1       -0.81649658      0.00000000      0.00000000
+         2        0.00000000     -0.57735027      0.00000000
+         3        0.00000000      0.57735027      0.00000000
+         4        0.00000000      0.00000000      0.81649658
+         5       -0.40824829     -0.28867513      0.00000000
+         6       -0.40824829      0.28867513      0.00000000
+         7       -0.40824829      0.00000000      0.40824829
+         8        0.00000000      0.00000000      0.00000000
+         9        0.00000000     -0.28867513      0.40824829
+        10        0.00000000      0.28867513      0.40824829
+ 
+  The number of faces is        4
+  The maximum order of any face is        6
+ 
+     Index     Order         Indices of Nodes in Face
+                             1       2       3       4       5       6
+ 
+         1         6         1       5       2       9       4       7
+         2         6         2       8       3      10       4       9
+         3         6         3       6       1       7       4      10
+         4         6         1       6       3       8       2       5
+
+tetrahedron_sample_test():
+  tetrahedron_sample() samples a tetrahedron.
+  barycentric coordinates.
+ 
+  Tetrahedron vertices
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    1.00000       4.00000       3.00000    
+    2    2.00000       4.00000       3.00000    
+    3    1.00000       6.00000       3.00000    
+    4    1.00000       4.00000       4.00000    
+ 
+  Sample points:
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    1.23320       4.75455       3.02941    
+    2    1.39640       4.15624       3.13095    
+    3    1.37623       4.62845       3.09788    
+    4    1.14767       5.26683       3.14594    
+    5    1.35369       4.36236       3.08852    
+    6    1.36793       4.19402       3.01158    
+    7    1.46019       4.44207       3.05693    
+    8    1.01798       4.34884       3.73956    
+    9    1.33821       4.39676       3.25877    
+   10    1.62019       4.45221       3.04094    
+
+tetrahedron_shape_test():
+  tetrahedron_size() returns dimension information
+  of a tetrahedron.
+  tetrahedron_shape() returns face and order info
+  of a tetrahedron.
+
+  We will use this information to compute the
+  areas and centers of each face.
+
+  Number of vertices =        4
+  Number of edges =           6
+  Number of faces =           4
+  Maximum face order =        3
+ 
+shape_print():
+  Information about a polytope.
+ 
+  The number of vertices is        4
+ 
+  Vertices:
+ 
+     Index          X               Y               Z
+ 
+         1        0.94280900      0.00000000     -0.33333300
+         2       -0.47140500      0.81649700     -0.33333300
+         3       -0.47140500     -0.81649700     -0.33333300
+         4        0.00000000      0.00000000      1.00000000
+ 
+  The number of faces is        4
+  The maximum order of any face is        3
+ 
+     Index     Order         Indices of Nodes in Face
+                             1       2       3
+ 
+         1         3         1       3       2
+         2         3         1       2       4
+         3         3         1       4       3
+         4         3         2       3       4
+
+  Face  Order  Area
+
+         1      3  1.1547
+         2      3  1.1547
+         3      3  1.1547
+         4      3  1.1547
+
+  Face  Center
+
+         1 -0.0000  0.0000 -0.3333
+         2  0.1571  0.2722  0.1111
+         3  0.1571 -0.2722  0.1111
+         4 -0.3143  0.0000  0.1111
+
+tetrahedron_solid_angles_test():
+  tetrahedron_solid_angles() computes the solid angles
+  associated with the vertices of a tetrahedron.
+ 
+  Tetrahedron #1
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000      0.942809     -0.333333    
+    2  -0.816496     -0.816496     -0.333333    
+    3   0.816496     -0.816496     -0.333333    
+    4    0.00000       0.00000       1.00000    
+ 
+  Solid angles for tetrahedron #1:
+ 
+         1    0.45508702    
+         2    0.53565626    
+         3    0.53565626    
+         4    0.64102502    
+ 
+  Tetrahedron #2
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000       0.00000       0.00000    
+    2    1.00000       0.00000       0.00000    
+    3    0.00000       1.00000       0.00000    
+    4    0.00000       0.00000       1.00000    
+ 
+  Solid angles for tetrahedron #2:
+ 
+         1     1.5707963    
+         2    0.33983691    
+         3    0.33983691    
+         4    0.33983691    
+ 
+  Tetrahedron #3
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000       0.00000       0.00000    
+    2    1.00000       0.00000       0.00000    
+    3    0.00000       2.00000       0.00000    
+    4    0.00000       0.00000       4.00000    
+ 
+  Solid angles for tetrahedron #3:
+ 
+         1     1.5707963    
+         2    0.89917491    
+         3    0.28975170    
+         4    0.58106238E-01
+ 
+  Tetrahedron #4
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000       0.00000       0.00000    
+    2    1.00000       0.00000       0.00000    
+    3    0.00000       1.00000       0.00000    
+    4    1.00000       1.00000       1.00000    
+ 
+  Solid angles for tetrahedron #4:
+ 
+         1    0.52359878    
+         2    0.44556125    
+         3    0.44556125    
+         4    0.18376187    
+
+tetrahedron_volume_test():
+  tetrahedron_volume() computes the volume of a tetrahedron.
+ 
+  Tetrahedron vertices
+ 
+  Row          1             2             3      
+  Col
+ 
+    1    0.00000      0.942809     -0.333333    
+    2  -0.816496     -0.816496     -0.333333    
+    3   0.816496     -0.816496     -0.333333    
+    4    0.00000       0.00000       1.00000    
+
+  Volume =   0.638429    
+
+tetrahedron_test():
+  Normal end of execution.
+
+04 May 2022   8:53:43.253 PM

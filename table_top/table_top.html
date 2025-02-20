@@ -1,0 +1,134 @@
+<html>
+
+  <head>
+    <title>
+      table_top
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      table_top
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>table_top</b>,
+      a Fortran90 code which
+      displays patterns in a set of N points in M dimensions.
+    </p>
+
+    <p>
+      The program simply creates an array of M<sup>2</sup> two dimensional
+      subplots.  Plot (I,J) plots the I-th and J-th coordinate
+      values against each other.  Simple patterns in the data may
+      show up in the plots.
+    </p>
+
+    <p>
+      The code then creates a PostScript file containing the plots, using
+      routines from the PS_WRITE library.
+    </p>
+
+    <h3 align = "center">
+      Usage:
+    </h3>
+
+    <p>
+      <dl>
+        <dt>
+          <b>table_top</b> <i>data.txt</i>
+        </dt>
+        <dd>
+          reads the data in <i>data.txt</i> and makes the plots.
+        </dd>
+      </dl>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>table_top</b> is available in
+      <a href = "table_top.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../table_top_test/table_top_test.html">
+      table_top_test</a>
+    </p>
+
+    <p>
+      <a href = "../ps_write/ps_write.html">
+      ps_write</a>,
+      a Fortran90 code which
+      creates a PostScript
+      graphics file.  This library is used by TABLE_TOP().
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/table_columns/table_columns.html">
+      table_columns</a>,
+      a Fortran90 code which
+      can extract specific columns of data
+      from a table file.
+    </p>
+
+    <p>
+      <a href = "../table_io/table_io.html">
+      table_io</a>,
+      a Fortran90 code which
+      supplies the routines used to read the TABLE file.
+    </p>
+
+    <p>
+      <a href = "../table_quality/table_quality.html">
+      table_quality</a>,
+      a Fortran90 code which
+      reads a file of
+      points and computes the quality of dispersion.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "table_top.f90">table_top.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "table_top.sh">table_top.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 02 September 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

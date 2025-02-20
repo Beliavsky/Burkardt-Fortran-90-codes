@@ -1,0 +1,20 @@
+ 7 January 2022   8:42:49.236 AM
+ 
+fd1d_heat_explicit_test():
+  FORTRAN90 version.
+  Test fd1d_heat_explicit().
+ 
+fd1d_heat_explicit_test01():
+  Compute an approximate solution to the time-dependent
+  one dimensional heat equation:
+ 
+    dH/dt - K * d2H/dx2 = f(x,t)
+ 
+  Run a simple test case.
+ 
+  CFL stability criterion value =   0.320000    
+ 
+fd1d_heat_explicit_test():
+  Normal end of execution.
+ 
+ 7 January 2022   8:42:49.241 AM

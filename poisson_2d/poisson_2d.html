@@ -1,0 +1,133 @@
+<html>
+
+  <head>
+    <title>
+      poisson_2d
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      poisson_2d
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>poisson_2d</b>,
+      a Fortran90 code which
+      computes an approximate solution to the Poisson equation 
+      in a rectangular region.
+    </p>
+
+    <p>
+      The version of Poisson's equation being solved here is
+      <pre>
+        - ( d/dx d/dx + d/dy d/dy ) U(x,y) = F(x,y)
+      </pre>
+      over the rectangle 0 <= X <= 1, 0 <= Y <= 1, with exact solution
+      <pre>
+        U(x,y) = sin ( pi * x * y )
+      </pre>
+      so that 
+      <pre>
+        F(x,y) = pi^2 * ( x^2 + y^2 ) * sin ( pi * x * y )
+      </pre>
+      and with Dirichlet boundary conditions along the lines x = 0, x = 1,
+      y = 0 and y = 1.  (The boundary conditions will actually be zero in
+      this case, but we write up the problem as though we didn't know that,
+      which makes it easy to change the problem later.)
+    </p>
+
+    <p>
+      We compute an approximate solution by discretizing the geometry,
+      assuming that DX = DY, and approximating the Poisson operator by
+      <pre>
+        ( U(i-1,j) + U(i+1,j) + U(i,j-1) + U(i,j+1) - 4*U(i,j) ) / dx /dy
+      </pre>
+      Along with the boundary conditions at the boundary nodes, we have
+      a linear system for U.  We can apply the Jacobi iteration to estimate
+      the solution to the linear system.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>poisson_2d</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/poisson_2d/poisson_2d.html">a C version</a> and
+      <a href = "poisson_2d.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/fenics_src/poisson_2d/poisson_2d.html">a FENICS version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/freefem_src/poisson_2d/poisson_2d.html">a FreeFem version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/poisson_2d/poisson_2d.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/poisson_2d/poisson_2d.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/poisson_2d/poisson_2d.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../poisson_2d_test/poisson_2d_test.html">
+      poisson_2d_test</a>
+    </p>
+
+    <p>
+      <a href = "../poisson_1d/poisson_1d.html">
+      poisson_1d</a>,
+      a Fortran90 code which
+      solves a discretized version of the Poisson equation -uxx = f(x) 
+      on the interval a &le; x &le; b, with Dirichlet boundary conditions
+      u(a) = ua, u(b) = ub.
+      The linear system is solved using Gauss-Seidel iteration.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/poisson_openmp/poisson_openmp.html">
+      poisson_openmp</a>,
+      a Fortran77 code which
+      computes an approximate solution to the Poisson equation in a rectangle,
+      using the Jacobi iteration to solve the linear system, and OpenMP to
+      carry out the Jacobi iteration in parallel.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "poisson_2d.f90">poisson_2d.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "poisson_2d.sh">poisson_2d.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 03 October 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

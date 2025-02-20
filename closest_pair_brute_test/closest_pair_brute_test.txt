@@ -1,0 +1,93 @@
+03 April 2024   2:35:23.535 PM
+
+closest_pair_brute_test()
+  Fortran90 version
+  Test closest_pair_brute().
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =    100
+  time in seconds =    0.00000    
+  xy(  12) =   0.234699      0.715869    
+  xy(  79) =   0.234004      0.714092    
+  distance =   0.190801E-02
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =    200
+  time in seconds =    0.00000    
+  xy(  44) =   0.231664      0.915574    
+  xy( 194) =   0.231523      0.914818    
+  distance =   0.769420E-03
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =    400
+  time in seconds =    0.00000    
+  xy( 252) =   0.190778      0.765766    
+  xy( 288) =   0.190907      0.767770    
+  distance =   0.200752E-02
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =    800
+  time in seconds =   0.200000E-02
+  xy( 364) =   0.293157      0.689208    
+  xy( 489) =   0.293203      0.688321    
+  distance =   0.888480E-03
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =   1600
+  time in seconds =   0.500000E-02
+  xy( 193) =   0.715205      0.966236    
+  xy(1016) =   0.714778      0.966796    
+  distance =   0.703951E-03
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =   3200
+  time in seconds =   0.230000E-01
+  xy( 370) =   0.954917      0.572143    
+  xy(2170) =   0.954606      0.572429    
+  distance =   0.422694E-03
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =   6400
+  time in seconds =   0.900000E-01
+  xy( 812) =   0.794428      0.582789    
+  xy(3340) =   0.794450      0.582721    
+  distance =   0.715639E-04
+
+closest_pair_brute_test01():
+  closest_pair_brute() on a set of N points in 2D.
+
+  n =  12800
+  time in seconds =   0.356000    
+  xy( 766) =   0.223242      0.301488    
+  xy(9925) =   0.223281      0.301535    
+  distance =   0.606222E-04
+
+  Test  Points  Time
+
+     1     100     0.00000    
+     2     200     0.00000    
+     3     400     0.00000    
+     4     800    0.200000E-02
+     5    1600    0.500000E-02
+     6    3200    0.230000E-01
+     7    6400    0.900000E-01
+     8   12800    0.356000    
+
+closest_pair_brute_test():
+  Normal end of execution.
+
+03 April 2024   2:35:24.012 PM

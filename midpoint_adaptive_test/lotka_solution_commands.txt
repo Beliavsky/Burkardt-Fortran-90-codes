@@ -1,0 +1,16 @@
+# lotka_solution_commands.txt
+#
+# Usage:
+#  gnuplot < lotka_solution_commands.txt
+#
+set term png
+set output "lotka_solution.png"
+set xlabel "Time"
+set ylabel "Y(T)"
+set title "MAD solution Y(T)"
+set grid
+set style data lines
+plot \
+  "lotka_solution_data.txt" using 1: 2 lw 3,\
+  "lotka_solution_data.txt" using 1: 3 lw 3
+quit

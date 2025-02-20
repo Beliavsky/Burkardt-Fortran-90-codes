@@ -1,0 +1,524 @@
+02 November 2024   2:49:46.573 PM
+ 
+helmholtz_openmp():
+  Fortran90/OpenMP version
+  A program which solves the 2D Helmholtz equation.
+  This program is being run in parallel under OpenMP.
+ 
+  Number of processors =        8
+  Number of threads    =        1
+ 
+  The region is [-1,1] x [-1,1].
+  The number of nodes in the X direction is M =       64
+  The number of nodes in the Y direction is N =       64
+  Number of variables in linear system M * N  =     4096
+  The scalar coefficient in the Helmholtz equation is ALPHA =   0.500000    
+  The relaxation value is OMEGA =   0.900000    
+  The error tolerance is TOL =   0.100000E-07
+  The maximum number of Jacobi iterations is IT_MAX =      100
+ 
+  RMS right hand side =    2.99316    
+     1  RMS Residual:  0.754040E-03
+     2  RMS Residual:  0.751014E-03
+     3  RMS Residual:  0.748679E-03
+     4  RMS Residual:  0.746639E-03
+     5  RMS Residual:  0.744773E-03
+     6  RMS Residual:  0.743024E-03
+     7  RMS Residual:  0.741363E-03
+     8  RMS Residual:  0.739769E-03
+     9  RMS Residual:  0.738230E-03
+    10  RMS Residual:  0.736737E-03
+    11  RMS Residual:  0.735282E-03
+    12  RMS Residual:  0.733862E-03
+    13  RMS Residual:  0.732470E-03
+    14  RMS Residual:  0.731106E-03
+    15  RMS Residual:  0.729764E-03
+    16  RMS Residual:  0.728444E-03
+    17  RMS Residual:  0.727144E-03
+    18  RMS Residual:  0.725861E-03
+    19  RMS Residual:  0.724595E-03
+    20  RMS Residual:  0.723344E-03
+    21  RMS Residual:  0.722107E-03
+    22  RMS Residual:  0.720883E-03
+    23  RMS Residual:  0.719672E-03
+    24  RMS Residual:  0.718472E-03
+    25  RMS Residual:  0.717284E-03
+    26  RMS Residual:  0.716106E-03
+    27  RMS Residual:  0.714938E-03
+    28  RMS Residual:  0.713779E-03
+    29  RMS Residual:  0.712630E-03
+    30  RMS Residual:  0.711488E-03
+    31  RMS Residual:  0.710356E-03
+    32  RMS Residual:  0.709231E-03
+    33  RMS Residual:  0.708113E-03
+    34  RMS Residual:  0.707003E-03
+    35  RMS Residual:  0.705900E-03
+    36  RMS Residual:  0.704803E-03
+    37  RMS Residual:  0.703714E-03
+    38  RMS Residual:  0.702630E-03
+    39  RMS Residual:  0.701552E-03
+    40  RMS Residual:  0.700481E-03
+    41  RMS Residual:  0.699415E-03
+    42  RMS Residual:  0.698354E-03
+    43  RMS Residual:  0.697299E-03
+    44  RMS Residual:  0.696250E-03
+    45  RMS Residual:  0.695205E-03
+    46  RMS Residual:  0.694165E-03
+    47  RMS Residual:  0.693130E-03
+    48  RMS Residual:  0.692100E-03
+    49  RMS Residual:  0.691074E-03
+    50  RMS Residual:  0.690053E-03
+    51  RMS Residual:  0.689037E-03
+    52  RMS Residual:  0.688024E-03
+    53  RMS Residual:  0.687016E-03
+    54  RMS Residual:  0.686012E-03
+    55  RMS Residual:  0.685011E-03
+    56  RMS Residual:  0.684015E-03
+    57  RMS Residual:  0.683023E-03
+    58  RMS Residual:  0.682034E-03
+    59  RMS Residual:  0.681049E-03
+    60  RMS Residual:  0.680067E-03
+    61  RMS Residual:  0.679090E-03
+    62  RMS Residual:  0.678115E-03
+    63  RMS Residual:  0.677144E-03
+    64  RMS Residual:  0.676177E-03
+    65  RMS Residual:  0.675213E-03
+    66  RMS Residual:  0.674252E-03
+    67  RMS Residual:  0.673294E-03
+    68  RMS Residual:  0.672339E-03
+    69  RMS Residual:  0.671388E-03
+    70  RMS Residual:  0.670439E-03
+    71  RMS Residual:  0.669494E-03
+    72  RMS Residual:  0.668551E-03
+    73  RMS Residual:  0.667612E-03
+    74  RMS Residual:  0.666675E-03
+    75  RMS Residual:  0.665741E-03
+    76  RMS Residual:  0.664810E-03
+    77  RMS Residual:  0.663882E-03
+    78  RMS Residual:  0.662956E-03
+    79  RMS Residual:  0.662033E-03
+    80  RMS Residual:  0.661113E-03
+    81  RMS Residual:  0.660195E-03
+    82  RMS Residual:  0.659280E-03
+    83  RMS Residual:  0.658368E-03
+    84  RMS Residual:  0.657458E-03
+    85  RMS Residual:  0.656550E-03
+    86  RMS Residual:  0.655645E-03
+    87  RMS Residual:  0.654742E-03
+    88  RMS Residual:  0.653842E-03
+    89  RMS Residual:  0.652944E-03
+    90  RMS Residual:  0.652049E-03
+    91  RMS Residual:  0.651156E-03
+    92  RMS Residual:  0.650265E-03
+    93  RMS Residual:  0.649376E-03
+    94  RMS Residual:  0.648490E-03
+    95  RMS Residual:  0.647606E-03
+    96  RMS Residual:  0.646724E-03
+    97  RMS Residual:  0.645844E-03
+    98  RMS Residual:  0.644967E-03
+    99  RMS Residual:  0.644091E-03
+   100  RMS Residual:  0.643218E-03
+ 
+Number of iterations      101
+ 
+  RMS U :         0.525000    
+  RMS UEXACT :    0.525000    
+  RMS U-UEXACT:   0.830743E-01
+ 
+  Elapsed wall clock time =   0.114591E-01
+ 
+helmholtz_openmp():
+  Normal end of execution.
+02 November 2024   2:49:46.585 PM
+ 
+helmholtz_openmp():
+  Fortran90/OpenMP version
+  A program which solves the 2D Helmholtz equation.
+  This program is being run in parallel under OpenMP.
+ 
+  Number of processors =        8
+  Number of threads    =        2
+ 
+  The region is [-1,1] x [-1,1].
+  The number of nodes in the X direction is M =       64
+  The number of nodes in the Y direction is N =       64
+  Number of variables in linear system M * N  =     4096
+  The scalar coefficient in the Helmholtz equation is ALPHA =   0.500000    
+  The relaxation value is OMEGA =   0.900000    
+  The error tolerance is TOL =   0.100000E-07
+  The maximum number of Jacobi iterations is IT_MAX =      100
+ 
+  RMS right hand side =    2.99316    
+     1  RMS Residual:  0.754040E-03
+     2  RMS Residual:  0.751014E-03
+     3  RMS Residual:  0.748679E-03
+     4  RMS Residual:  0.746639E-03
+     5  RMS Residual:  0.744773E-03
+     6  RMS Residual:  0.743024E-03
+     7  RMS Residual:  0.741363E-03
+     8  RMS Residual:  0.739769E-03
+     9  RMS Residual:  0.738230E-03
+    10  RMS Residual:  0.736737E-03
+    11  RMS Residual:  0.735282E-03
+    12  RMS Residual:  0.733862E-03
+    13  RMS Residual:  0.732470E-03
+    14  RMS Residual:  0.731106E-03
+    15  RMS Residual:  0.729764E-03
+    16  RMS Residual:  0.728444E-03
+    17  RMS Residual:  0.727144E-03
+    18  RMS Residual:  0.725861E-03
+    19  RMS Residual:  0.724595E-03
+    20  RMS Residual:  0.723344E-03
+    21  RMS Residual:  0.722107E-03
+    22  RMS Residual:  0.720883E-03
+    23  RMS Residual:  0.719672E-03
+    24  RMS Residual:  0.718472E-03
+    25  RMS Residual:  0.717284E-03
+    26  RMS Residual:  0.716106E-03
+    27  RMS Residual:  0.714938E-03
+    28  RMS Residual:  0.713779E-03
+    29  RMS Residual:  0.712630E-03
+    30  RMS Residual:  0.711488E-03
+    31  RMS Residual:  0.710356E-03
+    32  RMS Residual:  0.709231E-03
+    33  RMS Residual:  0.708113E-03
+    34  RMS Residual:  0.707003E-03
+    35  RMS Residual:  0.705900E-03
+    36  RMS Residual:  0.704803E-03
+    37  RMS Residual:  0.703714E-03
+    38  RMS Residual:  0.702630E-03
+    39  RMS Residual:  0.701552E-03
+    40  RMS Residual:  0.700481E-03
+    41  RMS Residual:  0.699415E-03
+    42  RMS Residual:  0.698354E-03
+    43  RMS Residual:  0.697299E-03
+    44  RMS Residual:  0.696250E-03
+    45  RMS Residual:  0.695205E-03
+    46  RMS Residual:  0.694165E-03
+    47  RMS Residual:  0.693130E-03
+    48  RMS Residual:  0.692100E-03
+    49  RMS Residual:  0.691074E-03
+    50  RMS Residual:  0.690053E-03
+    51  RMS Residual:  0.689037E-03
+    52  RMS Residual:  0.688024E-03
+    53  RMS Residual:  0.687016E-03
+    54  RMS Residual:  0.686012E-03
+    55  RMS Residual:  0.685011E-03
+    56  RMS Residual:  0.684015E-03
+    57  RMS Residual:  0.683023E-03
+    58  RMS Residual:  0.682034E-03
+    59  RMS Residual:  0.681049E-03
+    60  RMS Residual:  0.680067E-03
+    61  RMS Residual:  0.679090E-03
+    62  RMS Residual:  0.678115E-03
+    63  RMS Residual:  0.677144E-03
+    64  RMS Residual:  0.676177E-03
+    65  RMS Residual:  0.675213E-03
+    66  RMS Residual:  0.674252E-03
+    67  RMS Residual:  0.673294E-03
+    68  RMS Residual:  0.672339E-03
+    69  RMS Residual:  0.671388E-03
+    70  RMS Residual:  0.670439E-03
+    71  RMS Residual:  0.669494E-03
+    72  RMS Residual:  0.668551E-03
+    73  RMS Residual:  0.667612E-03
+    74  RMS Residual:  0.666675E-03
+    75  RMS Residual:  0.665741E-03
+    76  RMS Residual:  0.664810E-03
+    77  RMS Residual:  0.663882E-03
+    78  RMS Residual:  0.662956E-03
+    79  RMS Residual:  0.662033E-03
+    80  RMS Residual:  0.661113E-03
+    81  RMS Residual:  0.660195E-03
+    82  RMS Residual:  0.659280E-03
+    83  RMS Residual:  0.658368E-03
+    84  RMS Residual:  0.657458E-03
+    85  RMS Residual:  0.656550E-03
+    86  RMS Residual:  0.655645E-03
+    87  RMS Residual:  0.654742E-03
+    88  RMS Residual:  0.653842E-03
+    89  RMS Residual:  0.652944E-03
+    90  RMS Residual:  0.652049E-03
+    91  RMS Residual:  0.651156E-03
+    92  RMS Residual:  0.650265E-03
+    93  RMS Residual:  0.649376E-03
+    94  RMS Residual:  0.648490E-03
+    95  RMS Residual:  0.647606E-03
+    96  RMS Residual:  0.646724E-03
+    97  RMS Residual:  0.645844E-03
+    98  RMS Residual:  0.644967E-03
+    99  RMS Residual:  0.644091E-03
+   100  RMS Residual:  0.643218E-03
+ 
+Number of iterations      101
+ 
+  RMS U :         0.525000    
+  RMS UEXACT :    0.525000    
+  RMS U-UEXACT:   0.830743E-01
+ 
+  Elapsed wall clock time =   0.605308E-02
+ 
+helmholtz_openmp():
+  Normal end of execution.
+02 November 2024   2:49:46.593 PM
+ 
+helmholtz_openmp():
+  Fortran90/OpenMP version
+  A program which solves the 2D Helmholtz equation.
+  This program is being run in parallel under OpenMP.
+ 
+  Number of processors =        8
+  Number of threads    =        4
+ 
+  The region is [-1,1] x [-1,1].
+  The number of nodes in the X direction is M =       64
+  The number of nodes in the Y direction is N =       64
+  Number of variables in linear system M * N  =     4096
+  The scalar coefficient in the Helmholtz equation is ALPHA =   0.500000    
+  The relaxation value is OMEGA =   0.900000    
+  The error tolerance is TOL =   0.100000E-07
+  The maximum number of Jacobi iterations is IT_MAX =      100
+ 
+  RMS right hand side =    2.99316    
+     1  RMS Residual:  0.754040E-03
+     2  RMS Residual:  0.751014E-03
+     3  RMS Residual:  0.748679E-03
+     4  RMS Residual:  0.746639E-03
+     5  RMS Residual:  0.744773E-03
+     6  RMS Residual:  0.743024E-03
+     7  RMS Residual:  0.741363E-03
+     8  RMS Residual:  0.739769E-03
+     9  RMS Residual:  0.738230E-03
+    10  RMS Residual:  0.736737E-03
+    11  RMS Residual:  0.735282E-03
+    12  RMS Residual:  0.733862E-03
+    13  RMS Residual:  0.732470E-03
+    14  RMS Residual:  0.731106E-03
+    15  RMS Residual:  0.729764E-03
+    16  RMS Residual:  0.728444E-03
+    17  RMS Residual:  0.727144E-03
+    18  RMS Residual:  0.725861E-03
+    19  RMS Residual:  0.724595E-03
+    20  RMS Residual:  0.723344E-03
+    21  RMS Residual:  0.722107E-03
+    22  RMS Residual:  0.720883E-03
+    23  RMS Residual:  0.719672E-03
+    24  RMS Residual:  0.718472E-03
+    25  RMS Residual:  0.717284E-03
+    26  RMS Residual:  0.716106E-03
+    27  RMS Residual:  0.714938E-03
+    28  RMS Residual:  0.713779E-03
+    29  RMS Residual:  0.712630E-03
+    30  RMS Residual:  0.711488E-03
+    31  RMS Residual:  0.710356E-03
+    32  RMS Residual:  0.709231E-03
+    33  RMS Residual:  0.708113E-03
+    34  RMS Residual:  0.707003E-03
+    35  RMS Residual:  0.705900E-03
+    36  RMS Residual:  0.704803E-03
+    37  RMS Residual:  0.703714E-03
+    38  RMS Residual:  0.702630E-03
+    39  RMS Residual:  0.701552E-03
+    40  RMS Residual:  0.700481E-03
+    41  RMS Residual:  0.699415E-03
+    42  RMS Residual:  0.698354E-03
+    43  RMS Residual:  0.697299E-03
+    44  RMS Residual:  0.696250E-03
+    45  RMS Residual:  0.695205E-03
+    46  RMS Residual:  0.694165E-03
+    47  RMS Residual:  0.693130E-03
+    48  RMS Residual:  0.692100E-03
+    49  RMS Residual:  0.691074E-03
+    50  RMS Residual:  0.690053E-03
+    51  RMS Residual:  0.689037E-03
+    52  RMS Residual:  0.688024E-03
+    53  RMS Residual:  0.687016E-03
+    54  RMS Residual:  0.686012E-03
+    55  RMS Residual:  0.685011E-03
+    56  RMS Residual:  0.684015E-03
+    57  RMS Residual:  0.683023E-03
+    58  RMS Residual:  0.682034E-03
+    59  RMS Residual:  0.681049E-03
+    60  RMS Residual:  0.680067E-03
+    61  RMS Residual:  0.679090E-03
+    62  RMS Residual:  0.678115E-03
+    63  RMS Residual:  0.677144E-03
+    64  RMS Residual:  0.676177E-03
+    65  RMS Residual:  0.675213E-03
+    66  RMS Residual:  0.674252E-03
+    67  RMS Residual:  0.673294E-03
+    68  RMS Residual:  0.672339E-03
+    69  RMS Residual:  0.671388E-03
+    70  RMS Residual:  0.670439E-03
+    71  RMS Residual:  0.669494E-03
+    72  RMS Residual:  0.668551E-03
+    73  RMS Residual:  0.667612E-03
+    74  RMS Residual:  0.666675E-03
+    75  RMS Residual:  0.665741E-03
+    76  RMS Residual:  0.664810E-03
+    77  RMS Residual:  0.663882E-03
+    78  RMS Residual:  0.662956E-03
+    79  RMS Residual:  0.662033E-03
+    80  RMS Residual:  0.661113E-03
+    81  RMS Residual:  0.660195E-03
+    82  RMS Residual:  0.659280E-03
+    83  RMS Residual:  0.658368E-03
+    84  RMS Residual:  0.657458E-03
+    85  RMS Residual:  0.656550E-03
+    86  RMS Residual:  0.655645E-03
+    87  RMS Residual:  0.654742E-03
+    88  RMS Residual:  0.653842E-03
+    89  RMS Residual:  0.652944E-03
+    90  RMS Residual:  0.652049E-03
+    91  RMS Residual:  0.651156E-03
+    92  RMS Residual:  0.650265E-03
+    93  RMS Residual:  0.649376E-03
+    94  RMS Residual:  0.648490E-03
+    95  RMS Residual:  0.647606E-03
+    96  RMS Residual:  0.646724E-03
+    97  RMS Residual:  0.645844E-03
+    98  RMS Residual:  0.644967E-03
+    99  RMS Residual:  0.644091E-03
+   100  RMS Residual:  0.643218E-03
+ 
+Number of iterations      101
+ 
+  RMS U :         0.525000    
+  RMS UEXACT :    0.525000    
+  RMS U-UEXACT:   0.830743E-01
+ 
+  Elapsed wall clock time =   0.297265E-02
+ 
+helmholtz_openmp():
+  Normal end of execution.
+02 November 2024   2:49:46.597 PM
+ 
+helmholtz_openmp():
+  Fortran90/OpenMP version
+  A program which solves the 2D Helmholtz equation.
+  This program is being run in parallel under OpenMP.
+ 
+  Number of processors =        8
+  Number of threads    =        8
+ 
+  The region is [-1,1] x [-1,1].
+  The number of nodes in the X direction is M =       64
+  The number of nodes in the Y direction is N =       64
+  Number of variables in linear system M * N  =     4096
+  The scalar coefficient in the Helmholtz equation is ALPHA =   0.500000    
+  The relaxation value is OMEGA =   0.900000    
+  The error tolerance is TOL =   0.100000E-07
+  The maximum number of Jacobi iterations is IT_MAX =      100
+ 
+  RMS right hand side =    2.99316    
+     1  RMS Residual:  0.754040E-03
+     2  RMS Residual:  0.751014E-03
+     3  RMS Residual:  0.748679E-03
+     4  RMS Residual:  0.746639E-03
+     5  RMS Residual:  0.744773E-03
+     6  RMS Residual:  0.743024E-03
+     7  RMS Residual:  0.741363E-03
+     8  RMS Residual:  0.739769E-03
+     9  RMS Residual:  0.738230E-03
+    10  RMS Residual:  0.736737E-03
+    11  RMS Residual:  0.735282E-03
+    12  RMS Residual:  0.733862E-03
+    13  RMS Residual:  0.732470E-03
+    14  RMS Residual:  0.731106E-03
+    15  RMS Residual:  0.729764E-03
+    16  RMS Residual:  0.728444E-03
+    17  RMS Residual:  0.727144E-03
+    18  RMS Residual:  0.725861E-03
+    19  RMS Residual:  0.724595E-03
+    20  RMS Residual:  0.723344E-03
+    21  RMS Residual:  0.722107E-03
+    22  RMS Residual:  0.720883E-03
+    23  RMS Residual:  0.719672E-03
+    24  RMS Residual:  0.718472E-03
+    25  RMS Residual:  0.717284E-03
+    26  RMS Residual:  0.716106E-03
+    27  RMS Residual:  0.714938E-03
+    28  RMS Residual:  0.713779E-03
+    29  RMS Residual:  0.712630E-03
+    30  RMS Residual:  0.711488E-03
+    31  RMS Residual:  0.710356E-03
+    32  RMS Residual:  0.709231E-03
+    33  RMS Residual:  0.708113E-03
+    34  RMS Residual:  0.707003E-03
+    35  RMS Residual:  0.705900E-03
+    36  RMS Residual:  0.704803E-03
+    37  RMS Residual:  0.703714E-03
+    38  RMS Residual:  0.702630E-03
+    39  RMS Residual:  0.701552E-03
+    40  RMS Residual:  0.700481E-03
+    41  RMS Residual:  0.699415E-03
+    42  RMS Residual:  0.698354E-03
+    43  RMS Residual:  0.697299E-03
+    44  RMS Residual:  0.696250E-03
+    45  RMS Residual:  0.695205E-03
+    46  RMS Residual:  0.694165E-03
+    47  RMS Residual:  0.693130E-03
+    48  RMS Residual:  0.692100E-03
+    49  RMS Residual:  0.691074E-03
+    50  RMS Residual:  0.690053E-03
+    51  RMS Residual:  0.689037E-03
+    52  RMS Residual:  0.688024E-03
+    53  RMS Residual:  0.687016E-03
+    54  RMS Residual:  0.686012E-03
+    55  RMS Residual:  0.685011E-03
+    56  RMS Residual:  0.684015E-03
+    57  RMS Residual:  0.683023E-03
+    58  RMS Residual:  0.682034E-03
+    59  RMS Residual:  0.681049E-03
+    60  RMS Residual:  0.680067E-03
+    61  RMS Residual:  0.679090E-03
+    62  RMS Residual:  0.678115E-03
+    63  RMS Residual:  0.677144E-03
+    64  RMS Residual:  0.676177E-03
+    65  RMS Residual:  0.675213E-03
+    66  RMS Residual:  0.674252E-03
+    67  RMS Residual:  0.673294E-03
+    68  RMS Residual:  0.672339E-03
+    69  RMS Residual:  0.671388E-03
+    70  RMS Residual:  0.670439E-03
+    71  RMS Residual:  0.669494E-03
+    72  RMS Residual:  0.668551E-03
+    73  RMS Residual:  0.667612E-03
+    74  RMS Residual:  0.666675E-03
+    75  RMS Residual:  0.665741E-03
+    76  RMS Residual:  0.664810E-03
+    77  RMS Residual:  0.663882E-03
+    78  RMS Residual:  0.662956E-03
+    79  RMS Residual:  0.662033E-03
+    80  RMS Residual:  0.661113E-03
+    81  RMS Residual:  0.660195E-03
+    82  RMS Residual:  0.659280E-03
+    83  RMS Residual:  0.658368E-03
+    84  RMS Residual:  0.657458E-03
+    85  RMS Residual:  0.656550E-03
+    86  RMS Residual:  0.655645E-03
+    87  RMS Residual:  0.654742E-03
+    88  RMS Residual:  0.653842E-03
+    89  RMS Residual:  0.652944E-03
+    90  RMS Residual:  0.652049E-03
+    91  RMS Residual:  0.651156E-03
+    92  RMS Residual:  0.650265E-03
+    93  RMS Residual:  0.649376E-03
+    94  RMS Residual:  0.648490E-03
+    95  RMS Residual:  0.647606E-03
+    96  RMS Residual:  0.646724E-03
+    97  RMS Residual:  0.645844E-03
+    98  RMS Residual:  0.644967E-03
+    99  RMS Residual:  0.644091E-03
+   100  RMS Residual:  0.643218E-03
+ 
+Number of iterations      101
+ 
+  RMS U :         0.525000    
+  RMS UEXACT :    0.525000    
+  RMS U-UEXACT:   0.830743E-01
+ 
+  Elapsed wall clock time =   0.255041E-02
+ 
+helmholtz_openmp():
+  Normal end of execution.

@@ -1,0 +1,167 @@
+program main
+
+!*****************************************************************************80
+!
+!! line_nco_rule_test() tests line_nco_rule().
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license. 
+!
+!  Modified:
+!
+!    28 July 2014
+!
+!  Author:
+!
+!    John Burkardt
+!
+  implicit none
+
+  call timestamp ( )
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) 'line_nco_rule_test():'
+  write ( *, '(a)' ) '  FORTRAN90 version:'
+  write ( *, '(a)' ) '  Test LINE_NCO_RULE().'
+
+  call test01 ( )
+  call test02 ( )
+!
+!  Terminate.
+!
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) 'LINE_NCO_RULE_TEST():'
+  write ( *, '(a)' ) '  Normal end of execution.'
+  write ( *, '(a)' ) ' '
+  call timestamp ( )
+
+  stop 0
+end
+subroutine test01 ( )
+
+!*****************************************************************************80
+!
+!! TEST01 computes and prints NCO rules.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license. 
+!
+!  Modified:
+!
+!    28 July 2014
+!
+!  Author:
+!
+!    John Burkardt
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  real ( kind = rk ) a
+  real ( kind = rk ) b
+  integer i
+  integer n
+  real ( kind = rk ), allocatable :: w(:)
+  real ( kind = rk ), allocatable :: x(:)
+
+  a = -1.0D+00
+  b = +1.0D+00
+
+  write ( *, '(a)' ) ''
+  write ( *, '(a)' ) 'TEST01'
+  write ( *, '(a)' ) '  LINE_NCO_RULE computes the Newton-Cotes Open (NCO) rule'
+  write ( *, '(a)' ) '  using N equally spaced points for an interval [A,B].'
+
+  do n = 1, 12
+
+    allocate ( x(1:n) )
+    allocate ( w(1:n) )
+
+    call line_nco_rule ( n, a, b, x, w )
+    write ( *, '(a)' ) ''
+    write ( *, '(a,i2)' ) '  Newton-Cotes Open (NCO) Rule #', n
+    write ( *, '(a)' ) '   I       X(I)            W(I)'
+    write ( *, '(a)' ) ' '
+    do i = 1, n
+      write ( *, '(2x,i2,2x,g14.6,2x,g14.6)' ) i, x(i), w(i)
+    end do
+    write ( *, '(2x,2x,2x,a,2x,g14.6)' ) '  Sum(|W)|) =', sum ( abs ( w(1:n) ) )
+
+    deallocate ( x )
+    deallocate ( w )
+
+  end do
+
+  return
+end
+subroutine test02 ( )
+
+!*****************************************************************************80
+!
+!! TEST02 uses NCO rules to estimate the integral of exp(x) from 0 to 1.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license. 
+!
+!  Modified:
+!
+!    28 July 2014
+!
+!  Author:
+!
+!    John Burkardt
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  real ( kind = rk ) a
+  real ( kind = rk ) b
+  real ( kind = rk ) error
+  real ( kind = rk ) exact
+  integer i
+  integer n
+  real ( kind = rk ) q
+  real ( kind = rk ), allocatable :: w(:)
+  real ( kind = rk ), allocatable :: x(:)
+
+  a =  0.0D+00
+  b = +1.0D+00
+  exact = exp ( b ) - exp ( a )
+
+  write ( *, '(a)' ) ''
+  write ( *, '(a)' ) 'TEST02'
+  write ( *, '(a)' ) '  Use a sequence of NCO rules to compute an estimate Q'
+  write ( *, '(a)' ) '  of the integral:'
+  write ( *, '(a)' ) '    I = integral ( 0 <= x <= 1 ) exp(x) dx.'
+  write ( *, '(a)' ) '  The exact value is:'
+  write ( *, '(a,g14.6)' ) '    I = ', exact
+
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) '   N       Q             |Q-I|'
+  write ( *, '(a)' ) ' '
+
+  do n = 1, 22
+
+    allocate ( x(1:n) )
+    allocate ( w(1:n) )
+
+    call line_nco_rule ( n, a, b, x, w )
+
+    q = 0.0D+00
+    do i = 1, n
+      q = q + w(i) * exp ( x(i) )
+    end do
+    error = abs ( exact - q )
+    write ( *, '(2x,i2,2x,g14.6,2x,e14.6)' ) n, q, error
+
+    deallocate ( x )
+    deallocate ( w )
+
+  end do
+
+  return
+end

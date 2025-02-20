@@ -1,0 +1,20 @@
+24 March 2023   9:37:40.933 AM
+ 
+RECTANGLE:
+  FORTRAN90 version
+  Interpolation of the Franke function
+  on the unit square [0,1] x [0,1]
+  of degree =     60
+
+  Wrote F(x,y) at Padua points in "rectangle_fpd.txt".
+  Wrote F(x,y) at target points in "rectangle_ftg.txt".
+  Wrote I(F)(x,y) at target points in "rectangle_itg.txt".
+
+  Estimated error:  0.2604E-09
+  Actual error:     0.2468E-10
+  Expected error:   0.2468E-10
+ 
+RECTANGLE:
+  Normal end of execution.
+ 
+24 March 2023   9:37:40.999 AM

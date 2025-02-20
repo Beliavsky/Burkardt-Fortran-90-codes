@@ -1,0 +1,224 @@
+01 May 2022   8:09:42.153 PM
+
+hypersphere_test():
+  FORTRAN90 version
+  Test hypersphere().
+
+hypersphere_test01():
+  Test the coordinate conversion routines:
+  CARTESIAN_TO_HYPERSPHERE: X       -> R,Theta
+  HYPERSPHERE_TO_CARTESIAN: R,Theta -> X.
+
+  Pick a random X, and compute X2 by converting X
+  to hypersphere and back.  Consider norm of difference.
+
+  M    || X - X2 ||
+
+   1     0.00000    
+   1     0.00000    
+   1     0.00000    
+   1     0.00000    
+   1     0.00000    
+
+   2     0.00000    
+   2     0.00000    
+   2     0.00000    
+   2    0.555112E-16
+   2    0.111022E-15
+
+   3    0.555112E-16
+   3     0.00000    
+   3    0.555112E-16
+   3    0.111022E-15
+   3     0.00000    
+
+   4    0.166533E-15
+   4    0.111022E-15
+   4     0.00000    
+   4    0.555112E-16
+   4    0.111022E-15
+
+   5    0.111022E-15
+   5     0.00000    
+   5     0.00000    
+   5    0.555112E-16
+   5     0.00000    
+
+hypersphere_test02():
+  HYPERSPHERE_01_SURFACE_UNIFORM samples uniformly from the
+  surface of the unit hypersphere
+ 
+  Random hypersphere point:
+   1.00000    
+ 
+  Random hypersphere point:
+  -1.00000    
+ 
+  Random hypersphere point:
+   1.00000    
+ 
+  Random hypersphere point:
+ -0.466909     -0.884305    
+ 
+  Random hypersphere point:
+  0.439750      0.898120    
+ 
+  Random hypersphere point:
+  0.944294      0.329102    
+ 
+  Random hypersphere point:
+  0.772011      0.438979      0.459670    
+ 
+  Random hypersphere point:
+  0.813920      0.316930     -0.486919    
+ 
+  Random hypersphere point:
+ -0.739399E-01  0.250455     -0.965300    
+ 
+  Random hypersphere point:
+ -0.151485     -0.258625     -0.952941     -0.454847E-01
+ 
+  Random hypersphere point:
+ -0.668517      0.355511      0.111654     -0.643607    
+ 
+  Random hypersphere point:
+ -0.235450E-01 -0.183429     -0.694570      0.695250    
+ 
+  Random hypersphere point:
+  0.517463     -0.250936      0.620581     -0.517348      0.128430    
+ 
+  Random hypersphere point:
+  0.232848     -0.621496     -0.523707     -0.513665     -0.146302    
+ 
+  Random hypersphere point:
+  0.261622     -0.212864     -0.645486      0.455942      0.511573    
+
+hypersphere_test03():
+  HYPERSPHERE_01_AREA evaluates the area of the unit
+  hypersphere in M dimensions.
+
+       M      Exact       Computed
+              Area        Area
+
+       1      2.0000      2.0000
+       2      6.2832      6.2832
+       3     12.5664     12.5664
+       4     19.7392     19.7392
+       5     26.3189     26.3189
+       6     31.0063     31.0063
+       7     33.0734     33.0734
+       8     32.4697     32.4697
+       9     29.6866     29.6866
+      10     25.5016     25.5016
+      11     20.7251     20.7251
+      12     16.0232     16.0232
+      13     11.8382     11.8382
+      14      8.3897      8.3897
+      15      5.7216      5.7216
+      16      3.7653      3.7653
+      17      2.3967      2.3967
+      18      1.4786      1.4786
+      19      0.8858      0.8858
+      20      0.5161      0.5161
+
+hypersphere_test04():
+  HYPERSPHERE_01_VOLUME evaluates the area of the unit
+  hypersphere in M dimensions.
+  HYPERSPHERE_01_VOLUME_VALUES returns some test values.
+
+       M      Exact       Computed
+              Volume      Volume
+
+       1      2.0000      2.0000
+       2      3.1416      3.1416
+       3      4.1888      4.1888
+       4      4.9348      4.9348
+       5      5.2638      5.2638
+       6      5.1677      5.1677
+       7      4.7248      4.7248
+       8      4.0587      4.0587
+       9      3.2985      3.2985
+      10      2.5502      2.5502
+      11      1.8841      1.8841
+      12      1.3353      1.3353
+      13      0.9106      0.9106
+      14      0.5993      0.5993
+      15      0.3814      0.3814
+      16      0.2353      0.2353
+      17      0.1410      0.1410
+      18      0.0821      0.0821
+      19      0.0466      0.0466
+      20      0.0258      0.0258
+
+hypersphere_test05():
+  For a hypersphere in M dimensions:
+  HYPERSPHERE_AREA computes the area
+  HYPERSPHERE_VOLUME computes the volume.
+
+  Notice that both quantities eventually decrease!
+
+  We use a radius of R =    1.50000    
+
+    M        Area          Volume    Area / Volume 
+
+    1     2.00000         3.00000        0.666667    
+    2     9.42478         7.06858         1.33333    
+    3     28.2743         14.1372         2.00000    
+    4     66.6198         24.9824         2.66667    
+    5     133.240         39.9719         3.33333    
+    6     235.454         58.8635         4.00000    
+    7     376.726         80.7271         4.66667    
+    8     554.775         104.020         5.33333    
+    9     760.835         126.806         6.00000    
+   10     980.369         147.055         6.66667    
+   11     1195.12         162.970         7.33333    
+   12     1385.96         173.245         8.00000    
+   13     1535.96         177.226         8.66667    
+   14     1632.80         174.943         9.33333    
+   15     1670.32         167.032         10.0000    
+   16     1648.80         154.575         10.6667    
+   17     1574.24         138.903         11.3333    
+   18     1456.83         121.403         12.0000    
+   19     1309.13         103.353         12.6667    
+   20     1144.19         85.8145         13.3333    
+
+hypersphere_test06()
+  Test the stereographic mapping:
+  HYPERSPHERE_STEREOGRAPH maps hypersphere points to the plane.
+  HYPERSPHERE_STEREOGRAPH_INVERSE inverts the mapping.
+
+  Pick a random X1 on the hypersphere.
+  Map it to a point X2 on the plane.
+  Map it back to a point X3 on the hypersphere.
+  Consider norm of difference.
+
+  M    || X1 - X3 ||
+
+   2    0.111022E-15
+   2    0.111022E-15
+   2     0.00000    
+   2     0.00000    
+   2    0.222045E-15
+
+   3    0.832667E-16
+   3     0.00000    
+   3    0.555112E-16
+   3    0.111022E-15
+   3     0.00000    
+
+   4     0.00000    
+   4    0.111022E-15
+   4    0.277556E-16
+   4     0.00000    
+   4     0.00000    
+
+   5    0.111022E-15
+   5     0.00000    
+   5    0.555112E-16
+   5    0.277556E-16
+   5    0.555112E-16
+
+hypersphere_test():
+  Normal end of execution.
+
+01 May 2022   8:09:42.154 PM

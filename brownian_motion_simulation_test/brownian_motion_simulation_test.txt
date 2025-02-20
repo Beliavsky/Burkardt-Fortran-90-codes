@@ -1,0 +1,25 @@
+ 3 September 2021   6:17:01.928 PM
+
+brownian_motion_simulation_test():
+  FORTRAN90 version
+  Test brownian_motion_simulation().
+ 
+  BROWNIAN_MOTION data stored in "motion_1d_data.txt".
+  BROWNIAN_MOTION plot commands stored in "motion_1d_commands.txt".
+ 
+  BROWNIAN_MOTION data stored in "motion_2d_data.txt".
+  BROWNIAN_MOTION plot commands stored in "motion_2d_commands.txt".
+ 
+  BROWNIAN_DISPLACEMENT data stored in "displacement_1d_data.txt".
+  BROWNIAN_DISPLACEMENT plot commands stored in "displacement_1d_commands.txt".
+ 
+  BROWNIAN_DISPLACEMENT data stored in "displacement_2d_data.txt".
+  BROWNIAN_DISPLACEMENT plot commands stored in "displacement_2d_commands.txt".
+ 
+  BROWNIAN_DISPLACEMENT data stored in "displacement_3d_data.txt".
+  BROWNIAN_DISPLACEMENT plot commands stored in "displacement_3d_commands.txt".
+
+brownian_motion_simulation_test():
+  Normal end of execution.
+
+ 3 September 2021   6:17:01.967 PM

@@ -1,0 +1,78 @@
+13 September 2021   8:58:41.513 AM
+ 
+HYPERBALL_INTEGRALS_TEST
+  FORTRAN90 version
+  Test the HYPERBALL_INTEGRALS library.
+ 
+TEST01
+  Use the Monte Carlo method to estimate integrals over
+  the interior of the unit hyperball in M dimensions.
+
+  Spatial dimension M =    3
+
+  Number of sample points used is   4192
+
+  If any exponent is odd, the integral is zero.
+  We will restrict this test to randomly chosen even exponents.
+
+  Ex  Ey  Ez     MC-Estimate           Exact      Error
+
+   6   2   4    0.281356E-03    0.278974E-03    0.24E-05
+   4   8   6    0.402739E-05    0.431848E-05    0.29E-06
+   2   4   8    0.124194E-03    0.114872E-03    0.93E-05
+   0   2   6    0.198379E-01    0.181333E-01    0.17E-02
+   4   8   2    0.104369E-03    0.114872E-03    0.11E-04
+   0   0   6    0.212875        0.199466        0.13E-01
+   6   0   6    0.141618E-02    0.139487E-02    0.21E-04
+   6   0   4    0.418326E-02    0.418461E-02    0.13E-05
+   4   8   0    0.168077E-02    0.195282E-02    0.27E-03
+   2   6   8    0.310436E-04    0.302293E-04    0.81E-06
+   2   4   8    0.124194E-03    0.114872E-03    0.93E-05
+   2   4   4    0.836314E-03    0.836921E-03    0.61E-06
+   8   0   2    0.953653E-02    0.976408E-02    0.23E-03
+   4   6   8    0.424425E-05    0.431848E-05    0.74E-07
+   4   4   2    0.769222E-03    0.836921E-03    0.68E-04
+   8   0   8    0.212774E-03    0.211605E-03    0.12E-05
+   0   0   2    0.860642        0.837758        0.23E-01
+   0   0   6    0.212875        0.199466        0.13E-01
+   0   4   4    0.113842E-01    0.108800E-01    0.50E-03
+   8   0   2    0.953653E-02    0.976408E-02    0.23E-03
+ 
+TEST02
+  Use the Monte Carlo method to estimate integrals over
+  the interior of the unit hyperball in M dimensions.
+
+  Spatial dimension M =    6
+
+  Number of sample points used is   4192
+
+  If any exponent is odd, the integral is zero.
+  We will restrict this test to randomly chosen even exponents.
+
+  E1  E2  E3  E4  E5  E6     MC-Estimate           Exact      Error
+
+   6   4   0   2   4   4    0.184764E-08    0.196936E-08    0.12E-09
+   4   0   2   4   0   2    0.122976E-04    0.120157E-04    0.28E-06
+   6   2   6   2   6   2    0.166525E-10    0.195373E-10    0.29E-11
+   2   0   2   6   6   6    0.571481E-09    0.586118E-09    0.15E-10
+   6   4   4   4   6   6    0.116845E-13    0.134678E-13    0.18E-14
+   0   4   6   4   2   4    0.206091E-08    0.196936E-08    0.92E-10
+   4   2   0   4   6   6    0.340393E-09    0.351671E-09    0.11E-10
+   2   6   0   2   6   6    0.583218E-09    0.586118E-09    0.29E-11
+   2   0   2   2   6   6    0.250066E-07    0.284463E-07    0.34E-08
+   6   2   2   2   6   0    0.288411E-07    0.284463E-07    0.39E-09
+   2   0   0   2   0   4    0.111659E-02    0.115351E-02    0.37E-04
+   6   2   4   2   6   6    0.149220E-11    0.183162E-11    0.34E-12
+   2   4   2   2   0   4    0.598453E-06    0.600785E-06    0.23E-08
+   0   2   0   6   4   0    0.553663E-04    0.600785E-04    0.47E-05
+   6   4   6   4   4   2    0.917703E-12    0.109897E-11    0.18E-12
+   6   0   0   6   6   4    0.178102E-08    0.175835E-08    0.23E-10
+   2   0   6   6   6   4    0.723672E-10    0.586118E-10    0.14E-10
+   2   4   6   4   4   6    0.102615E-11    0.109897E-11    0.73E-13
+   0   2   2   4   4   0    0.123425E-04    0.120157E-04    0.33E-06
+   2   6   2   2   6   4    0.126115E-09    0.117224E-09    0.89E-11
+ 
+HYPERBALL_INTEGRALS_TEST
+  Normal end of execution.
+ 
+13 September 2021   8:58:41.519 AM

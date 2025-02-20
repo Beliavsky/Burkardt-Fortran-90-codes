@@ -1,0 +1,96 @@
+11 September 2021   6:15:21.061 PM
+ 
+glomin_test():
+  FORTRAN90 version.
+  glomin() seeks a global minimizer of a function F(X)
+  in an interval [A,B],
+  given some upper bound M for F".
+
+  Tolerances
+  e =   0.149012E-07
+  t =   0.149012E-07
+ 
+  h_01(x) = 2 - x
+  M =    0.00000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      7.00000000      9.00000000      9.00000000
+    -5.00000        -7.00000        -7.00000    
+  Number of calls to F =        2
+ 
+  h_01(x) = 2 - x
+  M =    100.000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+      7.00000000      9.00000000      9.00000000
+    -5.00000        -7.00000        -7.00000    
+  Number of calls to F =       15
+ 
+  h_02(x) = x * x
+  M =    2.00000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -1.00000000      0.00000000      2.00000000
+     1.00000         0.00000         4.00000    
+  Number of calls to F =        4
+ 
+  h_02(x) = x * x
+  M =    2.10000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -1.00000000      0.00000000      2.00000000
+     1.00000         0.00000         4.00000    
+  Number of calls to F =        8
+ 
+  h_03(x) = x^3 + x^2
+  M =    14.0000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -0.50000000      0.00000057      2.00000000
+    0.125000        0.326186E-12     12.0000    
+  Number of calls to F =       37
+ 
+  h_03(x) = x^3 + x^2
+  M =    28.0000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+     -0.50000000      0.00000981      2.00000000
+    0.125000        0.962435E-10     12.0000    
+  Number of calls to F =       47
+ 
+  h_04(x) = ( x + sin(x) ) * exp(-x*x)
+  M =    72.0000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+    -10.00000000     -0.67957866     10.00000000
+   -0.351770E-42   -0.824239        0.351770E-42
+  Number of calls to F =      221
+ 
+  h_05(x) = ( x - sin(x) ) * exp(-x*x)
+  M =    72.0000    
+ 
+      A                 X             B
+    F(A)              F(X)          F(B)
+ 
+    -10.00000000     -1.19513663     10.00000000
+   -0.392246E-42   -0.634905E-01    0.392246E-42
+  Number of calls to F =      458
+ 
+glomin_test():
+  Normal end of execution.
+ 
+11 September 2021   6:15:21.062 PM

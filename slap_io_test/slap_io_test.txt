@@ -1,0 +1,186 @@
+ 5 April 2023   3:02:27.739 PM
+ 
+slap_io_test():
+  FORTRAN90 version
+  Test slap_io().
+ 
+TEST01
+  slap_FILE_WRITE writes a matrix in SLAP Triad format
+  to a slap sparse matrix file.
+ 
+  The slap data to be written to the file.
+ 
+  slap Sparse Matrix File Header:
+ 
+  N,     the matrix order =                       5
+  NELT,  the number of nonzeros stored =         11
+  ISYM,  1 if symmetric storage used =            0
+  IRHS,  1 if a right hand side included =        1
+  ISOLN, 1 if a solution vector included =        1
+ 
+  The sparse matrix
+ 
+  Col:        1             2             3             4             5
+  Row
+  ---
+    1    11.0000       12.0000       0.00000       0.00000       15.0000    
+    2    21.0000       22.0000       0.00000       0.00000       0.00000    
+    3    0.00000       0.00000       33.0000       0.00000       35.0000    
+    4    0.00000       0.00000       0.00000       44.0000       0.00000    
+    5    51.0000       0.00000       53.0000       0.00000       55.0000    
+ 
+  slap right hand side vector:
+ 
+         1   110.00000    
+         2   65.000000    
+         3   274.00000    
+         4   176.00000    
+         5   485.00000    
+ 
+  slap solution vector:
+ 
+         1   1.0000000    
+         2   2.0000000    
+         3   3.0000000    
+         4   4.0000000    
+         5   5.0000000    
+ 
+  Wrote the matrix data to "a5by5.slap".
+ 
+TEST02
+  slap_FILE_READ reads a matrix from a SLAP sparse
+  matrix file into slap Triad format.
+ 
+  Read the matrix data from "a5by5.slap".
+ 
+  The slap data read from the file.
+ 
+  slap Sparse Matrix File Header:
+ 
+  N,     the matrix order =                       5
+  NELT,  the number of nonzeros stored =         11
+  ISYM,  1 if symmetric storage used =            0
+  IRHS,  1 if a right hand side included =        1
+  ISOLN, 1 if a solution vector included =        1
+ 
+  The sparse matrix
+ 
+  Col:        1             2             3             4             5
+  Row
+  ---
+    1    11.0000       12.0000       0.00000       0.00000       15.0000    
+    2    21.0000       22.0000       0.00000       0.00000       0.00000    
+    3    0.00000       0.00000       33.0000       0.00000       35.0000    
+    4    0.00000       0.00000       0.00000       44.0000       0.00000    
+    5    51.0000       0.00000       53.0000       0.00000       55.0000    
+ 
+  slap right hand side vector:
+ 
+         1   110.00000    
+         2   65.000000    
+         3   274.00000    
+         4   176.00000    
+         5   485.00000    
+ 
+  slap solution vector:
+ 
+         1   1.0000000    
+         2   2.0000000    
+         3   3.0000000    
+         4   4.0000000    
+         5   5.0000000    
+ 
+TEST03
+  slap_FILE_WRITE writes a matrix in SLAP Triad format
+  to a slap sparse matrix file.
+ 
+  In this example, symmetric storage is used.
+ 
+  The slap data to be written to the file.
+ 
+  slap Sparse Matrix File Header:
+ 
+  N,     the matrix order =                       5
+  NELT,  the number of nonzeros stored =          9
+  ISYM,  1 if symmetric storage used =            1
+  IRHS,  1 if a right hand side included =        1
+  ISOLN, 1 if a solution vector included =        1
+ 
+  The sparse matrix
+ 
+  Col:        1             2             3             4             5
+  Row
+  ---
+    1    11.0000       0.00000       31.0000       0.00000       51.0000    
+    2    0.00000       22.0000       0.00000       0.00000       0.00000    
+    3    31.0000       0.00000       33.0000       43.0000       0.00000    
+    4    0.00000       0.00000       43.0000       44.0000       54.0000    
+    5    51.0000       0.00000       0.00000       54.0000       55.0000    
+ 
+  slap right hand side vector:
+ 
+         1   359.00000    
+         2   44.000000    
+         3   302.00000    
+         4   575.00000    
+         5   542.00000    
+ 
+  slap solution vector:
+ 
+         1   1.0000000    
+         2   2.0000000    
+         3   3.0000000    
+         4   4.0000000    
+         5   5.0000000    
+ 
+  Wrote the matrix data to "a5by5_sym.slap".
+ 
+TEST04
+  slap_FILE_READ reads a matrix from a SLAP sparse
+  matrix file into slap Triad format.
+ 
+  In this example, symmetric storage is used.
+ 
+  Read the matrix data from "a5by5_sym.slap".
+ 
+  The slap data read from the file.
+ 
+  slap Sparse Matrix File Header:
+ 
+  N,     the matrix order =                       5
+  NELT,  the number of nonzeros stored =          9
+  ISYM,  1 if symmetric storage used =            1
+  IRHS,  1 if a right hand side included =        1
+  ISOLN, 1 if a solution vector included =        1
+ 
+  The sparse matrix
+ 
+  Col:        1             2             3             4             5
+  Row
+  ---
+    1    11.0000       0.00000       31.0000       0.00000       51.0000    
+    2    0.00000       22.0000       0.00000       0.00000       0.00000    
+    3    31.0000       0.00000       33.0000       43.0000       0.00000    
+    4    0.00000       0.00000       43.0000       44.0000       54.0000    
+    5    51.0000       0.00000       0.00000       54.0000       55.0000    
+ 
+  slap right hand side vector:
+ 
+         1   359.00000    
+         2   44.000000    
+         3   302.00000    
+         4   575.00000    
+         5   542.00000    
+ 
+  slap solution vector:
+ 
+         1   1.0000000    
+         2   2.0000000    
+         3   3.0000000    
+         4   4.0000000    
+         5   5.0000000    
+ 
+slap_io_test():
+  Normal end of execution.
+ 
+ 5 April 2023   3:02:27.739 PM

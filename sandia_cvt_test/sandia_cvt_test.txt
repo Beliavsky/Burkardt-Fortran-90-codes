@@ -1,0 +1,121 @@
+06 April 2023   9:24:51.110 AM
+ 
+sandia_cvt_test():
+  FORTRAN90 version
+  Test SANDIA_CVT().
+  A sample problem for the probabilistic
+  Centroidal Voronoi Tessellation algorithm.
+ 
+  Given a region in 2D or 3D, the problem is to determine
+  GENERATORS, a set of points which define a division
+  of the region into Voronoi cells, which are also
+  CENTROIDS of the Voronoi cells.
+ 
+ 
+Geometry parameters:
+-------------------
+ 
+  The spatial dimension is NDIM =        3
+ 
+  The minimum corner of the bounding box is:
+   0.00000       0.00000       0.00000    
+  The maximum corner of the bounding box is:
+   100.000       100.000       20.0000    
+ 
+  a simple routine determines the region.
+ 
+CVT Algorithm parameters:
+-------------------------
+ 
+  The number of Voronoi cells to generate:     1024
+  Number of iterations to determine CVT:       10
+  Number of sampling points per Voronoi cell:     5000
+  Voronoi cell generators are initialized by Halton.
+ 
+ 
+Moment parameters:
+------------------
+ 
+  Number of sampling points per Voronoi cell:     5000
+ 
+  The volume of the region is given.
+  It is specified as REGION_VOLUME =    34000.0    
+ 
+ 
+Nearest Neighbor Search parameters:
+-----------------------------------
+ 
+ 
+  The nearest neighbor search is speeded up by using bins.
+  The bounding box is to be divided up into bins.
+  The number of bins is :
+      25      25       5
+ 
+ 
+Miscellaneous parameters:
+------------------------
+ 
+  Generator and moment output files will NOT be written.
+ 
+ 
+RANDOM_INITIALIZE
+  Initialize RANDOM_NUMBER with arbitrary SEED =    423747261
+ 
+BIN_PREPROCESS:
+ 
+  Number of points =         1024
+  Total number of bins =     3125
+  Number of empty bins =     2563
+          nonempy bins =      562
+ 
+  Percentage nonempty bins =          18.0
+  Number of points per bin =           0.327680    
+  Number of points per nonempy bin =    1.82206    
+ 
+  Volume of bounding box is        200000.    
+  Given volume of region is        34000.0    
+  Estimated volume of region is    32005.9    
+ 
+Elapsed CPU time, CPU_TIME:    84.2946     seconds.
+Elapsed time, SYSTEM_CLOCK:    84.3610     seconds.
+ 
+QUALITY
+ 
+ 
+  Measure #1:
+    ( Cell_Volume - Expected Cell Volume )
+ 
+  Expected Cell Volume =    33.2031    
+ 
+  L1 norm =                 2663.82    
+  L2 norm =                 103.787    
+  L1 norm / N =             2.60139    
+  L2 norm / sqrt ( N ) =    3.24334    
+  L-Inf norm =              12.2453    
+ 
+ 
+  Measure #2:
+    ( Cell_Trace - Average Cell Trace )
+ 
+  Average Cell Trace =    2.48972    
+ 
+  L1 norm =                 121.113    
+  L2 norm =                 4.80023    
+  L1 norm / N =            0.118274    
+  L2 norm / sqrt ( N ) =   0.150007    
+  L-Inf norm =             0.589737    
+ 
+ 
+  Measure #3:
+    ( The determinant of the deviatoric matrix )
+ 
+  L1 norm = 	        2.69903    
+  L2 norm =                0.172771    
+  L1 norm / N =            0.263577E-02
+  L2 norm / sqrt ( N ) =   0.539910E-02
+  L-Inf norm =             0.710098E-01
+ 
+SANDIA_CVT_TEST
+  Normal end of execution.
+ 
+06 April 2023   9:26:15.472 AM

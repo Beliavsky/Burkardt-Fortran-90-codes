@@ -1,0 +1,319 @@
+14 September 2021   7:36:17.677 PM
+ 
+praxis_test
+  FORTRAN90 version
+  Test praxis.
+ 
+BEALE_TEST
+  The Beale function.
+ 
+  Initial point:
+ 
+         1    0.10000000    
+         2    0.10000000    
+  Function value =    12.9910    
+ 
+  Computed minimizer:
+ 
+         1     3.0000000    
+         2    0.50000000    
+  Function value =   0.369857E-25
+ 
+BOX_TEST
+  The Box function.
+ 
+  Initial point:
+ 
+         1     0.0000000    
+         2     10.000000    
+         3     20.000000    
+  Function value =    1031.15    
+ 
+  Computed minimizer:
+ 
+         1     1.0000000    
+         2     10.000000    
+         3     1.0000000    
+  Function value =   0.183203E-25
+ 
+CHEBYQUAD_TEST
+  The Chebyquad function.
+ 
+  Initial point:
+ 
+         1    0.11111111    
+         2    0.22222222    
+         3    0.33333333    
+         4    0.44444444    
+         5    0.55555556    
+         6    0.66666667    
+         7    0.77777778    
+         8    0.88888889    
+  Function value =   0.386177E-01
+ 
+  Computed minimizer:
+ 
+         1    0.43152748E-01
+         2    0.19309073    
+         3    0.26632899    
+         4    0.50000010    
+         5    0.50000004    
+         6    0.73367136    
+         7    0.80690925    
+         8    0.95684725    
+  Function value =   0.351687E-02
+ 
+CUBE_TEST
+  The Cube function.
+ 
+  Initial point:
+ 
+         1    -1.2000000    
+         2    -1.0000000    
+  Function value =    57.8384    
+ 
+  Computed minimizer:
+ 
+         1     1.0000000    
+         2     1.0000000    
+  Function value =   0.306398E-22
+ 
+HELIX_TEST
+  The Fletcher-Powell Helix function.
+ 
+  Initial point:
+ 
+         1    -1.0000000    
+         2     0.0000000    
+         3     0.0000000    
+  Function value =    10000.0    
+ 
+  Computed minimizer:
+ 
+         1     1.0000000    
+         2    0.31002546E-10
+         3    0.49872794E-10
+  Function value =   0.275608E-20
+ 
+HILBERT_TEST
+  The Hilbert function.
+ 
+  Initial point:
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4     1.0000000    
+         5     1.0000000    
+         6     1.0000000    
+         7     1.0000000    
+         8     1.0000000    
+         9     1.0000000    
+        10     1.0000000    
+  Function value =    13.3754    
+ 
+  Computed minimizer:
+ 
+         1    0.12147216E-04
+         2   -0.65814435E-03
+         3    0.74092708E-02
+         4   -0.18764641E-01
+         5   -0.10051749    
+         6    0.71058165    
+         7    -1.7660884    
+         8     2.2013817    
+         9    -1.3796017    
+        10    0.34626260    
+  Function value =   0.157470E-10
+ 
+POWELL3D_TEST
+  The Powell 3D function.
+ 
+  Initial point:
+ 
+         1     0.0000000    
+         2     1.0000000    
+         3     2.0000000    
+  Function value =    1.50000    
+ 
+  Computed minimizer:
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+  Function value =    0.00000    
+ 
+ROSENBROCK_TEST
+  The Rosenbrock function.
+ 
+  Initial point:
+ 
+         1    -1.2000000    
+         2     1.0000000    
+  Function value =    24.2000    
+ 
+  Computed minimizer:
+ 
+         1     1.0000000    
+         2     1.0000000    
+  Function value =   0.446274E-23
+ 
+SINGULAR_TEST
+  The Powell Singular function.
+ 
+  Initial point:
+ 
+         1     3.0000000    
+         2    -1.0000000    
+         3     0.0000000    
+         4     1.0000000    
+  Function value =    215.000    
+ 
+  Computed minimizer:
+ 
+         1    0.16338105E-05
+         2   -0.16338105E-06
+         3    0.46027718E-06
+         4    0.46027835E-06
+  Function value =   0.272477E-22
+ 
+TRIDIAGONAL_TEST
+  The Tridiagonal function.
+ 
+  Initial point:
+ 
+         1     0.0000000    
+         2     0.0000000    
+         3     0.0000000    
+         4     0.0000000    
+  Function value =    0.00000    
+ 
+  Computed minimizer:
+ 
+         1     4.0000000    
+         2     3.0000000    
+         3     2.0000000    
+         4     1.0000000    
+  Function value =   -4.00000    
+ 
+WATSON_TEST
+  The Watson function.
+ 
+  Initial point:
+ 
+         1     0.0000000    
+         2     0.0000000    
+         3     0.0000000    
+         4     0.0000000    
+         5     0.0000000    
+         6     0.0000000    
+  Function value =    30.0000    
+ 
+  Computed minimizer:
+ 
+         1   -0.15725086E-01
+         2     1.0124349    
+         3   -0.23299162    
+         4     1.2604301    
+         5    -1.5137290    
+         6    0.99299645    
+  Function value =   0.228767E-02
+ 
+WOOD_TEST
+  The Wood function.
+ 
+  Initial point:
+ 
+         1    -3.0000000    
+         2    -1.0000000    
+         3    -3.0000000    
+         4    -1.0000000    
+  Function value =    19192.0    
+ 
+  Computed minimizer:
+ 
+         1     1.0000000    
+         2     1.0000000    
+         3     1.0000000    
+         4     1.0000000    
+  Function value =   0.145928E-19
+ 
+MINFIT_TEST
+  MINFIT computes part of the SVD of a matrix A.
+    SVD: A = U * D * V'
+  MINFIT is given A, and returns the diagonal D
+  and the orthogonal matrix V.
+ 
+  The matrix A:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1       2.           -1.            0.            0.            0.      
+    2      -1.            2.           -1.            0.            0.      
+    3       0.           -1.            2.           -1.            0.      
+    4       0.            0.           -1.            2.           -1.      
+    5       0.            0.            0.           -1.            2.      
+ 
+  The vector V:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1  -0.288675      0.500000     -0.577350      0.500000     -0.288675    
+    2   0.500000     -0.500000      0.240746E-15  0.500000     -0.500000    
+    3  -0.577350      0.190820E-15  0.577350     -0.359110E-15 -0.577350    
+    4   0.500000      0.500000      0.607563E-16 -0.500000     -0.500000    
+    5  -0.288675     -0.500000     -0.577350     -0.500000     -0.288675    
+ 
+  The singular values D:
+ 
+         1     3.7320508    
+         2     3.0000000    
+         3     2.0000000    
+         4     1.0000000    
+         5    0.26794919    
+
+  Because A is positive definite symmetric,
+  we can reconstruct it as A = V * D * V'
+ 
+  The product A2 = V * D * V'
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1    2.00000      -1.00000     -0.492661E-15 -0.943690E-15 -0.163064E-15
+    2   -1.00000       2.00000      -1.00000          0.       -0.735523E-15
+    3  -0.388578E-15  -1.00000       2.00000      -1.00000     -0.402456E-15
+    4  -0.943690E-15 -0.111022E-15  -1.00000       2.00000      -1.00000    
+    5  -0.166533E-15 -0.735523E-15 -0.291434E-15  -1.00000       2.00000    
+ 
+SVSORT_TEST
+  SVSORT sorts a vector D, and the corresponding columns
+  of a matrix V.
+
+  First row = entries of D.
+  Corresponding columns of V below.
+
+  0.978878      0.774137      0.259163      0.872736      0.287810    
+
+   11.0000       12.0000       13.0000       14.0000       15.0000    
+   21.0000       22.0000       23.0000       24.0000       25.0000    
+   31.0000       32.0000       33.0000       34.0000       35.0000    
+   41.0000       42.0000       43.0000       44.0000       45.0000    
+   51.0000       52.0000       53.0000       54.0000       55.0000    
+
+  After sorting D and rearranging V:
+
+  0.978878      0.872736      0.774137      0.287810      0.259163    
+
+   11.0000       14.0000       12.0000       15.0000       13.0000    
+   21.0000       24.0000       22.0000       25.0000       23.0000    
+   31.0000       34.0000       32.0000       35.0000       33.0000    
+   41.0000       44.0000       42.0000       45.0000       43.0000    
+   51.0000       54.0000       52.0000       55.0000       53.0000    
+ 
+praxis_test
+  Normal end of execution.
+ 
+14 September 2021   7:36:17.684 PM

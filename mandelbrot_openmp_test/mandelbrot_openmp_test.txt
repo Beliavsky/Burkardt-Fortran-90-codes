@@ -1,0 +1,135 @@
+25 March 2023   3:10:47.032 PM
+ 
+MANDELBROT_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Create an ASCII PPM image of the Mandelbrot set.
+ 
+  For each point C = X + i*Y
+  with X range [  -2.25000    ,   1.25000    ]
+  and  Y range [  -1.75000    ,   1.75000    ]
+  carry out     2000 iterations of the map
+  Z(n+1) = Z(n)^2 + C.
+  If the iterates stay bounded (norm less than 2)
+  then C is taken to be a member of the set.
+ 
+  An ASCII PPM image of the set is created using
+    M =      500 pixels in the X direction and
+    N =      500 pixels in the Y direction.
+ 
+  Time =   0.673910    
+ 
+  Graphics data written to "mandelbrot_openmp.ppm".
+ 
+MANDELBROT_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023   3:10:47.790 PM
+25 March 2023   3:10:47.792 PM
+ 
+MANDELBROT_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Create an ASCII PPM image of the Mandelbrot set.
+ 
+  For each point C = X + i*Y
+  with X range [  -2.25000    ,   1.25000    ]
+  and  Y range [  -1.75000    ,   1.75000    ]
+  carry out     2000 iterations of the map
+  Z(n+1) = Z(n)^2 + C.
+  If the iterates stay bounded (norm less than 2)
+  then C is taken to be a member of the set.
+ 
+  An ASCII PPM image of the set is created using
+    M =      500 pixels in the X direction and
+    N =      500 pixels in the Y direction.
+ 
+  Time =   0.337250    
+ 
+  Graphics data written to "mandelbrot_openmp.ppm".
+ 
+MANDELBROT_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023   3:10:48.203 PM
+25 March 2023   3:10:48.205 PM
+ 
+MANDELBROT_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Create an ASCII PPM image of the Mandelbrot set.
+ 
+  For each point C = X + i*Y
+  with X range [  -2.25000    ,   1.25000    ]
+  and  Y range [  -1.75000    ,   1.75000    ]
+  carry out     2000 iterations of the map
+  Z(n+1) = Z(n)^2 + C.
+  If the iterates stay bounded (norm less than 2)
+  then C is taken to be a member of the set.
+ 
+  An ASCII PPM image of the set is created using
+    M =      500 pixels in the X direction and
+    N =      500 pixels in the Y direction.
+ 
+  Time =   0.331018    
+ 
+  Graphics data written to "mandelbrot_openmp.ppm".
+ 
+MANDELBROT_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023   3:10:48.611 PM
+25 March 2023   3:10:48.613 PM
+ 
+MANDELBROT_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Create an ASCII PPM image of the Mandelbrot set.
+ 
+  For each point C = X + i*Y
+  with X range [  -2.25000    ,   1.25000    ]
+  and  Y range [  -1.75000    ,   1.75000    ]
+  carry out     2000 iterations of the map
+  Z(n+1) = Z(n)^2 + C.
+  If the iterates stay bounded (norm less than 2)
+  then C is taken to be a member of the set.
+ 
+  An ASCII PPM image of the set is created using
+    M =      500 pixels in the X direction and
+    N =      500 pixels in the Y direction.
+ 
+  Time =   0.333067    
+ 
+  Graphics data written to "mandelbrot_openmp.ppm".
+ 
+MANDELBROT_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023   3:10:49.020 PM
+25 March 2023   3:10:49.023 PM
+ 
+MANDELBROT_OPENMP():
+  FORTRAN90/OpenMP version
+ 
+  Create an ASCII PPM image of the Mandelbrot set.
+ 
+  For each point C = X + i*Y
+  with X range [  -2.25000    ,   1.25000    ]
+  and  Y range [  -1.75000    ,   1.75000    ]
+  carry out     2000 iterations of the map
+  Z(n+1) = Z(n)^2 + C.
+  If the iterates stay bounded (norm less than 2)
+  then C is taken to be a member of the set.
+ 
+  An ASCII PPM image of the set is created using
+    M =      500 pixels in the X direction and
+    N =      500 pixels in the Y direction.
+ 
+  Time =   0.182197    
+ 
+  Graphics data written to "mandelbrot_openmp.ppm".
+ 
+MANDELBROT_OPENMP():
+  Normal end of execution.
+ 
+25 March 2023   3:10:49.281 PM

@@ -1,0 +1,98 @@
+<html>
+
+  <head>
+    <title>
+      r83_np
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      r83_np
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>r83_np</b>,
+      a FORTRAN90 code which 
+      carries out some basic linear algebra operations on R83_NP matrices
+      (real 64 bit precision tridiagonal 3xN format, nonpivoting factorization).
+    </p>
+
+    <p>
+      These utilities are distinguished by the fact that an LU factorization
+      is attempted without the use of pivoting.  Such an approach will
+      fail if a zero pivot is encountered, and will generally not be as
+      accurate as a pivoting factorization.  It is only recommended in cases
+      where pivoting is known to be unnecessary, such as for a symmetric
+      positive definite matrix.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page 
+      are distributed under
+      <a href = "https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt">the GNU LGPL license.</a>
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>r83_np</b> is available in 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/r83_np/r83_np.html">a C version </a> and 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/r83_np/r83_np.html">a C++ version </a> and 
+      <a href = "r83_np.html">a FORTRAN90 version </a> and 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/r83_np/r83_np.html">a MATLAB version</a> and 
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/r83_np/r83_np.html">a Python version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../r83_np_test/r83_np_test.html">
+      r83_np_test</a>
+    </p>
+
+    <p>
+      <a href = "../linear_algebra/linear_algebra.html">
+      linear_algebra</a>,
+      Fortran90 codes which 
+      carry out various linear algebra operations for matrices
+      stored in a variety of formats.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "r83_np.f90">r83_np.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "r83_np.sh">r83_np.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 August 2022.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

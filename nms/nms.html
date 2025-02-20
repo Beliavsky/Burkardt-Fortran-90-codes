@@ -1,0 +1,234 @@
+<html>
+
+  <head>
+    <title>
+      nms
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      nms
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>nms</b>,
+      a Fortran90 code which
+      includes a wide variety of numerical software, including
+      solvers for linear systems of equations, 
+      a piecewise Hermie cubic (PWH) interpolation package (PCHIP),
+      numerical quadrature, linear least squares data fitting,
+      the solution of nonlinear equations, 
+      ordinary differential equations (ODE),
+      optimization and nonlinear least squares (NLS), simulation and random
+      numbers, trigonometric approximation and Fast Fourier Transforms (FFT).
+    </p>
+
+    <p>
+      The code accompanies the text
+      "Numerical Methods and Software".  The book is a modern discussion
+      of current numerical algorithms and software.  The software that comes
+      with the book has been extracted from standard software libraries,
+      particularly the SLATEC code.  Thus the book is also a good
+      introduction to the use of a portion of the SLATEC code, which
+      does not have a widely available solid hardcopy reference.
+    </p>
+
+    <p>
+      In particular, the code includes some or all of:
+      <ul>
+        <li>
+          BLAS1, the Basis Linear Algebra Subprograms, Level 1;
+        </li>
+        <li>
+          DDRIV, for integrating systems of ODE's;
+        </li>
+        <li>
+          FFTPACK, for Fast Fourier Transforms,<br>
+          (Paul Swarztrauber);
+        </li>
+        <li>
+          FNLIB, Wayne Fullerton's special function package,
+        </li>
+        <li>
+          FUNPACK, Daniel Amos's special function package,
+        </li>
+        <li>
+          LINPACK, for solving linear systems.
+        </li>
+        <li>
+          MACHINE, for reporting values of machine arithmetic constants.
+        </li>
+        <li>
+          PCHIP, Piecewise Cubic Hermite Interpolation Package,<br>
+          (Fritsch and Carlson);
+        </li>
+        <li>
+          QUADPACK, for approximate integration;
+        </li>
+        <li>
+          UNCMIN, for the unconstrained minimization of a function
+          of several variables.
+        </li>
+        <li>
+          XERROR, for handling run time errors.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this web page
+      are distributed under
+      the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>nms</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/nms/nms.html">a Fortran77 version</a> and
+      <a href = "nms.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../nms_test/nms_test.html">
+      nms_test</a>
+    </p>
+
+    <p>
+      <a href = "../bernstein_polynomial/bernstein_polynomial.html">
+      bernstein_polynomial</a>,
+      a Fortran90 code which
+      evaluates the Bernstein polynomials, 
+      useful for uniform approximation of functions;
+    </p>
+
+    <p>
+      <a href = "../distance_to_position/distance_to_position.html">
+      distance_to_position</a>,
+      a Fortran90 code which
+      estimates the positions of cities based on a city-to-city distance table.
+      It uses UNCMIN from NMS to solve this problem.
+    </p>
+
+    <p>
+      <a href = "../fftpack5/fftpack5.html">
+      fftpack5</a>,
+      a Fortran90 code which
+      contains version 5 of FFTPACK.
+    </p>
+
+    <p>
+      <a href = "../machine/machine.html">
+      machine</a>,
+      a Fortran90 code which
+      reports the value of machine
+      arithmetic constants.
+    </p>
+
+    <p>
+      <a href = "../ode/ode.html">
+      ode</a>,
+      a Fortran90 code which
+      implements the Shampine and Gordon ODE solver.
+    </p>
+
+    <p>
+      <a href = "../qr_solve/qr_solve.html">
+      qr_solve</a>,
+      a Fortran90 code which
+      computes the least squares solution of a linear system A*x=b.
+    </p>
+
+    <p>
+      <a href = "../quadpack/quadpack.html">
+      quadpack</a>,
+      a Fortran90 code which
+      approximates integrals of functions.
+    </p>
+
+    <p>
+      <a href = "../reactor_simulation/reactor_simulation.html">
+      reactor_simulation</a>,
+      a Fortran90 code which
+      is a simple Monte Carlo simulation of the shielding effect of a slab
+      of a certain thickness in front of a neutron source.  This program was
+      provided as an example with the book "Numerical Methods and Software."
+    </p>
+
+    <p>
+      <a href = "../rkf45/rkf45.html">
+      rkf45</a>,
+      a Fortran90 code which
+      is a Runge-Kutta-Fehlberg ODE solver.
+    </p>
+
+    <p>
+      <a href = "../slatec/slatec.html">
+      slatec</a>,
+      a Fortran90 code which
+      evaluates many special functions.
+    </p>
+
+    <p>
+      <a href = "../xerror/xerror.html">
+      xerror</a>,
+      a Fortran90 code which
+      is designed to report and handle errors detected during program execution.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          David Kahaner, Cleve Moler, Steven Nash,<br>
+          Numerical Methods and Software,<br>
+          Prentice Hall, 1989,<br>
+          ISBN: 0-13-627258-4,<br>
+          LC: TA345.K34.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "nms.f90">nms.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "nms.sh">nms.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 09 January 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body
+
+</html>

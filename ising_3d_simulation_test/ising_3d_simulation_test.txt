@@ -1,0 +1,74 @@
+26 March 2023   8:44:53.990 AM
+ 
+ISING_3D_SIMULATION():
+  FORTRAN90 version
+  Monte Carlo simulation of a 3D Ising model.
+ 
+  The linear dimension of the system is N =       10
+  The number of iterations taken is ITERATIONS =       25
+ 
+  The transition probability table, based on the number
+  of neighbors with the same spin.
+ 
+      0         1         2         3         4         5         6
+ 
+    0.9900    0.9900    0.9900    0.8000    0.3000    0.2000    0.1000
+ 
+  Step     Positives       Flipped
+ 
+     0           534
+                               665
+     1           537
+                               760
+     2           535
+                               829
+     3           544
+                               870
+     4           516
+                               908
+     5           514
+                               926
+     6           508
+                               948
+     7           500
+                               940
+     8           504
+                               951
+     9           501
+                               949
+    10           508
+                               962
+    11           498
+                               955
+    12           503
+                               955
+    13           500
+                               970
+    14           492
+                               968
+    15           496
+                               965
+    16           501
+                               962
+    17           495
+                               958
+    18           495
+                               956
+    19           497
+                               964
+    20           503
+                               970
+    21           505
+                               973
+    22           500
+                               975
+    23           499
+                               969
+    24           502
+                               963
+    25           495
+ 
+ISING_3D_SIMULATION
+  Normal end of execution.
+ 
+26 March 2023   8:44:54.002 AM

@@ -1,0 +1,74 @@
+13 September 2021   9:02:28.178 AM
+ 
+HYPERSPHERE_INTEGRALS_TEST
+  FORTRAN90 version
+  Test the HYPERSPHERE_INTEGRALS library.
+
+TEST01
+  Estimate monomial integrals using Monte Carlo
+  over the surface of the unit hypersphere in 3D.
+
+  Number of sample points used is   4192
+
+  If any exponent is odd, the integral is zero.
+  We will restrict this test to randomly chosen even exponents.
+
+  Ex  Ey  Ez     MC-Estimate           Exact      Error
+
+   6   6   8    0.218283E-04    0.215924E-04    0.24E-06
+   2   0   0     4.15668         4.18879        0.32E-01
+   8   0   8    0.391293E-02    0.402050E-02    0.11E-03
+   2   6   0    0.200350        0.199466        0.88E-03
+   2   6   4    0.427918E-02    0.418461E-02    0.95E-04
+   0   6   6    0.212215E-01    0.209230E-01    0.30E-03
+   4   6   4    0.853300E-03    0.836921E-03    0.16E-04
+   6   4   0    0.557746E-01    0.543999E-01    0.14E-02
+   0   8   4    0.289556E-01    0.292922E-01    0.34E-03
+   0   0   8     1.39979         1.39626        0.35E-02
+   2   6   4    0.427918E-02    0.418461E-02    0.95E-04
+   0   6   8    0.100374E-01    0.976408E-02    0.27E-03
+   6   4   2    0.420936E-02    0.418461E-02    0.25E-04
+   4   8   6    0.938493E-04    0.906880E-04    0.32E-05
+   8   6   4    0.908336E-04    0.906880E-04    0.15E-06
+   8   2   2    0.985086E-02    0.976408E-02    0.87E-04
+   8   8   0    0.415518E-02    0.402050E-02    0.13E-03
+   2   6   2    0.183762E-01    0.181333E-01    0.24E-03
+   2   6   8    0.595187E-03    0.574358E-03    0.21E-04
+   6   2   6    0.138010E-02    0.139487E-02    0.15E-04
+
+TEST01
+  Estimate monomial integrals using Monte Carlo
+  over the surface of the unit hypersphere in 3D.
+
+  Number of sample points used is   4192
+
+  If any exponent is odd, the integral is zero.
+  We will restrict this test to randomly chosen even exponents.
+
+  E1  E2  E3  E4  E5  E6     MC-Estimate           Exact      Error
+
+   4   6   4   2   6   4    0.375059E-10    0.351671E-10    0.23E-11
+   4   4   2   2   2   4    0.839221E-07    0.819252E-07    0.20E-08
+   4   2   2   0   6   6    0.965553E-07    0.853388E-07    0.11E-07
+   2   0   6   6   0   2    0.125527E-04    0.150196E-04    0.25E-05
+   2   4   4   0   6   0    0.887222E-05    0.901178E-05    0.14E-06
+   2   6   0   0   6   4    0.211168E-05    0.204813E-05    0.64E-07
+   2   4   6   0   0   4    0.923253E-05    0.901178E-05    0.22E-06
+   2   6   4   2   2   2    0.146657E-06    0.136542E-06    0.10E-07
+   2   6   6   6   0   0    0.427106E-06    0.426694E-06    0.41E-09
+   0   0   6   0   2   0    0.773515E-01    0.807455E-01    0.34E-02
+   4   4   0   2   0   2    0.224202E-03    0.216283E-03    0.79E-05
+   4   0   4   0   2   0    0.361627E-02    0.346052E-02    0.16E-03
+   0   6   4   4   4   2    0.510582E-07    0.512033E-07    0.15E-09
+   2   0   4   0   4   4    0.370314E-04    0.360471E-04    0.98E-06
+   4   4   0   0   6   6    0.283256E-06    0.256016E-06    0.27E-07
+   4   2   4   6   2   0    0.417577E-06    0.409626E-06    0.80E-08
+   6   0   0   6   2   0    0.290609E-03    0.300393E-03    0.98E-05
+   6   2   6   6   0   6    0.304180E-09    0.293059E-09    0.11E-10
+   2   0   4   6   0   6    0.180462E-05    0.204813E-05    0.24E-06
+   6   6   4   0   0   4    0.261960E-06    0.256016E-06    0.59E-08
+ 
+HYPERSPHERE_INTEGRALS_TEST
+  Normal end of execution.
+ 
+13 September 2021   9:02:28.183 AM

@@ -1,0 +1,166 @@
+<html>
+
+  <head>
+    <title>
+      hypercube_exactness_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      hypercube_exactness_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>hypercube_exactness_test</b>,
+      a Fortran90 code which
+      calls hypercube_exactness() to
+      investigate the polynomial exactness of a quadrature rule
+      over the interior of the hypercube in M dimensions.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../hypercube_exactness/hypercube_exactness.html">
+      hypercube_exactness</a>,
+      a Fortran90 code which
+      measures the monomial exactness of an M-dimensional quadrature rule
+      over the interior of the unit hypercube in M dimensions.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "hypercube_exactness_test.sh">hypercube_exactness_tst.sh</a>, runs all the tests.
+        </li>
+        <li>
+          <a href = "hypercube_exactness_test.txt">hypercube_exactness_test.txt</a>, the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>CC_D1_O2</b> is a Clenshaw-Curtis order 2 rule for 1D.
+      <ul>
+        <li>
+          <a href = "cc_d1_o2_x.txt">cc_d1_o2_x.txt</a>,
+          the abscissas of the rule.
+        </li>
+        <li>
+          <a href = "cc_d1_o2_w.txt">cc_d1_o2_w.txt</a>,
+          the weights of the rule.
+        </li>
+        <li>
+          <a href = "cc_d1_o2_r.txt">cc_d1_o2_r.txt</a>,
+          defines the region for the rule.
+        </li>
+        <li>
+          <a href = "cc_d1_o2_exact.txt">cc_d1_o2_exact.txt</a>,
+          the results of the exactness test, up to degree 5.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>CC_D1_O3</b> is a Clenshaw-Curtis order 3 rule for 1D.
+      If you are paying attention, you may be surprised to see that
+      a Clenshaw Curtis rule of odd order has one more degree of
+      accuracy than you'd expect!
+      <ul>
+        <li>
+          <a href = "cc_d1_o3_x.txt">cc_d1_o3_x.txt</a>,
+          the abscissas of the rule.
+        </li>
+        <li>
+          <a href = "cc_d1_o3_w.txt">cc_d1_o3_w.txt</a>,
+          the weights of the rule.
+        </li>
+        <li>
+          <a href = "cc_d1_o3_r.txt">cc_d1_o3_r.txt</a>,
+          defines the region for the rule.
+        </li>
+        <li>
+          <a href = "cc_d1_o3_exact.txt">cc_d1_o3_exact.txt</a>,
+          the results of the exactness test, up to degree 5.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>CC_D2_O3x3</b> is a Clenshaw-Curtis 3x3 product rule for 2D.
+      <ul>
+        <li>
+          <a href = "cc_d2_o3x3_x.txt">cc_d2_o3x3_x.txt</a>,
+          the abscissas of the rule.
+        </li>
+        <li>
+          <a href = "cc_d2_o3x3_w.txt">cc_d2_o3x3_w.txt</a>,
+          the weights of the rule.
+        </li>
+        <li>
+          <a href = "cc_d2_o3x3_r.txt">cc_d2_o3x3_r.txt</a>,
+          defines the region for the rule.
+        </li>
+        <li>
+          <a href = "cc_d2_o3x3_exact.txt">cc_d2_o3x3_exact.txt</a>,
+          the results of the exactness test, up to degree 8.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>CCGL_D2_O3x2</b> is a product rule for 2D whose factors are
+      a Clenshaw-Curtis of order 3 and a Gauss-Legendre rule of order 2.
+      <ul>
+        <li>
+          <a href = "ccgl_d2_o3x2_x.txt">ccgl_d2_o3x2_x.txt</a>,
+          the abscissas of the rule.
+        </li>
+        <li>
+          <a href = "ccgl_d2_o3x2_w.txt">ccgl_d2_o3x2_w.txt</a>,
+          the weights of the rule.
+        </li>
+        <li>
+          <a href = "ccgl_d2_o3x2_r.txt">ccgl_d2_o3x2_r.txt</a>,
+          defines the region for the rule.
+        </li>
+        <li>
+          <a href = "ccgl_d2_o3x2_exact.txt">ccgl_d2_o3x2_exact.txt</a>,
+          the results of the exactness test, up to degree 5.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 07 July 2019.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

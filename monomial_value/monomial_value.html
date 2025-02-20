@@ -1,0 +1,102 @@
+<html>
+
+  <head>
+    <title>
+      monomial_value
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      monomial_value
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>monomial_value</b>,
+      a FORTRAN90 code which
+      evaluates a monomial in M dimensions.
+    </p>
+
+    <p>
+      Let X represent a point in M dimensional space, and let E be a vector
+      of M integers.  The value of the monomial with exponents E at the point X 
+      is
+      <pre>
+        V(X) = X(1)^E(1) * X(2)^E(2) * ... * X(M)^E(M)
+      </pre>
+      This library supplies a convenient method of evaluating V(X) at 
+      multiple points X.
+    </p>
+
+    <p>
+      The factor 0.0^0 might occur if, for some I, we have X(I) = 0.0
+      and E(I) = 0.  In this case, we take the corresponding value to be 1.
+    </p>
+
+    <p>
+      The factor 0.0^E(I) will cause problems if E(I) is negative.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>monomial_value</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/monomial_value/monomial_value.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/monomial_value/monomial_value.html">a C++ version</a> and
+      <a href = "monomial_value.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/monomial_value/monomial_value.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/monomial_value/monomial_value.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../monomial_value_test/monomial_value_test.html">
+      monomial_value_test</a>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "monomial_value.f90">monomial_value.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "monomial_value.sh">monomial_value.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 31 July 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

@@ -1,0 +1,298 @@
+<html>
+
+  <head>
+    <title>
+      triangle_witherden_rule
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      triangle_witherden_rule
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>triangle_witherden_rule</b>,
+      a MATLAB code which
+      returns a symmetric Witherden quadrature rule for the triangle,
+      with exactness up to total degree 20.
+    </p>
+
+    <p>
+     The data is given for the following triangle:
+     <pre>
+      (0,1) 
+        | \ 
+        |  \ 
+        |   \ 
+        |    \ 
+      (0,0)--(1,0)
+      </pre>
+    </p>
+
+    <p>
+     We suppose we are given a triangle T with vertices A, B, C.
+     We call a rule with n points, returning barycentric coordinates
+     a, b, c, and weights w.  Then the integral I of f(x,y) over T is 
+     approximated by Q as follows:
+    <pre>
+      (x,y) = a(1:n) * A + b(1:n) * B + c(1:n) * C
+      Q = area(T) * sum ( 1 <= i <= n ) w(i) * f(x(i),y(i)) 
+     </pre>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files made available on this
+      web page are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>triangle_witherden_rule</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/triangle_witherden_rule/triangle_witherden_rule.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/triangle_witherden_rule/triangle_witherden_rule.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_witherden_rule/triangle_witherden_rule.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/triangle_witherden_rule/triangle_witherden_rule.html">an Octave version</a>and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/triangle_witherden_rule/triangle_witherden_rule.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_witherden_rule_test/triangle_witherden_rule_test.html">
+      triangle_witherden_rule_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_dunavant_rule/triangle_dunavant_rule.html">
+      triangle_dunavant_rule</a>,
+      a MATLAB code which 
+      sets up a Dunavant quadrature rule
+      over the interior of a triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_fekete_rule/triangle_fekete_rule.html">
+      triangle_fekete_rule</a>,
+      a MATLAB code which
+      returns a Fekete rule for quadrature or interpolation 
+      over the interior of a triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_felippa_rule/triangle_felippa_rule.html">
+      triangle_felippa_rule</a>,
+      a MATLAB code which
+      returns a Felippa quadrature rule for approximating integrals
+      over the interior of a triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_integrals/triangle_integrals.html">
+      triangle_integrals</a>,
+      a MATLAB code which
+      returns the exact value of the integral of any monomial
+      over the interior of the unit triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_lyness_rule/triangle_lyness_rule.html">
+      triangle_lyness_rule</a>,
+      a MATLAB code which
+      returns a Lyness-Jespersen quadrature rule
+      over the interior of a triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_monte_carlo/triangle_monte_carlo.html">
+      triangle_monte_carlo</a>,
+      a MATLAB code which
+      uses the Monte Carlo method to estimate the integral of a function
+      over the interior of the unit triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_ncc_rule/triangle_ncc_rule.html">
+      triangle_ncc_rule</a>, 
+      a MATLAB code which
+      defines Newton-Cotes closed quadrature
+      rules on a triangle.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_nco_rule/triangle_nco_rule.html">
+      triangle_nco_rule</a>, 
+      a MATLAB code which 
+      defines Newton-Cotes open quadrature rules 
+      over the interior of a triangle in 2d.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_symq_rule/triangle_symq_rule.html">
+      triangle_symq_rule</a>,
+      a MATLAB code which
+      returns efficient symmetric quadrature rules, 
+      with exactness up to total degree 50,
+      over the interior of an arbitrary triangle in 2D,
+      by Hong Xiao and Zydrunas Gimbutas.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_twb_rule/triangle_twb_rule.html">
+      triangle_twb_rule</a>,
+      a MATLAB code which
+      generates the points and weights of quadrature rules 
+      over the interior of a triangle in 2D, 
+      determined by Taylor, Wingate, and Bos.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/triangle_wandzura_rule/triangle_wandzura_rule.html">
+      triangle_wandzura_rule</a>,
+      a MATLAB code which
+      returns a Wandzura quadrature rule of exactness 5, 10, 15, 20, 25 and 30
+      over the interior of the triangle in 2D.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Freddie Witherden, Peter Vincent,
+          On the identification of symmetric quadrature rules for finite element methods,
+          Computers and Mathematics with Applications,
+          Volume 69, pages 1232-1241, 2015.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule_order.m">rule_order.m</a>,
+          returns the number of points in rules of order 0 through 20.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule00.m">rule00.m</a>,
+          returns the rule of degree 0.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule01.m">rule01.m</a>,
+          returns the rule of degree 1.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule02.m">rule02.m</a>,
+          returns the rule of degree 2.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule03.m">rule03.m</a>,
+          returns the rule of degree 3.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule04.m">rule04.m</a>,
+          returns the rule of degree 4.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule05.m">rule05.m</a>,
+          returns the rule of degree 5.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule06.m">rule06.m</a>,
+          returns the rule of degree 6.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule07.m">rule07.m</a>,
+          returns the rule of degree 7.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule08.m">rule08.m</a>,
+          returns the rule of degree 8.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule09.m">rule09.m</a>,
+          returns the rule of degree 9.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule10.m">rule10.m</a>,
+          returns the rule of degree 10.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule11.m">rule11.m</a>,
+          returns the rule of degree 11.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule12.m">rule12.m</a>,
+          returns the rule of degree 12.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule13.m">rule13.m</a>,
+          returns the rule of degree 13.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule14.m">rule14.m</a>,
+          returns the rule of degree 14.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule15.m">rule15.m</a>,
+          returns the rule of degree 15.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule16.m">rule16.m</a>,
+          returns the rule of degree 16.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule17.m">rule17.m</a>,
+          returns the rule of degree 17.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule18.m">rule18.m</a>,
+          returns the rule of degree 18.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule19.m">rule19.m</a>,
+          returns the rule of degree 19.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/rule20.m">rule20.m</a>,
+          returns the rule of degree 20.
+        </li>
+        <li>
+          <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangle_witherden_rule/triangle_area.m">triangle_area.m</a>,
+          returns the area of a triangle.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 23 April 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

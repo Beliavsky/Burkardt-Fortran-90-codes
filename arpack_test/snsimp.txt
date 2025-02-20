@@ -1,0 +1,84 @@
+13 July 2024   7:34:39.412 PM
+ 
+snsimp():
+  Fortran90 version
+  A simple ARPACK calling program.
+  This program defines an eigenproblem for a
+  nonsymmetric matrix.
+
+ _naupd: Number of update iterations taken
+ -----------------------------------------
+    1 -    1:     0
+  
+
+ _naupd: Number of wanted "converged" Ritz values
+ ------------------------------------------------
+    1 -    1:     0
+  
+
+ _naupd: Real part of the final Ritz values
+ ------------------------------------------
+    1 -    4:   6.876E+02   6.876E+02   7.162E+02   7.162E+02
+  
+
+ _naupd: Imaginary part of the final Ritz values
+ -----------------------------------------------
+    1 -    4:   1.030E+03  -1.030E+03  -1.030E+03   1.030E+03
+  
+
+ _naupd: Associated Ritz estimates
+ ---------------------------------
+    1 -    4:   6.713E-05   6.713E-05   4.232E-08   4.232E-08
+  
+
+
+     =============================================
+     = Nonsymmetric implicit Arnoldi update code =
+     = Version Number:  2.4                      =
+     = Version Date:    07/31/96                 =
+     =============================================
+     = Summary of timing statistics              =
+     =============================================
+
+
+     Total number update iterations             =    12
+     Total number of OP*x operations            =   190
+     Total number of B*x operations             =     0
+     Total number of reorthogonalization steps  =    75
+     Total number of iterative refinement steps =     0
+     Total number of restart steps              =     0
+     Total time in user OP*x operation          =     0.003020
+     Total time in user B*x operation           =     0.000000
+     Total time in Arnoldi update routine       =     0.082295
+     Total time in naup2 routine                =     0.070314
+     Total time in basic Arnoldi iteration loop =     0.009177
+     Total time in reorthogonalization phase    =     0.002384
+     Total time in (re)start vector generation  =     0.020187
+     Total time in Hessenberg eig. subproblem   =     0.023705
+     Total time in getting the shifts           =     0.000776
+     Total time in applying the shifts          =     0.014174
+     Total time in convergence testing          =     0.000069
+     Total time in computing final Ritz vectors =     0.000000
+
+
+ Ritz values (Real, Imag) and residual residuals
+ -----------------------------------------------
+               Col   1       Col   2       Col   3
+  Row   1:    7.16199E+02   1.02958E+03   1.90206E-06
+  Row   2:    7.16199E+02  -1.02958E+03   1.90206E-06
+  Row   3:    6.87584E+02   1.02958E+03   1.20857E-06
+  Row   4:    6.87584E+02  -1.02958E+03   1.20857E-06
+  
+  
+  _NSIMP 
+  ====== 
+  
+  Size of the matrix is          100
+  The number of Ritz values requested is            4
+  The number of Arnoldi vectors generated (NCV) is           20
+  What portion of the spectrum: LM
+  The number of converged Ritz values is            4
+  The number of Implicit Arnoldi update iterations taken is           12
+  The number of OP*x is          190
+  The convergence criterion is    5.96046448E-08
+  

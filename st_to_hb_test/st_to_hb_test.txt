@@ -1,0 +1,15 @@
+ 1 March 2024   7:58:45.826 AM
+ 
+st_to_hb():
+  Fortran90 version
+  Read an ST sparse matrix file,
+  write the corresponding Harwell-Boeing sparse matrix file.
+ 
+ST_TO_HB:
+  Read data from ST file: "kershaw.st".
+  Created output HB file: "kershaw.hb".
+ 
+ST_TO_HB:
+  Normal end of execution.
+ 
+ 1 March 2024   7:58:45.835 AM

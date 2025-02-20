@@ -1,0 +1,143 @@
+<html>
+
+  <head>
+    <title>
+      candy_count
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      candy_count
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>candy_count</b>,
+      a Fortran90 code which
+      counts the types of candy in a rectangular container, which might be
+      a vector, matrix, or 3D box.  The candy is assumed to have C possible
+      types, and to have been entered into the container in a cycle that
+      begins with type 1.  While the vector case is easy, it is already 
+      difficult to come up with a general formula for the MxN matrix case. 
+    </p>
+
+    <p>
+      We are given a (rectangular) container of candy containing C distinct 
+      types, and asked to report how many of each type there are.
+    </p>
+
+    <p>
+      The container has been filled by a machine, which automatically
+      starts with candy type 1, then puts candy type 2 in the next open
+      position, and so on, until candy type C is used, at which point
+      the machine cycles back to candy type 1, repeating this process
+      until the container is filled.
+    </p>
+
+    <p>
+      we want to know how many candies of each type there are.
+      We could imagine simply dumping out the container and counting.
+      But is there a mathematical way to do this, based on the shape 
+      of the container.
+    </p>
+
+    <p>
+      We can imagine three simple cases, in which the candy comes in
+      a rectangular container which can be thought of as a vector
+      of length N, or an M by N matrix, or an L by M by N box.
+      The counting is simple for the vector, but is already tricky
+      for the case of a matrix.
+    </p> 
+
+    <p>
+      As an illustration, here is a M=10 by N=13 matrix, containing C=4 
+      candy types, with 33 examples of types 1 and 2, and 32 examples of
+      types 3 and 4.
+    </p>
+
+    <p>
+      <img src="candy_matrix.jpg" width = 390 height = 300>
+    </p> 
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>candy_count</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/candy_count/candy_count.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/candy_count/candy_count.html">a C++ version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/candy_count/candy_count.html">a Fortran77 version</a> and
+      <a href = "candy_count.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/candy_count/candy_count.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/candy_count/candy_count.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/candy_count/candy_count.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Programs:
+    </h3>
+
+    <p>
+      <a href = "../candy_count_test/candy_count_test.html">
+      candy_count_test</a>
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          Marcus Garvie,<br>
+          "How many squares of each colour are in a generalized C-coloured
+          m × n rectangle?",<br>
+          math Stack Exchange, accessed 20 May 2024,<br>
+          <a href = "https://math.stackexchange.com/questions/4439271/how-many-squ
+ares-of-each-colour-are-in-a-generalized-checkerboard-c-coloured">
+                     https://math.stackexchange.com/questions/4439271/how-many-squ
+ares-of-each-colour-are-in-a-generalized-checkerboard-c-coloured </a>
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "candy_count.f90">candy_count.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "candy_count.sh">candy_count.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 24 June 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

@@ -1,0 +1,20 @@
+24 March 2023   9:37:41.098 AM
+ 
+TRIANGLE:
+  FORTRAN90 version
+  Interpolation of the Franke function
+  on the unit triangle T((0,0),(1,0),(0,1))
+  at degree =     60
+
+  Wrote F(x,y) at Padua points in "triangle_fpd.txt".
+  Wrote F(x,y) at target points in "triangle_ftg.txt".
+  Wrote I(F)(x,y) at target points in "triangle_itg.txt".
+
+  Estimated error:  0.5536E-09
+  Actual error:     0.1226E-09
+  Expected error:   0.1226E-09
+ 
+TRIANGLE:
+  Normal end of execution.
+ 
+24 March 2023   9:37:41.164 AM

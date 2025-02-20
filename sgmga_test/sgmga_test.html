@@ -1,0 +1,279 @@
+<html>
+
+  <head>
+    <title>
+      sgmga_test
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align="center">
+      sgmga_test
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>sgmga_test</b>,
+      a Fortran90 code which
+      calls sgmga(), which
+      implements a family of sparse grid rules.  These rules are "mixed",
+      in that a different 1D quadrature rule can be specified for each dimension.
+      Moreover, each 1D quadrature rule comes in a family of increasing size
+      whose growth rate (typically linear or exponential) is chosen by the user.
+      Finally, the user may also specify different weights for each dimension,
+      resulting in anisotropic rules.
+    </p>
+
+    <h3 align="center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align="center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../sgmga/sgmga.html">
+      sgmga</a>,
+      a Fortran90 code which
+      implements a family of sparse grid rules.  These rules are "mixed",
+      in that a different 1D quadrature rule can be specified for each dimension.
+      Moreover, each 1D quadrature rule comes in a family of increasing size
+      whose growth rate (typically linear or exponential) is chosen by the user.
+      Finally, the user may also specify different weights for each dimension,
+      resulting in anisotropic rules.
+    </p>
+
+    <h3 align="center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "sgmga_test.sh">sgmga_test.sh</a>,
+          runs all the tests.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      sgmga_aniso_normalize_test() tests sgmga_aniso_normalize() and
+      sgmga_importance_to_aniso().
+      <ul>
+        <li>
+          <a href = "sgmga_aniso_normalize_test.f90">sgmga_aniso_normalize_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_aniso_normalize_test.sh">sgmga_aniso_normalize_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_aniso_normalize_test.txt">sgmga_aniso_normalize_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_INDEX_test</b> tests <b>SGMGA_INDEX</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_index_test.f90">sgmga_index_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_index_test.sh">sgmga_index_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_index_test.txt">sgmga_index_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_POINT_test</b> tests <b>SGMGA_POINT</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_point_test.f90">sgmga_point_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_point_test.sh">sgmga_point_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_point_test.txt">sgmga_point_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_PRODUCT_WEIGHT_test</b> tests <b>SGMGA_PRODUCT_WEIGHT</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_product_weight_test.f90">sgmga_product_weight_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_product_weight_test.sh">sgmga_product_weight_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_product_weight_test.txt">sgmga_product_weight_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_SIZE_test</b> tests <b>SGMGA_SIZE</b> and <b>SGMGA_SIZE_TOTAL</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_size_test.f90">sgmga_size_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_size_test.sh">sgmga_size_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_size_test.txt">sgmga_size_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_SIZE_TABLE</b> tabulates the point counts from <b>SGMGA_SIZE</b>
+      for an isotropic rule over a range of dimensions and levels.
+      <ul>
+        <li>
+          <a href = "sgmga_size_table.f90">sgmga_size_table.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_size_table.sh">sgmga_size_table.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_size_table.txt">sgmga_size_table.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_UNIQUE_INDEX_test</b> tests <b>SGMGA_UNIQUE_INDEX</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_unique_index_test.f90">sgmga_unique_index_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_unique_index_test.sh">sgmga_unique_index_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_unique_index_test.txt">sgmga_unique_index_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_VCN_test</b> tests <b>SGMGA_VCN</b> and <b>SGMGA_VCN_ORDERED</b>:
+      <ul>
+        <li>
+          <a href = "sgmga_vcn_test.f90">sgmga_vcn_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_vcn_test.sh">sgmga_vcn_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_vcn_test.txt">sgmga_vcn_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_VCN_COEF_test</b> tests <b>SGMGA_VCN_COEF</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_vcn_coef_test.f90">sgmga_vcn_coef_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_vcn_coef_test.sh">sgmga_vcn_coef_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_vcn_coef_test.txt">sgmga_vcn_coef_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>SGMGA_WEIGHT_test</b> tests <b>SGMGA_WEIGHT</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_weight_test.f90">sgmga_weight_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_weight_test.sh">sgmga_weight_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_weight_test.txt">sgmga_weight_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    <p>
+
+    <p>
+      <b>SGMGA_WRITE_test</b> tests <b>SGMGA_WRITE</b>.
+      <ul>
+        <li>
+          <a href = "sgmga_write_test.f90">sgmga_write_test.f90</a>,
+          calls all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_write_test.sh">sgmga_write_test.sh</a>,
+          runs all the tests.
+        </li>
+        <li>
+          <a href = "sgmga_write_test.txt">sgmga_write_test.txt</a>,
+          the output file.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 21 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>
+

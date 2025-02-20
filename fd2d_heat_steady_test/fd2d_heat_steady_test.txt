@@ -1,0 +1,15 @@
+17 September 2021   9:31:11.041 AM
+
+FD2D_HEAT_STEADY_TEST:
+  FORTRAN90 version
+  Test the FD2D_HEAT_STEADY library.
+ 
+  Created graphics data file "test01_data.txt".
+  Created graphics command file "test01_commands.txt".
+ 
+  Mean value of U is    15.0070    
+
+FD2D_HEAT_STEADY_TEST:
+  Normal end of execution.
+
+17 September 2021   9:31:11.068 AM

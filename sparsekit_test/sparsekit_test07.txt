@@ -1,0 +1,15 @@
+19 November 2024   4:51:15.268 PM
+ 
+SPARSEKIT_PRB07
+  FORTRAN90 version
+ 
+  Generate a Markov chain matrix to test the
+  eigenvalue routine.
+ 
+  The matrix has been stored in Harwell/Boeing format
+  in the file "markov.mat".
+ 
+SPARSEKIT_PRB07
+  Normal end of execution.
+ 
+19 November 2024   4:51:15.268 PM

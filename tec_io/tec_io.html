@@ -1,0 +1,182 @@
+<html>
+
+  <head>
+    <title>
+      tec_io
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      tec_io
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>tec_io</b>,
+      a Fortran90 code which
+      reads or writes
+      a TECPLOT ASCII file containing a finite element model.
+    </p>
+
+    <p>
+      There are several kinds of TECPLOT ASCII files; the routines given here can only
+      handle the case where a single <b>ZONE</b> record is used to define finite
+      element data, using a <b>DATAPACKING</b> value of "POINT" (not "BLOCK"),
+      and a ZONETYPE of
+      <ul>
+        <li>
+          FETRIANGLE
+        </li>
+        <li>
+          FEQUADRILATERAL
+        </li>
+        <li>
+          FETETRAHEDRON
+        </li>
+        <li>
+          FEBRICK
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      The data to be written or read is assumed to have a logical
+      organization into three groups:
+      <ul>
+        <li>
+          Node coordinate data;
+        </li>
+        <li>
+          Element definitions, that is, the sequence of node indices
+          that define each element;
+        </li>
+        <li>
+          Node data, such as finite element coefficients for pressure,
+          velocity, and so on.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <a href = "http://www.tecplot.com/">
+      The TECPLOT home page</a> contains a description of the
+      TECPLOT program.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>tec_io</b> is available in
+      <a href = "tec_io.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/tec_io/tec_io.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/tec_io/tec_io.html">an Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../tec_io_test/tec_io_test.html">
+      tec_io_test</a>
+    </p>
+
+    <p>
+      <a href = "../fem_to_tec/fem_to_tec.html">
+      fem_to_tec</a>,
+      a FORTRAN90 code which
+      reads the three files
+      defining an FEM model and writes an equivalent TEC file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/tec/tec.html">
+      tec</a>,
+      a data directory which
+      contains a description and examples
+      of the TEC graphics files used by TECPLOT().
+    </p>
+
+    <p>
+      <a href = "../tec_to_fem/tec_to_fem.html">
+      tec_to_fem</a>,
+      a FORTRAN90 code which
+      reads a TEC file and writes a set of three files defining the
+      equivalent FEM model.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/tec_to_obj/tec_to_obj.html">
+      tec_to_obj</a>,
+      a FORTRAN90 code which
+      can read a TECPLOT() file describing a surface in 3D composed of triangles
+      or quadrilaterals, and write an OBJ file.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/tec_write/tec_write.html">
+      tec_write</a>,
+      a FORTRAN90 code which
+      can write TEC files.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          Tecplot, Inc,<br>
+          TECPLOT Reference Manual,<br>
+          Version 10, Release 4,<br>
+          Tecplot, Inc, 2005.
+        </li>
+        <li>
+          Tecplot, Inc,<br>
+          TECPLOT User's Manual,<br>
+          Version 10,<br>
+          Tecplot, Inc, 2005.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "tec_io.f90">tec_io.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "tec_io.sh">tec_io.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 09 September 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

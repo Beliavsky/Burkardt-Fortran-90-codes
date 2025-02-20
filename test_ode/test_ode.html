@@ -1,0 +1,404 @@
+<html>
+
+  <head>
+    <title>
+      test_ode
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      test_ode
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>test_ode</b>,
+      a FORTRAN90 code which
+      defines a set of test initial
+      value problems for ordinary differential equations (ODE).
+    </p>
+
+    <p>
+      These problems have the common form:
+      <blockquote>
+        determine (some values of) the function <b>Y(T)</b>
+      </blockquote>
+      given
+      <blockquote>
+        <b>Y'(T) = F(T,Y)</b>
+      </blockquote>
+      with initial value
+      <blockquote>
+        <b>Y(T<sub>0</sub>) = Y<sub>0</sub></b>
+      </blockquote>
+    </p>
+
+    <p>
+      A uniform interface makes it easy to solve all the problems
+      automatically, or to concentrate on a single one.
+    </p>
+
+    <p>
+      The problems include:
+      <ol>
+        <li>
+          Enright and Pryce #A1,<br>
+          neqn = 1,<br>
+          y' = -y;
+        </li>
+        <li>
+          Enright and Pryce #A2,<br>
+          neqn = 1,<br>
+          y' = -y^3/2;
+        </li>
+        <li>
+          Enright and Pryce #A3,<br>
+          neqn = 1,<br>
+          y' = cos(t)*y;
+        </li>
+        <li>
+          Enright and Pryce #A4,<br>
+          neqn = 1,<br>
+          y' = y*(20-y)/80;
+        </li>
+        <li>
+          Enright and Pryce #A5,<br>
+          neqn = 1,<br>
+          y' = (y-t)/(y+t);
+        </li>
+        <li>
+          Enright and Pryce #B1,<br>
+          neqn = 2,<br>
+          y1' = 2*y1*(1-y2)<br>
+          y2' = - y2*(1-y1);
+        </li>
+        <li>
+          Enright and Pryce #B2,<br>
+          neqn = 3,<br>
+          y1' = -y1+y2<br>
+          y2' = y1-2*y2+y3<br>
+          y3' = y2-y3;
+        </li>
+        <li>
+          Enright and Pryce #B3,<br>
+          neqn = 3,<br>
+          y1' = -y1<br>
+          y2' = y1-y2^2<br>
+          y3' = y2^2;
+        </li>
+        <li>
+          Enright and Pryce #B4,<br>
+          neqn = 3,<br>
+          y1' = (-y2-y1*y3) / sqrt(y1^2+y2^2)<br>
+          y2' = (y1-y2*y3) / sqrt(y1^2+y2^2)<br>
+          y3' = y1 / sqrt(y1^2+y2^2);
+        </li>
+        <li>
+          Enright and Pryce #B5,<br>
+          neqn = 3,<br>
+          y1' = y2*y3<br>
+          y2' = -y1*y3<br>
+          y3' = -0.51*y1*y2;
+        </li>
+        <li>
+          Enright and Pryce #C1,<br>
+          neqn = 10;
+        </li>
+        <li>
+          Enright and Pryce #C2,<br>
+          neqn = 10;
+        </li>
+        <li>
+          Enright and Pryce #C3,<br>
+          neqn = 10;
+        </li>
+        <li>
+          Enright and Pryce #C4,<br>
+          neqn = 51;
+        </li>
+        <li>
+          Enright and Pryce #C5,<br>
+          neqn = 30;
+        </li>
+        <li>
+          Enright and Pryce #D1,<br>
+          neqn = 4;
+        </li>
+        <li>
+          Enright and Pryce #D2,<br>
+          neqn = 4;
+        </li>
+        <li>
+          Enright and Pryce #D3,<br>
+          neqn = 4;
+        </li>
+        <li>
+          Enright and Pryce #D4,<br>
+          neqn = 4;
+        </li>
+        <li>
+          Enright and Pryce #D5,<br>
+          neqn = 4;
+        </li>
+        <li>
+          Enright and Pryce #E1,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #E2,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #E3,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #E4,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #E5,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #F1,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #F2,<br>
+          neqn = 1;
+        </li>
+        <li>
+          Enright and Pryce #F3,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Enright and Pryce #F4,<br>
+          neqn = 1;
+        </li>
+        <li>
+          Enright and Pryce #F5,<br>
+          neqn = 1;
+        </li>
+        <li>
+          Lotka-Volterra Predator-Prey Equations,<br>
+          neqn = 2;
+        </li>
+        <li>
+          The Lorenz System,<br>
+          neqn = 3;
+        </li>
+        <li>
+          The Van der Pol equation,<br>
+          neqn = 2;
+        </li>
+        <li>
+          The Linearized Damped Pendulum,<br>
+          neqn = 2;
+        </li>
+        <li>
+          The Nonlinear Damped Pendulum,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Duffing's Equation,<br>
+          neqn = 2,
+        </li>
+        <li>
+          Duffing's Equation with Damping and Forcing,<br>
+          neqn = 2;
+        </li>
+        <li>
+          Shampine's Ball of Flame,<br>
+          neqn = 1,<br>
+          y' = y^2-y^3;
+        </li>
+        <li>
+          Polking's First Order System,<br>
+          neqn = 1,<br>
+          y' = y^2-a*t+b;
+        </li>
+        <li>
+          the Knee problem,<br>
+          neqn = 1,<br>
+          y' = y*(y-t)/eps;
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>test_ode</b> is available in
+      <a href = "test_ode.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/test_ode/test_ode.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../test_ode_test/test_ode_test.html">
+      test_ode_test</a>
+    </p>
+
+    <p>
+      <a href = "../lorenz_ode/lorenz_ode.html">
+      lorenz_ode</a>,
+      a FORTRAN90 code which
+      approximates solutions to the Lorenz system,
+      creating output files that can be displayed by Gnuplot.
+    </p>
+
+    <p>
+      <a href = "../midpoint/midpoint.html">
+      midpoint</a>,
+      a FORTRAN90 code which
+      solves one or more ordinary differential equations (ODEs)
+      using the midpoint method.
+    </p>
+
+    <p>
+      <a href = "../nms/nms.html">
+      nms</a>,
+      a FORTRAN90 code which
+      includes the ddriv() package of ODE solvers.
+    </p>
+
+    <p>
+      <a href = "../ode/ode.html">
+      ODE</a>,
+      a FORTRAN90 code which
+      implements the Shampine and Allen ODE solver.
+    </p>
+
+    <p>
+      <a href = "../predator_prey_ode/predator_prey_ode.html">
+      predator_prey_ode</a>,
+      a FORTRAN90 code which
+      solves a pair of predator prey ordinary differential equations (ODE's).
+    </p>
+
+    <p>
+      <a href = "../rkf45/rkf45.html">
+      RKF45</a>,
+      a FORTRAN90 code which
+      implements a Runge-Kutta-Fehlberg ODE solver.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/spring_ode/spring_ode.html">
+      spring</a>,
+      a FORTRAN90 code which
+      shows how gnuplot graphics can be used to illustrate
+      a solution of the ordinary differential equation (ODE) that describes
+      the motion of a weight attached to a spring.
+    </p>
+
+    <p>
+      <a href = "../stiff_ode/stiff_ode.html">
+      stiff_ode</a>,
+      a FORTRAN90 code which 
+      considers an ordinary differential equation (ODE) which is
+      an example of a stiff ODE.
+    </p>
+
+    <h3 align = "center">
+      References:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          David Arnold, John Polking,<br>
+          Ordinary Differential Equations using Matlab,<br>
+          Second Edition,<br>
+          Prentice Hall, 1999,<br>
+          ISBN: 0130113816.
+        </li>
+        <li>
+          Wayne Enright, John Pryce,<br>
+          Two FORTRAN packages for assessing initial value methods,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 13, Number 1, March 1987, pages 1-27.
+        </li>
+        <li>
+          Wayne Enright, John Pryce,<br>
+          Algorithm 648:
+          NSDTST and STDTST,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 13, Number 1, March 1987, pages 28-34.
+        </li>
+        <li>
+          Thomas Hull, Wayne Enright, BM Fellen, Arthur Sedgwick,<br>
+          Comparing numerical methods for ordinary differential equations,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 9, 1972, pages 603-637.
+        </li>
+        <li>
+          Cleve Moler,<br>
+          Cleve's Corner: Stiff Differential Equations,<br>
+          MATLAB News and Notes,<br>
+          May 2003, pages 12-13.
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <a href = "http://pitagora.dm.uniba.it/~testset/">
+          http://pitagora.dm.uniba.it/~testset/</a>,
+          Test Set for IVP Solvers.
+        </li>
+        <li>
+          <a href =
+          "http://www.unige.ch/math/~hairer/testset/testset.html">
+           http://www.unige.ch/math/~hairer/testset/testset.html</a>
+          Stiff ODE test set of Hairer and Wanner.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "test_ode.f90">test_ode.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "test_ode.sh">test_ode.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 02 October 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

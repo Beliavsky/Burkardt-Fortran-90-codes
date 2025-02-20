@@ -1,0 +1,277 @@
+<html>
+
+  <head>
+    <title>
+      prime
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      prime
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>prime</b>,
+      a FORTRAN90 code which
+      counts the number of primes between 1 and N,
+      and is intended as a starting point for a parallel version.
+    </p>
+
+    <p>
+      The algorithm is completely naive.  For each integer I, it simply checks
+      whether any smaller J evenly divides it.  The total amount of work
+      for a given N is thus roughly proportional to 1/2*N^2.
+    </p>
+
+    <p>
+      Here are the counts of the number of primes for some selected values of N:
+      <table border="1" align="center">
+        <tr>
+          <th>N</th><th>Number of Primes</th>
+        </tr>
+        <tr>
+          <td>1</td><td>0</td>
+        </tr>
+        <tr>
+          <td>10</td><td>4</td>
+        </tr>
+        <tr>
+          <td>100</td><td>25</td>
+        </tr>
+        <tr>
+          <td>1,000</td><td>168</td>
+        </tr>
+        <tr>
+          <td>10,000</td><td>1,229</td>
+        </tr>
+        <tr>
+          <td>100,000</td><td>9,592</td>
+        </tr>
+        <tr>
+          <td>1,000,000</td><td>78,498</td>
+        </tr>
+        <tr>
+          <td>10,000,000</td><td>664,579</td>
+        </tr>
+        <tr>
+          <td>100,000,000</td><td>5,761,455</td>
+        </tr>
+        <tr>
+          <td>1,000,000,000</td><td>50,847,534</td>
+        </tr>
+      </table>
+    </p>
+
+    <p>
+      The following results were observed for the elapsed time.
+      <table border="1" align="center">
+        <tr>
+          <th>N</th><th>Pi</th><th>Time</th>
+        </tr>
+<tr><td>       1</td><td>         0</td><td>        0.000030</td></tr>
+<tr><td>       2</td><td>         1</td><td>        0.000016</td></tr>
+<tr><td>       4</td><td>         2</td><td>        0.000016</td></tr>
+<tr><td>       8</td><td>         4</td><td>        0.000017</td></tr>
+<tr><td>      16</td><td>         6</td><td>        0.000020</td></tr>
+<tr><td>      32</td><td>        11</td><td>        0.000030</td></tr>
+<tr><td>      64</td><td>        18</td><td>        0.000057</td></tr>
+<tr><td>     128</td><td>        31</td><td>        0.000147</td></tr>
+<tr><td>     256</td><td>        54</td><td>        0.000452</td></tr>
+<tr><td>     512</td><td>        97</td><td>        0.001548</td></tr>
+<tr><td>    1024</td><td>       172</td><td>        0.005303</td></tr>
+<tr><td>    2048</td><td>       309</td><td>        0.018660</td></tr>
+<tr><td>    4096</td><td>       564</td><td>        0.068059</td></tr>
+<tr><td>    8192</td><td>      1028</td><td>        0.246378</td></tr>
+<tr><td>   16384</td><td>      1900</td><td>        0.914953</td></tr>
+<tr><td>   32768</td><td>      3512</td><td>        3.380086</td></tr>
+<tr><td>   65536</td><td>      6542</td><td>       12.619071</td></tr>
+<tr><td>  131072</td><td>     12251</td><td>       47.412759</td></tr>
+      </table>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>prime</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/prime/prime.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/prime/prime.html">a C++ version</a> and
+      <a href = "prime.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/prime/prime.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/prime/prime.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/prime/prime.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/prime_test/prime_test.html">
+      prime_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/collatz/collatz.html">
+      collatz</a>,
+      a MATLAB library which
+      computes and analyzes the Collatz
+      sequence (or "hailstone" sequence or "3n+1 sequence");
+    </p>
+
+    <p>
+      <a href = "../fft_serial/fft_serial.html">
+      FFT_SERIAL</a>,
+      a FORTRAN90 code which
+      demonstrates the computation of a Fast Fourier Transform,
+      and is intended as a starting point for implementing a parallel version.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/fire_serial/fire_serial.html">
+      FIRE_SERIAL</a>,
+      a FORTRAN90 code which
+      simulates a forest fire over a rectangular array of trees,
+      starting at a single random location.  It is intended as a starting
+      point for the development of a parallel version.
+    </p>
+
+    <p>
+      <a href = "../md/md.html">
+      MD</a>,
+      a FORTRAN90 code which
+      carries out a molecular dynamics simulation, and is intended as
+      a starting point for implementing a parallel version.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mxm_serial/mxm_serial.html">
+      MXM_SERIAL</a>,
+      a FORTRAN90 code which
+      sets up a matrix multiplication problem A=B*C,
+      intended as a starting point for implementing a parallel version.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/poisson_serial/poisson_serial.html">
+      POISSON_SERIAL</a>,
+      a FORTRAN90 code which
+      computes an approximate solution to the Poisson equation in a rectangle,
+      and is intended as the starting point for the creation of a parallel version.
+    </p>
+
+    <p>
+      <a href = "../prime_mpi/prime_mpi.html">
+      PRIME_MPI</a>,
+      a FORTRAN90 code which
+      counts the number of primes between 1 and N, using MPI for parallel execution.
+    </p>
+
+    <p>
+      <a href = "../prime_openmp/prime_openmp.html">
+      PRIME_OPENMP</a>,
+      a FORTRAN90 code which
+      counts the number of primes between 1 and N, using OpenMP for parallel execution.
+    </p>
+
+    <p>
+      <a href = "../quad_serial/quad_serial.html">
+      QUAD_SERIAL</a>,
+      a FORTRAN90 code which
+      approximates an integral using a quadrature rule,
+      and is intended as a starting point for parallelization exercises.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quad2d_serial/quad2d_serial.html">
+      QUAD2D_SERIAL</a>,
+      a FORTRAN90 code which
+      approximates an integral over a 2D region using a product quadrature rule,
+      and is intended as a starting point for parallelization exercises.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/satisfy/satisfy.html">
+      SATISFY</a>,
+      a FORTRAN90 code which
+      demonstrates, for a particular circuit, an exhaustive search
+      for solutions of the circuit satisfiability problem.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/search_serial/search_serial.html">
+      SEARCH_SERIAL</a>,
+      a FORTRAN90 code which
+      searches the integers from A to B for a value J such that F(J) = C.
+      this version of the program is intended as a starting point for
+      a parallel approach.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/subset_sum_serial/subset_sum_serial.html">
+      SUBSET_SUM_SERIAL</a>,
+      a FORTRAN90 code which
+      seeks solutions of the subset sum problem, in which it is desired
+      to find a subset of a set of integers which has a given sum;
+      this version of the program is intended as a starting point for
+      a parallel approach.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Eratosthenes,<br>
+          A Method For Finding Prime Numbers,<br>
+          Papyrus 487, <br>
+          Library of Alexandria.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "prime.f90">prime.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "prime.sh">prime.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 12 January 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

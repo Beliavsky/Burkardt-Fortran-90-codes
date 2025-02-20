@@ -1,0 +1,139 @@
+<html>
+
+  <head>
+    <title>
+      frieze
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      frieze
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>frieze</b>
+      a Fortran90 code which
+      demonstrates how to tile a 2D region with repeated copies
+      of a given pattern.
+    </p>
+
+    <p>
+      We assume that the 2D region has already been subdivided into
+      subregions, not necessarily rectilinear or equal in size or shape.
+      Thus, we need to twist and squash and stretch the pattern tile
+      to fit each of the subregions.
+    </p>
+
+    <p>
+      We used this program as a first mockup of
+      a 3D brain simulation.  We wanted to see if we could make a pattern
+      repeat throughout a region, and match up at the boundaries of the
+      (curving) sub-cells.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>frieze</b> is available in 
+      <a href = "frieze.html">a Fortran90 version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../frieze_test/frieze_test.html">
+      frieze_test</a>
+    </p>
+
+    <p>
+      <a href = "../blend/blend.html">
+      blend</a>,
+      a Fortran90 code which
+      implements blended mapping or transfinite interpolation.
+    </p>
+
+    <p>
+      <a href = "../ps_write/ps_write.html">
+      ps_write</a>,
+      a Fortran90 code which
+      can create PostScript images.
+    </p>
+
+    <p>
+      <a href = "../tiler_2d/tiler_2d.html">
+      tiler_2d</a>,
+      a Fortran90 code which
+      demonstrates a 2D example of transfinite interpolation.
+    </p>
+
+    <p>
+      <a href = "../tiler_3d/tiler_3d.html">
+      tiler_3d</a>,
+      a Fortran90 code which
+      demonstrates a 3D example of transfinite interpolation.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          William Gordon, Charles Hall,<br>
+          Construction of Curvilinear Coordinate Systems and Application to
+          Mesh Generation,<br>
+          International Journal of Numerical Methods in Engineering,<br>
+          Volume 7, pages 461-477, 1973.
+        </li>
+        <li>
+          Joe Thompson, Bharat Soni, Nigel Weatherill,<br>
+          Handbook of Grid Generation,<br>
+          CRC Press, 1999.
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "frieze.f90">frieze.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "frieze.sh">frieze.sh</a>,
+          compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 26 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

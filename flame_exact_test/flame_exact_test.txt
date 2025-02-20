@@ -1,0 +1,21 @@
+28 April 2024   9:17:25.634 AM
+
+flame_exact_test():
+  Fortran90 version
+  flame_exact() evaluates the exact solution of the flame ODE.
+
+  parameters:
+    t0    =    0.00000    
+    tstop =    300.000    
+    y0 =   0.500000E-02
+    y0 =   0.100000E-01
+    y0 =   0.200000E-01
+    y0 =   0.500000E-01
+ 
+  Ddata stored in "flame_exact_data.txt".
+  Plot commands stored in "flame_exact_commands.txt".
+
+flame_exact_test():
+  Normal end of execution.
+
+28 April 2024   9:17:25.634 AM

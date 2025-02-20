@@ -1,0 +1,3343 @@
+subroutine cheby_t_zero ( n, z )
+
+!*****************************************************************************80
+!
+!! cheby_t_zero() returns zeroes of the Chebyshev polynomial T(N)(X).
+!
+!  Discussion:
+!
+!    The I-th zero of T(N)(X) is cos((2*I-1)*PI/(2*N)), I = 1 to N
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    30 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Output, real ( kind = rk ) Z(N), the zeroes of T(N)(X).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) angle
+  integer i
+  real ( kind = rk ), parameter :: pi = 3.141592653589793D+00
+  real ( kind = rk ) z(n)
+
+  do i = 1, n
+    angle = real ( 2 * i - 1, kind = rk ) * pi &
+          / real ( 2 * n,     kind = rk )
+    z(i) = cos ( angle )
+  end do
+
+  return
+end
+subroutine cheby_u_zero ( n, z )
+
+!*****************************************************************************80
+!
+!! CHEBY_U_ZERO returns zeroes of the Chebyshev polynomial U(N)(X).
+!
+!  Discussion:
+!
+!    The I-th zero of U(N)(X) is cos((I-1)*PI/(N-1)), I = 1 to N
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    30 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Output, real ( kind = rk ) Z(N), the zeroes of U(N)(X).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) angle
+  integer i
+  real ( kind = rk ), parameter :: pi = 3.141592653589793D+00
+  real ( kind = rk ) z(n)
+
+  do i = 1, n
+    angle = real ( i,     kind = rk ) * pi &
+          / real ( n + 1, kind = rk )
+    z(i) = cos ( angle )
+  end do
+
+  return
+end
+subroutine data_to_dif ( ntab, xtab, ytab, diftab )
+
+!*****************************************************************************80
+!
+!! DATA_TO_DIF sets up a divided difference table from raw data.
+!
+!  Discussion:
+!
+!    Space can be saved by using a single array for both the DIFTAB and
+!    YTAB dummy parameters.  In that case, the divided difference table will
+!    overwrite the Y data without interfering with the computation.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    04 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the number of pairs of points
+!    (XTAB(I),YTAB(I)) which are to be used as data.  The
+!    number of entries to be used in DIFTAB, XTAB and YTAB.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values at which data was taken.
+!    These values must be distinct.
+!
+!    Input, real ( kind = rk ) YTAB(NTAB), the corresponding Y values.
+!
+!    Output, real ( kind = rk ) DIFTAB(NTAB), the divided difference coefficients
+!    corresponding to the input (XTAB,YTAB).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) diftab(ntab)
+  integer i
+  integer j
+  logical r8vec_distinct
+  real ( kind = rk ) xtab(ntab)
+  real ( kind = rk ) ytab(ntab)
+
+  if ( .not. r8vec_distinct ( ntab, xtab ) ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DATA_TO_DIF - Fatal error!'
+    write ( *, '(a)' ) '  Two entries of XTAB are equal!'
+    stop 1
+  end if
+!
+!  Copy the data values into DIFTAB.
+!
+  diftab(1:ntab) = ytab(1:ntab)
+!
+!  Compute the divided differences.
+!
+  do i = 2, ntab
+    do j = ntab, i, -1
+
+      diftab(j) = ( diftab(j) - diftab(j-1) ) / ( xtab(j) - xtab(j+1-i) )
+
+    end do
+  end do
+
+  return
+end
+subroutine data_to_dif_display ( ntab, xtab, ytab, diftab )
+
+!*****************************************************************************80
+!
+!! DATA_TO_DIF_DISPLAY computes a divided difference table and shows how.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    04 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the number of pairs of points
+!    (XTAB(I),YTAB(I)) which are to be used as data.  The
+!    number of entries to be used in DIFTAB, XTAB and YTAB.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values at which data was taken.
+!
+!    Input, real ( kind = rk ) YTAB(NTAB), the corresponding Y values.
+!
+!    Output, real ( kind = rk ) DIFTAB(NTAB), the divided difference
+!    coefficients corresponding to the input (XTAB,YTAB).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) diftab(ntab)
+  integer i
+  integer j
+  logical r8vec_distinct
+  real ( kind = rk ) xtab(ntab)
+  real ( kind = rk ) ytab(ntab)
+
+  if ( .not. r8vec_distinct ( ntab, xtab ) ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DATA_TO_DIF_DISPLAY - Fatal error!'
+    write ( *, '(a)' ) '  Two entries of XTAB are equal!'
+    stop 1
+  end if
+
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) '  Divided difference table:'
+  write ( *, '(a)' ) ' '
+  write ( *, '(6x,5g14.6)' ) xtab(1:ntab)
+  write ( *, '(a)' ) ' '
+  write ( *, '(2x,i3,1x,5g14.6)' ) 0, ytab(1:ntab)
+!
+!  Copy the data values into DIFTAB.
+!
+  diftab(1:ntab) = ytab(1:ntab)
+!
+!  Compute the divided differences.
+!
+  do i = 2, ntab
+    do j = ntab, i, -1
+
+      diftab(j) = ( diftab(j) - diftab(j-1) ) / ( xtab(j) - xtab(j+1-i) )
+
+    end do
+
+    write ( *, '(2x,i3,1x,5g14.6)' ) i-1, diftab(i:ntab)
+
+  end do
+
+  return
+end
+subroutine data_to_r8poly ( ntab, xtab, ytab, c )
+
+!*****************************************************************************80
+!
+!! DATA_TO_R8POLY computes the coefficients of a polynomial interpolating data.
+!
+!  Discussion:
+!
+!    Space can be saved by using a single array for both the C and
+!    YTAB parameters.  In that case, the coefficients will
+!    overwrite the Y data without interfering with the computation.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 October 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the number of data points.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), YTAB(NTAB), the data values.
+!
+!    Output, real ( kind = rk ) C(NTAB), the coefficients of the 
+!    polynomial that passes through the data (XTAB,YTAB).  C(1) is the 
+!    constant term.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) c(ntab)
+  real ( kind = rk ) diftab(ntab)
+  logical r8vec_distinct
+  real ( kind = rk ) xtab(ntab)
+  real ( kind = rk ) ytab(ntab)
+
+  if ( .not. r8vec_distinct ( ntab, xtab ) ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DATA_TO_POLY - Fatal error!'
+    write ( *, '(a)' ) '  Two entries of XTAB are equal!'
+    stop 1
+  end if
+
+  call data_to_dif ( ntab, xtab, ytab, diftab )
+
+  call dif_to_r8poly ( ntab, xtab, diftab, c )
+
+  return
+end
+subroutine dif_antideriv ( nd, xd, yd, na, xa, ya )
+
+!*****************************************************************************80
+!
+!! DIF_ANTIDERIV computes the antiderivative of a divided difference polynomial.
+!
+!  Discussion:
+!
+!    The routine uses the divided difference representation 
+!    of a polynomial to compute the divided difference representation
+!    of the antiderivative of the polynomial.
+!
+!    The antiderivative of a polynomial P(X) is any polynomial Q(X)
+!    with the property that d/dX Q(X) = P(X).
+!
+!    This routine chooses the antiderivative whose constant term is zero.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    25 May 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ND, the size of the difference table.
+!
+!    Input, real ( kind = rk ) XD(ND), the abscissas of the 
+!    difference table.
+!
+!    Input, real ( kind = rk ) YD(ND), the difference table.
+!
+!    Input, integer NA, the size of the difference table for the
+!    antiderivative, which will be ND+1.
+!
+!    Output, real ( kind = rk ) XA(NA), the abscissas of the 
+!    difference table for the antiderivative.
+!
+!    Output, real ( kind = rk ) YA(NA), the difference table
+!    for the antiderivative.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+
+  integer na
+  real ( kind = rk ) x0(nd)
+  real ( kind = rk ) xa(nd+1)
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) y0(nd)
+  real ( kind = rk ) ya(nd+1)
+  real ( kind = rk ) yd(nd)
+!
+!  Copy the input data.
+!
+  x0(1:nd) = xd(1:nd)
+  y0(1:nd) = yd(1:nd)
+!
+!  Compute an equivalent difference table with all abscissas 0.
+!
+  call dif_shift_zero ( nd, x0, y0 )
+!
+!  There is one more abscissas for the antiderivative polynomial.
+!
+  na = nd + 1
+  xa(1:na) = 0.0D+00
+!
+!  Get the antiderivative of the standard form polynomial.
+!
+  call r8poly_ant_cof ( nd, y0, ya )
+
+  return
+end
+subroutine dif_append ( ntab, xtab, diftab, xval, yval, ntab2, xtab2, diftab2 )
+
+!*****************************************************************************80
+!
+!! DIF_APPEND adds a pair of data values to a divided difference table.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the size of the difference table.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X data values.
+!
+!    Input, real ( kind = rk ) DIFTAB(NTAB), the difference table.
+!
+!    Input, real ( kind = rk ) XVAL, the X data value to be inserted as XTAB(1).
+!
+!    Input, real ( kind = rk ) YVAL, the Y data value to be inserted as YTAB(1).
+!
+!    Output, integer NTAB2, the updated size of the 
+!    difference table.
+!
+!    Output, real ( kind = rk ) XTAB2(NTAB2), the updated abscissas.
+!
+!    Output, real ( kind = rk ) DIFTAB2(NTAB2), the updated difference table.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) diftab(ntab)
+  real ( kind = rk ) diftab2(ntab+1)
+  integer i
+  integer ntab2
+  real ( kind = rk ) xtab(ntab)
+  real ( kind = rk ) xtab2(ntab+1)
+  real ( kind = rk ) xval
+  real ( kind = rk ) yval
+!
+!  Move the original data up one index.
+!
+  ntab2 = ntab + 1
+
+  do i = ntab2, 2, -1
+    xtab2(i) = xtab(i-1)
+  end do
+
+  do i = ntab2, 2, -1
+    diftab2(i) = diftab(i-1)
+  end do
+!
+!  Insert the new data.
+!
+  xtab2(1) = xval
+  diftab2(1) = yval
+!
+!  Recompute the difference table.
+!
+  do i = 2, ntab2
+    diftab2(i) = ( diftab2(i) - diftab2(i-1) ) / ( xtab2(i) - xtab2(1) )
+  end do
+
+  return
+end
+subroutine dif_basis ( ntab, xtab, diftab )
+
+!*****************************************************************************80
+!
+!! DIF_BASIS computes all Lagrange basis polynomials in divided difference form.
+!
+!  Discussion:
+!
+!    The I-th Lagrange basis polynomial for a set of NTAB X values XTAB,
+!    L(I,NTAB,XTAB)(X) is a polynomial of degree NTAB-1 which is zero at
+!    XTAB(J) for J not equal to I, and 1 when J is equal to I.
+!
+!    The Lagrange basis polynomials have the property that the interpolating
+!    polynomial through a set of NTAB data points (XTAB,YTAB) may be
+!    represented as
+!
+!      P(X) = Sum ( 1 <= I <= N ) YTAB(I) * L(I,NTAB,XTAB)(X)
+!
+!    Higher order interpolation at selected points may be accomplished
+!    using repeated X values, and scaled derivative values.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the number of X data points XTAB, 
+!    and the number of basis polynomials to compute.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values upon which the 
+!    Lagrange basis polynomials are to be based.
+!
+!    Output, real ( kind = rk ) DIFTAB(NTAB,NTAB), the set of divided 
+!    difference tables.  Column I of DIFTAB contains the table for 
+!    the I-th Lagrange basis polynomial.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) diftab(ntab,ntab)
+  integer i
+  real ( kind = rk ) xtab(ntab)
+!
+!  Initialize DIFTAB to the identity matrix.
+!
+  diftab(1:ntab,1:ntab) = 0.0D+00
+  do i = 1, ntab
+    diftab(i,i) = 1.0D+00
+  end do
+!
+!  Compute each Lagrange basis polynomial.
+!
+  do i = 1, ntab
+    call data_to_dif ( ntab, xtab, diftab(1,i), diftab(1,i) )
+  end do
+
+  return
+end
+subroutine dif_basis_deriv ( nd, xd, xdp, ddp )
+
+!*****************************************************************************80
+!
+!! DIF_BASIS_DERIV: Lagrange basis derivative difference tables.
+!
+!  Discussion:
+!
+!    Given ND points XD, a Lagrange basis polynomial L(J)(X) is associated
+!    with each point XD(J).
+!
+!    This function computes a table DDP(*,*) whose J-th column contains
+!    the difference table for the first derivative of L(J)(X).
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    01 June 2013
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the number of data points.
+!
+!    Input, real ( kind = rk ) XD(ND), the X values upon which the 
+!    Lagrange basis polynomials are to be based.
+!
+!    Output, real ( kind = rk ) XDP(ND-1), the X values upon with
+!    the derivative difference table is based.  In fact, these are
+!    all 0.
+!
+!    Output, real ( kind = rk ) DDP(ND-1,ND), the divided difference 
+!    tables for all the Lagrange basis polynomials.  Column J of DDP
+!    contains the table for basis polynomial associated with XD(J).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+
+  real ( kind = rk ) dd(nd)
+  real ( kind = rk ) ddp(nd-1,nd)
+  integer j
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) xdp(nd-1)
+  real ( kind = rk ) yd(nd)
+!
+!  Process the vectors one column at a time.
+!
+  do j = 1, nd
+!
+!  Set the data.
+!
+    yd(1:nd) = 0.0D+00
+    yd(j) = 1.0D+00
+!
+!  Compute the divided difference table.
+!
+    call data_to_dif ( nd, xd, yd, dd )
+!
+!  Compute the divided difference table for the derivative.
+!
+    call dif_deriv_table ( nd, xd, dd, xdp, ddp(1:nd-1,j) )
+
+  end do
+
+  return
+end
+subroutine dif_basis_derivk ( nd, xd, k, xdp, ddp )
+
+!*****************************************************************************80
+!
+!! DIF_BASIS_DERIVK: Lagrange basis K-th derivative difference tables.
+!
+!  Discussion:
+!
+!    Given ND points XD, a Lagrange basis polynomial L(J)(X) is associated
+!    with each point XD(J).
+!
+!    This function computes a table DDP(*,*) whose J-th column contains
+!    the difference table for the K-th derivative of L(J)(X).
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    01 June 2013
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the number of data points.
+!
+!    Input, real ( kind = rk ) XD(ND), the X values upon which the 
+!    Lagrange basis polynomials are to be based.
+!
+!    Input, integer K, the index of the derivative.
+!
+!    Output, real ( kind = rk ) XDP(ND-K), the X values upon with
+!    the derivative difference table is based.  In fact, these are
+!    all 0.
+!
+!    Output, real ( kind = rk ) DDP(ND-K,ND), the divided difference 
+!    tables for all the Lagrange basis polynomials.  Column J of DDP
+!    contains the table for basis polynomial associated with XD(J).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer k
+  integer nd
+
+  real ( kind = rk ) dd(nd)
+  real ( kind = rk ) ddp(nd-k,nd)
+  integer j
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) xdp(nd-k)
+  real ( kind = rk ) yd(nd)
+!
+!  Process the vectors one column at a time.
+!
+  do j = 1, nd
+!
+!  Set the data.
+!
+    yd(1:nd) = 0.0D+00
+    yd(j) = 1.0D+00
+!
+!  Compute the divided difference table.
+!
+    call data_to_dif ( nd, xd, yd, dd )
+!
+!  Compute the divided difference table for the derivative.
+!
+    call dif_derivk_table ( nd, xd, dd, k, xdp, ddp(1:nd-k,j) )
+
+  end do
+
+  return
+end
+subroutine dif_basis_i ( ival, ntab, xtab, diftab )
+
+!*****************************************************************************80
+!
+!! DIF_BASIS_I: I-th Lagrange basis polynomial in divided difference form.
+!
+!  Discussion:
+!
+!    The I-th Lagrange basis polynomial for a set of NTAB X values XTAB,
+!    L(I,NTAB,XTAB)(X) is a polynomial of degree NTAB-1 which is zero at
+!    XTAB(J) for J not equal to I, and 1 when J is equal to I.
+!
+!    The Lagrange basis polynomials have the property that the interpolating
+!    polynomial through a set of NTAB data points (XTAB,YTAB) may be
+!    represented as
+!
+!      P(X) = Sum ( 1 <= I <= N ) YTAB(I) * L(I,NTAB,XTAB)(X)
+!
+!    Higher order interpolation at selected points may be accomplished
+!    using repeated X values, and scaled derivative values.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer IVAL, the index of the desired Lagrange 
+!    basis polynomial.  IVAL should be between 1 and NTAB.
+!
+!    Input, integer NTAB, the number of data points XTAB.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values upon which the 
+!    Lagrange basis polynomial is to be based.
+!
+!    Output, real ( kind = rk ) DIFTAB(NTAB), the divided difference table 
+!    for the IVAL-th Lagrange basis polynomial.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) diftab(ntab)
+  integer ival
+  real ( kind = rk ) xtab(ntab)
+!
+!  Check IVAL.
+!
+  if ( ival < 1 .or. ntab < ival ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DIF_BASIS_I - Fatal error!'
+    write ( *, '(a,i6)' ) '  IVAL must be between 1 and ', ntab
+    write ( *, '(a,i6)' ) '  but your value is ', ival
+    stop 1
+  end if
+!
+!  Initialize DIFTAB to Delta(I,J).
+!
+  diftab(1:ntab) = 0.0D+00
+  diftab(ival) = 1.0D+00
+!
+!  Compute the IVAL-th Lagrange basis polynomial.
+!
+  call data_to_dif ( ntab, xtab, diftab, diftab )
+
+  return
+end
+subroutine dif_deriv_table ( nd, xd, yd, xdp, ydp )
+
+!*****************************************************************************80
+!
+!! DIF_DERIV_TABLE computes the divided difference table for a derivative.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    23 June 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the size of the input table.
+!
+!    Input, real ( kind = rk ) XD(ND), the abscissas for the divided
+!    difference table.
+!
+!    Input, real ( kind = rk ) YD(ND), the divided difference table.
+!
+!    Output, real ( kind = rk ) XDP(ND-1), the abscissas for the divided
+!    difference table for the derivative.
+!
+!    Output, real ( kind = rk ) YDP(ND-1), the divided difference 
+!    table for the derivative.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+
+  integer i
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) xd_temp(nd)
+  real ( kind = rk ) xdp(nd-1)
+  real ( kind = rk ) yd(nd)
+  real ( kind = rk ) yd_temp(nd)
+  real ( kind = rk ) ydp(nd-1)
+!
+!  Using a temporary copy of the difference table, shift the abscissas to zero.
+!
+  xd_temp(1:nd) = xd(1:nd)
+  yd_temp(1:nd) = yd(1:nd)
+
+  call dif_shift_zero ( nd, xd_temp, yd_temp )
+!
+!  Now construct the derivative.
+!
+  xdp(1:nd-1) = 0.0D+00
+
+  do i = 1, nd - 1
+    ydp(i) = real ( i, kind = rk ) * yd_temp(i+1)
+  end do
+
+  return
+end
+subroutine dif_derivk_table ( nd, xd, dd, k, xdk, ddk )
+
+!*****************************************************************************80
+!
+!! DIF_DERIVK_TABLE computes the divided difference table for K-th derivative.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    31 May 2013
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the size of the input table.
+!
+!    Input, real ( kind = rk ) XD(ND), the abscissas for the divided
+!    difference table.
+!
+!    Input, real ( kind = rk ) DD(ND), the divided difference table.
+!
+!    Input, integer K, the index of the derivative.
+!    0 <= K
+!
+!    Input, real ( kind = rk ) XDK(ND-K), the abscissas for the divided
+!    difference table for the derivative.
+!
+!    Output, real ( kind = rk ) DDK(ND-K), the divided difference 
+!    table for the derivative.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer k
+  integer nd
+
+  real ( kind = rk ) dd(nd)
+  real ( kind = rk ) dd_temp(nd)
+  real ( kind = rk ) ddk(nd-k)
+  integer i
+  integer j
+  integer ndk
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) xd_temp(nd)
+  real ( kind = rk ) xdk(nd-k)
+
+  if ( k < 0 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DIF_DERIVK_TABLE - Fatal error!'
+    write ( *, '(a)' ) '  K < 0.'
+    stop 1
+  end if
+
+  if ( nd <= k ) then
+    return
+  end if
+!
+!  Shift the abscissas to zero.
+!
+  ndk = nd
+
+  xd_temp(1:ndk) = xd(1:ndk)
+  dd_temp(1:ndk) = dd(1:ndk)
+
+  call dif_shift_zero ( ndk, xd_temp, dd_temp )
+!
+!  Repeatedly differentiate.
+!
+  do j = 1, k
+
+    ndk = ndk - 1
+
+    do i = 1, ndk
+      dd_temp(i) = real ( i, kind = rk ) * dd_temp(i+1)
+    end do
+
+  end do
+
+  ddk(1:ndk) = dd_temp(1:ndk)
+  xdk(1:ndk) = 0.0D+00
+
+  return
+end
+subroutine dif_print ( nd, xd, yd, title )
+
+!*****************************************************************************80
+!
+!! DIF_PRINT prints the polynomial represented by a divided difference table.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    24 May 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ND, the order of the difference table.
+!
+!    Input, real ( kind = rk ) XD(ND), the X values for the polynomial.
+!
+!    Input, real ( kind = rk ) YD(ND), the divided difference table
+!    for the polynomial.
+!
+!    Input, character ( len = * ) TITLE, a title.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+
+  integer i
+  character ( len = * ) title
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) yd(nd)
+
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) trim ( title )
+  write ( *, '(a)' ) ' '
+  write ( *, '( ''  p(x) =                           '', g14.6 )' ) yd(1)
+
+  do i = 2, nd
+    write ( *, '( ''       + ( x - '', g14.6, '') * ( '', g14.6 )' ) &
+      xd(i-1), yd(i)
+  end do
+
+  write ( *, '(80a1)' ) ( '       )', i = 1, nd - 1 )
+
+  return
+end
+subroutine dif_root ( abserr, fxname, iprint, maxstp, maxtab, &
+  relerr, xroot, xtry1, xtry2 )
+
+!*****************************************************************************80
+!
+!! DIF_ROOT seeks a zero of F(X) using divided difference techniques.
+!
+!  Discussion:
+!
+!    The method uses the idea of considering the related function
+!
+!      H(X) = 1 / F(X)
+!
+!    The iteration begins with two estimates for the root supplied by
+!    the user.
+!
+!    From the most recent approximation to the root, X(K), the next
+!    approximation X(K+1) is determined by:
+!
+!      X(K+1) = X(K) + H(X(K-R),...,X(K-1)) / H(X(K-R),...,X(K-1),X(K))
+!
+!    where K-R = 1 until the maximal order NTAB is reached.
+!
+!    Generally, the next iterate X(K+1) is the zero of a rational function
+!    which passes through the previous data points.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    11 April 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    FM Larkin,
+!    Root Finding by Divided Differences,
+!    Numerische Mathematik,
+!    Volume 37, pages 93-104, 1981.
+!
+!  Parameters:
+!
+!    Input, real ( kind = rk ) ABSERR, a positive absolute error tolerance.  
+!    If an estimate X for the root is found with ABS ( F(X) ) <= ABSERR, 
+!    the iteration is stopped.
+!
+!    Input, external FXNAME, the name of the function routine which evaluates
+!    F(X).  The form of FXNAME must be similar to the following function which
+!    has F(X) = ( X - 1 ) * ( X + 1 ).
+!
+!    function parab ( x )
+!
+!      real ( kind = rk ) parab
+!      real ( kind = rk ) x
+!
+!      parab = ( x - 1.0D+00 ) * ( x + 1.0D+00 )
+!
+!      return
+!    end
+!
+!    Input, integer IPRINT, a switch controlling printed output:
+!    0, only print error messages.
+!    nonzero, also print a table of the iterative process.
+!
+!    Input, integer MAXSTP, the limit on how many iterations 
+!    may be tried.
+!
+!    Input, integer MAXTAB, the limit on how high an order can be 
+!    used in the divided difference table.  MAXTAB must be at least 2, and 
+!    probably should not be too large.  Perhaps a value of 5 or 6 is reasonable,
+!    20 is too large.
+!
+!    Input, real ( kind = rk ) RELERR, a tolerance on the size of the change 
+!    in the root estimates.  If a step is taken, and the change in the root
+!    estimate is less than RELERR, the iteration will stop.
+!
+!    Output, real ( kind = rk ) XROOT, the point which the program has 
+!    produced as an approximate root.
+!    Either ABS ( F(XROOT) ) <= ABSERR, or the maximum number of steps was
+!    reached, or the current estimate of the root could not be significantly
+!    improved.
+!
+!    Input, real ( kind = rk ) XTRY1, XTRY2, two initial approximations to 
+!    the root, supplied by the user, which must be distinct.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer maxtab
+
+  real ( kind = rk ) abserr
+  real ( kind = rk ) diftab(maxtab)
+  real ( kind = rk ) froot
+  real ( kind = rk ) ftemp1
+  real ( kind = rk ) ftemp2
+  real ( kind = rk ), external :: fxname
+  integer iprint
+  integer istep
+  integer maxstp
+  integer ntab
+  real ( kind = rk ) relerr
+  real ( kind = rk ) xdelt
+  real ( kind = rk ) xold
+  real ( kind = rk ) xroot
+  real ( kind = rk ) xtab(maxtab)
+  real ( kind = rk ) xtry1
+  real ( kind = rk ) xtry2
+  real ( kind = rk ) yval
+!
+!  Make sure XTRY1 and XTRY2 are not equal.
+!
+  if ( xtry1 == xtry2 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DIF_ROOT - Fatal error!'
+    write ( *, '(a)' ) '  XTRY1 = XTRY2 on input.'
+    stop 1
+  end if
+!
+!  Make sure MAXTAB is at least 2.
+!
+  if ( maxtab < 2 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'DIF_ROOT - Fatal error!'
+    write ( *, '(a)' ) '  MAXTAB < 2 on input!'
+    stop 1
+  end if
+
+  xtab(1) = xtry1
+  xtab(2) = xtry2
+  ftemp1 = fxname ( xtry1 )
+  ftemp2 = fxname ( xtry2 )
+
+  if ( abs ( ftemp2 ) < abs ( ftemp1 ) ) then
+    xtab(1) = xtry2
+    xtab(2) = xtry1
+    call r8_swap ( ftemp1, ftemp2 )
+  end if
+!
+!  Initialize the number of steps.
+!
+  istep = 0
+!
+!  Initialize the number of data points.
+!
+  ntab = 2
+
+  if ( 0 < iprint ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) '   Step  NTAB    XROOT        F(XROOT)      XDELT'
+    write ( *, '(a)' ) ' '
+  end if
+!
+!  Initialize the divided difference table data.
+!
+  diftab(1) = 1.0D+00 / ftemp1
+  diftab(2) = 1.0D+00 / ftemp2
+
+  call data_to_dif ( ntab, xtab, diftab, diftab )
+!
+!  Initialize values used in the iteration.
+!
+  xroot = xtry1
+  froot = ftemp1
+  xdelt = xtry1 - xtry2
+!
+!  Does the starting data already satisfy the function norm
+!  error tolerance ABSERR, or the interval norm error tolerance
+!  RELERR?
+!
+  do
+
+    if ( 0 < iprint ) then
+      write ( *, '(3x,i4,4x,i2, 3g14.6)' ) istep, ntab, xroot, froot, xdelt
+    end if
+
+    if ( abs ( froot ) <= abserr ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'DIF_ROOT - Absolute convergence,'
+      write ( *, '(a)' ) '  The function value meets the error tolerance.'
+      exit
+    end if
+
+    if ( abs ( xdelt ) <= relerr ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'DIF_ROOT - Relative convergence.'
+      write ( *, '(a)' ) '  The stepsize meets the error tolerance.'
+      exit
+    end if
+!
+!  Check the number of steps taken.
+!
+    if ( maxstp <= istep ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'DIF_ROOT - Nonconvergence!'
+      write ( *, '(a)' ) '  The maximum number of steps was taken.'
+      exit
+    end if
+!
+!  Generate the next point, XVAL.
+!
+    xold = xroot
+    istep = istep + 1
+!
+!  Algorithm breakdown: The divisor DIFTAB(NTAB) is zero.
+!
+    if ( diftab(ntab) == 0.0D+00 ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'DIF_ROOT - Fatal error!'
+      write ( *, '(a,i6)' ) '  Algorithm using differences of order ', ntab
+      write ( *, '(a)' ) '  A zero-divisor was computed.'
+      write ( *, '(a)' ) '  The algorithm has broken down.'
+      write ( *, '(a)' ) '  Examine the results.  They may be useful.'
+      write ( *, '(a)' ) '  Perhaps a lower value of MAXTAB would help.'
+      stop 1
+    end if
+
+    xroot = xtab(ntab) + ( diftab(ntab-1) / diftab(ntab) )
+    xdelt = xroot - xold
+    froot = fxname ( xroot )
+
+    if ( abs ( froot ) <= abserr ) then
+      cycle
+    end if
+
+    yval = 1.0D+00 / froot
+!
+!  If we are now using MAXTAB points, we have to remove an old
+!  one before adding the new one.
+!
+    if ( maxtab <= ntab ) then
+      ntab = ntab - 1
+    end if
+
+    call dif_append ( ntab, xtab, diftab, xroot, yval, ntab, xtab, diftab )
+
+  end do
+
+  return
+end
+subroutine dif_shift_x ( nd, xd, yd, xv )
+
+!*****************************************************************************80
+!
+!! DIF_SHIFT_X replaces one abscissa of a divided difference table.
+!
+!  Discussion:
+!
+!    The routine shifts the representation of a divided difference polynomial by
+!    dropping the last X value in XD, and adding a new value XV to the
+!    beginning of the XD array, suitably modifying the coefficients stored
+!    in YD.
+!
+!    The representation of the polynomial is changed, but the polynomial itself
+!    should be identical.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    23 June 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the number of divided difference 
+!    coefficients, and the number of entries in XD.
+!
+!    Input/output, real ( kind = rk ) XD(ND), the X values used in 
+!    the representation of the divided difference polynomial.
+!    After a call to this routine, the last entry of XD has been dropped,
+!    the other entries have shifted up one index, and XV has been inserted
+!    at the beginning of the array.
+!
+!    Input/output, real ( kind = rk ) YD(ND), the divided difference
+!    coefficients corresponding to the XD array.  On output, this 
+!    array has been adjusted.
+!
+!    Input, real ( kind = rk ) XV, a new X value which is to be used in 
+!    the representation of the polynomial.  On output, XD(1) equals 
+!    XV and the representation of the polynomial has been suitably changed.
+!    Note that XV does not have to be distinct from any of the original XD
+!    values.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+
+  integer i
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) xv
+  real ( kind = rk ) yd(nd)
+!
+!  Recompute the divided difference coefficients.
+!
+  do i = nd - 1, 1, -1
+    yd(i) = yd(i) + ( xv - xd(i) ) * yd(i+1)
+  end do
+!
+!  Shift the XD values up one position, and insert XV at the beginning.
+!
+  xd(2:nd) = xd(1:nd-1)
+
+  xd(1) = xv
+
+  return
+end
+subroutine dif_shift_zero ( nd, xd, yd )
+
+!*****************************************************************************80
+!
+!! DIF_SHIFT_ZERO shifts a divided difference table so all abscissas are zero.
+!
+!  Discussion:
+!
+!    When the abscissas are changed, the coefficients naturally
+!    must also be changed.
+!
+!    The resulting pair (XD, YD) still represents the
+!    same polynomial, but the entries in YD are now the
+!    standard polynomial coefficients.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    01 November 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the length of the table.
+!
+!    Input/output, real ( kind = rk ) XD(ND), the abscissas for the divided
+!    difference table.  On output, all entries have been reset to 0, but
+!    (XD,YD) can still be regarded as a divided difference table for the input
+!    polynomial.
+!
+!    Input/output, real ( kind = rk ) YD(ND).  On input, the divided difference 
+!    table for the polynomial.  On output, the divided difference table for
+!    the polynomial, which has been rebased at 0.  Hence, YD is also simply
+!    the coefficient array for the standard representation of the polynomial.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+
+  integer i
+  integer j
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) yd(nd)
+
+  do j = 1, nd
+
+    do i = nd - 1, 1, -1
+      yd(i) = yd(i) - xd(i) * yd(i+1)
+    end do
+!
+!  Shift the XD values up one position.
+!
+    xd(2:nd) = xd(1:nd-1)
+
+    xd(1) = 0.0D+00
+
+  end do
+
+  return
+end
+subroutine dif_to_r8poly ( n, xd, yd, c )
+
+!*****************************************************************************80
+!
+!! DIF_TO_R8POLY converts a divided difference polynomial to standard form.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer N, the number of coefficients, and abscissas.
+!
+!    Input, real ( kind = rk ) XD(N), the X values used in the divided
+!    difference representation of the polynomial.
+!
+!    Input, real ( kind = rk ) YD(N) the divided difference table.
+!
+!    Output, real ( kind = rk ) C(N), the polyomial coefficients.
+!    C(1) is the constant term, and C(N) is the coefficient
+!    of X^(N-1).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) c(n)
+
+  integer i
+  integer j
+  real ( kind = rk ) xd(n)
+  real ( kind = rk ) yd(n)
+
+  c(1:n) = yd(1:n)
+!
+!  Recompute the divided difference coefficients.
+!
+  do j = 1, n - 1
+    do i = 1, n - j
+      c(n-i) = c(n-i) - xd(n-i-j+1) * c(n-i+1)
+    end do
+  end do
+
+  return
+end
+subroutine dif_val ( ntab, xtab, diftab, xv, yv )
+
+!*****************************************************************************80
+!
+!! DIF_VAL evaluates a divided difference polynomial at a point.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    31 October 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the number of divided difference
+!    coefficients in DIFTAB, and the number of points XTAB.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values upon which the
+!    divided difference polynomial is based.
+!
+!    Input, real ( kind = rk ) DIFTAB(NTAB), the divided difference 
+!    polynomial coefficients.
+!
+!    Input, real ( kind = rk ) XV, the value where the polynomial 
+!    is to be evaluated.
+!
+!    Output, real ( kind = rk ) YV, the value of the polynomial at XV.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  real ( kind = rk ) diftab(ntab)
+  integer i
+  real ( kind = rk ) xtab(ntab)
+  real ( kind = rk ) xv
+  real ( kind = rk ) yv
+
+  yv = diftab(ntab)
+  do i = ntab - 1, 1, -1
+    yv = diftab(i) + ( xv - xtab(i) ) * yv
+  end do
+
+  return
+end
+subroutine dif_vals ( nd, xd, yd, nv, xv, yv )
+
+!*****************************************************************************80
+!
+!! DIF_VALS evaluates a divided difference polynomial at a set of points.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    31 October 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Carl deBoor,
+!    A Practical Guide to Splines,
+!    Springer, 2001,
+!    ISBN: 0387953663,
+!    LC: QA1.A647.v27.
+!
+!  Parameters:
+!
+!    Input, integer ND, the order of the difference table.
+!
+!    Input, real ( kind = rk ) XD(ND), the X values of the difference table.
+!
+!    Input, real ( kind = rk ) YD(ND), the divided differences.
+!
+!    Input, integer NV, the number of evaluation points.
+!
+!    Input, real ( kind = rk ) XV(NV), the evaluation points.
+!
+!    Output, real ( kind = rk ) YV(NV), the value of the divided difference
+!    polynomial at the evaluation points.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nd
+  integer nv
+
+  integer i
+  real ( kind = rk ) xd(nd)
+  real ( kind = rk ) xv(nv)
+  real ( kind = rk ) yd(nd)
+  real ( kind = rk ) yv(nv)
+
+  yv(1:nv) = yd(nd)
+  do i = nd - 1, 1, -1
+    yv(1:nv) = yd(i) + ( xv(1:nv) - xd(i) ) * yv(1:nv)
+  end do
+
+  return
+end
+subroutine lagrange_rule ( n, x, w )
+
+!*****************************************************************************80
+!
+!! LAGRANGE_RULE computes the weights of a Lagrange interpolation rule.
+!
+!  Discussion:
+!
+!    Given N abscissas X, an arbitrary function F(X) can be
+!    interpolated by a polynomial P(X) of order N (and degree N-1)
+!    using weights that depend only on X.
+!
+!    Standard Lagrange interpolation can be rewritten into this form,
+!    which is more economical than evaluating the individual Lagrange
+!    basis polynomials.
+!
+!    If we define
+!
+!      W(I) = 1 / product ( 1 <= J <= N, J /= I ) ( X(J) - X(I) )
+!
+!    then
+!
+!      P(XV) = sum ( 1 <= I <= N ) W(I) * F( X(I) ) / ( XV - X(I) )
+!            / sum ( 1 <= I <= N ) W(I)             / ( XV - X(I) )
+!
+!    except when XV = X(J), for some J, when we set:
+!
+!      P(X(J)) = F(X(J))
+!
+!  Modified:
+!
+!    30 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jean-Paul Berrut, Lloyd Trefethen,
+!    Barycentric Lagrange Interpolation,
+!    SIAM Review,
+!    Volume 46, Number 3, September 2004, pages 501-517.
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the rule.
+!
+!    Input, real ( kind = rk ) X(N), the abscissas of the rule.
+!
+!    Output, real ( kind = rk ) W(N), the weights of the rule.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer i
+  integer j
+  real ( kind = rk ) w(n)
+  real ( kind = rk ) x(n)
+
+  w(1:n) = 1.0D+00
+
+  do i = 1, n
+    do j = 1, i - 1
+      w(j) = ( x(i) - x(j) ) * w(j)
+    end do
+    w(i) = product ( ( x(1:i-1) - x(i) ) )
+  end do
+
+  w(1:n) = 1.0D+00 / w(1:n)
+
+  return
+end
+subroutine lagrange_sum ( n, x, w, y, xv, yv )
+
+!*****************************************************************************80
+!
+!! LAGRANGE_SUM carries out a Lagrange interpolation rule.
+!
+!  Discussion:
+!
+!    It is assumed that LAGRANGE_RULE has already been called to compute
+!    the appropriate weights for the given set of abscissas.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    30 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Jean-Paul Berrut, Lloyd Trefethen,
+!    Barycentric Lagrange Interpolation,
+!    SIAM Review,
+!    Volume 46, Number 3, September 2004, pages 501-517.
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the rule.
+!
+!    Input, real ( kind = rk ) X(N), the abscissas of the rule.
+!
+!    Input, real ( kind = rk ) W(N), the weights of the rule.
+!
+!    Input, real ( kind = rk ) Y(N), the function values at the abscissas.
+!
+!    Input, real ( kind = rk ) XV, a point where an interpolated value is
+!    needed.
+!
+!    Output, real ( kind = rk ) YV, the interpolated function value.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) bot
+  integer i
+  real ( kind = rk ) top
+  real ( kind = rk ) w(n)
+  real ( kind = rk ) x(n)
+  real ( kind = rk ) xv
+  real ( kind = rk ) y(n)
+  real ( kind = rk ) yv
+
+  do i = 1, n
+
+    if ( xv == x(i) ) then
+      yv = y(i)
+      return
+    end if
+
+  end do
+
+  top = 0.0D+00
+  bot = 0.0D+00
+  
+  do i = 1, n
+    top = top + w(i) * y(i) / ( xv - x(i) )
+    bot = bot + w(i)        / ( xv - x(i) )
+  end do
+
+  yv = top / bot
+
+  return
+end
+subroutine lagrange_val ( n, x, y, xv, yv )
+
+!*****************************************************************************80
+!
+!! LAGRANGE_VAL applies a naive form of Lagrange interpolation.
+!
+!  Discussion:
+!
+!    Given N abscissas X, an arbitrary function Y(X) can be
+!    interpolated by a polynomial P(X) of order N (and degree N-1)
+!    using Lagrange basis polynomials of degree N-1.
+!
+!    Standard Lagrange interpolation can be rewritten into this form,
+!    which is more economical than evaluating the individual Lagrange
+!    basis polynomials.
+!
+!    If we define
+!
+!      L(I)(XV) = product ( 1 <= J <= N, J /= I )
+!        ( XV - X(J) ) / ( X(I) - X(J) )
+!
+!    then
+!
+!      P(XV) = sum ( 1 <= I <= N ) Y( X(I) ) * L(I)(XV)
+!
+!    Applying this form of the interpolation rule directly involves 
+!    about N^2 work.  There are more efficient forms of the rule.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    24 May 2011
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the number of data points.
+!
+!    Input, real ( kind = rk ) X(N), the abscissas.
+!
+!    Input, real ( kind = rk ) Y(N), the function values at the abscissas.
+!
+!    Input, real ( kind = rk ) XV, a point where an interpolated value is
+!    needed.
+!
+!    Output, real ( kind = rk ) YV, the interpolated function value.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer i
+  integer j
+  real ( kind = rk ) poly
+  real ( kind = rk ) x(n)
+  real ( kind = rk ) xv
+  real ( kind = rk ) y(n)
+  real ( kind = rk ) yv
+
+  yv = 0.0D+00
+
+  do i = 1, n
+    poly = 1.0D+00
+    do j = 1, n
+      if ( j /= i ) then
+        poly = poly * ( xv - x(j) ) / ( x(i) - x(j) )
+      end if
+    end do
+    yv = yv + y(i) * poly
+  end do
+
+  return
+end
+subroutine nc_rule ( n, a, b, xtab, weight )
+
+!*****************************************************************************80
+!
+!! NC_RULE computes the weights of a Newton-Cotes quadrature rule.
+!
+!  Discussion:
+!
+!    For the interval [A,B], the Newton-Cotes quadrature rule estimates
+!
+!      Integral ( A <= X <= B ) F(X) dX
+!
+!    using N equally spaced abscissas XTAB(I) and a weight vector
+!    WEIGHT(I):
+!
+!      Sum ( 1 <= I <= N ) WEIGHT(I) * F ( XTAB(I) ).
+!
+!    For the CLOSED rule, the abscissas include the points A and B.
+!    For the OPEN rule, the abscissas do not include A and B.
+!
+!    For the common closed and open rules, the abscissas are equally spaced.
+!
+!    This routine allows the user to specify any set of abscissas;
+!    hence, it can compute the standard open and closed rules, and
+!    other variations.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    25 September 1998
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the rule.
+!
+!    Input, real ( kind = rk ) A, B, the left and right endpoints of the interval
+!    over which the quadrature rule is to be applied.
+!
+!    Input, real ( kind = rk ) XTAB(N), the abscissas of the rule.
+!
+!    Output, real ( kind = rk ) WEIGHT(N), the weights of the rule.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) a
+  real ( kind = rk ) b
+  real ( kind = rk ) poly_cof(n)
+  integer i
+  real ( kind = rk ) weight(n)
+  real ( kind = rk ) xtab(n)
+  real ( kind = rk ) yvala
+  real ( kind = rk ) yvalb
+
+  do i = 1, n
+!
+!  Compute the Lagrange basis polynomial which is 1 at XTAB(I),
+!  and zero at the other nodes.
+!
+    call r8poly_basis_1 ( i, n, xtab, poly_cof )
+!
+!  Evaluate the antiderivative of the polynomial at the left and
+!  right endpoints.
+!
+    call r8poly_ant_val ( n, poly_cof, a, yvala )
+
+    call r8poly_ant_val ( n, poly_cof, b, yvalb )
+
+    weight(i) = yvalb - yvala
+
+  end do
+
+  return
+end
+subroutine ncc_rule ( norder, xtab, weight )
+
+!*****************************************************************************80
+!
+!! NCC_RULE computes the coefficients of a Newton-Cotes closed quadrature rule.
+!
+!  Discussion:
+!
+!    For the interval [-1,1], the Newton-Cotes quadrature rule estimates
+!
+!      Integral ( -1 <= X <= 1 ) F(X) dX
+!
+!    using NORDER equally spaced abscissas XTAB(I) and a weight vector
+!    WEIGHT(I):
+!
+!      Sum ( 1 <= I <= N ) WEIGHT(I) * F ( XTAB(I) ).
+!
+!    For the CLOSED rule, the abscissas include A and B.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    25 September 1998
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NORDER, the order of the rule.
+!
+!    Output, real ( kind = rk ) XTAB(NORDER), the abscissas of the rule.
+!
+!    Output, real ( kind = rk ) WEIGHT(NORDER), the weights of the rule.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer norder
+
+  real ( kind = rk ) a
+  real ( kind = rk ) b
+  integer i
+  real ( kind = rk ) weight(norder)
+  real ( kind = rk ) xtab(norder)
+!
+!  Compute a closed quadrature rule.
+!
+  a = -1.0D+00
+  b = 1.0D+00
+
+  do i = 1, norder
+    xtab(i) = ( real ( norder - i,     kind = rk ) * a   &
+              + real (          i - 1, kind = rk ) * b ) &
+              / real ( norder - 1,     kind = rk )
+  end do
+
+  call nc_rule ( norder, a, b, xtab, weight )
+
+  return
+end
+subroutine nco_rule ( norder, xtab, weight )
+
+!*****************************************************************************80
+!
+!! NCO_RULE computes the coefficients of a Newton-Cotes open quadrature rule.
+!
+!  Discussion:
+!
+!    For the interval [-1,1], the Newton-Cotes quadrature rule estimates
+!
+!      Integral ( -1 <= X <= 1 ) F(X) dX
+!
+!    using NORDER equally spaced abscissas XTAB(I) and a weight vector
+!    WEIGHT(I):
+!
+!      Sum ( 1 <= I <= N ) WEIGHT(I) * F ( XTAB(I) ).
+!
+!    For the OPEN rule, the abscissas do not include A and B.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    25 September 1998
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NORDER, the order of the rule.
+!
+!    Output, real ( kind = rk ) XTAB(NORDER), the abscissas of the rule.
+!
+!    Output, real ( kind = rk ) WEIGHT(NORDER), the weights of the  rule.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer norder
+
+  real ( kind = rk ) a
+  real ( kind = rk ) b
+  integer i
+  real ( kind = rk ) weight(norder)
+  real ( kind = rk ) xtab(norder)
+
+  a = -1.0D+00
+  b = 1.0D+00
+
+  do i = 1, norder
+    xtab(i) = ( real ( norder + 1 - i, kind = rk ) * a   &
+              + real (              i, kind = rk ) * b ) &
+              / real ( norder + 1,     kind = rk )
+  end do
+
+  call nc_rule ( norder, a, b, xtab, weight )
+
+  return
+end
+subroutine r8_swap ( x, y )
+
+!*****************************************************************************80
+!
+!! R8_SWAP swaps two R8's.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    01 May 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input/output, real ( kind = rk ) X, Y.  On output, the values of X and
+!    Y have been interchanged.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  real ( kind = rk ) x
+  real ( kind = rk ) y
+  real ( kind = rk ) z
+
+  z = x
+  x = y
+  y = z
+
+  return
+end
+subroutine r8mat_transpose_print ( m, n, a, title )
+
+!*****************************************************************************80
+!
+!! R8MAT_TRANSPOSE_PRINT prints an R8MAT, transposed.
+!
+!  Discussion:
+!
+!    An R8MAT is an MxN array of R8's, stored by (I,J) -> [I+J*M].
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    14 June 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer M, N, the number of rows and columns.
+!
+!    Input, real ( kind = rk ) A(M,N), an M by N matrix to be printed.
+!
+!    Input, character ( len = * ) TITLE, a title.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer m
+  integer n
+
+  real ( kind = rk ) a(m,n)
+  character ( len = * ) title
+
+  call r8mat_transpose_print_some ( m, n, a, 1, 1, m, n, title )
+
+  return
+end
+subroutine r8mat_transpose_print_some ( m, n, a, ilo, jlo, ihi, jhi, title )
+
+!*****************************************************************************80
+!
+!! R8MAT_TRANSPOSE_PRINT_SOME prints some of an R8MAT, transposed.
+!
+!  Discussion:
+!
+!    An R8MAT is an MxN array of R8's, stored by (I,J) -> [I+J*M].
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    10 September 2009
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer M, N, the number of rows and columns.
+!
+!    Input, real ( kind = rk ) A(M,N), an M by N matrix to be printed.
+!
+!    Input, integer ILO, JLO, the first row and column to print.
+!
+!    Input, integer IHI, JHI, the last row and column to print.
+!
+!    Input, character ( len = * ) TITLE, a title.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer, parameter :: incx = 5
+  integer m
+  integer n
+
+  real ( kind = rk ) a(m,n)
+  character ( len = 14 ) ctemp(incx)
+  integer i
+  integer i2
+  integer i2hi
+  integer i2lo
+  integer ihi
+  integer ilo
+  integer inc
+  integer j
+  integer j2hi
+  integer j2lo
+  integer jhi
+  integer jlo
+  character ( len = * ) title
+
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) trim ( title )
+
+  if ( m <= 0 .or. n <= 0 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) '  (None)'
+    return
+  end if
+
+  do i2lo = max ( ilo, 1 ), min ( ihi, m ), incx
+
+    i2hi = i2lo + incx - 1
+    i2hi = min ( i2hi, m )
+    i2hi = min ( i2hi, ihi )
+
+    inc = i2hi + 1 - i2lo
+
+    write ( *, '(a)' ) ' '
+
+    do i = i2lo, i2hi
+      i2 = i + 1 - i2lo
+      write ( ctemp(i2), '(i8,6x)' ) i
+    end do
+
+    write ( *, '(''  Row   '',5a14)' ) ctemp(1:inc)
+    write ( *, '(a)' ) '  Col'
+    write ( *, '(a)' ) ' '
+
+    j2lo = max ( jlo, 1 )
+    j2hi = min ( jhi, n )
+
+    do j = j2lo, j2hi
+
+      do i2 = 1, inc
+        i = i2lo - 1 + i2
+        write ( ctemp(i2), '(g14.6)' ) a(i,j)
+      end do
+
+      write ( *, '(i5,a,5a14)' ) j, ':', ( ctemp(i), i = 1, inc )
+
+    end do
+
+  end do
+
+  return
+end
+subroutine r8poly_ant_cof ( n, poly_cof, poly_cof2 )
+
+!*****************************************************************************80
+!
+!! R8POLY_ANT_COF integrates a polynomial in standard form.
+!
+!  Discussion:
+!
+!    The antiderivative of a polynomial P(X) is any polynomial Q(X)
+!    with the property that d/dX Q(X) = P(X).
+!
+!    This routine chooses the antiderivative whose constant term is zero.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Input, real ( kind = rk ) POLY_COF(N), the polynomial coefficients.
+!    POLY_COF(1) is the constant term, and POLY_COF(N) is the
+!    coefficient of X^(N-1).
+!
+!    Output, real ( kind = rk ) POLY_COF2(N+1), the coefficients of 
+!    the antiderivative polynomial, in standard form.  The constant 
+!    term is set to zero.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) poly_cof(n)
+  real ( kind = rk ) poly_cof2(n+1)
+  integer i
+!
+!  Set the constant term.
+!
+  poly_cof2(1) = 0.0D+00
+!
+!  Integrate the polynomial.
+!
+  do i = 2, n + 1
+    poly_cof2(i) = poly_cof(i-1) / real ( i - 1, kind = rk )
+  end do
+
+  return
+end
+subroutine r8poly_ant_val ( n, c, xv, yv )
+
+!*****************************************************************************80
+!
+!! R8POLY_ANT_VAL evaluates the antiderivative of a polynomial in standard form.
+!
+!  Discussion:
+!
+!    The constant term of the antiderivative is taken to be zero.
+!
+!    Thus, if 
+!      p(x) = c(1)     + c(2) * x   + c(3) * x^2   + ... + c(n) * x^(n-1)
+!    then q(x), the antiderivative, is taken to be:
+!      q(x) = c(1) * x + c(2) * x/2 + c(3) * x^3/3 + ... + c(n) * x^n/n
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Input, real ( kind = rk ) C(N), the polynomial coefficients.
+!    C(1) is the constant term, and C(N) is the coefficient of X^(N-1).
+!
+!    Input, real ( kind = rk ) XV, the evaluation point.
+!
+!    Output, real ( kind = rk ) YV, the value of the antiderivative of 
+!    the polynomial at XV.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) c(n)
+  integer i
+  real ( kind = rk ) xv
+  real ( kind = rk ) yv
+
+  yv = 0.0D+00
+
+  do i = n, 1, -1
+    yv = ( yv + c(i) / real ( i, kind = rk ) ) * xv
+  end do
+
+  return
+end
+subroutine r8poly_basis ( ntab, xtab, poly_cof )
+
+!*****************************************************************************80
+!
+!! R8POLY_BASIS computes all Lagrange basis polynomials in standard form.
+!
+!  Discussion:
+!
+!    The I-th Lagrange basis polynomial for a set of NTAB X values XTAB,
+!    L(I,NTAB,XTAB)(X) is a polynomial of degree NTAB-1 which is zero at
+!    XTAB(J) for J not equal to I, and 1 when J is equal to I.
+!
+!    The Lagrange basis polynomials have the property that the interpolating
+!    polynomial through a set of NTAB data points (XTAB,YTAB) may be
+!    represented as
+!
+!      P(X) = Sum ( 1 <= I <= N ) YTAB(I) * L(I,NTAB,XTAB)(X)
+!
+!    Higher order interpolation at selected points may be accomplished
+!    using repeated X values, and scaled derivative values.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NTAB, the number of data points XTAB.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values upon which the 
+!    Lagrange basis polynomial is to be based.
+!
+!    Output, real ( kind = rk ) POLY_COF(NTAB,NTAB), the polynomial 
+!    coefficients for the I-th Lagrange basis polynomial are stored 
+!    in column I.  POLY_COF(1,I) is the constant term, and POLY_COF(1,NTAB) 
+!    is the coefficient of X^(NTAB-1).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  integer i
+  real ( kind = rk ) poly_cof(ntab,ntab)
+  real ( kind = rk ) xtab(ntab)
+!
+!  Initialize POLY_COF to the identity matrix.
+!
+  poly_cof(1:ntab,1:ntab) = 0.0D+00
+  do i = 1, ntab
+    poly_cof(i,i) = 1.0D+00
+  end do
+!
+!  Compute the divided difference table for the IVAL-th Lagrange basis
+!  polynomial.
+!
+  do i = 1, ntab
+    call data_to_dif ( ntab, xtab, poly_cof(1,i), poly_cof(1,i) )
+  end do
+!
+!  Convert the divided difference table coefficients to standard polynomial
+!  coefficients.
+!
+  do i = 1, ntab
+    call dif_to_r8poly ( ntab, xtab, poly_cof(1,i), poly_cof(1,i) )
+  end do
+
+  return
+end
+subroutine r8poly_basis_1 ( ival, ntab, xtab, poly_cof )
+
+!*****************************************************************************80
+!
+!! R8POLY_BASIS_1 computes the I-th Lagrange basis polynomial in standard form.
+!
+!  Discussion:
+!
+!    The I-th Lagrange basis polynomial for a set of NTAB X values XTAB,
+!    L(I,NTAB,XTAB)(X) is a polynomial of degree NTAB-1 which is zero at
+!    XTAB(J) for J not equal to I, and 1 when J is equal to I.
+!
+!    The Lagrange basis polynomials have the property that the interpolating
+!    polynomial through a set of NTAB data points (XTAB,YTAB) may be
+!    represented as
+!
+!      P(X) = Sum ( 1 <= I <= N ) YTAB(I) * L(I,NTAB,XTAB)(X)
+!
+!    Higher order interpolation at selected points may be accomplished
+!    using repeated X values, and scaled derivative values.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer IVAL, the index of the desired Lagrange 
+!    basis polynomial.  IVAL should be between 1 and NTAB.
+!
+!    Input, integer NTAB, the number of data points XTAB.
+!
+!    Input, real ( kind = rk ) XTAB(NTAB), the X values upon which the 
+!    Lagrange basis polynomial is to be based.
+!
+!    Output, real ( kind = rk ) POLY_COF(NTAB), the polynomial 
+!    coefficients for the IVAL-th Lagrange basis polynomial.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer ntab
+
+  integer ival
+  real ( kind = rk ) poly_cof(ntab)
+  real ( kind = rk ) xtab(ntab)
+!
+!  Check IVAL.
+!
+  if ( ival < 1 .or. ntab < ival ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'R8POLY_BASE_1 - Fatal error!'
+    write ( *, '(a,i6)' ) '  IVAL must be between 1 and ', ntab
+    write ( *, '(a,i6)' ) '  but your value is ', ival
+    stop 1
+  end if
+!
+!  Initialize POLY_COF to the IVAL-th column of the identity matrix.
+!
+  poly_cof(1:ntab) = 0.0D+00
+  poly_cof(ival) = 1.0D+00
+!
+!  Compute the divided difference table for the IVAL-th Lagrange basis
+!  polynomial.
+!
+  call data_to_dif ( ntab, xtab, poly_cof, poly_cof )
+!
+!  Convert the divided difference table coefficients to standard polynomial
+!  coefficients.
+!
+  call dif_to_r8poly ( ntab, xtab, poly_cof, poly_cof )
+
+  return
+end
+subroutine r8poly_der_cof ( n, poly_cof, poly_cof2 )
+
+!*****************************************************************************80
+!
+!! R8POLY_DER_COF computes the coefficients of the derivative of a polynomial.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    12 April 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Input, real ( kind = rk ) POLY_COF(N), the coefficients of the 
+!    polynomial to be differentiated.  POLY_COF(1) is the constant term, and
+!    POLY_COF(N) is the coefficient of X^(N-1).
+!
+!    Output, real ( kind = rk ) POLY_COF2(N-1), the coefficients of the
+!    derivative of the polynomial.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) poly_cof(n)
+  real ( kind = rk ) poly_cof2(n-1)
+  integer i
+
+  do i = 1, n-1
+    poly_cof2(i) = real ( i, kind = rk ) * poly_cof(i+1)
+  end do
+
+  return
+end
+subroutine r8poly_der_val ( n, poly_cof, xval, yval )
+
+!*****************************************************************************80
+!
+!! R8POLY_DER_VAL evaluates the derivative of a polynomial in standard form.
+!
+!  Discussion:
+!
+!    A polynomial in standard form, with coefficients POLY_COF(*),
+!    may be written:
+!
+!      P(X) = POLY_COF(1)
+!           + POLY_COF(2) * X
+!           ...
+!           + POLY_COF(N) * X^(N-1)
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    11 April 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Input, real ( kind = rk ) POLY_COF(N), the polynomial coefficients.
+!    POLY_COF(1) is the constant term, and POLY_COF(N) is the coefficient of
+!    X^(N-1).
+!
+!    Input, real ( kind = rk ) XVAL, a value where the derivative of the
+!    polynomial is to be evaluated.
+!
+!    Output, real ( kind = rk ) YVAL, the value of the derivative of the
+!    polynomial at XVAL.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer i
+  real ( kind = rk ) poly_cof(n)
+  real ( kind = rk ) xval
+  real ( kind = rk ) yval
+
+  yval = real ( n - 1, kind = rk ) * poly_cof(n)
+  do i = n - 1, 2, -1
+    yval = yval * xval + real ( i - 1, kind = rk ) * poly_cof(i)
+  end do
+
+  return
+end
+subroutine r8poly_order ( na, a, order )
+
+!*****************************************************************************80
+!
+!! R8POLY_ORDER returns the order of a polynomial.
+!
+!  Discussion:
+!
+!    The order of a polynomial is the degree plus 1.
+!
+!    The order of a constant polynomial is 1.  
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NA, the dimension of A.
+!
+!    Input, real ( kind = rk ) A(NA), the coefficients of the polynomials.
+!
+!    Output, integer ORDER, the order of A.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer na
+
+  real ( kind = rk ) a(na)
+  integer order
+
+  order = na
+
+  do while ( 1 < order )
+
+    if ( a(order) /= 0.0D+00 ) then
+      return
+    end if
+
+    order = order - 1
+
+  end do
+
+  return
+end
+subroutine r8poly_print ( n, a, title )
+
+!*****************************************************************************80
+!
+!! R8POLY_PRINT prints out a polynomial.
+!
+!  Discussion:
+!
+!    The power sum form is:
+!
+!      p(x) = a(0) + a(1)*x + ... + a(n-1)*x^(n-1) + a(n)*x^(n)
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 August 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Input, real ( kind = rk ) A(N), the polynomial coefficients.
+!    A(1) is the constant term and
+!    A(N) is the coefficient of X^(N-1).
+!
+!    Input, character ( len = * ) TITLE, a title.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) a(n)
+  integer i
+  real ( kind = rk ) mag
+  integer n2
+  character plus_minus
+  character ( len = * ) title
+
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) trim ( title )
+  write ( *, '(a)' ) ' '
+  
+  call r8poly_order ( n, a, n2 )
+
+  if ( a(n2) < 0.0D+00 ) then
+    plus_minus = '-'
+  else
+    plus_minus = ' '
+  end if
+
+  mag = abs ( a(n2) )
+
+  if ( 3 <= n2 ) then
+    write ( *, '( ''  p(x) = '', a1, g14.6, '' * x ^ '', i3 )' ) &
+      plus_minus, mag, n2-1
+  else if ( n2 == 2 ) then
+    write ( *, '( ''  p(x) = '', a1, g14.6, '' * x'' )' ) plus_minus, mag
+  else if ( n2 == 1 ) then
+    write ( *, '( ''  p(x) = '', a1, g14.6 )' ) plus_minus, mag
+  end if
+
+  do i = n2 - 1, 1, -1
+
+    if ( a(i) < 0.0D+00 ) then
+      plus_minus = '-'
+    else
+      plus_minus = '+'
+    end if
+
+    mag = abs ( a(i) )
+
+    if ( mag /= 0.0D+00 ) then
+
+      if ( 3 <= i ) then
+        write ( *, ' ( ''         '', a1, g14.6, '' * x ^ '', i3 )' ) &
+          plus_minus, mag, i-1
+      else if ( i == 2 ) then
+        write ( *, ' ( ''         '', a1, g14.6, '' * x'' )' ) plus_minus, mag
+      else if ( i == 1 ) then
+        write ( *, ' ( ''         '', a1, g14.6 )' ) plus_minus, mag
+      end if
+    end if
+
+  end do
+
+  return
+end
+subroutine r8poly_shift ( scale, shift, n, poly_cof )
+
+!*****************************************************************************80
+!
+!! R8POLY_SHIFT adjusts the coefficients of a polynomial for a new argument.
+!
+!  Discussion:
+!
+!    Assuming P(X) is a polynomial in the argument X, of the form:
+!
+!      P(X) = C(1)
+!           + C(2) * X
+!           + ...
+!           + C(N) * X^(N-1)
+!
+!    and that Z is related to X by the formula:
+!
+!      Z = SCALE * X + SHIFT
+!
+!    then this routine computes coefficients C for the polynomial Q(Z):
+!
+!      Q(Z) = C(1)
+!           + C(2) * Z
+!           + ...
+!           + C(N) * Z^(N-1)
+!
+!    so that:
+!
+!      Q(Z(X)) = P(X)
+!
+!  Example:
+!
+!    P(X) = 2 * X^2 - X + 6
+!
+!    Z = 2.0D+00 * X + 3.0D+00
+!
+!    Q(Z) = 0.5 *         Z^2 -  3.5 * Z + 12
+!
+!    Q(Z(X)) = 0.5 * ( 4.0D+00 * X^2 + 12.0D+00 * X +  9 )
+!            - 3.5 * (                  2.0D+00 * X +  3 )
+!                                                   + 12
+!
+!            = 2.0D+00         * X^2 -  1.0D+00 * X +  6
+!
+!            = P(X)
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, real ( kind = rk ) SHIFT, SCALE, the shift and scale applied to X,
+!    so that Z = SCALE * X + SHIFT.
+!
+!    Input, integer N, the order of the polynomial
+!
+!    Input/output, real ( kind = rk ) POLY_COF(N).
+!    On input, the coefficient array in terms of the X variable.
+!    On output, the coefficient array in terms of the Z variable.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer i
+  integer j
+  real ( kind = rk ) poly_cof(n)
+  real ( kind = rk ) scale
+  real ( kind = rk ) shift
+
+  do i = 1, n
+    poly_cof(i+1:n) = poly_cof(i+1:n) / scale
+  end do
+
+  do i = 1, n
+    do j = n-1, i, -1
+      poly_cof(j) = poly_cof(j) - shift * poly_cof(j+1)
+    end do
+  end do
+
+  return
+end
+subroutine r8poly_val_horner ( n, poly_cof, xval, yval )
+
+!*****************************************************************************80
+!
+!! R8POLY_VAL_HORNER evaluates a polynomial in standard form.
+!
+!  Discussion:
+!
+!    A polynomial in standard form, with coefficients POLY_COF(*),
+!    may be written:
+!
+!      P(X) = C(1)
+!           + C(2) * X
+!           ...
+!           + C(N) * X^(N-1)
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    11 April 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the order of the polynomial.
+!
+!    Input, real ( kind = rk ) POLY_COF(N), the polynomial coefficients.
+!    POLY_COF(1) is the constant term, and POLY_COF(N) is the coefficient of
+!    X^(N-1).
+!
+!    Input, real ( kind = rk ) XVAL, a value where the polynomial is to 
+!    be evaluated.
+!
+!    Output, real ( kind = rk ) YVAL, the value of the polynomial at XVAL.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer i
+  real ( kind = rk ) poly_cof(n)
+  real ( kind = rk ) xval
+  real ( kind = rk ) yval
+
+  yval = 0.0D+00
+
+  do i = n, 1, -1
+    yval = yval * xval + poly_cof(i)
+  end do
+
+  return
+end
+function r8vec_distinct ( n, x )
+
+!*****************************************************************************80
+!
+!! R8VEC_DISTINCT is true if the entries in an R8VEC are distinct.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    16 September 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the number of entries in the vector.
+!
+!    Input, real ( kind = rk ) X(N), the vector to be checked.
+!
+!    Output, logical R8VEC_DISTINCT is .TRUE. if all N elements of X
+!    are distinct.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer i
+  integer j
+  logical r8vec_distinct
+  real ( kind = rk ) x(n)
+
+  r8vec_distinct = .false.
+
+  do i = 2, n
+    do j = 1, i - 1
+      if ( x(i) == x(j) ) then
+        return
+      end if
+    end do
+  end do
+
+  r8vec_distinct = .true.
+
+  return
+end
+subroutine r8vec_even ( n, alo, ahi, a )
+
+!*****************************************************************************80
+!
+!! R8VEC_EVEN returns N values, evenly spaced between ALO and AHI.
+!
+!  Discussion:
+!
+!    If N is 1, then the midpoint is returned.
+!
+!    Otherwise, the two endpoints are returned, and N-2 evenly
+!    spaced points between them.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    09 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the number of values.
+!
+!    Input, real ( kind = rk ) ALO, AHI, the low and high values.
+!
+!    Output, real ( kind = rk ) A(N), N evenly spaced values.
+!    Normally, A(1) = ALO and A(N) = AHI.
+!    However, if N = 1, then A(1) = 0.5*(ALO+AHI).
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) a(n)
+  real ( kind = rk ) ahi
+  real ( kind = rk ) alo
+  integer i
+
+  if ( n == 1 ) then
+
+    a(1) = 0.5D+00 * ( alo + ahi )
+
+  else
+
+    do i = 1, n
+      a(i) = ( real ( n - i,     kind = rk ) * alo   &
+             + real (     i - 1, kind = rk ) * ahi ) &
+             / real ( n     - 1, kind = rk )
+    end do
+
+  end if
+
+  return
+end
+subroutine r8vec_even_select ( n, xlo, xhi, ival, xval )
+
+!*****************************************************************************80
+!
+!! R8VEC_EVEN_SELECT returns the I-th of N evenly spaced values in [ XLO, XHI ].
+!
+!  Discussion:
+!
+!    XVAL = ( (N-IVAL) * XLO + (IVAL-1) * XHI ) / real ( N - 1 )
+!
+!    Unless N = 1, X(1) = XLO and X(N) = XHI.
+!
+!    If N = 1, then X(1) = 0.5*(XLO+XHI).
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    09 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the number of values.
+!
+!    Input, real ( kind = rk ) XLO, XHI, the low and high values.
+!
+!    Input, integer IVAL, the index of the desired point.
+!    IVAL is normally between 1 and N, but may be any value.
+!
+!    Output, real ( kind = rk ) XVAL, the IVAL-th of N evenly spaced values
+!    between XLO and XHI.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  integer ival
+  real ( kind = rk ) xhi
+  real ( kind = rk ) xlo
+  real ( kind = rk ) xval
+
+  if ( n == 1 ) then
+
+    xval = 0.5D+00 * ( xlo + xhi )
+
+  else
+
+    xval = ( real ( n - ival,     kind = rk ) * xlo   &
+           + real (     ival - 1, kind = rk ) * xhi ) &
+           / real ( n        - 1, kind = rk )
+
+  end if
+
+  return
+end
+subroutine r8vec_indicator ( n, a )
+
+!*****************************************************************************80
+!
+!! R8VEC_INDICATOR sets an R8VEC to the indicator vector A(I)=I.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    09 February 2001
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the number of elements of A.
+!
+!    Output, real ( kind = rk ) A(N), the array to be initialized.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) a(n)
+  integer i
+
+  do i = 1, n
+    a(i) = real ( i, kind = rk )
+  end do
+
+  return
+end
+subroutine r8vec_print ( n, a, title )
+
+!*****************************************************************************80
+!
+!! R8VEC_PRINT prints an R8VEC.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    16 December 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer N, the number of components of the vector.
+!
+!    Input, real ( kind = rk ) A(N), the vector to be printed.
+!
+!    Input, character ( len = * ) TITLE, a title.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer n
+
+  real ( kind = rk ) a(n)
+  integer i
+  character ( len = *  ) title
+
+  write ( *, '(a)' ) ' '
+  write ( *, '(a)' ) trim ( title )
+  write ( *, '(a)' ) ' '
+  do i = 1, n
+    write ( *, '(2x,i4,2x,g14.6)' ) i, a(i)
+  end do
+
+  return
+end
+subroutine roots_to_dif ( nroots, roots, ntab, xtab, diftab )
+
+!*****************************************************************************80
+!
+!! ROOTS_TO_DIF sets a divided difference table for a polynomial from its roots.
+!
+!  Discussion:
+!
+!    This turns out to be a simple task, because of two facts:
+!
+!    * The divided difference polynomial of one smaller degree which
+!      passes through the values ( ROOT(I), 0 ) is the zero polynomial,
+!      and hence has a zero divided difference table.
+!
+!    * We want a polynomial of one degree higher, but we don't want it
+!      to pass through an addditional point.  Instead, we specify that
+!      the polynomial is MONIC.  This means that the divided difference
+!      table is almost the same as for the zero polynomial, except that
+!      there is one more pair of entries, an arbitrary X value, and
+!      a Y value of 1.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    05 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NROOTS, is the number of roots.
+!
+!    Input, real ( kind = rk ) ROOTS(NROOTS), the roots of
+!    the polynomial.
+!
+!    Output, integer NTAB, is equal to NROOTS+1.
+!
+!    Output, real ( kind = rk ) XTAB(NTAB), the abscissas of the divided
+!    difference table.
+!
+!    Output, real ( kind = rk ) DIFTAB(NTAB), the divided difference
+!    table.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nroots
+
+  real ( kind = rk ) diftab(nroots+1)
+  integer ntab
+  real ( kind = rk ) roots(nroots)
+  real ( kind = rk ) xtab(nroots+1)
+
+  ntab = nroots + 1
+!
+!  Build the appropriate difference table for the polynomial
+!  through ( ROOTS(I), 0 ) of degree NTAB-1.
+!
+  diftab(1:ntab-1) = 0.0D+00
+!
+!  Append the extra data to make a monic polynomial of degree NTAB
+!  which is zero at the NTAB-1 roots.
+!
+  xtab(1:ntab-1) = roots(1:ntab-1)
+  xtab(ntab) = 0.0D+00
+
+  diftab(ntab) = 1.0D+00
+
+  return
+end
+subroutine roots_to_r8poly ( nroots, roots, nc, c )
+
+!*****************************************************************************80
+!
+!! ROOTS_TO_R8POLY converts polynomial roots to polynomial coefficients.
+!
+!  Licensing:
+!
+!    This code is distributed under the MIT license.
+!
+!  Modified:
+!
+!    06 September 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer NROOTS, the number of roots specified.
+!
+!    Input, real ( kind = rk ) ROOTS(NROOTS), the roots.
+!
+!    Output, integer NC, the order of the polynomial, which will
+!    be NROOTS + 1.
+!
+!    Output, real ( kind = rk ) C(NC), the coefficients of the polynomial.
+!
+  implicit none
+
+  integer, parameter :: rk = kind ( 1.0D+00 )
+
+  integer nroots
+
+  real ( kind = rk ) c(nroots+1)
+  integer nc
+  real ( kind = rk ) roots(nroots)
+  real ( kind = rk ) xtab(nroots+1)
+
+  nc = nroots + 1
+!
+!  Initialize C to (0, 0, ..., 0, 1).
+!  Essentially, we are setting up a divided difference table.
+!
+  xtab(1:nroots) = roots(1:nroots)
+  xtab(nc) = 0.0
+
+  c(1:nc-1) = 0.0D+00
+  c(nc) = 1.0D+00
+!
+!  Convert to standard polynomial form by shifting the abscissas
+!  of the divided difference table to 0.
+!
+  call dif_shift_zero ( nc, xtab, c )
+
+  return
+end
+

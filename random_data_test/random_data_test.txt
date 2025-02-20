@@ -1,0 +1,378 @@
+14 January 2025   7:55:29.222 PM
+ 
+random_data_test():
+  Fortran90 version
+  Test random_data().
+ 
+TEST005:
+  BAD_IN_SIMPLEX01 is a "bad" sampling technique
+  for the unit simplex.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =             10000
+ 
+  Data written to "bad_in_triangle.txt".
+ 
+  Spatial dimension DIM_NUM =          3
+  Number of points N =             10000
+ 
+  Data written to "bad_in_tetrahedron.txt".
+ 
+TEST01:
+  BROWNIAN generates Brownian motion points.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               100
+ 
+  Data written to "brownian.txt".
+ 
+grid_in_cube01_test():
+  grid_in_cube01() generates grid points
+  in the unit hypercube.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =                85
+  CENTER option =                      1
+ 
+  Data written to file "grid_in_cube01.txt".
+ 
+TEST09
+  NORMAL generates normal points
+    in M dimensions, using a nonzero mean, and with
+    user-specified variance-covariance matrix.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  Mean vector MU:
+ 
+         1     6.0000000    
+         2     100.00000    
+ 
+  Variance-covariance matrix V:
+ 
+  Col          1             2      
+  Row
+ 
+    1:      1.        0.300000    
+    2:  0.300000          1.      
+ 
+  Cholesky factor R:
+ 
+  Col          1             2      
+  Row
+ 
+    1:      1.        0.300000    
+    2:      0.        0.953939    
+ 
+  Data written to file "normal.txt".
+ 
+TEST10
+  NORMAL_CIRCULAR generates points in 2D
+    distributed according to a circular normal.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              2000
+ 
+  Data written to file "normal_circular.txt".
+ 
+TEST11
+  NORMAL_SIMPLE generates normal points
+    in M dimensions, using a zero mean, and with
+    the identity as the variance-covariance matrix.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  Data written to file "normal_simple.txt".
+ 
+TEST115
+  UNIFORM_IN_ANNULUS generates uniform 
+  points in an annulus by mapping.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               400
+  Center PC(1:2) =                 10.0000       5.00000    
+  Inner radius is R1 =             1.00000    
+  Outer radius is R2 =             3.00000    
+ 
+  Data written to file "uniform_in_annulus.txt".
+ 
+TEST12
+  UNIFORM_IN_ANNULUS_ACCEPT generates uniform 
+  points in an annulus by acceptance/rejection.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               400
+  Center PC(1:2) =                 10.0000       5.00000    
+  Inner radius is R1 =             1.00000    
+  Outer radius is R2 =             3.00000    
+ 
+  Data written to file "uniform_in_annulus_accept.txt".
+ 
+TEST125
+  UNIFORM_IN_ANNULUS_SECTOR generates uniform 
+  points in an annular sector by mapping.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               400
+  Center PC(1:2) =                 10.0000       5.00000    
+  Inner radius is R1 =             1.00000    
+  Outer radius is R2 =             3.00000    
+  THETA1 =                         0.00000    
+  THETA2 =                         1.57080    
+ 
+  Data written to file "uniform_in_annulus_sector.txt".
+ 
+TEST13
+  UNIFORM_IN_CIRCLE01_MAP maps uniform 
+  points into a unit circle.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               400
+ 
+  Data written to file "uniform_in_circle01_map.txt".
+ 
+TEST14
+  UNIFORM_IN_CUBE01 generates uniform 
+  points in the unit hypercube.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  Data written to file "uniform_in_cube01.txt".
+ 
+TEST15
+  UNIFORM_IN_ELLIPSOID_MAP maps uniform 
+  points into an ellipsoid.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  Data written to file "uniform_in_ellipisoid_map.txt".
+ 
+         0  points failed the ellipsoid test.
+      1000 points satisfy the ellipsoid test.
+ 
+TEST16
+  UNIFORM_IN_PARALLELOGRAM_MAP maps uniform
+  points into an arbitrary parallelogram.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  V1 =     0.75    0.90
+  V2 =     0.00    0.20
+  V3 =     1.10    0.65
+  V4 =     0.35   -0.05
+ 
+  Data written to file "uniform_in_parallelogram_map.txt".
+ 
+uniform_in_polygon_convex_test():
+  uniform_in_polygon_convex() maps uniform 
+  points into a convex polygon.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  Polygonal vertices:
+ 
+  Col          1             2             3             4             5      
+  Row
+ 
+    1:      0.        0.500000          1.        0.700000          1.      
+    2:      0.        0.300000          0.        0.400000      0.600000    
+ 
+  Col          6             7             8             9            10      
+  Row
+ 
+    1:  0.600000      0.500000      0.400000          0.        0.300000    
+    2:  0.600000          1.        0.600000      0.600000      0.400000    
+ 
+  Data written to file "uniform_in_polygon_convex.txt".
+ 
+TEST18
+  UNIFORM_IN_SECTOR_MAP maps uniform 
+  points into a circular sector.
+ 
+  R1 =    1.00000    
+  R2 =    2.00000    
+  T1 =   0.780000    
+  T2 =    2.35000    
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               300
+ 
+  Data written to file "uniform_in_sector_map.txt".
+ 
+TEST19
+  UNIFORM_IN_SIMPLEX01_MAP maps uniform 
+  points into the unit simplex.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =             10000
+ 
+  Data written to "uniform_in_simplex01_map.txt".
+ 
+TEST20
+  UNIFORM_IN_SPHERE01_MAP maps uniform 
+  points into the unit sphere.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  Data written to file "uniform_in_sphere01_map.txt".
+ 
+TEST205
+  UNIFORM_IN_TETRAHEDRON returns uniform 
+  points from a tetrahedron.
+ 
+  Spatial dimension DIM_NUM =          3
+  Number of points N =              1000
+ 
+  Tetrahedron vertices:
+ 
+  Col          1             2             3             4      
+  Row
+ 
+    1:      1.            4.            2.            3.      
+    2:      2.            1.            4.            2.      
+    3:      3.            2.            4.            5.      
+ 
+  Data written to file "uniform_in_tetrahedron.txt".
+ 
+UNIFORM_IN_TRIANGLE_MAP1_TEST
+  UNIFORM_IN_TRIANGLE_MAP1 maps uniform 
+  points into a triangle.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  V1 =     0.75    0.90
+  V2 =     0.00    0.20
+  V3 =     0.95    0.65
+ 
+  Data written to file "uniform_in_triangle_map1.txt".
+ 
+TEST22
+  UNIFORM_IN_TRIANGLE_MAP maps uniform 
+  points into a triangle.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              1000
+ 
+  V1 =     0.75    0.90
+  V2 =     0.00    0.20
+  V3 =     0.95    0.65
+ 
+  Data written to file "uniform_in_triangle_map2.txt".
+ 
+TEST23
+  UNIFORM_IN_TRIANGLE01_MAP maps uniform 
+  points into the unit triangle.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =              2000
+ 
+  Data written to file "uniform_in_triangle01_map.txt".
+ 
+TEST235
+  UNIFORM_ON_CUBE01 samples N uniform points on
+  the surface of the unit M-dimensional cube.
+ 
+  Spatial dimension DIM_NUM =          3
+  Number of points N =               200
+ 
+  Data written to file "uniform_on_cube01.txt".
+ 
+TEST24
+  UNIFORM_ON_ELLIPSOID_MAP maps uniform 
+  points onto an ellipsoid.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               200
+ 
+  Data written to file "uniform_on_ellipsoid_map.txt".
+ 
+TEST245
+  UNIFORM_ON_HEMISPHERE01_PHONG maps uniform 
+  points onto the unit hemisphere with Phong density.
+ 
+  Spatial dimension DIM_NUM =          3
+  Number of points N =                50
+  Phong exponent M =                   2
+ 
+  Data written to file "uniform_on_hemisphere01_phong.txt".
+ 
+TEST25
+  UNIFORM_ON_SIMPLEX01_MAP maps uniform 
+  points onto the unit simplex.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =                50
+ 
+  Data written to file "uniform_on_simplex01_map.txt".
+ 
+TEST26
+  UNIFORM_ON_SPHERE01_MAP maps uniform 
+  points onto the unit sphere, in any dimension.
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =                50
+ 
+  Data written to file "uniform_on_sphere01_map.txt".
+ 
+TEST264
+  UNIFORM_ON_SPHERE01_PATCH_TP maps uniform 
+  points onto a TP (THETA,PHI) patch of the unit sphere.
+ 
+  Spatial dimension DIM_NUM =          3
+  Data dimension =                     2
+  Number of points N =              5000
+  Latitudinal angle PHI1 =         0.00000    
+  Latitudinal angle PHI2 =         3.14159    
+  Longitudinal angle THETA1 =      0.00000    
+  Longitudinal angle THETA2 =     0.261799    
+ 
+  Data written to file "uniform_on_sphere01_patch_tp.txt".
+ 
+TEST265
+  UNIFORM_ON_SPHERE01_PATCH_XYZ maps uniform 
+  points onto an XYZ patch of the unit sphere.
+ 
+  Spatial dimension DIM_NUM =          3
+  Number of points N =                50
+  Latitudinal angle PHI1 =         1.30900    
+  Latitudinal angle PHI2 =         1.57080    
+  Longitudinal angle THETA1 =      0.00000    
+  Longitudinal angle THETA2 =     0.261799    
+ 
+  Data written to file "uniform_on_sphere01_patch_xyz.txt".
+ 
+TEST267
+  UNIFORM_ON_SPHERE01_TRIANGLE_XYZ maps uniform 
+  points onto a spherical triangle using XYZ coordinates.
+ 
+  Spatial dimension DIM_NUM =          3
+  Number of points N =               500
+ 
+  Vertices of spherical triangle:
+ 
+  V1:  0.670100      0.322255     -0.668669    
+  V2: -0.172661     -0.802770      0.570744    
+  V3: -0.688006     -0.173600     -0.704635    
+ 
+  Data written to file "uniform_on_sphere01_triangle_xyz.txt".
+ 
+TEST27:
+  UNIFORM_WALK generates points on a uniform random walk
+ 
+  Spatial dimension DIM_NUM =          2
+  Number of points N =               400
+ 
+  Data written to file "uniform_walk.txt".
+ 
+RANDOM_DATA_TEST
+  Normal end of execution.
+ 
+14 January 2025   7:55:29.285 PM

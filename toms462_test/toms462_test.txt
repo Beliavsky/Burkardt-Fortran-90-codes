@@ -1,0 +1,14 @@
+ 7 April 2023   6:20:42.604 PM
+ 
+toms462_test():
+  FORTRAN90 version
+  Test TOMS462().
+ 
+TEST01
+  Compare BIVNOR with some simple data
+  with 3 digit accuracy.
+ 
+       X         Y          R          P               P
+                                      (Tabulated)     (BIVNOR)
+ 
+    0.80000   -1.50000   -0.90000    0.148000        0.147355    

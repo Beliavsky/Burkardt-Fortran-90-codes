@@ -1,0 +1,28 @@
+27 November 2022   7:16:39.182 PM
+ 
+asa189_test():
+  FORTRAN90 version
+  Test asa189().
+  Applied Statistics Algorithm 189
+  Estimate the parameters A and B of a 
+  beta binomial distribution.
+ 
+  Exact values:
+ 
+          A             B                MU         THETA
+ 
+         2.00000       3.00000      0.400000      0.200000    
+ 
+  Estimated values:
+ 
+Samples   A_est         B_est        MU_est     THETA_est
+ 
+   100   6.15280       10.4793      0.369936      0.601249E-01
+  1000   2.09170       3.07042      0.405202      0.193719    
+ 10000   1.92836       2.92274      0.397509      0.206139    
+100000   1.95395       2.93762      0.399452      0.204434    
+ 
+asa189_test():
+  Normal end of execution.
+ 
+27 November 2022   7:16:39.238 PM

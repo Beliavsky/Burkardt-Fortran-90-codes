@@ -1,0 +1,20 @@
+ 7 April 2023   6:36:52.093 AM
+ 
+toms660_test():
+  FORTRAN90 version
+  Test TOMS660().
+ 
+  Maximum absolute errors in the interpolant Q and
+  partial derivatives QX and QY relative to machine
+  precision EPS.
+ 
+  Function   Max error   Max error/EPS
+ 
+  Q          0.333E-15     1.50
+  dQdX       0.193E-13
+  dQdY       0.144E-13
+ 
+TOMS660_TEST
+  Normal end of execution.
+ 
+ 7 April 2023   6:36:52.094 AM

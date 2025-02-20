@@ -1,0 +1,76 @@
+16 July 2023   9:09:59.914 PM
+
+hexahedron_witherden_rule_test():
+  Fortran90 version
+  Test hexahedron_witherden_rule().
+
+hexahedron_witherden_rule_test01():
+  Quadrature rule for the unit hexahedron,
+  Precision p =  5
+
+  Number of nodes N =  14
+
+     I      W          X           Y           Z
+
+     1    0.110803        0.102089        0.500000        0.500000    
+     2    0.110803        0.500000        0.500000        0.897911    
+     3    0.110803        0.500000        0.897911        0.500000    
+     4    0.110803        0.500000        0.500000        0.102089    
+     5    0.110803        0.897911        0.500000        0.500000    
+     6    0.110803        0.500000        0.102089        0.500000    
+     7    0.418975E-01    0.879393        0.120607        0.120607    
+     8    0.418975E-01    0.120607        0.879393        0.879393    
+     9    0.418975E-01    0.120607        0.879393        0.120607    
+    10    0.418975E-01    0.120607        0.120607        0.120607    
+    11    0.418975E-01    0.120607        0.120607        0.879393    
+    12    0.418975E-01    0.879393        0.879393        0.120607    
+    13    0.418975E-01    0.879393        0.879393        0.879393    
+    14    0.418975E-01    0.879393        0.120607        0.879393    
+
+  Weight Sum    1.00000    
+
+hexahedron_witherden_rule_test02():
+  Test the precision of a quadrature rule for the unit hexahedron,
+
+  Number of nodes N =  14
+
+  Stated precision of rule    =  5
+  Number of quadrature points =  14
+
+  Degree  Maximum error
+
+   0    0.2220446049250313E-15
+   1    0.3330669073875470E-15
+   2    0.1110223024625157E-15
+   3    0.1665334536937735E-15
+   4    0.1110223024625157E-15
+   5    0.8326672684688674E-16
+   6    0.4208754208754467E-03
+   7    0.1235269360269312E-02
+
+hexahedron_witherden_rule_test03():
+  Test the precision of a quadrature rule for the unit hexahedron,
+  Check rules of precision p =  0 through 11
+  for error in approximating integrals of monomials.
+
+              maximum                   maximum
+   p          absolute                  relative
+              error                     error
+
+   0     0.000000000000000         0.000000000000000    
+   1     0.000000000000000         0.000000000000000    
+   2    0.2220446049250313E-15    0.3330669073875470E-15
+   3    0.2220446049250313E-15    0.3330669073875470E-15
+   4    0.3330669073875470E-15    0.8326672684688674E-15
+   5    0.3330669073875470E-15    0.8326672684688674E-15
+   6    0.2220446049250313E-15    0.5551115123125783E-15
+   7    0.2220446049250313E-15    0.5551115123125783E-15
+   8    0.3330669073875470E-15    0.1040834085586084E-14
+   9    0.3330669073875470E-15    0.1040834085586084E-14
+  10    0.8881784197001252E-15    0.3691491556878645E-14
+  11    0.8881784197001252E-15    0.3691491556878645E-14
+
+hexahedron_witherden_rule_test():
+  Normal end of execution.
+
+16 July 2023   9:09:59.915 PM

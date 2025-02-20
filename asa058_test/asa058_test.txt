@@ -1,0 +1,34 @@
+ 1 September 2022   9:16:51.837 AM
+ 
+asa058_test():
+  FORTRAN90 version
+  Test asa058().
+ 
+test01():
+  clustr() uses K-means for clustering data.
+  Applied Statistics Algorithm 58
+ 
+  Reading the data.
+ 
+  First 5 data values:
+ 
+         1    0.532095        0.894141    
+         2    0.189043        0.613426    
+         3    0.550977        0.415724    
+         4    0.397300E-02    0.605760    
+         5    0.894230        0.666812    
+ 
+  Cluster  Population  Energy
+ 
+         1        14    0.341942    
+         2        27    0.738345    
+         3        22     1.02164    
+         4        17    0.696631    
+         5        20    0.679602    
+ 
+     Total       100     3.47816    
+ 
+asa058_test():
+  Normal end of execution.
+ 
+ 1 September 2022   9:16:51.840 AM

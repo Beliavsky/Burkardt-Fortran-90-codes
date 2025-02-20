@@ -1,0 +1,470 @@
+05 March 2023   7:58:06.263 PM
+ 
+graph_arc_test():
+  FORTRAN90 version
+  graph_arc() implements graph algorithms.
+ 
+graph_arc_chromatic_test():
+  graph_arc_chromatic() finds the chromatic polynomial
+  of a graph.
+ 
+  The end point arrays:
+ 
+   1   1   1   1   2   2   2   3   3   4   4   5
+   2   3   4   5   3   4   6   5   6   5   6   6
+ 
+  The chromatic polynomial:
+ 
+  Power sum form:
+  64 154 137  58  12   1
+ 
+  Tutte or tree form:
+   0  11  25  20   7   1
+ 
+  Stirling form:
+   0   0   1   3   3   1
+ 
+graph_arc_complement_test():
+  graph_arc_complement() computes the complement
+  of a graph described by its edge array;
+ 
+  Number of edges in original graph is        0
+  Number of nodes is        0
+ 
+  The graph:
+ 
+Number of edges in complement is        0
+ 
+  The complement graph:
+ 
+ 
+graph_arc_degree_test():
+  graph_arc_degree() computes the degree of the nodes;
+ 
+  The graph:
+ 
+       1           1       3
+       2           1       7
+       3           1      10
+       4           2       5
+       5           2      10
+       6           3       6
+       7           3       9
+       8           4       7
+       9           4       8
+      10           6       9
+      11           8      10
+ 
+  The node degrees:
+ 
+       1         3
+       2         2
+       3         3
+       4         2
+       5         1
+       6         2
+       7         2
+       8         2
+       9         2
+      10         3
+ 
+graph_arc_edge_con2_test():
+  graph_arc_edge_con2() finds graph edge connectivity.
+ 
+  The arc list of the graph:
+ 
+       1           6       8
+       2           2       5
+       3           3       1
+       4           6       3
+       5           7       2
+       6           1       8
+       7           4       3
+       8           7       5
+       9           3       8
+      10           4       1
+      11           9       2
+      12           6       1
+      13           5       9
+      14           4       8
+      15           2       6
+      16           9       7
+      17           4       2
+ 
+  The computed edge connectivity is        2
+ 
+graph_arc_edge_sort_test():
+  graph_arc_edge_sort() sorts the edge array of a graph.
+ 
+  Number of edges in original graph is        0
+  Number of nodes is        0
+ 
+  The graph:
+ 
+ 
+graph_arc_euler_circ_test():
+  graph_arc_euler_circ() returns an Euler circuit
+  of a graph.
+ 
+  The graph:
+ 
+       1           1       2
+       2           1       3
+       3           1       4
+       4           1       5
+       5           2       3
+       6           2       4
+       7           2       5
+       8           3       4
+       9           3       5
+      10           4       5
+ 
+  The nodes in the Euler circuit:
+ 
+       1         1
+       2         2
+       3         3
+       4         4
+       5         5
+       6         3
+       7         1
+       8         4
+       9         2
+      10         5
+ 
+graph_arc_euler_circ_next_test():
+  graph_arc_euler_circ_next() finds the next
+  Euler circuit of a graph.
+ 
+ 
+  The graph:
+ 
+       1           1       2
+       2           1       3
+       3           1       4
+       4           1       5
+       5           2       3
+       6           2       4
+       7           2       5
+       8           3       4
+       9           3       5
+      10           4       5
+ 
+  Circuits:
+ 
+  1    1  7 10  8  9  4  3  6  5  2
+  2    1  7 10  8  9  4  2  5  6  3
+  3    1  7 10  8  2  6  5  9  4  3
+  4    1  7 10  8  2  3  4  9  5  6
+  5    1  7 10  3  9  8  6  5  2  4
+  6    1  7 10  3  9  5  6  8  2  4
+ 
+graph_arc_is_eulerian_test()
+  graph_arc_is_eulerian() checks if a graph has an
+  Euler circuit.
+ 
+  The graph:
+ 
+       1           1       2
+       2           1       3
+       3           1       4
+       4           1       5
+       5           2       3
+       6           2       4
+       7           2       5
+       8           3       4
+       9           3       5
+      10           4       5
+ 
+  The graph is eulerian.
+ 
+  Circuits:
+ 
+  1    1  7 10  8  9  4  3  6  5  2
+  2    1  7 10  8  9  4  2  5  6  3
+  3    1  7 10  8  2  6  5  9  4  3
+  4    1  7 10  8  2  3  4  9  5  6
+  5    1  7 10  3  9  8  6  5  2  4
+  6    1  7 10  3  9  5  6  8  2  4
+ 
+graph_arc_match_test():
+  graph_arc_match() finds a maximal matching in a graph.
+ 
+  The edge list of the graph:
+ 
+       1           6       2
+       2           9       7
+       3           3       7
+       4           4      10
+       5          11       5
+       6           6       8
+       7           4       6
+       8           5       7
+       9           6      12
+      10          10       2
+      11           3       1
+      12           4       2
+      13           1       5
+      14           3       5
+ 
+  Nodes and their types:
+ 
+       1         1
+       2         1
+       3         2
+       4         1
+       5         2
+       6         2
+       7         1
+       8         2
+       9         2
+      10         2
+      11         1
+      12         1
+ 
+  Node and matching node:
+ 
+       1         3
+       2         6
+       3         1
+       4        10
+       5        11
+       6         2
+       7         9
+       8         0
+       9         7
+      10         4
+      11         5
+      12         0
+ 
+graph_arc_min_path_test():
+  graph_arc_min_path() computes the shortest path from one
+  node to another.
+ 
+ 
+  The weighted graph:
+ 
+       1           1       2   1.00000    
+       2           1       3   1.00000    
+       3           2       3   3.00000    
+       4           2       5   2.00000    
+       5           3       4   2.00000    
+       6           3       5   5.00000    
+ 
+  The distance matrix constructed by GRAPH_ARC_MIN_PATH:
+ 
+ 
+ 
+Columns       1             2             3             4             5       
+  Row
+ 
+    1     0.0          1.00000       1.00000       3.00000       3.00000    
+    2    1.00000        0.0          2.00000       4.00000       2.00000    
+    3    1.00000       2.00000        0.0          2.00000       4.00000    
+    4    3.00000       4.00000       2.00000        0.0          6.00000    
+    5    3.00000       2.00000       4.00000       6.00000        0.0       
+ 
+  The routine actually also computes the path.
+  For instance, starting at node        4
+  we compute the shortest path to node        5
+ 
+  The path:
+ 
+       1         4
+       2         3
+       3         1
+       4         2
+       5         5
+ 
+graph_arc_min_span_tree_test():
+  graph_arc_min_span_tree() finds a minimum length
+  spanning tree.
+ 
+ 
+  The weighted graph:
+ 
+       1           1       2   100.000    
+       2           1       3   125.000    
+       3           1       4   120.000    
+       4           1       5   110.000    
+       5           2       3   40.0000    
+       6           2       4   65.0000    
+       7           2       5   60.0000    
+       8           3       4   45.0000    
+       9           3       5   55.0000    
+      10           4       5   50.0000    
+ 
+  The minimal spanning tree:
+ 
+       1           1       2   100.000    
+       2           2       3   40.0000    
+       3           3       4   45.0000    
+       4           4       5   50.0000    
+ 
+  The length of the minimal tree is    235.000    
+ 
+graph_arc_node_count_test():
+  graph_arc_node_count() counts the nodes and
+  finds the highest label.
+ 
+  The graph:
+ 
+       1           1       3
+       2           1       7
+       3           1     100
+       4           2       5
+       5           2     100
+       6           3       0
+       7           3       9
+       8          -4       7
+       9          -4      88
+      10           0       9
+      11          88     100
+  Number of nodes is          10
+  Maximum node label is      100
+ 
+graph_arc_span_forest_test():
+  graph_arc_span_forest()
+  computes a spanning forest for a graph
+ 
+  The graph:
+ 
+       1           2       3
+       2           4       7
+       3           1       9
+       4           7      11
+       5           5       8
+       6           2       5
+       7           6      10
+       8           2       8
+       9           3       8
+      10           4      11
+ 
+  The reordered endpoint array:
+ 
+       1           1       9
+       2           2       3
+       3           2       5
+       4           2       8
+       5           4       7
+       6           4      11
+       7           6      10
+       8          11       7
+       9           8       3
+      10           8       5
+ 
+  Number of connected components =        7
+ 
+  Node component membership:
+ 
+       1         1
+       2         2
+       3         2
+       4         3
+       5         2
+       6         4
+       7         3
+       8         2
+       9         1
+      10         4
+      11         3
+      12         5
+      13         6
+      14         7
+ 
+graph_arc_span_tree_test():
+  graph_arc_span_tree() constructs a spanning tree.
+ 
+ 
+  The graph:
+ 
+       1           1       2
+       2           1       3
+       3           1       4
+       4           1       5
+       5           1       6
+       6           1       7
+       7           1       8
+       8           2       5
+       9           2       6
+      10           2       8
+      11           3       4
+      12           3       7
+      13           9      10
+      14           9      13
+      15          10      11
+      16          10      12
+      17          10      13
+      18          11      12
+ 
+  Nodes and Parent Nodes:
+ 
+       1        -1
+       2         1
+       3         1
+       4         1
+       5         1
+       6         1
+       7         1
+       8         1
+       9        -1
+      10         9
+      11        10
+      12        10
+      13         9
+ 
+graph_arc_to_digraph_arc_test():
+  graph_arc_to_digraph_arc() makes a directed graph
+  from an undirected one.
+ 
+  The graph:
+ 
+       1           1       2
+       2           1       1
+       3           1       4
+       4           2       1
+       5           3       2
+       6           4       1
+       7           2       3
+       8           4       2
+ 
+  The digraph:
+ 
+       1           1       1
+       2           1       2
+       3           1       4
+       4           2       1
+       5           2       3
+       6           2       4
+       7           3       2
+       8           4       1
+       9           4       2
+ 
+graph_arc_to_graph_adj_test():
+  graph_arc_to_graph_adj() converts an arclist
+  graph to an adjacency graph.
+ 
+ 
+  The graph:
+ 
+       1           1       2
+       2           1       1
+       3           1       4
+       4           2       1
+       5           3       2
+       6           4       1
+       7           2       3
+       8           4       2
+ 
+  The graph:
+ 
+    1  11010
+    2  10110
+    3  01000
+    4  11000
+    5  00000
+ 
+graph_theory_test():
+  Normal end of execution.
+ 
+05 March 2023   7:58:06.263 PM

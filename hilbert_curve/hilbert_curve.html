@@ -1,0 +1,133 @@
+<html>
+
+  <head>
+    <title>
+      hilbert_curve
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      hilbert_curve
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>hilbert_curve</b>,
+      a Fortran90 code which
+      can convert between 1D and 2D coordinates of the Hilbert curve.
+    </p>
+
+    <p>
+      Mathematically, the Hilbert curve H is a continuous curve that passes
+      through every point in the unit square.  Naturally, it is not possible
+      to draw, or even to imagine, such a curve.  However, the Hilbert curve 
+      can be described as the limit of a sequence of simpler curves Hn, where
+      Hn is drawn by dividing the unit square into an NxN array of cells Cn 
+      (where N is a power of 2), and connecting the cell centers.  The Hilbert curve 
+      Hn will pass through each cell exactly once.
+    </p>
+
+    <p>
+      Computationally, the Hilbert curve Hn is very useful.  It provides a 
+      way of traversing a 2D array that tends to preserve locality.  It provides
+      an interesting corresponding between points on the unit line segment [0,1],
+      expressed as base 4 decimal fractions, and cells in the sequence of nested 
+      squares Cn.  For instance, the point whose base four decimal expansion 
+      begins 0.312... can be located by going to the 4th cell of H2, then when that
+      cell gets subdivided, going to the second cell, then when that cell gets 
+      subdivided, going to the third cell.  (Note that, in order for the Hilbert
+      curve to be connected, each time a cell is subdivided, the ordering of the
+      subcells is rotated or flipped in a regular way.)
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>hilbert_curve</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/hilbert_curve/hilbert_curve.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/hilbert_curve/hilbert_curve.html">a C++ version</a> and
+      <a href = "hilbert_curve.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/hilbert_curve/hilbert_curve.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/hilbert_curve/hilbert_curve.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/hilbert_curve/hilbert_curve.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../hilbert_curve_test/hilbert_curve_test.html">
+      hilbert_curve_test</a>
+    </p>
+
+    <p>
+      <a href = "../mandelbrot/mandelbrot.html">
+      mandelbrot</a>,
+      a Fortran90 code which
+      generates an ASCII Portable Pixel Map (PPM) image 
+      of the Mandelbrot fractal set;
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Nick Berry,<br>
+          Hilbert curves,<br>
+          https://datagenetics.com/blog/march22013
+        </li>
+        <li>
+          Brian Hayes,<br>
+          Crinkly curves,<br>
+          American Scientist,<br>
+          Volume 101, Number 3, May-June 2013, pages 178-183.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "hilbert_curve.f90">hilbert_curve.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "hilbert_curve.sh">hilbert_curve.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 15 July 2020.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

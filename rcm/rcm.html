@@ -1,0 +1,255 @@
+<html>
+
+  <head>
+    <title>
+      rcm
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      rcm
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>rcm</b>,
+      a Fortran90 code which 
+      computes the Reverse Cuthill McKee (RCM) ordering of the nodes of a graph.
+    </p>
+
+    <p>
+      The RCM ordering is frequently used when a matrix is to be
+      generated whose rows and columns are numbered according to
+      the numbering of the nodes.  By an appropriate renumbering
+      of the nodes, it is often possible to produce a matrix with a
+      much smaller bandwidth.
+    </p>
+
+    <p>
+      The bandwidth of a matrix is computed as the maximum bandwidth
+      of each row of the matrix.  The bandwidth of a row of the matrix
+      is essentially the number of matrix entries between the first
+      and last nonzero entries in the row, with the proviso that
+      the diagonal entry is always treated as though it were nonzero.
+    </p>
+
+    <p>
+      This library includes a few routines to handle the common case
+      where the connectivity can be described in terms of a triangulation
+      of the nodes, that is, a grouping of the nodes into sets of
+      3-node or 6-node triangles.  The natural description of a triangulation
+      is simply a listing of the nodes that make up each triangle.  The
+      library includes routines for determining the adjacency structure
+      associated with a triangulation, and the test problems include
+      examples of how the nodes in a triangulation can be relabeled
+      with the RCM permutation.
+    </p>
+
+    <p>
+      Here is a simple example of how reordering can reduce the 
+      bandwidth.  In our first picture, we have nine nodes:
+      <pre>
+           5--7--6
+           |  | /
+        4--8--2
+        |  |  |
+        9--1--3
+      </pre>
+      The corresponding adjacency matrix is:
+      <pre>
+        * . 1 . . . . 1 1
+        . * 1 . . 1 1 1 .
+        1 1 * . . . . . .
+        . . . * . . . 1 1
+        . . . . * . 1 1 .
+        . 1 . . . * 1 . .
+        . 1 . . 1 1 * . .
+        1 1 . 1 1 . . * .
+        1 . . 1 . . . . *
+      </pre>
+      which has a disastrous bandwidth of 17 (lower and upper bandwidths
+      of 8, and 1 for the diagonal.)
+    <p>
+
+    <p>
+      If we keep the same connectivity graph, but relabel the nodes,
+      we could get a picture like this:
+      <pre>
+           7--8--9
+           |  | /
+        3--5--6
+        |  |  |
+        1--2--4
+      </pre>
+      whose adjacency matrix is:
+      <pre>
+        * 1 1 . . . . . .
+        1 * . 1 1 . . . .
+        1 . * . 1 . . . .
+        . 1 . * . 1 . . .
+        . 1 1 . * 1 1 . .
+        . . . 1 1 * . 1 1
+        . . . . 1 . * 1 .
+        . . . . . 1 1 * 1
+        . . . . . 1 . 1 *
+      </pre>
+      which has a bandwidth of 7 (lower and upper bandwidths
+      of 3, and 1 for the diagonal.)
+    <p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+ 
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>rcm</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/rcm/rcm.html">a C++ version</a> and
+      <a href = "rcm.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/rcm/rcm.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/rcm/rcm.html">an Octave version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../rcm_test/rcm_test.html">
+      rcm_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/mesh_bandwidth/mesh_bandwidth.html">
+      mesh_bandwidth</a>,
+      a Fortran90 code which
+      returns the geometric bandwidth associated with a mesh of
+      elements of any order and in a space of arbitrary dimension.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/quadrilateral_mesh_rcm/quadrilateral_mesh_rcm.html">
+      quadrilateral_mesh_rcm</a>,
+      a Fortran90 code which
+      computes the Reverse Cuthill McKee (RCM) reordering for nodes 
+      in a mesh of 4-node 
+      quadrilaterals.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/tet_mesh_rcm/tet_mesh_rcm.html">
+      tet_mesh_rcm</a>, 
+      a Fortran90 code which
+      reads files
+      describing a tetrahedral mesh of nodes in 3D, and applies the RCM
+      algorithm to produce a renumbering of the tet mesh with a reduced
+      bandwidth.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/triangulation_order3/triangulation_order3.html">
+      triangulation_order3</a>, 
+      a directory which
+      contains a description and
+      examples of order 3 triangulations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/data/triangulation_order6/triangulation_order6.html">
+      triangulation_order6</a>, 
+      a directory which
+      contains a description and
+      examples of order 6 triangulations.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/triangulation_rcm/triangulation_rcm.html">
+      triangulation_rcm</a>, 
+      a Fortran90 code which
+      reads files describing a triangulation of nodes in 2D, 
+      and applies the RCM algorithm
+      to produce a renumbering of the triangulation with a reduced
+      bandwidth.
+    </p>
+
+    <h3 align="center">
+      Reference:
+    </h3>
+
+    <p>
+      </p><ol>
+        <li>
+          HL Crane, Norman Gibbs, William Poole, Paul Stockmeyer,<br>
+          Algorithm 508:
+          Matrix Bandwidth and Profile Reduction,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 2, Number 4, December 1976, pages 375-377.
+        </li>
+        <li>
+          Alan George, Joseph Liu,<br>
+          Computer Solution of Large Sparse Positive Definite Matrices,<br>
+          Prentice Hall, 1981,<br>
+          ISBN: 0131652745,<br>
+          LC: QA188.G46
+        </li>
+        <li>
+          Norman Gibbs,<br>
+          Algorithm 509:
+          A Hybrid Profile Reduction Algorithm,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 2, Number 4, December 1976, pages 378-387.
+        </li>
+        <li>
+          Norman Gibbs, William Poole, Paul Stockmeyer,<br>
+          An Algorithm for Reducing the Bandwidth
+          and Profile of a Sparse Matrix,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 13, Number 2, April 1976, pages 236-250.
+        </li>
+        <li>
+          John Lewis,<br>
+          Algorithm 582:
+          The Gibbs-Poole-Stockmeyer and Gibbs-King Algorithms
+          for Reordering Sparse Matrices,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 8, Number 2, June 1982, pages 190-194.
+        </li>
+      </ol>
+    <p></p>
+
+    <h3 align="center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "rcm.f90">rcm.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "rcm.sh">rcm.sh</a>, compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 17 September 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+   </body>
+
+</html>

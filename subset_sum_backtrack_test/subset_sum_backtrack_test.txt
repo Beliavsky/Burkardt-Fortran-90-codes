@@ -1,0 +1,76 @@
+ 6 November 2022   9:09:03.228 AM
+ 
+subset_sum_test():
+  FORTRAN90 version
+  Test subset_sum().
+
+subset_sum_backtrack_tests():
+  subset_sum_backtrack_test() solves the subset sum problem
+  for specific values of S, N and V.
+
+subset_sum_backtrack_test():
+  subset_sum_backtrack() finds the "next" subset of the values V
+  which sum to the desired total S.
+
+  Desired sum S =      9
+  Number of targets =   5
+  Targets:      1      2      3      5      7
+
+    1:       9 =      1 +     3 +     5
+    2:       9 =      2 +     7
+
+subset_sum_backtrack_test():
+  subset_sum_backtrack() finds the "next" subset of the values V
+  which sum to the desired total S.
+
+  Desired sum S =      8
+  Number of targets =   9
+  Targets:      1      2      3      4      5      6      7      8      9
+
+    1:       8 =      1 +     2 +     5
+    2:       8 =      1 +     3 +     4
+    3:       8 =      1 +     7
+    4:       8 =      2 +     6
+    5:       8 =      3 +     5
+    6:       8 =      8
+
+subset_sum_backtrack_test():
+  subset_sum_backtrack() finds the "next" subset of the values V
+  which sum to the desired total S.
+
+  Desired sum S =      8
+  Number of targets =   9
+  Targets:      1      2      3      3      5      6      7      8      9
+
+    1:       8 =      1 +     2 +     5
+    2:       8 =      1 +     7
+    3:       8 =      2 +     3 +     3
+    4:       8 =      2 +     6
+    5:       8 =      3 +     5
+    6:       8 =      3 +     5
+    7:       8 =      8
+
+subset_sum_backtrack_test():
+  subset_sum_backtrack() finds the "next" subset of the values V
+  which sum to the desired total S.
+
+  Desired sum S =     18
+  Number of targets =   5
+  Targets:      1      2      3      5      7
+
+    1:      18 =      1 +     2 +     3 +     5 +     7
+
+subset_sum_backtrack_test():
+  subset_sum_backtrack() finds the "next" subset of the values V
+  which sum to the desired total S.
+
+  Desired sum S =   5842
+  Number of targets =  10
+  Targets:    267    493    869    961   1000   1153   1246   1598   1766   1922
+
+    1:    5842 =    869 +   961 +  1000 +  1246 +  1766
+ 
+subset_sum_test():
+  Normal end of execution.
+ 
+ 6 November 2022   9:09:03.228 AM

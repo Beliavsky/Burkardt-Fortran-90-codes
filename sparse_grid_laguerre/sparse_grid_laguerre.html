@@ -1,0 +1,240 @@
+<html>
+
+  <head>
+    <title>
+      sparse_grid_laguerre
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      sparse_grid_laguerre
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>sparse_grid_laguerre</b>,
+      a FORTRAN90 code which
+      constructs sparse grids based on 1D Gauss-Laguerre rules.
+    </p>
+
+    <p>
+      Sparse grids are more naturally constructed from a nested family
+      of quadrature rules.  Gauss-Laguerre rules are not nested, but
+      have higher accuracy.  Thus, there can be a tradeoff.  If we compare
+      two sparse grids of the same "level", one using Gauss-Laguerre rules
+      and the other a nested rule, then the Gauss-Laguerre
+      sparse grid will have higher accuracy...but also a significantly
+      greater number of points.  When measuring efficiency, we really need
+      to balance the cost in quadrature points against the accuracy, and
+      so it is not immediately obvious which choice is best!
+    </p>
+
+    <p>
+      To slightly complicate matters, Gauss-Laguerre rules are not
+      nested.  A sparse grid constructed from Gauss-Laguerre rules
+      will thus generally have more abscissas than a grid built of nested
+      rules..
+    </p>
+
+    <p>
+      Here is a table showing the number of points in a sparse grid based on
+      Gauss-Laguerre rules, indexed by the spatial dimension, and by the
+      "level", which is simply an index for the family of sparse grids.
+      <table border = "1">
+        <tr>
+          <th>DIM:</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+        </tr>
+        <tr>
+          <th>LEVEL_MAX</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th>
+        </tr>
+        <tr>
+          <th>0</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+        </tr>
+        <tr>
+          <th>1</th><td>3</td><td>7</td><td>10</td><td>13</td><td>16</td><td>19</td>
+        </tr>
+        <tr>
+          <th>2</th><td>7</td><td>29</td><td>58</td><td>95</td><td>141</td><td>196</td>
+        </tr>
+        <tr>
+          <th>3</th><td>15</td><td>95</td><td>255</td><td>515</td><td>906</td><td>1456</td>
+        </tr>
+        <tr>
+          <th>4</th><td>31</td><td>273</td><td>945</td><td>2309</td><td>4746</td><td>8722</td>
+        </tr>
+        <tr>
+          <th>5</th><td>63</td><td>723</td><td>3120</td><td>9065</td><td>21503</td><td>44758</td>
+        </tr>
+        <tr>
+          <th>6</th><td>127</td><td>1813</td><td>9484</td><td>32259</td><td>87358</td><td>204203</td>
+        </tr>
+      </table>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The code described and made available on this web page is distributed
+      under the
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/sparse_grid_laguerre/gnu_lgpl.txt">GNU LGPL</a> license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>sparse_grid_laguerre</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/sparse_grid_laguerre/sparse_grid_laguerre.html">a C++ version</a> and
+      <a href = "sparse_grid_laguerre.html">a FORTRAN90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/sparse_grid_laguerre/sparse_grid_laguerre.html">a MATLAB version.</a>
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../sparse_grid_laguerre_test/sparse_grid_laguerre_test.html">
+      sparse_grid_laguerre_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules/quadrature_rules.html">
+      QUADRATURE_RULES</a>,
+      a dataset directory which
+      defines quadrature rules;
+      a number of examples of sparse grid quadrature rules are included.
+    </p>
+
+    <p>
+      <a href = "../quad_rule/quad_rule.html">
+      quad_rule</a>,
+      a FORTRAN90 library which
+      defines quadrature rules for
+      various intervals and weight functions.
+    </p>
+
+    <p>
+      <a href = "../sgmga/sgmga.html">
+      SGMGA</a>,
+      a FORTRAN90 library which
+      creates sparse grids based on a mixture of 1D quadrature rules,
+      allowing anisotropic weights for each dimension.
+    </p>
+
+    <p>
+      <a href = "../sparse_grid_gl/sparse_grid_gl.html">
+      SPARSE_GRID_GL</a>,
+      a FORTRAN90 library which
+      computes a sparse grid
+      based on 1D Gauss-Legendre rules..
+    </p>
+
+    <p>
+      <a href = "../sparse_grid_hermite/sparse_grid_hermite.html">
+      SPARSE_GRID_HERMITE</a>,
+      a FORTRAN90 library which
+      creates sparse grids based on Gauss-Hermite rules.
+    </p>
+
+    <p>
+      <a href = "../sparse_grid_hw/sparse_grid_hw.html">
+      SPARSE_GRID_HW</a>,
+      a FORTRAN90 library which
+      creates sparse grids based on Gauss-Legendre, Gauss-Hermite,
+      Gauss-Patterson, or a nested variation of Gauss-Hermite rules,
+      by Florian Heiss and Viktor Winschel.
+    </p>
+
+    <p>
+      <a href = "../sparse_grid_mixed/sparse_grid_mixed.html">
+      SPARSE_GRID_MIXED</a>,
+      a FORTRAN90 library which
+      constructs a sparse grid using different rules in each spatial dimension.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Volker Barthelmann, Erich Novak, Klaus Ritter,<br>
+          High Dimensional Polynomial Interpolation on Sparse Grids,<br>
+          Advances in Computational Mathematics,<br>
+          Volume 12, Number 4, 2000, pages 273-288.
+        </li>
+        <li>
+          Thomas Gerstner, Michael Griebel,<br>
+          Numerical Integration Using Sparse Grids,<br>
+          Numerical Algorithms,<br>
+          Volume 18, Number 3-4, 1998, pages 209-232.
+        </li>
+        <li>
+          Albert Nijenhuis, Herbert Wilf,<br>
+          Combinatorial Algorithms for Computers and Calculators,<br>
+          Second Edition,<br>
+          Academic Press, 1978,<br>
+          ISBN: 0-12-519260-6,<br>
+          LC: QA164.N54.
+        </li>
+        <li>
+          Fabio Nobile, Raul Tempone, Clayton Webster,<br>
+          A Sparse Grid Stochastic Collocation Method for Partial Differential
+          Equations with Random Input Data,<br>
+          SIAM Journal on Numerical Analysis,<br>
+          Volume 46, Number 5, 2008, pages 2309-2345.
+        </li>
+        <li>
+          Sergey Smolyak,<br>
+          Quadrature and Interpolation Formulas for Tensor Products of
+          Certain Classes of Functions,<br>
+          Doklady Akademii Nauk SSSR,<br>
+          Volume 4, 1963, pages 240-243.
+        </li>
+        <li>
+          Dennis Stanton, Dennis White,<br>
+          Constructive Combinatorics,<br>
+          Springer, 1986,<br>
+          ISBN: 0387963472,<br>
+          LC: QA164.S79.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "sparse_grid_laguerre.f90">sparse_grid_laguerre.f90</a>, the source code.
+        </li>
+        <li>
+          <a href = "sparse_grid_laguerre.sh">sparse_grid_laguerre.sh</a>, 
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 16 January 2023.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+  <!-- Initial HTML skeleton created by HTMLINDEX. -->
+
+</html>

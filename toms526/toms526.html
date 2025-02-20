@@ -1,0 +1,193 @@
+<html>
+
+  <head>
+    <title>
+      toms526
+    </title>
+  </head>
+
+  <body alink="#ff3300" bgcolor="#eeeeee" link="#cc0000" vlink="#000055">
+
+    <h1 align="center">
+      toms526
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>toms526</b>,
+      a FORTRAN90 code which
+      interpolates scattered bivariate data,
+      by Hiroshi Akima.
+    </p>
+
+    <p>
+      The code accepts a set of (X,Y) data points scattered in 2D,
+      with associated Z data values, and is able to construct a smooth
+      interpolation function Z(X,Y), which agrees with the given data,
+      and can be evaluated at other points in the plane.
+    </p>
+
+    <p>
+      The code is a FORTRAN90 version of ACM TOMS Algorithm 526.
+    </p>
+
+    <p>
+      The text of many ACM TOMS algorithms is available online
+      through ACM:
+              <a href = "https://calgo.acm.org">
+                         https://calgo.acm.org/</a> 
+      or NETLIB:
+      <a href = "https://www.netlib.org/toms/index.html">
+      https://www.netlib.org/toms/index.html</a>.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The computer code and data files described and made available on this web page
+      are distributed under
+      the MIT license
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>toms526</b> is available in
+      <a href = "toms526.html">a FORTRAN90 version</a>.
+    </p>
+
+    <h3 align="center">
+      Related Data and Packages:
+    </h3>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/rbf_interp/rbf_interp.html">
+      RBF_INTERP</a>,
+      a FORTRAN90 code which
+      defines and evaluates radial basis interpolants to multidimensional data.
+    </p>
+
+    <p>
+      <a href = "../test_interp_nd/test_interp_nd.html">
+      TEST_INTERP_ND</a>,
+      a FORTRAN90 code which
+      defines test problems for interpolation of data z(x),
+      depending on an M-dimensional argument.
+    </p>
+
+    <p>
+      <a href = "../toms526_test/toms526_test.html">
+      toms526_test</a>
+    </p>
+
+    <p>
+      <a href = "../toms660/toms660.html">
+      TOMS660</a>,
+      a FORTRAN90 code which
+      takes scattered 2D data and produces an interpolating function F(X,Y),
+      this is a FORTRAN90 version of ACM TOMS algorithm 660,
+      called qshep2d,
+      by Robert Renka.
+    </p>
+
+    <p>
+      <a href = "../toms661/toms661.html">
+      TOMS661</a>,
+      a FORTRAN90 code which
+      takes scattered 3D data and produces an interpolating function F(X,Y,Z),
+      this is a FORTRAN90 version of ACM TOMS algorithm 661,
+      called qshep3d,
+      by Robert Renka.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms790/toms790.html">
+      TOMS790</a>,
+      a FORTRAN77 library which
+      computes an interpolating function to a set of scattered data in the plane;
+      this library is commonly called CSHEP2D
+      by Robert Renka;<br>
+      this is ACM TOMS algorithm 790.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f77_src/toms792/toms792.html">
+      TOMS792</a>,
+      a FORTRAN77 library which
+      tests functions that interpolate scattered data in the plane;
+      by Robert Renka;
+      this is ACM TOMS algorithm 792.
+    </p>
+
+    <h3 align="center">
+      Author:
+    </h3>
+
+    <p>
+      Original FORTRAN77 version by Hiroshi Akima.
+      FORTRAN90 version by John Burkardt.
+    </p>
+
+    <h3 align="center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Hiroshi Akima,<br>
+          Algorithm 526:
+          A Method of Bivariate Interpolation and Smooth Surface Fitting
+          for Values Given at Irregularly Distributed Points,<br>
+          ACM Transactions on Mathematical Software,<br>
+          Volume 4, Number 2, June 1978, pages 160-164.
+        </li>
+        <li>
+          Hiroshi Akima, <br>
+          On Estimating Partial Derivatives for Bivariate Interpolation
+          of Scattered Data,<br>
+          Rocky Mountain Journal of Mathematics,<br>
+          Volume 14, Number 1, Winter 1984, pages 41-51.
+        </li>
+        <li>
+          Richard Franke,<br>
+          Scattered Data Interpolation: Tests of Some Methods,<br>
+          Mathematics of Computation,<br>
+          Volume 38, Number 157, January 1982, pages 181-200.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align="center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "toms526.f90">toms526.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "toms526.sh">toms526.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 13 March 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

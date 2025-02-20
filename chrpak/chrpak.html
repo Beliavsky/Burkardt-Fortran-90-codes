@@ -1,0 +1,157 @@
+<html>
+
+  <head>
+    <title>
+      chrpak
+    </title>
+  </head>
+
+  <body bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <h1 align = "center">
+      chrpak
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>chrpak</b>,
+      a Fortran90 code which
+      handles characters and strings.  
+    </p>
+
+    <p>
+      The code began when I simply wanted to be able to capitalize
+      a string.  Now it has expanded to a number of interesting uses.
+      Many unusual situations are provided for, including
+      <ul> 
+        <li>
+          string '31.2' <=> numeric value 31.2;
+        </li>
+        <li>
+          uppercase <=> lowercase;
+        </li>
+        <li>
+          removal of control characters or blanks;
+        </li>
+        <li>
+          sorting, merging, searching.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Many of the routine names begin with the name of the data type they 
+      operate on:
+      <ul>
+        <li>
+          <b>B4</b> - a 4 byte word;
+        </li>
+        <li>
+          <b>CH</b> - a character;
+        </li>
+        <li>
+          <b>CHVEC</b> - a vector of characters;
+        </li>
+        <li>
+          <b>DEC</b> - a decimal fraction;
+        </li>
+        <li>
+          <b>DIGIT</b> - a character representing a numeric digit;
+        </li>
+        <li>
+          <b>I4</b> - an integer ( kind = 4 );
+        </li>
+        <li>
+          <b>R4</b> - a real ( kind = 4 );
+        </li>
+        <li>
+          <b>R8</b> - a real ( kind = 8 );
+        </li>
+        <li>
+          <b>RAT</b> - a ratio I/J;
+        </li>
+        <li>
+          <b>S</b> - a string;
+        </li>
+        <li>
+          <b>SVEC</b> - a vector of strings;
+        </li>
+        <li>
+          <b>SVECI</b> - a vector of strings, implicitly capitalized;
+        </li>
+      </ul>
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+ 
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>chrpak</b> is available in
+      <a href = "https://people.sc.fsu.edu/~jburkardt/c_src/chrpak/chrpak.html">a C version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/cpp_src/chrpak/chrpak.html">a C++ version</a> and
+      <a href = "chrpak.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/chrpak/chrpak.html">a MATLAB version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/octave_src/chrpak/chrpak.html">an Octave version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/py_src/chrpak/chrpak.html">a Python version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Software and Data:
+    </h3>
+
+    <p>
+      <a href = "../chrpak_test/chrpak_test.html">
+      chrpak_test</a>
+    </p>
+
+    <p>
+      <a href = "../caesar/caesar.html">
+      caesar</a>,
+      a Fortran90 code which
+      can apply a Caesar Shift Cipher to a string of text.
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/rot13/rot13.html">
+      rot13</a>,
+      a Fortran90 code which
+      can encipher a string using the ROT13 cipher for letters, and the 
+      ROT5 cipher for digits.
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <ul>
+        <li>
+          <a href = "chrpak.f90">chrpak.f90</a>, the source code;
+        </li>
+        <li>
+          <a href = "chrpak.sh">chrpak.sh</a>, compiles the source code;
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last revised on 07 September 2021.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>

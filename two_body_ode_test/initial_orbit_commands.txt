@@ -1,0 +1,18 @@
+# initial_orbit_commands.txt
+#
+# Usage:
+#  gnuplot < initial_orbit_commands.txt
+#
+set term png
+set output "initial_orbit.png"
+set xlabel "X"
+set ylabel "Y"
+set title "Initial orbit"
+set size ratio -1
+set grid
+set style data lines
+set style fill solid
+set object 1 circle fc rgb "red"
+set object 1 circle at 0,0 size 0.05
+plot "initial_orbit_data.txt" using 3:5 lw 3 linecolor rgb "blue"
+quit

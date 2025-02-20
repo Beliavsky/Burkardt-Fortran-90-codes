@@ -1,0 +1,64 @@
+24 March 2023   9:39:29.226 PM
+ 
+mxm_openmp():
+  FORTRAN90/OpenMP version
+  Compute matrix product C = A * B using OpenMP.
+ 
+  The number of processors available =       16
+  The number of threads available    =        1
+  The matrix order N                 =     2000
+  Elapsed seconds =    89.1263    
+  C(100,100)  =    1.00000    
+ 
+mxm_openmp():
+  Normal end of execution.
+ 
+24 March 2023   9:40:58.358 PM
+24 March 2023   9:40:58.360 PM
+ 
+mxm_openmp():
+  FORTRAN90/OpenMP version
+  Compute matrix product C = A * B using OpenMP.
+ 
+  The number of processors available =       16
+  The number of threads available    =        2
+  The matrix order N                 =     2000
+  Elapsed seconds =    44.2787    
+  C(100,100)  =    1.00000    
+ 
+mxm_openmp():
+  Normal end of execution.
+ 
+24 March 2023   9:41:42.645 PM
+24 March 2023   9:41:42.647 PM
+ 
+mxm_openmp():
+  FORTRAN90/OpenMP version
+  Compute matrix product C = A * B using OpenMP.
+ 
+  The number of processors available =       16
+  The number of threads available    =        4
+  The matrix order N                 =     2000
+  Elapsed seconds =    22.5486    
+  C(100,100)  =    1.00000    
+ 
+mxm_openmp():
+  Normal end of execution.
+ 
+24 March 2023   9:42:05.200 PM
+24 March 2023   9:42:05.202 PM
+ 
+mxm_openmp():
+  FORTRAN90/OpenMP version
+  Compute matrix product C = A * B using OpenMP.
+ 
+  The number of processors available =       16
+  The number of threads available    =        8
+  The matrix order N                 =     2000
+  Elapsed seconds =    13.7296    
+  C(100,100)  =    1.00000    
+ 
+mxm_openmp():
+  Normal end of execution.
+ 
+24 March 2023   9:42:18.937 PM

@@ -1,0 +1,707 @@
+12 February 2025   6:35:09.798 PM
+ 
+digraph_adjacency_test():
+  FORTRAN90 version
+  Test digraph_adj(), which implements digraph algorithms.
+ 
+digraph_adjacency_components_test():
+  digraph_adjacency_components() finds strongly connected
+  components of a directed graph.
+ 
+  The digraph
+ 
+ 1  0100000000100
+ 2  0010010000000
+ 3  0001100000000
+ 4  0010000000000
+ 5  0001000000000
+ 6  0000001100000
+ 7  0000010000000
+ 8  0000000011000
+ 9  0000001000000
+10  0000000010000
+11  0000000000011
+12  1000000000000
+13  1000000000010
+ 
+  Number of components =        4
+ 
+  Node, Dad, Component, Order
+ 
+       1       0       4       1
+       2       1       3       2
+       3       2       1       3
+       4       3       1       4
+       5       3       1       5
+       6       2       2       6
+       7       6       2       7
+       8       6       2       8
+       9       8       2       9
+      10       8       2      10
+      11       1       4      11
+      12      11       4      12
+      13      11       4      13
+ 
+  The correct components are:
+ (1,11,12,13), (2), (3,4,5), (6,7,8,9,10).
+ 
+  I, Component(I), Node(I)
+ 
+       1         1         3
+       2         1         4
+       3         1         5
+       4         2         6
+       5         2         7
+       6         2         8
+       7         2         9
+       8         2        10
+       9         3         2
+      10         4         1
+      11         4        11
+      12         4        12
+      13         4        13
+ 
+  The graph:
+ 
+ 1  0100000000100
+ 2  0010010000000
+ 3  0001100000000
+ 4  0010000000000
+ 5  0001000000000
+ 6  0000001100000
+ 7  0000010000000
+ 8  0000000011000
+ 9  0000001000000
+10  0000000010000
+11  0000000000011
+12  1000000000000
+13  1000000000010
+ 
+digraph_adjacency_cycle_test():
+  digraph_adjacency_cycle() searches for cycles in a digraph.
+ 
+  The digraph:
+ 
+ 1  001010000
+ 2  000001010
+ 3  000101100
+ 4  001000000
+ 5  010000000
+ 6  000100010
+ 7  000000101
+ 8  100000000
+ 9  000010100
+ 
+  The number of edges is       16
+ 
+  Node, Dad, Order
+ 
+       1         0         1
+       2         5         9
+       3         1         2
+       4         3         3
+       5         9         8
+       6         3         4
+       7         3         6
+       8         6         5
+       9         7         7
+ 
+  Adjacency matrix with cycles marked.
+ 
+  0  0 -2  0  1  0  0  0  0
+  0  0  0  0  0  1  0  1  0
+  0  0  0 -2  0 -2 -2  0  0
+  0  0 -1  0  0  0  0  0  0
+  0 -2  0  0  0  0  0  0  0
+  0  0  0  1  0  0  0 -2  0
+  0  0  0  0  0  0 -1  0 -2
+ -1  0  0  0  0  0  0  0  0
+  0  0  0  0 -2  0 -1  0  0
+ 
+digraph_adjacency_degree_test():
+  digraph_adjacency_degree() computes the degree of the nodes;
+ 
+  The digraph:
+ 
+ 1  001010000
+ 2  000001010
+ 3  000101100
+ 4  001000000
+ 5  010000000
+ 6  000100010
+ 7  000000101
+ 8  100000000
+ 9  000010100
+ 
+  Node, In/Outdegree
+ 
+       1         1         2
+       2         1         2
+       3         2         3
+       4         2         1
+       5         2         1
+       6         2         2
+       7         3         2
+       8         2         1
+       9         1         2
+ 
+digraph_adjacency_degree_max_test():
+  digraph_adjacency_degree_max_test() computes the maximum
+  degree of the nodes;
+ 
+  The digraph:
+ 
+ 1  001010000
+ 2  000001010
+ 3  000101100
+ 4  001000000
+ 5  010000000
+ 6  000100010
+ 7  000000101
+ 8  100000000
+ 9  000010100
+ 
+  Maximum  indegree is        3
+  Maximum outdegree is        3
+  Maximum    degree is        5
+ 
+ 
+digraph_adjacency_degree_sequence_test():
+  digraph_adjacency_degree_sequence() computes the degree sequence.
+ 
+  The digraph:
+ 
+ 1  001010000
+ 2  000001010
+ 3  000101100
+ 4  001000000
+ 5  010000000
+ 6  000100010
+ 7  000000101
+ 8  100000000
+ 9  000010100
+ 
+  Node, In/Outdegree sequence
+ 
+       1         2         3
+       2         3         2
+       3         2         2
+       4         1         2
+       5         1         2
+       6         1         2
+       7         2         1
+       8         2         1
+       9         2         1
+ 
+digraph_adjacency_eigen_test()
+  digraph_adjacency_eigen() computes the eigenvalues of a digraph.
+ 
+  The digraph:
+ 
+ 1  001010000
+ 2  000001010
+ 3  000101100
+ 4  001000000
+ 5  010000000
+ 6  000100010
+ 7  000000101
+ 8  100000000
+ 9  000010100
+ 
+  Real and imaginary parts of eigenvalues:
+ 
+       1  0.355990E-01   1.18547    
+       2  0.355990E-01  -1.18547    
+       3 -0.727831      0.503178    
+       4 -0.727831     -0.503178    
+       5   1.79187       0.00000    
+       6  -1.00000       0.00000    
+       7   1.15595      0.269800    
+       8   1.15595     -0.269800    
+       9 -0.719305       0.00000    
+ 
+digraph_adjacency_ham_next_test():
+  digraph_adjacency_ham_next() produces Hamilton circuits in
+  a digraph, one at a time.
+ 
+  The digraph:
+ 
+ 1  01000001000000000001
+ 2  10100000000000100000
+ 3  01010010000000000000
+ 4  00101000000001000000
+ 5  00010100000100000000
+ 6  00001010010000000000
+ 7  00100101000000000000
+ 8  10000010100000000000
+ 9  00000001010000000010
+10  00000100101000000000
+11  00000000010100000100
+12  00001000001010000000
+13  00000000000101001000
+14  00010000000010100000
+15  01000000000001010000
+16  00000000000000101001
+17  00000000000010010100
+18  00000000001000001010
+19  00000000100000000101
+20  10000000000000010010
+ 
+  Circuits:
+ 
+  1    1 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2
+  2    1 20 19 18 17 16 15  2  3  7  6  5  4 14 13 12 11 10  9  8
+  3    1 20 19 18 11 12 13 17 16 15 14  4  5  6 10  9  8  7  3  2
+  4    1 20 19 18 11 12  5  6 10  9  8  7  3  4 14 13 17 16 15  2
+  5    1 20 19 18 11 12  5  4 14 13 17 16 15  2  3  7  6 10  9  8
+  6    1 20 19 18 11 10  9  8  7  6  5 12 13 17 16 15 14  4  3  2
+  7    1 20 19  9 10 11 18 17 16 15  2  3  4 14 13 12  5  6  7  8
+  8    1 20 19  9 10  6  5  4 14 13 12 11 18 17 16 15  2  3  7  8
+  9    1 20 19  9  8  7  6 10 11 18 17 16 15 14 13 12  5  4  3  2
+ 10    1 20 19  9  8  7  3  4 14 13 12  5  6 10 11 18 17 16 15  2
+ 11    1 20 16 17 18 19  9 10 11 12 13 14 15  2  3  4  5  6  7  8
+ 12    1 20 16 17 18 19  9  8  7  3  4  5  6 10 11 12 13 14 15  2
+ 13    1 20 16 17 13 14 15  2  3  4  5 12 11 18 19  9 10  6  7  8
+ 14    1 20 16 17 13 12 11 18 19  9 10  6  5  4 14 15  2  3  7  8
+ 15    1 20 16 17 13 12  5  6 10 11 18 19  9  8  7  3  4 14 15  2
+ 16    1 20 16 17 13 12  5  4 14 15  2  3  7  6 10 11 18 19  9  8
+ 17    1 20 16 15 14 13 17 18 19  9  8  7  6 10 11 12  5  4  3  2
+ 18    1 20 16 15 14  4  5  6 10 11 12 13 17 18 19  9  8  7  3  2
+ 19    1 20 16 15  2  3  7  6 10 11 12  5  4 14 13 17 18 19  9  8
+ 20    1 20 16 15  2  3  4 14 13 17 18 19  9 10 11 12  5  6  7  8
+ 21    1  8  9 19 20 16 17 18 11 10  6  7  3  4  5 12 13 14 15  2
+ 22    1  8  9 19 20 16 15 14  4  5 12 13 17 18 11 10  6  7  3  2
+ 23    1  8  9 19 18 17 13 14  4  5 12 11 10  6  7  3  2 15 16 20
+ 24    1  8  9 19 18 11 10  6  7  3  2 15 14  4  5 12 13 17 16 20
+ 25    1  8  9 10 11 18 19 20 16 17 13 12  5  6  7  3  4 14 15  2
+ 26    1  8  9 10 11 12 13 17 18 19 20 16 15 14  4  5  6  7  3  2
+ 27    1  8  9 10 11 12 13 14  4  5  6  7  3  2 15 16 17 18 19 20
+ 28    1  8  9 10 11 12  5  6  7  3  4 14 13 17 18 19 20 16 15  2
+ 29    1  8  9 10  6  7  3  4  5 12 11 18 19 20 16 17 13 14 15  2
+ 30    1  8  9 10  6  7  3  2 15 16 17 13 14  4  5 12 11 18 19 20
+ 31    1  8  7  6 10  9 19 20 16 15 14 13 17 18 11 12  5  4  3  2
+ 32    1  8  7  6 10  9 19 18 11 12  5  4  3  2 15 14 13 17 16 20
+ 33    1  8  7  6  5 12 13 17 18 11 10  9 19 20 16 15 14  4  3  2
+ 34    1  8  7  6  5 12 13 14  4  3  2 15 16 17 18 11 10  9 19 20
+ 35    1  8  7  6  5 12 11 10  9 19 18 17 13 14  4  3  2 15 16 20
+ 36    1  8  7  6  5  4  3  2 15 14 13 12 11 10  9 19 18 17 16 20
+ 37    1  8  7  3  4 14 13 17 18 11 12  5  6 10  9 19 20 16 15  2
+ 38    1  8  7  3  4  5  6 10  9 19 20 16 17 18 11 12 13 14 15  2
+ 39    1  8  7  3  2 15 16 17 18 11 12 13 14  4  5  6 10  9 19 20
+ 40    1  8  7  3  2 15 14  4  5  6 10  9 19 18 11 12 13 17 16 20
+ 41    1  2 15 16 20 19 18 17 13 14  4  3  7  6  5 12 11 10  9  8
+ 42    1  2 15 16 20 19  9 10  6  5 12 11 18 17 13 14  4  3  7  8
+ 43    1  2 15 16 17 18 11 10  6  5 12 13 14  4  3  7  8  9 19 20
+ 44    1  2 15 16 17 13 14  4  3  7  8  9 10  6  5 12 11 18 19 20
+ 45    1  2 15 14 13 17 16 20 19 18 11 12  5  4  3  7  6 10  9  8
+ 46    1  2 15 14 13 12 11 18 17 16 20 19  9 10  6  5  4  3  7  8
+ 47    1  2 15 14 13 12 11 10  6  5  4  3  7  8  9 19 18 17 16 20
+ 48    1  2 15 14 13 12  5  4  3  7  6 10 11 18 17 16 20 19  9  8
+ 49    1  2 15 14  4  3  7  8  9 19 18 11 10  6  5 12 13 17 16 20
+ 50    1  2 15 14  4  3  7  6  5 12 13 17 16 20 19 18 11 10  9  8
+ 51    1  2  3  7  8  9 19 18 17 13 12 11 10  6  5  4 14 15 16 20
+ 52    1  2  3  7  8  9 10  6  5  4 14 15 16 17 13 12 11 18 19 20
+ 53    1  2  3  7  6 10 11 18 17 13 12  5  4 14 15 16 20 19  9  8
+ 54    1  2  3  7  6  5  4 14 15 16 20 19 18 17 13 12 11 10  9  8
+ 55    1  2  3  4 14 15 16 20 19  9 10 11 18 17 13 12  5  6  7  8
+ 56    1  2  3  4 14 15 16 17 13 12  5  6  7  8  9 10 11 18 19 20
+ 57    1  2  3  4  5 12 13 14 15 16 17 18 11 10  6  7  8  9 19 20
+ 58    1  2  3  4  5 12 11 18 17 13 14 15 16 20 19  9 10  6  7  8
+ 59    1  2  3  4  5 12 11 10  6  7  8  9 19 18 17 13 14 15 16 20
+ 60    1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+ 
+  The digraph:
+ 
+ 1  010001000
+ 2  001010000
+ 3  000100000
+ 4  100010010
+ 5  111100111
+ 6  001010010
+ 7  010110000
+ 8  000111001
+ 9  000010000
+ 
+  Circuits:
+ 
+  1    1  6  8  9  5  7  2  3  4
+ 
+digraph_adjacency_ham_next_brute_test():
+  digraph_adjacency_ham_next_brute() seeks circuits
+  in a directed graph which visit every node.
+  A brute force algorithm is used.
+ 
+  The digraph:
+ 
+ 1  010001000
+ 2  001010000
+ 3  000100000
+ 4  100010010
+ 5  111100111
+ 6  001010010
+ 7  010110000
+ 8  000111001
+ 9  000010000
+ 
+  Circuits:
+ 
+  1    1  6  8  9  5  7  2  3  4
+ 
+  No more circuits were found.
+ 
+digraph_adjacency_ham_path_next_brute_test()
+  digraph_adjacency_ham_path_next_brute() seeks paths in a
+  digraph which visit every node once.
+  A brute force algorithm is used.
+ 
+  The digraph:
+ 
+ 1  1101
+ 2  0101
+ 3  1011
+ 4  0101
+ 
+  Paths:
+ 
+  1    3  1  2  4
+  2    3  1  4  2
+ 
+  No more paths were found.
+ 
+digraph_adjacency_is_edge_connected_test():
+  digraph_adjacency_is_edge_connected() reports if a
+  digraph is edgewise connected;
+ 
+  The digraph:
+ 
+ 1  0100
+ 2  0000
+ 3  0101
+ 4  1000
+ 
+  The digraph is NOT edgewise connected.
+ 
+digraph_adjacency_is_eulerian_test():
+  digraph_adjacency_is_eulerian() reports if a digraph is Eulerian;
+ 
+  The digraph:
+ 
+ 1  010000
+ 2  001000
+ 3  000100
+ 4  000010
+ 5  000001
+ 6  010000
+ 
+  The digraph IS path Eulerian.
+ 
+digraph_adjacency_is_strongly_connected_test():
+  digraph_adjacency_is_strongly_connected() reports if a
+  digraph is strongly connected;
+ 
+  The digraph:
+ 
+ 1  0100
+ 2  0000
+ 3  0101
+ 4  1000
+ 
+  The digraph is NOT strongly connected.
+ 
+  The digraph:
+ 
+ 1  01000000
+ 2  00100100
+ 3  00010000
+ 4  00000001
+ 5  10000000
+ 6  00001000
+ 7  00100000
+ 8  00000010
+ 
+  The digraph is NOT strongly connected.
+ 
+  The digraph:
+ 
+ 1  01000000
+ 2  00100100
+ 3  00010000
+ 4  00000001
+ 5  10000000
+ 6  00001000
+ 7  00100100
+ 8  00000010
+ 
+  The digraph IS strongly connected.
+ 
+digraph_adjacency_is_tournament_test():
+  digraph_adjacency_is_tournament() reports if a
+  digraph is a tournament.
+ 
+  A random tournament digraph:
+ 
+ 1  000001
+ 2  101101
+ 3  100001
+ 4  101011
+ 5  111000
+ 6  000010
+ 
+  The digraph IS a tournament.
+ 
+digraph_adjacency_is_transitive_test():
+  digraph_adjacency_is_transitive() reports if a
+  digraph is transitive;
+ 
+  The digraph:
+ 
+ 1  011111111111
+ 2  000101110111
+ 3  000001011011
+ 4  000000010101
+ 5  000000101111
+ 6  000000010011
+ 7  000000000111
+ 8  000000000001
+ 9  000000000011
+10  000000000001
+11  000000000001
+12  000000000000
+ 
+  The digraph IS transitive.
+ 
+digraph_adjacency_random_test():
+  digraph_adjacency_random() returns a random digraph.
+ 
+  Number of edges requested =       10
+ 
+  The digraph:
+ 
+ 1  000111
+ 2  000101
+ 3  100000
+ 4  000000
+ 5  101000
+ 6  110000
+ 
+  Number of edges is       10
+ 
+digraph_adjacency_reduce_test():
+  digraph_adjacency_reduce() finds the transitive 
+  reduction of a digraph.
+ 
+ 
+  Adjacency matrix for G:
+ 
+ 1  0100011000000
+ 2  0000000000000
+ 3  1000000000000
+ 4  0000010000000
+ 5  0001000000000
+ 6  0000100000000
+ 7  0010100001000
+ 8  0000001010000
+ 9  0000000100000
+10  0000000000111
+11  0000000000000
+12  0000001000001
+13  0000000000010
+ 
+  Adjacency matrix for the transitive reduction of G:
+ 
+ 1  0100011000000
+ 2  0000000000000
+ 3  1000000000000
+ 4  0000010000000
+ 5  0001000000000
+ 6  0000100000000
+ 7  0010100001000
+ 8  0000001010000
+ 9  0000000100000
+10  0000000000110
+11  0000000000000
+12  0000001000001
+13  0000000000010
+ 
+digraph_adjacency_to_digraph_arc_test():
+  digraph_adjacency_to_digraph_arc() converts a digraph in
+  adjacency form to arc list form;
+ 
+  The digraph in adjacency form:
+ 
+ 1  010000
+ 2  001000
+ 3  000100
+ 4  000010
+ 5  000001
+ 6  010000
+ 
+  The digraph in arc list form:
+ 
+       1           1       2
+       2           6       2
+       3           2       3
+       4           3       4
+       5           4       5
+       6           5       6
+ 
+digraph_adjacency_to_incidence_test():
+  digraph_adjacency_to_incidence() converts a digraph in
+  adjacency form to incidence matrix form;
+ 
+  The digraph in adjacency form:
+ 
+ 1  010000
+ 2  001000
+ 3  000100
+ 4  000010
+ 5  000001
+ 6  010000
+ 
+  The digraph in incidence form:
+ 
+  1  0  0  0  0  0
+ -1 -1  1  0  0  0
+  0  0 -1  1  0  0
+  0  0  0 -1  1  0
+  0  0  0  0 -1  1
+  0  1  0  1  0 -1
+ 
+digraph_adjacency_top_sort_test()
+  digraph_adjacency_top_sort() does a topological sort
+  of an acyclic digraph.
+ 
+  The digraph:
+ 
+ 1  0110010000000
+ 2  0000000000000
+ 3  0000000000000
+ 4  0000000000000
+ 5  0001000000000
+ 6  0001100000000
+ 7  0010100100000
+ 8  0000000010000
+ 9  0000000000000
+10  0000001000111
+11  0000000000000
+12  0000001000001
+13  0000000000000
+ 
+  Nodes and "Dads":
+ 
+       1         0
+       2         1
+       3         1
+       4         6
+       5         6
+       6         1
+       7         0
+       8         7
+       9         8
+      10         0
+      11        10
+      12        10
+      13        12
+ 
+  Nodes and order of visit:
+ 
+       1         1
+       2         2
+       3         3
+       4         5
+       5         6
+       6         4
+       7         7
+       8         8
+       9         9
+      10        10
+      11        11
+      12        12
+      13        13
+ 
+  Nodes and reverse topological order:
+ 
+       1         2
+       2         3
+       3         4
+       4         5
+       5         6
+       6         1
+       7         9
+       8         8
+       9         7
+      10        11
+      11        13
+      12        12
+      13        10
+ 
+  The reordered digraph:
+ 
+ 1  0110010000000
+ 2  0000000000000
+ 3  0000000000000
+ 4  0000000000000
+ 5  0001000000000
+ 6  0001100000000
+ 7  0010100100000
+ 8  0000000010000
+ 9  0000000000000
+10  0000001000111
+11  0000000000000
+12  0000001000001
+13  0000000000000
+ 
+digraph_adjacency_tournament_random_test():
+  digraph_adjacency_tournament_random() returns a random
+  tournament digraph.
+ 
+  A random tournament digraph:
+ 
+ 1  000110
+ 2  100011
+ 3  110101
+ 4  010001
+ 5  001100
+ 6  100010
+ 
+digraph_adjacency_transitive_closure_test():
+  digraph_adjacency_transitive_closure() finds the transitive 
+  closure of a digraph;
+ 
+ 
+  Adjacency matrix for G:
+ 
+ 1  0100011000000
+ 2  0000000000000
+ 3  1000000000000
+ 4  0000010000000
+ 5  0001000000000
+ 6  0000100000000
+ 7  0010100001000
+ 8  0000001010000
+ 9  0000000100000
+10  0000000000111
+11  0000000000000
+12  0000001000001
+13  0000000000010
+ 
+  Adjacency matrix for H, the transitive closure of G:
+ 
+ 1  1111111001111
+ 2  0100000000000
+ 3  1111111001111
+ 4  0001110000000
+ 5  0001110000000
+ 6  0001110000000
+ 7  1111111001111
+ 8  1111111111111
+ 9  1111111111111
+10  1111111001111
+11  0000000000100
+12  1111111001111
+13  1111111001111
+ 
+digraph_adjacency_test():
+  Normal end of execution.
+ 
+12 February 2025   6:35:09.800 PM

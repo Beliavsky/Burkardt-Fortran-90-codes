@@ -1,0 +1,172 @@
+<html>
+
+  <head>
+    <title>
+      two_body_ode
+    </title>
+  </head>
+
+  <body bgcolor="#eeeeee" link="#cc0000" alink="#ff3300" vlink="#000055">
+
+    <h1 align = "center">
+      two_body_ode
+    </h1>
+
+    <hr>
+
+    <p>
+      <b>two_body_ode</b>,
+      a Fortran90 code which
+      simulates the planar two body problem,
+      writing graphics files for processing by gnuplot().
+    </p>
+
+    <p>
+      Two bodies, regarded as point masses, are constrained to lie in a plane.
+      The masses of each body are given, as are the positions and velocities
+      at a starting time T = 0.  The bodies move in accordance with the gravitational
+      force between them.  One body is assume to be much more massive than the other.
+      Therefore, the common motion of the two bodies about their center of mass
+      can be approximated by assuming that the large body remains fixed.
+    </p>
+
+    <p>
+      Under these assumptions, Newton's equations for (x(t),y(t)), the positition 
+      of the lighter body with respect to the heavy body at (0,0), can be written as:
+      <pre>
+        r(t) = sqrt ( x(t)^2 + y(t)^2 )
+        x''(t) = - x(t) / r^3
+        y''(t) = - y(t) / r^3
+      </pre>
+    </p>
+
+    <p>
+      These two second order equations can be rewritten as a system of four
+      first order equations using the variable u = [ x(t), x'(t), y(t), y'(t) ],
+      resulting in the equations:
+      <pre>
+        r = sqrt ( u(1)^2 + u(3)^2 )
+        u'(1) =   u(2)
+        u'(2) = - u(1) / r^3
+        u'(3) =   u(4)
+        u'(4) = - u(3) / r^3
+      </pre>
+    </p>
+
+    <p>
+      By specifying some initial condition for u, the system can then be
+      integrated in time using a standard ODE solver.
+    </p>
+
+    <h3 align = "center">
+      Licensing:
+    </h3>
+
+    <p>
+      The information on this web page is distributed under the MIT license.
+    </p>
+
+    <h3 align = "center">
+      Languages:
+    </h3>
+
+    <p>
+      <b>two_body_ode</b> is available in
+      <a href = "two_body_ode.html">a Fortran90 version</a> and
+      <a href = "https://people.sc.fsu.edu/~jburkardt/m_src/two_body_ode/two_body_ode.html">a MATLAB version</a>.
+    </p>
+
+    <h3 align = "center">
+      Related Data and Programs:
+    </h3>
+
+    <p>
+      <a href = "../two_body_ode_test/two_body_ode_test.html">
+      two_body_ode_test</a>
+    </p>
+
+    <p>
+      <a href = "https://people.sc.fsu.edu/~jburkardt/f_src/gnuplot_test/gnuplot_test.html">
+      gnuplot_test</a>,
+      a Fortran90 code which
+      illustrates how a program can write data and command files
+      so that gnuplot() can create plots of the program results.
+    </p>
+
+    <p>
+      <a href = "../rkf45/rkf45.html">
+      rkf45</a>,
+      a Fortran90 code which
+      implements the Runge-Kutta-Fehlberg (RKF) solver 
+      for the solution of an ordinary differential equation (ODE) system.
+    </p>
+
+    <p>
+      <a href = "../three_body_ode/three_body_ode.html">
+      three_body_ode</a>,
+      a Fortran90 code which
+      simulates the behavior of three planets, constrained to lie in a plane,
+      and moving under the influence of gravity,
+      by Walter Gander and Jiri Hrebicek.
+    </p>
+
+    <h3 align = "center">
+      Reference:
+    </h3>
+
+    <p>
+      <ol>
+        <li>
+          Charles VanLoan,<br>
+          Introduction to Scientific Computing,<br>
+          Prentice Hall, 1997,<br>
+          ISBN: 0-13-125444-8,<br>
+          LC: QA76.9.M35V375.
+        </li>
+      </ol>
+    </p>
+
+    <h3 align = "center">
+      Source Code:
+    </h3>
+
+    <p>
+      <b>INITIAL_ORBIT</b> starts the problem, and runs it for just two orbits.
+      <ul>
+        <li>
+          <a href = "initial_orbit.f90">initial_orbit.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "initial_orbit.sh">initial_orbit.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <b>ORBITAL_DECAY</b> runs the problem for 20 orbits.
+      <ul>
+        <li>
+          <a href = "orbital_decay.f90">orbital_decay.f90</a>,
+          the source code.
+        </li>
+        <li>
+          <a href = "orbital_decay.sh">orbital_decay.sh</a>,
+          compiles the source code.
+        </li>
+      </ul>
+    </p>
+
+    <hr>
+
+    <i>
+      Last modified on 26 November 2024.
+    </i>
+
+    <!-- John Burkardt -->
+
+  </body>
+
+</html>
+
