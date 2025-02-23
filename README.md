@@ -1,5 +1,5 @@
 # Burkardt Fortran 90 codes
-John Burkardt's Fortran 90 codes and documentation. Here is a partial list by category.
+John Burkardt's Fortran 90 codes and documentation, uploaded with his permission. The licenses are in the codes. Most use the MIT license, and others use the GPL or LGPL. Here is a partial list by category.
 
 * [Calendrical Calculations](#calendrical-calculations)
 * [Cluster Analysis](#cluster-analysis)
